@@ -17,10 +17,10 @@ class MessageRepository extends BaseRepository {
   getLanguage() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     var languageCode = _prefs.getString("LANGUAGE_CODE") ?? "en-US";
-    if (languageCode == "zh-TW")
+    /*if (languageCode == "zh-TW")
       return "zh-CN";
     else
-      return languageCode;
+      return languageCode;*/
   }
 
   Future<EventResult<ListResponse<Message>>> getMessageList(int page, int rows) async {
