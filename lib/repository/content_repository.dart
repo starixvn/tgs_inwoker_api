@@ -17,8 +17,8 @@ class ContentRepository extends BaseRepository {
     var languageCode = _prefs.getString("LANGUAGE_CODE") ?? "en-US";
     /*if (languageCode == "zh-TW")
       return "zh-CN";
-    else
-      return languageCode;*/
+    else*/
+      return languageCode;
   }
 
   Future<EventResult<List<GameProvider>>> getGameProviderList() async {
