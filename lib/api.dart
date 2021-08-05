@@ -2,6 +2,7 @@ library api;
 
 import 'dart:convert';
 import 'dart:developer';
+import 'package:api/entity/live_chat.dart';
 import 'package:http/http.dart' as http;
 import 'package:api/entity/env_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';

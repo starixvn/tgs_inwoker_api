@@ -14,8 +14,6 @@ class UserRepository extends BaseRepository {
     return _singleton;
   }
 
-
-
   Future<EventResult<LoginResponse>> login(String username, String password) async {
     return await ApiRequestBuilder<LoginResponse>(
             isAuthorization: false,
@@ -75,7 +73,7 @@ class UserRepository extends BaseRepository {
     await prefs.remove("token");
   }
 
-  getEnvData(String url, String jwtKey, String currency){
+  getEnvData(String url, String jwtKey, String currency) {
     env = EnvConfig(jwtKey, url, currency);
   }
 
@@ -194,111 +192,128 @@ class UserRepository extends BaseRepository {
   }
 
   Future<EventResult<TransactionResponse<AccountTransaction>>> getAccountTransaction(
-      DateTime startDate,
-      DateTime endDate,
-      int page,
-      int rows,
-      Status status
+      DateTime startDate, DateTime endDate, int page, int rows, Status status
       /*int orderBy,
       bool isDesc,
       String sortBy,
       bool showAll*/
       ) async {
     return await ApiRequestBuilder<TransactionResponse<AccountTransaction>>(
-        method: HttpMethod.GET,
-        endPoint: "api/deposit/player/list",
-        params: status==null || status == Status.All?{
-          "begincreate": startDate.toString(),
-          "endcreate": endDate.toString(),
-          "Page": page.toString(),
-          "Rows": rows.toString(),
-        }:{
-          "begincreate": startDate.toString(),
-          "endcreate": endDate.toString(),
-          "Page": page.toString(),
-          "Rows": rows.toString(),
-          "status":status.getJson().toString()
-        },
-        converter: (json) => TransactionResponse.fromJson(json, (res) => AccountTransaction.fromJson(res)),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.GET,
+            endPoint: "api/deposit/player/list",
+            params: status == null || status == Status.All
+                ? {
+                    "begincreate": startDate.toString(),
+                    "endcreate": endDate.toString(),
+                    "Page": page.toString(),
+                    "Rows": rows.toString(),
+                  }
+                : {
+                    "begincreate": startDate.toString(),
+                    "endcreate": endDate.toString(),
+                    "Page": page.toString(),
+                    "Rows": rows.toString(),
+                    "status": status.getJson().toString()
+                  },
+            converter: (json) => TransactionResponse.fromJson(json, (res) => AccountTransaction.fromJson(res)),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<TransactionResponse<AccountTransaction>>> getWithdrawTransaction(
-      DateTime startDate,
-      DateTime endDate,
-      int page,
-      int rows,
-      Status status
+      DateTime startDate, DateTime endDate, int page, int rows, Status status
       /*int orderBy,
       bool isDesc,
       String sortBy,
       bool showAll*/
       ) async {
     return await ApiRequestBuilder<TransactionResponse<AccountTransaction>>(
-        method: HttpMethod.GET,
-        endPoint: "api/withdraw/player/list",
-        params: status==null|| status == Status.All?{
-          "begincreate": startDate.toString(),
-          "endcreate": endDate.toString(),
-          "Page": page.toString(),
-          "Rows": rows.toString(),
-        }:{
-          "begincreate": startDate.toString(),
-          "endcreate": endDate.toString(),
-          "Page": page.toString(),
-          "Rows": rows.toString(),
-          "status":status.getJson().toString()
-        },
-        converter: (json) => TransactionResponse.fromJson(json, (res) => AccountTransaction.fromJson(res)),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.GET,
+            endPoint: "api/withdraw/player/list",
+            params: status == null || status == Status.All
+                ? {
+                    "begincreate": startDate.toString(),
+                    "endcreate": endDate.toString(),
+                    "Page": page.toString(),
+                    "Rows": rows.toString(),
+                  }
+                : {
+                    "begincreate": startDate.toString(),
+                    "endcreate": endDate.toString(),
+                    "Page": page.toString(),
+                    "Rows": rows.toString(),
+                    "status": status.getJson().toString()
+                  },
+            converter: (json) => TransactionResponse.fromJson(json, (res) => AccountTransaction.fromJson(res)),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<TransactionResponse<TransferTransaction>>> getTransferTransaction(
-      DateTime startDate,
-      DateTime endDate,
-      int page,
-      int rows,
-      /*int orderBy,
+    DateTime startDate,
+    DateTime endDate,
+    int page,
+    int rows,
+    /*int orderBy,
       bool isDesc,
       String sortBy,
       bool showAll*/
-      ) async {
+  ) async {
     return await ApiRequestBuilder<TransactionResponse<TransferTransaction>>(
-        method: HttpMethod.GET,
-        endPoint: "api/game/balance/list",
-        params:{
-          "begincreate": startDate.toString(),
-          "endcreate": endDate.toString(),
-          "Page": page.toString(),
-          "Rows": rows.toString(),
-          "OrderBy":"1",
-          "SortBy":"BalanceTime"
-        },
-        converter: (json) => TransactionResponse.fromJson(json, (res) => TransferTransaction.fromJson(res)),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.GET,
+            endPoint: "api/game/balance/list",
+            params: {
+              "begincreate": startDate.toString(),
+              "endcreate": endDate.toString(),
+              "Page": page.toString(),
+              "Rows": rows.toString(),
+              "OrderBy": "1",
+              "SortBy": "BalanceTime"
+            },
+            converter: (json) => TransactionResponse.fromJson(json, (res) => TransferTransaction.fromJson(res)),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<List<BrandCommunication>>> getBrandCommunication() async {
     return await ApiRequestBuilder<List<BrandCommunication>>(
-        method: HttpMethod.GET,
-        endPoint: "api/brandcommunication",
-        converter: (json)=>(json as List<dynamic>).map((e) => BrandCommunication.fromJson(e)).toList(),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.GET,
+            endPoint: "api/brandcommunication",
+            converter: (json) => (json as List<dynamic>).map((e) => BrandCommunication.fromJson(e)).toList(),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult> getApiErrorLocalization() async {
     return await ApiRequestBuilder(
-        method: HttpMethod.GET,
-        endPoint: "api/localization",
-       // converter: (json) => json,
-        consumer: (result) => setRepoValues(() {
-          apiError = result;
-        }),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.GET,
+            endPoint: "api/localization",
+            // converter: (json) => json,
+            consumer: (result) => setRepoValues(() {
+                  apiError = result;
+                }),
+            jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult<LiveChat>> getLiveChatUrl() async {
+    return await ApiRequestBuilder<LiveChat>(
+            method: HttpMethod.GET,
+            endPoint: "api/brandlivechat",
+            converter: (json) => LiveChat.fromJson(json),
+            jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult<bool>> getAutoTransferValue() async {
+    return await ApiRequestBuilder<bool>(
+            method: HttpMethod.GET, endPoint: "api/player​/game​/auto-transfer", jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult> setAutoTransferValue() async {
+    return await ApiRequestBuilder(
+            method: HttpMethod.POST, endPoint: "api/player​/game​/auto-transfer", jwtRefresher: jwtAuth)
         .execute();
   }
 }
