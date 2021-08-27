@@ -5,7 +5,6 @@ class UserRepository extends BaseRepository {
   UserProfile userProfile;
   MainWallet wallet;
   Map<String, dynamic> apiError;
-  EnvConfig env;
 
   static UserRepository getSingleton() {
     if (_singleton == null) {
@@ -71,10 +70,6 @@ class UserRepository extends BaseRepository {
     userProfile = null;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove("token");
-  }
-
-  getEnvData(String url, String jwtKey, String currency) {
-    env = EnvConfig(jwtKey, url, currency);
   }
 
   Future<EventResult<LoginResponse>> auth() async {
@@ -277,11 +272,12 @@ class UserRepository extends BaseRepository {
 
   Future<EventResult<List<BrandCommunication>>> getBrandCommunication() async {
     return await ApiRequestBuilder<List<BrandCommunication>>(
-            method: HttpMethod.GET,
-            endPoint: "api/brandcommunication",
-            converter: (json) => (json as List<dynamic>).map((e) => BrandCommunication.fromJson(e)).toList(),
-            jwtRefresher: jwtAuth)
-        .execute();
+      method: HttpMethod.GET,
+      endPoint: "api/brandcommunication",
+      converter: (json) => (json as List<dynamic>).map((e) => BrandCommunication.fromJson(e)).toList(),
+      jwtRefresher: jwtAuth,
+      isAuthorization: false,
+    ).execute();
   }
 
   Future<EventResult> getApiErrorLocalization() async {
@@ -298,22 +294,23 @@ class UserRepository extends BaseRepository {
 
   Future<EventResult<LiveChat>> getLiveChatUrl() async {
     return await ApiRequestBuilder<LiveChat>(
-            method: HttpMethod.GET,
-            endPoint: "api/brandlivechat",
-            converter: (json) => LiveChat.fromJson(json),
-            jwtRefresher: jwtAuth)
-        .execute();
+      method: HttpMethod.GET,
+      endPoint: "api/brandlivechat",
+      converter: (json) => LiveChat.fromJson(json),
+      jwtRefresher: jwtAuth,
+      isAuthorization: false,
+    ).execute();
   }
 
   Future<EventResult<bool>> getAutoTransferValue() async {
     return await ApiRequestBuilder<bool>(
-            method: HttpMethod.GET, endPoint: "api/player​/game​/auto-transfer", jwtRefresher: jwtAuth)
+            method: HttpMethod.GET, endPoint: "api/player/game/auto-transfer", jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult> setAutoTransferValue() async {
-    return await ApiRequestBuilder(
-            method: HttpMethod.POST, endPoint: "api/player​/game​/auto-transfer", jwtRefresher: jwtAuth)
+  Future<EventResult<dynamic>> setAutoTransferValue() async {
+    return await ApiRequestBuilder<dynamic>(
+            method: HttpMethod.POST, endPoint: "api/player/game/auto-transfer", jwtRefresher: jwtAuth)
         .execute();
   }
 }
