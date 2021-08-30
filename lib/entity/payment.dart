@@ -1,3 +1,4 @@
+import 'package:api/entity/bank_type.dart';
 import 'package:api/entity/payment_bank.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:api/entity/transfer_limit.dart';
@@ -9,6 +10,8 @@ class Payment {
   Payment();
 
   String id;
+  @JsonKey(name: "banktype")
+  BankType bankType;
   @JsonKey(name: "channelname")
   String channelName;
   @JsonKey(name: "transferlimit")
