@@ -36,7 +36,7 @@ class _MyLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'zh'].contains(locale.languageCode);
+    return ['en', 'zh','id', 'vi','th'].contains(locale.languageCode);
   }
 
   @override

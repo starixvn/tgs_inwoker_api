@@ -31,7 +31,7 @@ class LanguageProvider {
           Language("en", "English", Locale("en", ''), "en-US", "images/language/ic_lang_en.png"),
         );
       } else
-        list.add(Language(splitCode[0], languageTextMap[code], Locale(splitCode[0], splitCode[1]), code,
+        list.add(Language(splitCode[0], languageTextMap[code], Locale(splitCode[0],""), code,
             " "));
     });
   }

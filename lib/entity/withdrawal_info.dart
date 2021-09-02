@@ -1,5 +1,4 @@
 import 'package:api/entity/bank_extended_info.dart';
-import 'package:api/entity/bonus_limit.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:api/entity/transfer_limit.dart';
 
