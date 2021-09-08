@@ -15,6 +15,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
   JwtRefresher jwtRefresher;
   ResultConsumer consumer;
   dynamic imageContent;
+  int timeout;
 
   ApiRequestBuilder(
       {this.isAuthorization = true,
@@ -25,10 +26,12 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       this.converter,
       this.jwtRefresher,
       this.consumer,
-      this.imageContent});
+      this.imageContent,
+      this.timeout = 3});
 
   Future<EventResult<T>> execute() async {
-    var response = await api(method, endPoint, content:params, isAuthorization: isAuthorization, imageContent: imageContent);
+    var response = await api(method, endPoint,
+        content: params, isAuthorization: isAuthorization, imageContent: imageContent, timeout: timeout);
     var result = resolveBaseResponse(response, converter, consumer);
     if (result.errorCode == 101 && retryCounter < 2 && !isJWTAuthRequest) {
       retryCounter++;
@@ -44,8 +47,12 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
     print(value);
     var baseResponse = BaseResponse.fromJson(value);
     if (baseResponse.error == null ||
-        (baseResponse.success == null && baseResponse.error == 0) ||
-        (baseResponse.success != null && baseResponse.success)) {
+        (baseResponse.error == 0 && baseResponse.errorMsgId == null && (baseResponse.msg.isEmpty ?? "")) ||
+        (baseResponse.success == null &&
+            baseResponse.error == 0 &&
+            baseResponse.errorMsgId == null &&
+            (baseResponse?.msg?.isEmpty ?? "")) ||
+        (baseResponse?.success ?? false)) {
       var dataToConvert = baseResponse.data ?? value;
       var result = converter == null ? dataToConvert as T : converter(dataToConvert);
       if (onSuccess != null) onSuccess(result);
