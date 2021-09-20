@@ -5,6 +5,7 @@ class ContentRepository extends BaseRepository {
   UserProfile userProfile;
   List<GameProvider> gameProviderList;
   List<LanguageOption> languageOptionList;
+  BrandLogo brandLogo;
 
   static ContentRepository getSingleton() {
     if (_singleton == null) {
@@ -179,4 +180,17 @@ class ContentRepository extends BaseRepository {
       jwtRefresher: jwtAuth,
       isAuthorization: false,
     ).execute();
+
+  Future<EventResult<BrandLogo>> getBrandLogo() async {
+    return await ApiRequestBuilder<BrandLogo>(
+      method: HttpMethod.GET,
+      endPoint: "api/brand",
+      converter: (json) => BrandLogo.fromJson(json),
+      jwtRefresher: jwtAuth,
+      isAuthorization: false,
+      consumer: (result) => setRepoValues(() {
+        brandLogo = result;
+      }),
+    ).execute();
+  }
 }

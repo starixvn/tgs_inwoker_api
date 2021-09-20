@@ -2,6 +2,7 @@ library api;
 
 import 'dart:convert';
 import 'dart:developer';
+import 'package:api/entity/brand_logo.dart';
 import 'package:api/entity/home_banner.dart';
 import 'package:api/entity/language_option.dart';
 import 'package:api/entity/live_chat.dart';
