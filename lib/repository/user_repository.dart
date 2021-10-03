@@ -28,13 +28,13 @@ class UserRepository extends BaseRepository {
   }
 
   Future<EventResult<RegisterResponse>> register(
-      String username, String password, String rpassword, String currency, String invitationCode) async {
+      String username, String password, String rpassword, String invitationCode) async {
     return await ApiRequestBuilder<RegisterResponse>(
             isAuthorization: false,
             endPoint: "api/Player/create",
             params: {
               "username": username,
-              "currency": currency,
+              "currency": env.currency,
               "pwd": password,
               "confirmpwd": rpassword,
               "invitationcode": invitationCode,

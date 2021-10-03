@@ -22,7 +22,7 @@ class AuthenticationRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> verifyCode(String securityKey, String validateCode, {bool isPhone = false}) async {
+  Future<EventResult<dynamic>> submitVerifyCode(String securityKey, String validateCode, {bool isPhone = false}) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.PUT,
             endPoint: isPhone ? "api/player/phone" : "api/player/email",
@@ -31,10 +31,11 @@ class AuthenticationRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> phoneVerify(String phone) async {
+  Future<EventResult<dynamic>> getPhoneVerify(String area, String phone) async {
     return await ApiRequestBuilder<dynamic>(
             endPoint: "api/player/phone",
             params: {
+              "area": area,
               "phone": phone,
             },
             jwtRefresher: jwtAuth)
@@ -48,7 +49,8 @@ class AuthenticationRepository extends BaseRepository {
             params: {
               "email": phone,
             },
-            jwtRefresher: jwtAuth)
+            jwtRefresher: jwtAuth,
+            timeout: 10)
         .execute();
   }
 
@@ -79,6 +81,23 @@ class AuthenticationRepository extends BaseRepository {
             endPoint: "api/pay/password",
             params: {"newpwd": password, "validatecode": code, "securitykey": securityKey},
             jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult<dynamic>> getReVerifyCode(String username, String password, String areaCode, String phone) async {
+    return await ApiRequestBuilder<dynamic>(
+        endPoint: "api/player/init-phone",
+        params: {"username": username, "pwd": password, "areacode": areaCode, "phone": phone},
+        jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult<dynamic>> phoneReVerify(String securityKey, validateCode) async {
+    return await ApiRequestBuilder<dynamic>(
+        method: HttpMethod.PUT,
+        endPoint: "api/player/init-phone",
+        params: {"securitykey": securityKey, "validatecode": validateCode},
+        jwtRefresher: jwtAuth)
         .execute();
   }
 }

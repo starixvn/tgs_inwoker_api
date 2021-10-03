@@ -28,7 +28,7 @@ class ContentRepository extends BaseRepository {
         params: {
           "platformtype": "1",
           "language": await getLanguage(),
-          "currency": "CNY",
+          "currency": env.currency
         },
         converter: (json) => (json as List<dynamic>).map((e) => GameProvider.fromJson(e)).toList(),
         consumer: (result) => setRepoValues(() {
@@ -48,7 +48,7 @@ class ContentRepository extends BaseRepository {
           "gametypes": gameType.getJsonValue.toString(),
           "platformtype": "1",
           "language": await getLanguage(),
-          "currency": "CNY"
+          "currency": "env.currency"
         },
         converter: (json) => (json as List<dynamic>).map((e) => Game.fromJson(e)).toList(),
         jwtRefresher: jwtAuth)
@@ -96,10 +96,12 @@ class ContentRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ListResponse<Promotion>>> getPromotionList(int page, int rows, bool desc, bool all) async {
+  Future<EventResult<ListResponse<Promotion>>> getPromotionList(int page, int rows, bool desc, bool all, bool isUserProfileNotNull) async {
     return await ApiRequestBuilder<ListResponse<Promotion>>(
         method: HttpMethod.GET,
-        endPoint: "api/promotion/${await getLanguage()}",
+        endPoint: isUserProfileNotNull
+            ? "api/promotion/${await getLanguage()}"
+            : "api/playerpromotion/${await getLanguage()}",
         params: {
           "page": page.toString(),
           "rows": rows.toString(),
@@ -118,7 +120,7 @@ class ContentRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ListResponse<Promotion>>> getPlayerPromotionList(int page, int rows, bool desc, bool all) async {
+  /*Future<EventResult<ListResponse<Promotion>>> getPlayerPromotionList(int page, int rows, bool desc, bool all) async {
     return await ApiRequestBuilder<ListResponse<Promotion>>(
         method: HttpMethod.GET,
         endPoint: "api/playerpromotion/${await getLanguage()}",
@@ -131,7 +133,7 @@ class ContentRepository extends BaseRepository {
         converter: (json) => ListResponse.fromJson(json, (res) => Promotion.fromJson(res)),
         jwtRefresher: jwtAuth)
         .execute();
-  }
+  }*/
 
   Future<EventResult<List<int>>> getFavoriteGame(GameType gameType) async {
     return await ApiRequestBuilder<List<int>>(
