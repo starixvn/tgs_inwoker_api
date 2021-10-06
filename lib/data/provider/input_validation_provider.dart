@@ -27,6 +27,19 @@ class InputValidationProvider{
     ).hasMatch(phone);
   }
 
+  validateMalaysiaPhoneNumber(String phone) {
+    return RegExp("^(\\+?6?01)[02-46-9]-*[0-9]{7}\$|^(\\+?6?01)[1]-*[0-9]{8}\$", caseSensitive: true, multiLine: false)
+        .hasMatch(phone);
+  }
+
+  validateThaiPhoneNumber(String phone) {
+    return RegExp("^(\\+?66)(\\d{1,2}\-?\\d{3,4}\-?\\d{3,4})\$", caseSensitive: true, multiLine: false).hasMatch(phone);
+  }
+
+  validateHKPhoneNumber(String phone) {
+    return RegExp("^[2-9][0-9]{7}\$", caseSensitive: true, multiLine: false).hasMatch(phone);
+  }
+
   validateEmail(String email){
     return RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
         caseSensitive: true,
@@ -46,5 +59,27 @@ class InputValidationProvider{
         caseSensitive: true,
         multiLine: false
     ).hasMatch(qq);
+  }
+
+  validateAreaCodeAndPhone(String area, String phone){
+    var _phone = area+phone;
+    switch (area) {
+      case "+852":
+        return true;
+        //return validateHKPhoneNumber(_phone);
+        break;
+      case "+86":
+        return validateChinaPhoneNumber(_phone);
+        break;
+      case "+60":
+        return validateMalaysiaPhoneNumber(_phone);
+        break;
+      case "+66":
+        return validateThaiPhoneNumber(_phone);
+        break;
+      default:
+        return true;
+        break;
+    }
   }
 }

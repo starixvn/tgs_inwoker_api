@@ -56,7 +56,10 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       var dataToConvert = baseResponse.data ?? value;
       var result = converter == null ? dataToConvert as T : converter(dataToConvert);
       if (onSuccess != null) onSuccess(result);
-      return EventResult.success(result);
+      if (response.statusCode == 503)
+        return EventResult.maintenance(result);
+      else
+        return EventResult.success(result);
     } else {
       return EventResult.failure(baseResponse.error, baseResponse.msg, baseResponse.errorMsgId);
     }

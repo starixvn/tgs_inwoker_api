@@ -42,12 +42,14 @@ class AuthenticationRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> getForgotPasswordCode(String phone) async {
+  Future<EventResult<dynamic>> getForgotPasswordCode(String email, String phone, String areaCode) async {
     return await ApiRequestBuilder<dynamic>(
             isAuthorization: false,
             endPoint: "api/player/password/forgot",
             params: {
-              "email": phone,
+              "email": email,
+              "phone": phone,
+              "areaCode": areaCode,
             },
             jwtRefresher: jwtAuth,
             timeout: 10)
@@ -86,18 +88,18 @@ class AuthenticationRepository extends BaseRepository {
 
   Future<EventResult<dynamic>> getReVerifyCode(String username, String password, String areaCode, String phone) async {
     return await ApiRequestBuilder<dynamic>(
-        endPoint: "api/player/init-phone",
-        params: {"username": username, "pwd": password, "areacode": areaCode, "phone": phone},
-        jwtRefresher: jwtAuth)
+            endPoint: "api/player/init-phone",
+            params: {"username": username, "pwd": password, "areacode": areaCode, "phone": phone},
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> phoneReVerify(String securityKey, validateCode) async {
     return await ApiRequestBuilder<dynamic>(
-        method: HttpMethod.PUT,
-        endPoint: "api/player/init-phone",
-        params: {"securitykey": securityKey, "validatecode": validateCode},
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.PUT,
+            endPoint: "api/player/init-phone",
+            params: {"securitykey": securityKey, "validatecode": validateCode},
+            jwtRefresher: jwtAuth)
         .execute();
   }
 }
