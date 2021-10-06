@@ -65,8 +65,7 @@ class InputValidationProvider{
     var _phone = area+phone;
     switch (area) {
       case "+852":
-        return true;
-        //return validateHKPhoneNumber(_phone);
+        return validateHKPhoneNumber(_phone);
         break;
       case "+86":
         return validateChinaPhoneNumber(_phone);
