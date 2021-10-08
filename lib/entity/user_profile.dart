@@ -15,7 +15,8 @@ class UserProfile {
   bool isSetPayPassword;
   @JsonKey(name: 'identityauthentication')
   bool identityAuthentication;
-
+  @JsonKey(name: 'viplevel')
+  int vipLevel;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
   Map<String, dynamic> toJson() => _$UserProfileToJson(this);
