@@ -1,11 +1,11 @@
 part of api;
 
 class ContentRepository extends BaseRepository {
-  static ContentRepository _singleton;
-  UserProfile userProfile;
-  List<GameProvider> gameProviderList;
-  List<LanguageOption> languageOptionList;
-  BrandLogo brandLogo;
+  static late  ContentRepository _singleton;
+  UserProfile? userProfile;
+  List<GameProvider>? gameProviderList;
+  List<LanguageOption>? languageOptionList;
+  BrandLogo? brandLogo;
 
   static ContentRepository getSingleton() {
     if (_singleton == null) {
@@ -109,7 +109,7 @@ class ContentRepository extends BaseRepository {
           //"sort":"",
           "all": all.toString(),
         },
-        converter: (json) => ListResponse.fromJson(json, (res) => Promotion.fromJson(res)),
+        converter: (json) => ListResponse.fromJson(json, (res) => Promotion.fromJson(res as Map<String, dynamic>)),
         jwtRefresher: jwtAuth)
         .execute();
   }

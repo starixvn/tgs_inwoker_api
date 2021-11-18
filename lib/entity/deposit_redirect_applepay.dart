@@ -4,7 +4,9 @@ part 'deposit_redirect_applepay.g.dart';
 @JsonSerializable()
 
 class DepositRedirectApplePay {
-  DepositRedirectApplePay();
+  //DepositRedirectApplePay();
+
+  DepositRedirectApplePay(this.formId, this.paymentUrl, this.errorMsg);
 
   @JsonKey(name: "formid")
   String formId;

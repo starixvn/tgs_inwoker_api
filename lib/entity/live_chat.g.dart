@@ -7,11 +7,10 @@ part of 'live_chat.dart';
 // **************************************************************************
 
 LiveChat _$LiveChatFromJson(Map<String, dynamic> json) {
-  return LiveChat()
-    ..name = json['name'] as String
-    ..setting = json['setting'] == null
-        ? null
-        : Url.fromJson(json['setting'] as Map<String, dynamic>);
+  return LiveChat(
+    json['name'] as String,
+    Url.fromJson(json['setting'] as Map<String, dynamic>),
+  );
 }
 
 Map<String, dynamic> _$LiveChatToJson(LiveChat instance) => <String, dynamic>{

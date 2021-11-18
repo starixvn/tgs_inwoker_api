@@ -14,7 +14,7 @@ extension BankTypeExtension on BankType {
     BankType.CRYPTO: "Crypto",
   };
 
-  String get getJson => json[this];
+  String? get getJson => json[this];
 
 
   String getName(BuildContext context) {

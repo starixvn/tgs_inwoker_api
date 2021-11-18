@@ -8,7 +8,10 @@ part 'withdrawal_info.g.dart';
 @JsonSerializable()
 
 class WithdrawalInfo {
-  WithdrawalInfo();
+  //WithdrawalInfo();
+
+  WithdrawalInfo(this.id, this.bankType, this.channelId, this.channelName, this.channelCode, this.methodCode,
+      this.methodId, this.paymentCode, this.paymentId, this.transferLimit, this.bankExtendedInfo);
 
   String id;
   @JsonKey(name: "banktype")

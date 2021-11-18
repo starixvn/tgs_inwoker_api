@@ -4,7 +4,9 @@ part 'game_tag.g.dart';
 @JsonSerializable()
 
 class GameTag {
-  GameTag();
+  //GameTag();
+
+  GameTag(this.isNew, this.isHot, this.isRecommend);
 
   @JsonKey(name:"new")
   bool isNew;

@@ -7,18 +7,17 @@ part of 'payment.dart';
 // **************************************************************************
 
 Payment _$PaymentFromJson(Map<String, dynamic> json) {
-  return Payment()
-    ..id = json['id'] as String
-    ..bankType = _$enumDecodeNullable(_$BankTypeEnumMap, json['banktype'])
-    ..channelName = json['channelname'] as String
-    ..transferLimit = json['transferlimit'] == null
-        ? null
-        : TransferLimit.fromJson(json['transferlimit'] as Map<String, dynamic>)
-    ..paymentId = json['paymentid'] as String
-    ..paymentCode = json['paymentcode'] as String
-    ..methodId = json['methodid'] as String
-    ..methodCode = json['methodcode'] as String
-    ..order = json['displayorder'] as int;
+  return Payment(
+    json['id'] as String,
+    _$enumDecode(_$BankTypeEnumMap, json['banktype']),
+    json['channelname'] as String,
+    TransferLimit.fromJson(json['transferlimit'] as Map<String, dynamic>),
+    json['paymentid'] as String,
+    json['paymentcode'] as String,
+    json['methodid'] as String,
+    json['methodcode'] as String,
+    json['displayorder'] as int,
+  );
 }
 
 Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
@@ -33,36 +32,30 @@ Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
       'displayorder': instance.order,
     };
 
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
 }) {
   if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
 }
 
 const _$BankTypeEnumMap = {

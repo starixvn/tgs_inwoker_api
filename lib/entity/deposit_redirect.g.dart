@@ -7,9 +7,10 @@ part of 'deposit_redirect.dart';
 // **************************************************************************
 
 DepositRedirect _$DepositRedirectFromJson(Map<String, dynamic> json) {
-  return DepositRedirect()
-    ..formId = json['formid'] as String
-    ..paymentUrl = json['paymenturl'] as String;
+  return DepositRedirect(
+    json['formid'] as String,
+    json['paymenturl'] as String,
+  );
 }
 
 Map<String, dynamic> _$DepositRedirectToJson(DepositRedirect instance) =>

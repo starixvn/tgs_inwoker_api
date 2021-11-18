@@ -7,33 +7,31 @@ part of 'promotion.dart';
 // **************************************************************************
 
 Promotion _$PromotionFromJson(Map<String, dynamic> json) {
-  return Promotion()
-    ..id = json['id'] as String
-    ..name = json['name'] as String
-    ..from = json['from'] as String
-    ..to = json['to'] as String
-    ..status = json['status'] as int
-    ..promotionType = json['promotionType'] as String
-    ..bonusAmountLimit = (json['bonusAmountLimit'] as num)?.toDouble()
-    ..amountUsed = (json['amountUsed'] as num)?.toDouble()
-    ..unlimited = json['unlimited'] as bool
-    ..gameType = json['gameType'] as int
-    ..percentage = (json['percentage'] as num)?.toDouble()
-    ..totalAmountLimit = (json['totalAmountLimit'] as num)?.toDouble()
-    ..turnoverMultiple = (json['turnoverMultiple'] as num)?.toDouble()
-    ..gameProviderIds =
-        (json['gameProviderIds'] as List)?.map((e) => e as String)?.toList()
-    ..vipLevels = (json['vipLevels'] as List)?.map((e) => e as int)?.toList()
-    ..createdOn = json['createdOn'] as String
-    ..updatedOn = json['updatedOn'] as String
-    ..createdByUsername = json['createdByUsername'] as String
-    ..updatedByUsername = json['updatedByUsername'] as String
-    ..localization = json['localization'] == null
-        ? null
-        : Localization.fromJson(json['localization'] as Map<String, dynamic>)
-    ..mobileBanner = json['mobileBanner'] as String
-    ..content = json['content'] as String
-    ..terms = json['terms'] as String;
+  return Promotion(
+    json['id'] as String,
+    json['name'] as String,
+    json['from'] as String,
+    json['to'] as String,
+    json['status'] as int,
+    json['promotionType'] as String,
+    (json['bonusAmountLimit'] as num).toDouble(),
+    (json['amountUsed'] as num).toDouble(),
+    json['unlimited'] as bool,
+    json['gameType'] as int,
+    (json['percentage'] as num).toDouble(),
+    (json['totalAmountLimit'] as num).toDouble(),
+    (json['turnoverMultiple'] as num).toDouble(),
+    (json['gameProviderIds'] as List<dynamic>).map((e) => e as String).toList(),
+    (json['vipLevels'] as List<dynamic>).map((e) => e as int).toList(),
+    json['createdOn'] as String,
+    json['updatedOn'] as String,
+    json['createdByUsername'] as String,
+    json['updatedByUsername'] as String,
+    Localization.fromJson(json['localization'] as Map<String, dynamic>),
+    json['mobileBanner'] as String,
+    json['content'] as String,
+    json['terms'] as String,
+  );
 }
 
 Map<String, dynamic> _$PromotionToJson(Promotion instance) => <String, dynamic>{

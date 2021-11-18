@@ -8,7 +8,10 @@ part 'game.g.dart';
 
 @JsonSerializable()
 class Game {
-  Game();
+  //Game();
+
+  Game(this.id, this.code, this.name, this.description, this.gamePlatformCode, this.isActive, this.type, this.tag,
+      this.localizedName, this.isFavourite);
 
   int id;
   String code;

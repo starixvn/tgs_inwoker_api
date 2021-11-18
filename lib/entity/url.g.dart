@@ -7,7 +7,9 @@ part of 'url.dart';
 // **************************************************************************
 
 Url _$UrlFromJson(Map<String, dynamic> json) {
-  return Url()..url = json['url'] as String;
+  return Url(
+    json['url'] as String,
+  );
 }
 
 Map<String, dynamic> _$UrlToJson(Url instance) => <String, dynamic>{

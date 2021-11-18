@@ -8,8 +8,8 @@ class ListResponse<T> {
 
   @JsonKey(name: 'totalcount')
   int totalCount;
-  List<T> items;
+  List<T>? items;
 
-  factory ListResponse.fromJson(Map<String, dynamic> json, T Function(Object json) fromJsonT,) => _$ListResponseFromJson(json, fromJsonT);
+  factory ListResponse.fromJson(Map<String, dynamic> json, T Function(Object? json) fromJsonT,) => _$ListResponseFromJson(json, fromJsonT);
   Map<String, dynamic> toJson(Object Function(T value) toJsonT) => _$ListResponseToJson(this, toJsonT);
 }

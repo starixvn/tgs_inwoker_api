@@ -102,7 +102,7 @@ extension GameTypeExtension on GameType {
     }
   }
 
-  int get getJsonValue => json[this];
+  int? get getJsonValue => json[this];
 
   getTranslatedText(BuildContext context, String key) => LanguageProvider().getTranslated(context, key);
 

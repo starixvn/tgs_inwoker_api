@@ -7,9 +7,10 @@ part of 'transfer_limit.dart';
 // **************************************************************************
 
 TransferLimit _$TransferLimitFromJson(Map<String, dynamic> json) {
-  return TransferLimit()
-    ..from = (json['from'] as num)?.toDouble()
-    ..to = (json['to'] as num)?.toDouble();
+  return TransferLimit(
+    (json['from'] as num).toDouble(),
+    (json['to'] as num).toDouble(),
+  );
 }
 
 Map<String, dynamic> _$TransferLimitToJson(TransferLimit instance) =>

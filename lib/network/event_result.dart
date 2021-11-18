@@ -1,7 +1,7 @@
 class EventResult<T> {
-  T result;
-  String error;
-  int errorCode;
+  T? result;
+  String? error;
+  int? errorCode;
   bool isLoading, isSuccess, isError, isMaintenance;
   bool isHandled = false; //always false when init
   String errorMsgId;
@@ -14,7 +14,7 @@ class EventResult<T> {
       this.isSuccess = false,
       this.isError = false,
       this.isMaintenance = false,
-      this.errorMsgId});
+      this.errorMsgId = ""});
 
   EventResult.loading() : this(isLoading: true);
 

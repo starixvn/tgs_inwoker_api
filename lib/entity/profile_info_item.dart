@@ -14,14 +14,13 @@ enum ProfileInfoItem {
 }
 
 extension ProfileInfoItemExtension on ProfileInfoItem {
-
   static const name = {
     ProfileInfoItem.REALNAME: "ic_no",
     ProfileInfoItem.PHONE_NUMBER: "phone_number",
     ProfileInfoItem.EMAIL: "email",
     ProfileInfoItem.QQ_NUMBER: "qq_no",
     ProfileInfoItem.WECHAT_NUMBER: "wechat_no",
-   // ProfileInfoItem.ADDRESS: "收货地址",
+    // ProfileInfoItem.ADDRESS: "收货地址",
     ProfileInfoItem.LOGIN_PASSWORD: "edit_password",
     ProfileInfoItem.PAY_PASSWORD: "pay_password",
     ProfileInfoItem.RESET_PAY_PASSWORD: "reset_pay_password",
@@ -39,9 +38,9 @@ extension ProfileInfoItemExtension on ProfileInfoItem {
     ProfileInfoItem.RESET_PAY_PASSWORD: "images/profile_info/ic_profile_info_withdraw_password.png",
   };
 
-  String getDisplayName(BuildContext context) => getTranslatedText(context,name[this]);
-  String get getImagePath => imagePath[this];
+  String? getDisplayName(BuildContext context) => getTranslatedText(context, name[this]!);
 
-  getTranslatedText(BuildContext context, String key) =>
-      LanguageProvider().getTranslated(context, key);
+  String? get getImagePath => imagePath[this];
+
+  getTranslatedText(BuildContext context, String key) => LanguageProvider().getTranslated(context, key);
 }

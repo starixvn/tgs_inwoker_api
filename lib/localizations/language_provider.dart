@@ -28,9 +28,9 @@ class LanguageProvider {
   LanguageProvider() {
     var languageOptionList = contentRepo.languageOptionList;
     if (languageOptionList?.isEmpty ?? true) {
-      list.add(languageList["en-US"]);
+      list.add(languageList["en-US"]!);
     } else {
-      languageOptionList.forEach((languageOption) {
+      languageOptionList!.forEach((languageOption) {
         var code = languageOption.code;
         languageList.forEach((key, value) {
           if (key == code) {
@@ -41,19 +41,19 @@ class LanguageProvider {
     }
   }
 
-  Future<Locale> setLocale(Language language) async {
+  Future<Locale?> setLocale(Language language) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     await _prefs.setString("LANGUAGE_CODE", language.apiCode);
     return _locale(language);
   }
 
-  Future<Locale> getLocale() async {
+  Future<Locale?> getLocale() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    String languageCode = _prefs.getString("LANGUAGE_CODE");
+    String? languageCode = _prefs.getString("LANGUAGE_CODE");
     return _locale(languageCode != null ? list.singleWhere((e) => e.apiCode == languageCode) : null);
   }
 
-  Locale _locale(Language language) {
+  Locale? _locale(Language? language) {
     if (language == null) {
       return null;
     } else {
@@ -62,7 +62,7 @@ class LanguageProvider {
   }
 
   String getTranslated(BuildContext context, String key) {
-    return MyLocalizations.of(context).translate(key);
+    return MyLocalizations.of(context)!.translate(key);
   }
 
   getCurrentLanguage(Locale _locale) {

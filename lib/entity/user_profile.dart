@@ -3,7 +3,10 @@ part 'user_profile.g.dart';
 @JsonSerializable()
 
 class UserProfile {
-  UserProfile();
+  //UserProfile();
+
+  UserProfile(this.username, this.realname, this.phone, this.email, this.qq, this.wechat, this.isSetPayPassword,
+      this.identityAuthentication, this.vipLevel);
 
   String username;
   String realname;

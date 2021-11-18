@@ -4,7 +4,9 @@ part 'language_option.g.dart';
 @JsonSerializable()
 
 class LanguageOption {
-  LanguageOption();
+  //LanguageOption();
+
+  LanguageOption(this.code);
 
   @JsonKey(name: "culturecode")
   String code;

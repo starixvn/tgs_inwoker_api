@@ -3,7 +3,9 @@ part 'brand_logo.g.dart';
 @JsonSerializable()
 
 class BrandLogo {
-  BrandLogo();
+  //BrandLogo();
+
+  BrandLogo(this.id, this.mobileUrl);
 
   @JsonKey(name: 'brandId')
   String id;

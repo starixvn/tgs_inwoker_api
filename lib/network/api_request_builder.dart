@@ -8,12 +8,13 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
   bool isAuthorization;
   bool isJWTAuthRequest;
   HttpMethod method;
-  String endPoint;
+  String? endPoint;
+
   dynamic params;
-  ResponseResultConverter<T> converter;
+  ResponseResultConverter<T>? converter;
   int retryCounter = 0;
-  JwtRefresher jwtRefresher;
-  ResultConsumer consumer;
+  JwtRefresher? jwtRefresher;
+  ResultConsumer? consumer;
   dynamic imageContent;
   int timeout;
 
@@ -21,11 +22,11 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       {this.isAuthorization = true,
       this.isJWTAuthRequest = false,
       this.method = HttpMethod.POST,
-      this.endPoint,
+       this.endPoint,
       this.params,
       this.converter,
-      this.jwtRefresher,
-      this.consumer,
+       this.jwtRefresher,
+       this.consumer,
       this.imageContent,
       this.timeout = 3});
 
@@ -35,24 +36,24 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
     var result = resolveBaseResponse(response, converter, consumer);
     if (result.errorCode == 101 && retryCounter < 2 && !isJWTAuthRequest) {
       retryCounter++;
-      await jwtRefresher();
+      await jwtRefresher!();
       return execute();
     }
     return result;
   }
 
   EventResult<T> resolveBaseResponse<T>(http.Response response,
-      [ResponseResultConverter<T> converter, void Function(T) onSuccess]) {
+      [ResponseResultConverter<T>? converter, void Function(T)? onSuccess]) {
     var value = json.decode(response.body);
     print(value);
     var baseResponse = BaseResponse.fromJson(value);
     if (baseResponse.error == null ||
-        (baseResponse.error == 0 && baseResponse.errorMsgId == null && (baseResponse.msg.isEmpty ?? "")) ||
+        (baseResponse.error == 0 && baseResponse.errorMsgId == null && (baseResponse.msg?.isEmpty ?? false)) ||
         (baseResponse.success == null &&
             baseResponse.error == 0 &&
             baseResponse.errorMsgId == null &&
-            (baseResponse?.msg?.isEmpty ?? "")) ||
-        (baseResponse?.success ?? false)) {
+            (baseResponse.msg?.isEmpty ?? false)) ||
+        (baseResponse.success ?? false)) {
       var dataToConvert = baseResponse.data ?? value;
       var result = converter == null ? dataToConvert as T : converter(dataToConvert);
       if (onSuccess != null) onSuccess(result);
@@ -61,7 +62,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       else
         return EventResult.success(result);
     } else {
-      return EventResult.failure(baseResponse.error, baseResponse.msg, baseResponse.errorMsgId);
+      return EventResult.failure(baseResponse.error!, baseResponse.msg!, baseResponse.errorMsgId!);
     }
   }
 }

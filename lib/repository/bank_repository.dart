@@ -1,9 +1,9 @@
 part of api;
 
 class BankRepository extends BaseRepository {
-  static BankRepository _singleton;
-  UserProfile userProfile;
-  List<GameProvider> gameProviderList;
+  static late  BankRepository _singleton;
+  UserProfile? userProfile;
+  List<GameProvider>? gameProviderList;
 
   static BankRepository getSingleton() {
     if (_singleton == null) {
@@ -77,7 +77,7 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<dynamic>> addBankCard(String paymentChannelId, BankType bankType,
-      {String address, bankAccount, bankName, name, bankBranch}) async {
+      {String? address, bankAccount, bankName, name, bankBranch}) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.POST,
             endPoint: "api/bankinfo",

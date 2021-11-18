@@ -3,7 +3,9 @@ part 'home_banner.g.dart';
 @JsonSerializable()
 
 class HomeBanner {
-  HomeBanner();
+  //HomeBanner();
+
+  HomeBanner(this.id, this.mobileUrl, this.title);
 
   @JsonKey(name: 'id')
   String id;

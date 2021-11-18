@@ -1,7 +1,7 @@
 part of api;
 
 class WalletRepository extends BaseRepository {
-  static WalletRepository _singleton;
+  static late WalletRepository _singleton;
 
   static WalletRepository getSingleton() {
     if (_singleton == null) {

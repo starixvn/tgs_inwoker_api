@@ -1,10 +1,10 @@
 part of api;
 
 class UserRepository extends BaseRepository {
-  static UserRepository _singleton;
-  UserProfile userProfile;
-  MainWallet wallet;
-  Map<String, dynamic> apiError;
+  static late  UserRepository _singleton;
+  UserProfile? userProfile;
+  MainWallet? wallet;
+  Map<String, dynamic>? apiError;
 
   static UserRepository getSingleton() {
     if (_singleton == null) {
@@ -169,7 +169,7 @@ class UserRepository extends BaseRepository {
           "SortBy":sortBy,
           "ShowAll":showAll.toString(),*/
             },
-            converter: (json) => ListResponse.fromJson(json, (res) => BetTransaction.fromJson(res)),
+            converter: (json) => ListResponse.fromJson(json, (res) => BetTransaction.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -210,7 +210,7 @@ class UserRepository extends BaseRepository {
                     "Rows": rows.toString(),
                     "status": status.getJson().toString()
                   },
-            converter: (json) => TransactionResponse.fromJson(json, (res) => AccountTransaction.fromJson(res)),
+            converter: (json) => TransactionResponse.fromJson(json, (res) => AccountTransaction.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -239,7 +239,7 @@ class UserRepository extends BaseRepository {
                     "Rows": rows.toString(),
                     "status": status.getJson().toString()
                   },
-            converter: (json) => TransactionResponse.fromJson(json, (res) => AccountTransaction.fromJson(res)),
+            converter: (json) => TransactionResponse.fromJson(json, (res) => AccountTransaction.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -265,7 +265,7 @@ class UserRepository extends BaseRepository {
               "OrderBy": "1",
               "SortBy": "BalanceTime"
             },
-            converter: (json) => TransactionResponse.fromJson(json, (res) => TransferTransaction.fromJson(res)),
+            converter: (json) => TransactionResponse.fromJson(json, (res) => TransferTransaction.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }

@@ -7,15 +7,16 @@ part of 'game_provider.dart';
 // **************************************************************************
 
 GameProvider _$GameProviderFromJson(Map<String, dynamic> json) {
-  return GameProvider()
-    ..code = json['code'] as String
-    ..name = json['name'] as String
-    ..description = json['description'] as String
-    ..status = json['status'] as int
-    ..transferWallet = json['transferwallet'] as bool
-    ..gameTypes = (json['gametypes'] as List)
-        ?.map((e) => _$enumDecodeNullable(_$GameTypeEnumMap, e))
-        ?.toList();
+  return GameProvider(
+    json['code'] as String,
+    json['name'] as String,
+    json['description'] as String,
+    json['status'] as int,
+    json['transferwallet'] as bool,
+    (json['gametypes'] as List<dynamic>)
+        .map((e) => _$enumDecode(_$GameTypeEnumMap, e))
+        .toList(),
+  );
 }
 
 Map<String, dynamic> _$GameProviderToJson(GameProvider instance) =>
@@ -25,40 +26,33 @@ Map<String, dynamic> _$GameProviderToJson(GameProvider instance) =>
       'description': instance.description,
       'status': instance.status,
       'transferwallet': instance.transferWallet,
-      'gametypes':
-          instance.gameTypes?.map((e) => _$GameTypeEnumMap[e])?.toList(),
+      'gametypes': instance.gameTypes.map((e) => _$GameTypeEnumMap[e]).toList(),
     };
 
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
+K _$enumDecode<K, V>(
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
 }) {
   if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
+    throw ArgumentError(
+      'A value must be provided. Supported values: '
+      '${enumValues.values.join(', ')}',
+    );
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+  return enumValues.entries.singleWhere(
+    (e) => e.value == source,
+    orElse: () {
+      if (unknownValue == null) {
+        throw ArgumentError(
+          '`$source` is not one of the supported values: '
+          '${enumValues.values.join(', ')}',
+        );
+      }
+      return MapEntry(unknownValue, enumValues.values.first);
+    },
+  ).key;
 }
 
 const _$GameTypeEnumMap = {

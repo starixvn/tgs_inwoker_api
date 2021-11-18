@@ -1,11 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'brand_communication.g.dart';
+
 @JsonSerializable()
-
 class BrandCommunication {
-  BrandCommunication();
+  //BrandCommunication();
 
-  String type;
+  BrandCommunication(this.phone, this.appId, this.qrCodeUrl);
+
   String phone;
   @JsonKey(name: 'appid')
   String appId;
@@ -13,5 +15,6 @@ class BrandCommunication {
   String qrCodeUrl;
 
   factory BrandCommunication.fromJson(Map<String, dynamic> json) => _$BrandCommunicationFromJson(json);
+
   Map<String, dynamic> toJson() => _$BrandCommunicationToJson(this);
 }

@@ -4,7 +4,9 @@ part 'deposit_redirect.g.dart';
 @JsonSerializable()
 
 class DepositRedirect {
-  DepositRedirect();
+  //DepositRedirect();
+
+  DepositRedirect(this.formId, this.paymentUrl);
 
   @JsonKey(name: "formid")
   String formId;

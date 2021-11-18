@@ -7,7 +7,9 @@ part 'announcement.g.dart';
 @JsonSerializable()
 
 class Announcement {
-  Announcement();
+  //Announcement();
+
+  Announcement(this.subject, this.content, this.from, this.to, this.localization);
 
   String subject;
   String content;

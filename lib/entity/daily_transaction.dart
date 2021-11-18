@@ -4,7 +4,9 @@ part 'daily_transaction.g.dart';
 @JsonSerializable()
 
 class DailyTransaction {
-  DailyTransaction();
+  //DailyTransaction();
+
+  DailyTransaction(this.betTime, this.betAmount, this.winLoss, this.turnover);
 
   @JsonKey(name: "bet_time")
   String betTime;

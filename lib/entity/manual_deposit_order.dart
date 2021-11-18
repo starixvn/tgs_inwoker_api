@@ -4,7 +4,10 @@ part 'manual_deposit_order.g.dart';
 @JsonSerializable()
 
 class ManualDepositOrder {
-  ManualDepositOrder();
+  //ManualDepositOrder();
+
+  ManualDepositOrder(
+      this.methodName, this.channelName, this.amount, this.bankName, this.bankAccountName, this.bankAccount);
 
   @JsonKey(name: "methodname")
   String methodName;

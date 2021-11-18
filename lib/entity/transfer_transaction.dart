@@ -5,8 +5,10 @@ part 'transfer_transaction.g.dart';
 @JsonSerializable()
 
 class TransferTransaction {
-  TransferTransaction();
-  
+  //TransferTransaction();
+
+  TransferTransaction(this.from, this.to, this.amount, this.balanceTime);
+
   String from;
   String to;
   double amount;

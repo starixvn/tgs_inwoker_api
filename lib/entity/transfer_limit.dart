@@ -4,7 +4,9 @@ part 'transfer_limit.g.dart';
 @JsonSerializable()
 
 class TransferLimit {
-  TransferLimit();
+  //TransferLimit();
+
+  TransferLimit(this.from, this.to);
 
   double from;
   double to;

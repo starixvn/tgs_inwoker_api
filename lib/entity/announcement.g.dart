@@ -7,14 +7,13 @@ part of 'announcement.dart';
 // **************************************************************************
 
 Announcement _$AnnouncementFromJson(Map<String, dynamic> json) {
-  return Announcement()
-    ..subject = json['subject'] as String
-    ..content = json['content'] as String
-    ..from = json['from'] as int
-    ..to = json['to'] as int
-    ..localization = json['localization'] == null
-        ? null
-        : Localization.fromJson(json['localization'] as Map<String, dynamic>);
+  return Announcement(
+    json['subject'] as String,
+    json['content'] as String,
+    json['from'] as int,
+    json['to'] as int,
+    Localization.fromJson(json['localization'] as Map<String, dynamic>),
+  );
 }
 
 Map<String, dynamic> _$AnnouncementToJson(Announcement instance) =>

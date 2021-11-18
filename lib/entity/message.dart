@@ -4,7 +4,9 @@ part 'message.g.dart';
 @JsonSerializable()
 
 class Message {
-  Message();
+  //Message();
+
+  Message(this.id, this.createdOn, this.content, this.subject, this.isRead, this.localization);
 
   @JsonKey(name: 'id')
   String id;

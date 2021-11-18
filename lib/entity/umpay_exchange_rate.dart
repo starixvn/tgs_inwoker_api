@@ -5,7 +5,9 @@ part 'umpay_exchange_rate.g.dart';
 @JsonSerializable()
 
 class UmPayExchangeRate {
-  UmPayExchangeRate();
+  //UmPayExchangeRate();
+
+  UmPayExchangeRate(this.rate, this.fee, this.inRate, this.outRate);
 
   double rate;
   double fee;

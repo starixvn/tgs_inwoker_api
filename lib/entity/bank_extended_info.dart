@@ -6,7 +6,9 @@ part 'bank_extended_info.g.dart';
 @JsonSerializable()
 
 class BankExtendedInfo {
-  BankExtendedInfo();
+  //BankExtendedInfo();
+
+  BankExtendedInfo(this.channel, this.systemId, this.systemKey, this.channelCurrency);
 
   String channel;
   String systemId;

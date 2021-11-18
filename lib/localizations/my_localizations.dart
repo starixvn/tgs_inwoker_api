@@ -7,11 +7,11 @@ class MyLocalizations {
   MyLocalizations(this.locale);
 
   final Locale locale;
-  static MyLocalizations of(BuildContext context) {
+  static MyLocalizations? of(BuildContext context) {
     return Localizations.of<MyLocalizations>(context, MyLocalizations);
   }
 
-  Map<String, String> _localizedValues;
+  late Map<String, String> _localizedValues;
 
   Future<void> load() async {
     String jsonStringValues =
@@ -22,7 +22,7 @@ class MyLocalizations {
   }
 
   String translate(String key) {
-    return _localizedValues[key];
+    return _localizedValues[key]!;
   }
 
 // static member to have simple access to the delegate from Material App

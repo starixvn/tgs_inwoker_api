@@ -7,7 +7,9 @@ part 'url.g.dart';
 @JsonSerializable()
 
 class Url {
-  Url();
+  //Url();
+
+  Url(this.url);
 
   String url;
 

@@ -6,7 +6,9 @@ part 'bank_card.g.dart';
 @JsonSerializable()
 
 class BankCard {
-  BankCard();
+  //BankCard();
+
+  BankCard(this.id, this.paymentChannelId, this.bankType, this.bankDetail);
 
   String id;
   @JsonKey(name: "paymentchannelid")

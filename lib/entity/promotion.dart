@@ -6,7 +6,32 @@ part 'promotion.g.dart';
 @JsonSerializable()
 
 class Promotion {
-  Promotion();
+  //Promotion();
+
+  Promotion(
+      this.id,
+      this.name,
+      this.from,
+      this.to,
+      this.status,
+      this.promotionType,
+      this.bonusAmountLimit,
+      this.amountUsed,
+      this.unlimited,
+      this.gameType,
+      this.percentage,
+      this.totalAmountLimit,
+      this.turnoverMultiple,
+      this.gameProviderIds,
+      this.vipLevels,
+      this.createdOn,
+      this.updatedOn,
+      this.createdByUsername,
+      this.updatedByUsername,
+      this.localization,
+      this.mobileBanner,
+      this.content,
+      this.terms);
 
   String id;
   String name;

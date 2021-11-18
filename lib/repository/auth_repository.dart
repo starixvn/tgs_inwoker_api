@@ -1,8 +1,8 @@
 part of api;
 
 class AuthenticationRepository extends BaseRepository {
-  static AuthenticationRepository _singleton;
-  UserProfile userProfile;
+  static late  AuthenticationRepository _singleton;
+  UserProfile? userProfile;
 
   static AuthenticationRepository getSingleton() {
     if (_singleton == null) {

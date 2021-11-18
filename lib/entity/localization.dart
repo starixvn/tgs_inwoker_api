@@ -5,7 +5,9 @@ part 'localization.g.dart';
 @JsonSerializable()
 
 class Localization {
-  Localization();
+  //Localization();
+
+  Localization(this.name, this.subSubject, this.content, this.mobileBanner);
 
   String name;
   String subSubject;

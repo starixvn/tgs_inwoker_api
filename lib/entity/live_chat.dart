@@ -8,7 +8,9 @@ part 'live_chat.g.dart';
 @JsonSerializable()
 
 class LiveChat {
-  LiveChat();
+  //LiveChat();
+
+  LiveChat(this.name, this.setting);
 
   String name;
   Url setting;

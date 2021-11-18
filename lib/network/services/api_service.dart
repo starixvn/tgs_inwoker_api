@@ -1,6 +1,6 @@
 part of api;
 
-http.Client client;
+late http.Client client;
 //const timeoutDuration = Duration(seconds: 3);
 
 Future<http.Response> api(HttpMethod method, final endPoint,
@@ -25,7 +25,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
     case HttpMethod.POST:
       response = await client
           .post(
-            url,
+            Uri.parse(url),
             headers: header,
             body: jsonEncode(content),
           )
@@ -43,7 +43,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
 
         response = await client
             .get(
-              url + queryParams,
+              Uri.parse(url + queryParams),
               headers: header,
             )
             .timeout(timeoutDuration, onTimeout: onTimeout);
@@ -54,7 +54,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
     case HttpMethod.DELETE:
       response = await client
           .delete(
-            url,
+            Uri.parse(url),
             headers: header,
           )
           .timeout(timeoutDuration, onTimeout: onTimeout);
@@ -63,7 +63,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
     case HttpMethod.PATCH:
       response = await client
           .patch(
-            url,
+            Uri.parse(url),
             headers: header,
             body: jsonEncode(content),
           )
@@ -72,7 +72,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
     case HttpMethod.PUT:
       response = await client
           .put(
-            url,
+            Uri.parse(url),
             headers: header,
             body: jsonEncode(content),
           )
@@ -92,7 +92,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
     default:
       response = await client
           .post(
-            url,
+            Uri.parse(url),
             headers: header,
             body: jsonEncode(content),
           )
@@ -122,9 +122,7 @@ getLanguage() async {
 
 _getAuthorizationToken(Map<String, String> header) async {
   var prefs = await SharedPreferences.getInstance();
-  String authToken = prefs.getString("auth_token");
-  var auth_token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0ZTg2NzE5Zi0yNDNmLTQ2ZjYtYjAxMC01Yzc1OGI3Mjg1YWYiLCJqdGkiOiJjMjE1OWRlNS0wNWFiLTQzZTEtYWU2Yi00MTExZmYwYWFkYTQiLCJjdXJyIjoiQ05ZIiwibmJmIjoxNjE4NTU5ODgzLCJleHAiOjE2MTg1NjM0ODMsImlhdCI6MTYxODU1OTg4MywiaXNzIjoib3BlcmF0b3ItYXBpIn0.RxQJPt-YcVhwZ68_QEPlhyZhcNgvR-jftDLRbOBxGE8";
+  String? authToken = prefs.getString("auth_token");
   if (authToken != null) {
     header["Authorization"] = "Bearer " + authToken;
   }
@@ -133,9 +131,7 @@ _getAuthorizationToken(Map<String, String> header) async {
 
 _getToken(Map<String, String> header) async {
   var prefs = await SharedPreferences.getInstance();
-  var _token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJTNGZZZVlCQjJhTnZlbXExWkpwank1RWlMWDNkQjBEZDJLNWRUa05PdVFYQmlLZXFIdFRXNXFXMW1HNFlPZGc3c2VKbnpEUVZmdHpDaWxpb3FnTFZPRTJIRFNvUDByblFXQTJkUzZQVVVBdmFFaFFMZHZDUU1ncnVBQlEySDVITWdmY09iMWJLenpld01jeWxKaUFqQnp2YWJSTnVPTFZEbXZ4V25DcXEwRlRVeTdZeENXUFIxS2JRSm5nak5IRTJuaDd4bFFRRWIxUmUydW1nZDZwWHl6Tm0iLCJqdGkiOiJlYWZhNDliMy01M2M1LTRjZWUtYTAyYi1mMTJjZjI5MjA1M2YiLCJuYmYiOjE2MTg1NjAwMTksImV4cCI6MTYxODYwMzIxOSwiaWF0IjoxNjE4NTYwMDE5LCJpc3MiOiJvcGVyYXRvci1hcGkifQ.Dl79XK0_ai8QlRZ6obORaEMaRXIm3qg6XXN7ikXekXs";
-  String token = prefs.getString("token");
+  String? token = prefs.getString("token");
   if (token != null) {
     header["Token"] = token;
   }

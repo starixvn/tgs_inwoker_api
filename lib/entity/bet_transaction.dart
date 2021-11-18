@@ -5,7 +5,10 @@ part 'bet_transaction.g.dart';
 @JsonSerializable()
 
 class BetTransaction {
-  BetTransaction();
+  //BetTransaction();
+
+  BetTransaction(
+      this.id, this.createdOn, this.gameProviderName, this.betAmount, this.validBetAmount, this.winLoss, this.gameName);
 
   String id;
   String createdOn;

@@ -3,7 +3,9 @@ part 'main_wallet.g.dart';
 @JsonSerializable()
 
 class MainWallet {
-  MainWallet();
+  //MainWallet();
+
+  MainWallet(this.main);
 
   double main;
 

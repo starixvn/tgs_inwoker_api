@@ -3,7 +3,9 @@ part 'game_wallet.g.dart';
 @JsonSerializable()
 
 class GameWallet {
-  GameWallet();
+  //GameWallet();
+
+  GameWallet(this.balance);
 
   double balance;
 

@@ -5,7 +5,9 @@ part 'account_transaction.g.dart';
 @JsonSerializable()
 
 class AccountTransaction {
-  AccountTransaction();
+  //AccountTransaction();
+
+  AccountTransaction(this.id, this.createdOn, this.updatedOn, this.status, this.amount, this.canUploadCerts);
 
   String id;
   @JsonKey(name: 'createdon')

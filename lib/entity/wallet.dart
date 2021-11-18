@@ -1,7 +1,7 @@
 
 
 class Wallet {
-  double balance;
+  double? balance;
   String gpCode;
   String title;
   bool isMainWallet;
