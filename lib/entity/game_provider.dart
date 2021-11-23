@@ -11,7 +11,7 @@ class GameProvider {
 
   String code;
   String name;
-  String description;
+  String? description;
   int status;
   @JsonKey(name: "transferwallet")
   bool transferWallet;

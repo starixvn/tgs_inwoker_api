@@ -21,8 +21,8 @@ class MyLocalizations {
         mappedJson.map((key, value) => MapEntry(key, value.toString()));
   }
 
-  String translate(String key) {
-    return _localizedValues[key]!;
+  String? translate(String key) {
+    return _localizedValues[key] ?? key;
   }
 
 // static member to have simple access to the delegate from Material App

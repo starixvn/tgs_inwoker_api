@@ -9,11 +9,11 @@ part of 'user_profile.dart';
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
   return UserProfile(
     json['username'] as String,
-    json['realname'] as String,
-    json['phone'] as String,
-    json['email'] as String,
-    json['qq'] as String,
-    json['wechat'] as String,
+    json['realname'] as String?,
+    json['phone'] as String?,
+    json['email'] as String?,
+    json['qq'] as String?,
+    json['wechat'] as String?,
     json['issetpaypassword'] as bool,
     json['identityauthentication'] as bool,
     json['viplevel'] as int,

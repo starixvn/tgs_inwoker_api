@@ -51,4 +51,6 @@ K _$enumDecode<K, V>(
 const _$BankTypeEnumMap = {
   BankType.BANK: 'Bank',
   BankType.CRYPTO: 'Crypto',
+  BankType.THIRD_PARTY: 'ThirdParty',
+  BankType.FPS: 'FPS',
 };

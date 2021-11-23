@@ -11,7 +11,7 @@ GameProvider2 _$GameProvider2FromJson(Map<String, dynamic> json) {
     _$enumDecode(_$GameTypeEnumMap, json['gameType']),
     json['code'] as String,
     json['name'] as String,
-    json['description'] as String,
+    json['description'] as String?,
     json['status'] as int,
   );
 }

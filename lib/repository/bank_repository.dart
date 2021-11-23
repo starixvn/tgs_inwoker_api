@@ -1,7 +1,7 @@
 part of api;
 
 class BankRepository extends BaseRepository {
-  static late  BankRepository _singleton;
+  static BankRepository? _singleton;
   UserProfile? userProfile;
   List<GameProvider>? gameProviderList;
 
@@ -9,7 +9,7 @@ class BankRepository extends BaseRepository {
     if (_singleton == null) {
       _singleton = BankRepository();
     }
-    return _singleton;
+    return _singleton!;
   }
 
   Future<EventResult<List<Payment>>> getPayment() async {
@@ -107,7 +107,7 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<DepositRedirect>> leePayDepositOrder(String amount, String paymentId, String promotionId) async {
+  Future<EventResult<DepositRedirect>> leePayDepositOrder(String amount, String paymentId, String? promotionId) async {
     return await ApiRequestBuilder<DepositRedirect>(
             method: HttpMethod.PUT,
             endPoint: "api/deposit/crypto/leepay",

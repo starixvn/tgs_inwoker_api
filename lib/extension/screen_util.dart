@@ -26,9 +26,9 @@ double _designD = 3.0;
 /// 配置设计稿尺寸 屏幕 宽，高，密度。
 /// Configuration design draft size  screen width, height, density.
 void setDesignWHD(double w, double h, {double density = 3.0}) {
-  _designW = w ?? _designW;
-  _designH = h ?? _designH;
-  _designD = density ?? _designD;
+  _designW = w /*?? _designW*/;
+  _designH = h /*?? _designH*/;
+  _designD = density /*?? _designD*/;
 }
 
 /// Screen Util.
@@ -133,7 +133,7 @@ class ScreenUtil {
   /// 返回根据屏幕宽适配后尺寸（单位 dp or pt）
   /// size 单位 dp or pt
   static double getScaleW(BuildContext context, double size) {
-    if (context == null || getScreenW(context) == 0.0) return size;
+    if (/*context == null ||*/ getScreenW(context) == 0.0) return size;
     return size * getScreenW(context) / _designW;
   }
 
@@ -142,7 +142,7 @@ class ScreenUtil {
   /// 返回根据屏幕高适配后尺寸 （单位 dp or pt）
   /// size unit dp or pt
   static double getScaleH(BuildContext context, double size) {
-    if (context == null || getScreenH(context) == 0.0) return size;
+    if (/*context == null ||*/ getScreenH(context) == 0.0) return size;
     return size * getScreenH(context) / _designH;
   }
 
@@ -151,7 +151,7 @@ class ScreenUtil {
   /// 返回根据屏幕宽适配后字体尺寸
   /// fontSize 字体尺寸
   static double getScaleSp(BuildContext context, double fontSize) {
-    if (context == null || getScreenW(context) == 0.0) return fontSize;
+    if (/*context == null ||*/ getScreenW(context) == 0.0) return fontSize;
     return fontSize * getScreenW(context) / _designW;
   }
 

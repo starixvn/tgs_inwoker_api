@@ -3,7 +3,7 @@ part of api;
 
 
 class MessageRepository extends BaseRepository {
-  static late  MessageRepository _singleton;
+  static MessageRepository? _singleton;
   UserProfile? userProfile;
   List<GameProvider>? gameProviderList;
 
@@ -11,7 +11,7 @@ class MessageRepository extends BaseRepository {
     if (_singleton == null) {
       _singleton = MessageRepository();
     }
-    return _singleton;
+    return _singleton!;
   }
 
   getLanguage() async {

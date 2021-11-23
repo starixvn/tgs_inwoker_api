@@ -61,8 +61,8 @@ class LanguageProvider {
     }
   }
 
-  String getTranslated(BuildContext context, String key) {
-    return MyLocalizations.of(context)!.translate(key);
+  String? getTranslated(BuildContext context, String key) {
+    return MyLocalizations.of(context)?.translate(key) ?? key;
   }
 
   getCurrentLanguage(Locale _locale) {

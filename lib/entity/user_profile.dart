@@ -9,11 +9,11 @@ class UserProfile {
       this.identityAuthentication, this.vipLevel);
 
   String username;
-  String realname;
-  String phone;
-  String email;
-  String qq;
-  String wechat;
+  String? realname;
+  String? phone;
+  String? email;
+  String? qq;
+  String? wechat;
   @JsonKey(name: 'issetpaypassword')
   bool isSetPayPassword;
   @JsonKey(name: 'identityauthentication')

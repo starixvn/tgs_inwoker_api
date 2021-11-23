@@ -6,13 +6,14 @@ part 'brand_communication.g.dart';
 class BrandCommunication {
   //BrandCommunication();
 
-  BrandCommunication(this.phone, this.appId, this.qrCodeUrl);
+  BrandCommunication(this.type, this.phone, this.appId, this.qrCodeUrl);
 
+  String type;
   String phone;
   @JsonKey(name: 'appid')
   String appId;
   @JsonKey(name: 'qrcodeurl')
-  String qrCodeUrl;
+  String? qrCodeUrl;
 
   factory BrandCommunication.fromJson(Map<String, dynamic> json) => _$BrandCommunicationFromJson(json);
 

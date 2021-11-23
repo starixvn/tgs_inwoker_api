@@ -9,7 +9,7 @@ part of 'login_response.dart';
 LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) {
   return LoginResponse(
     json['token'] as String,
-    json['expires'] as int,
+    json['expires'] as int?,
   );
 }
 

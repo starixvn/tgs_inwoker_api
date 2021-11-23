@@ -1,14 +1,14 @@
 part of api;
 
 class AuthenticationRepository extends BaseRepository {
-  static late  AuthenticationRepository _singleton;
+  static AuthenticationRepository? _singleton;
   UserProfile? userProfile;
 
   static AuthenticationRepository getSingleton() {
     if (_singleton == null) {
       _singleton = AuthenticationRepository();
     }
-    return _singleton;
+    return _singleton!;
   }
 
   Future<EventResult<dynamic>> emailVerify(String email) async {
@@ -42,7 +42,7 @@ class AuthenticationRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> getForgotPasswordCode(String email, String phone, String areaCode) async {
+  Future<EventResult<dynamic>> getForgotPasswordCode(String? email, String? phone, String? areaCode) async {
     return await ApiRequestBuilder<dynamic>(
             isAuthorization: false,
             endPoint: "api/player/password/forgot",

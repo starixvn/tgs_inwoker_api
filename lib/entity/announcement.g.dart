@@ -8,11 +8,13 @@ part of 'announcement.dart';
 
 Announcement _$AnnouncementFromJson(Map<String, dynamic> json) {
   return Announcement(
-    json['subject'] as String,
-    json['content'] as String,
+    json['subject'] as String?,
+    json['content'] as String?,
     json['from'] as int,
     json['to'] as int,
-    Localization.fromJson(json['localization'] as Map<String, dynamic>),
+    json['localization'] == null
+        ? null
+        : Localization.fromJson(json['localization'] as Map<String, dynamic>),
   );
 }
 

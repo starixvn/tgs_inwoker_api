@@ -10,7 +10,7 @@ GameProvider _$GameProviderFromJson(Map<String, dynamic> json) {
   return GameProvider(
     json['code'] as String,
     json['name'] as String,
-    json['description'] as String,
+    json['description'] as String?,
     json['status'] as int,
     json['transferwallet'] as bool,
     (json['gametypes'] as List<dynamic>)

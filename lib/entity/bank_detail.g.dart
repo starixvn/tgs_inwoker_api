@@ -8,8 +8,8 @@ part of 'bank_detail.dart';
 
 BankDetail _$BankDetailFromJson(Map<String, dynamic> json) {
   return BankDetail(
-    json['address'] as String,
-    json['bankAccount'] as String,
+    json['address'] as String?,
+    json['bankAccount'] as String?,
   );
 }
 

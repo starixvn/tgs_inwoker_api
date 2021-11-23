@@ -1,7 +1,7 @@
 part of api;
 
 class ContentRepository extends BaseRepository {
-  static late  ContentRepository _singleton;
+  static ContentRepository? _singleton;
   UserProfile? userProfile;
   List<GameProvider>? gameProviderList;
   List<LanguageOption>? languageOptionList;
@@ -11,7 +11,7 @@ class ContentRepository extends BaseRepository {
     if (_singleton == null) {
       _singleton = ContentRepository();
     }
-    return _singleton;
+    return _singleton!;
   }
 
   getLanguage() async {

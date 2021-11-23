@@ -8,10 +8,10 @@ part of 'localization.dart';
 
 Localization _$LocalizationFromJson(Map<String, dynamic> json) {
   return Localization(
-    json['name'] as String,
-    json['subSubject'] as String,
-    json['content'] as String,
-    json['mobileBanner'] as String,
+    json['name'] as String?,
+    json['subSubject'] as String?,
+    json['content'] as String?,
+    json['mobileBanner'] as String?,
   );
 }
 

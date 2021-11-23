@@ -1,7 +1,7 @@
 part of api;
 
 class UserRepository extends BaseRepository {
-  static late  UserRepository _singleton;
+  static UserRepository? _singleton;
   UserProfile? userProfile;
   MainWallet? wallet;
   Map<String, dynamic>? apiError;
@@ -10,7 +10,7 @@ class UserRepository extends BaseRepository {
     if (_singleton == null) {
       _singleton = UserRepository();
     }
-    return _singleton;
+    return _singleton!;
   }
 
   Future<EventResult<LoginResponse>> login(String username, String password) async {

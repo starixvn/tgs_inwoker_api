@@ -1,6 +1,6 @@
 part of api;
 
-late http.Client client;
+http.Client? client;
 //const timeoutDuration = Duration(seconds: 3);
 
 Future<http.Response> api(HttpMethod method, final endPoint,
@@ -23,7 +23,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
   http.Response response;
   switch (method) {
     case HttpMethod.POST:
-      response = await client
+      response = await client!
           .post(
             Uri.parse(url),
             headers: header,
@@ -41,7 +41,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
 
         print("Api->Start ${method.getName}:$url");
 
-        response = await client
+        response = await client!
             .get(
               Uri.parse(url + queryParams),
               headers: header,
@@ -52,7 +52,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
       }
       break;
     case HttpMethod.DELETE:
-      response = await client
+      response = await client!
           .delete(
             Uri.parse(url),
             headers: header,
@@ -61,7 +61,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
       ;
       break;
     case HttpMethod.PATCH:
-      response = await client
+      response = await client!
           .patch(
             Uri.parse(url),
             headers: header,
@@ -70,7 +70,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
           .timeout(timeoutDuration, onTimeout: onTimeout);
       break;
     case HttpMethod.PUT:
-      response = await client
+      response = await client!
           .put(
             Uri.parse(url),
             headers: header,
@@ -90,7 +90,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
       ;
       break;
     default:
-      response = await client
+      response = await client!
           .post(
             Uri.parse(url),
             headers: header,

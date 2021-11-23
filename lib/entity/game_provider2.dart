@@ -10,7 +10,7 @@ class GameProvider2 {
   GameType gameType;
   String code;
   String name;
-  String description;
+  String? description;
   int status;
 
   factory GameProvider2.fromJson(Map<String, dynamic> json) => _$GameProvider2FromJson(json);

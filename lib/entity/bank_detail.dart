@@ -8,8 +8,8 @@ class BankDetail {
   //BankDetail();
   BankDetail(this.address, this.bankAccount);
 
-  String address;
-  String bankAccount;
+  String? address;
+  String? bankAccount;
 
   factory BankDetail.fromJson(Map<String, dynamic> json) => _$BankDetailFromJson(json);
 
