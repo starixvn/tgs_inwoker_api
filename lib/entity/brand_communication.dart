@@ -11,7 +11,7 @@ class BrandCommunication {
   String type;
   String phone;
   @JsonKey(name: 'appid')
-  String appId;
+  String? appId;
   @JsonKey(name: 'qrcodeurl')
   String? qrCodeUrl;
 

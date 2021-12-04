@@ -146,30 +146,25 @@ class UserRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ListResponse<BetTransaction>>> getTransaction(
+  Future<EventResult<ListResponse<BetReport>>> getReport(
     DateTime startDate,
     DateTime endDate,
     int page,
     int rows,
-    /*int orderBy,
-      bool isDesc,
-      String sortBy,
-      bool showAll*/
   ) async {
-    return await ApiRequestBuilder<ListResponse<BetTransaction>>(
+    return await ApiRequestBuilder<ListResponse<BetReport>>(
             method: HttpMethod.GET,
             endPoint: "api/playerreport/rounds",
             params: {
               "From": startDate.toString(),
               "To": endDate.toString(),
-              "Page": page.toString(),
-              "Rows": rows.toString(),
-              /*"OrderBy":orderBy.toString(),
-          "IsDesc":isDesc.toString(),
-          "SortBy":sortBy,
-          "ShowAll":showAll.toString(),*/
+              "page": page.toString(),
+              "rows": rows.toString(),
+              "desc": "true",
+              "sort": "CreatedOn",
+              "all": "false",
             },
-            converter: (json) => ListResponse.fromJson(json, (res) => BetTransaction.fromJson(res as Map<String, dynamic>)),
+            converter: (json) => ListResponse.fromJson(json, (res) => BetReport.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -186,65 +181,61 @@ class UserRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<TransactionResponse<AccountTransaction>>> getAccountTransaction(
-      DateTime startDate, DateTime endDate, int page, int rows, Status status
-      /*int orderBy,
-      bool isDesc,
-      String sortBy,
-      bool showAll*/
-      ) async {
-    return await ApiRequestBuilder<TransactionResponse<AccountTransaction>>(
+  Future<EventResult<ReportResponse<AccountReport>>> getAccountReport(
+    DateTime startDate,
+    DateTime endDate,
+    int page,
+    int rows,
+    Status status,
+  ) async {
+    return await ApiRequestBuilder<ReportResponse<AccountReport>>(
             method: HttpMethod.GET,
             endPoint: "api/deposit/player/list",
-            params: status == null || status == Status.All
-                ? {
-                    "begincreate": startDate.toString(),
-                    "endcreate": endDate.toString(),
-                    "Page": page.toString(),
-                    "Rows": rows.toString(),
-                  }
-                : {
-                    "begincreate": startDate.toString(),
-                    "endcreate": endDate.toString(),
-                    "Page": page.toString(),
-                    "Rows": rows.toString(),
-                    "status": status.getJson().toString()
-                  },
-            converter: (json) => TransactionResponse.fromJson(json, (res) => AccountTransaction.fromJson(res as Map<String, dynamic>)),
+            params: {
+              "begincreate": startDate.toString(),
+              "endcreate": endDate.toString(),
+              "Page": page.toString(),
+              "Rows": rows.toString(),
+              "status": (status == null || status == Status.All) ? null : status.getJson().toString(),
+              "IsDesc": "true",
+              "SortBy": "CreatedOn",
+              "ShowAll": "false",
+              "OrderBy": "1"
+            },
+            converter: (json) =>
+                ReportResponse.fromJson(json, (res) => AccountReport.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<TransactionResponse<AccountTransaction>>> getWithdrawTransaction(
+  Future<EventResult<ReportResponse<AccountReport>>> getWithdrawReport(
       DateTime startDate, DateTime endDate, int page, int rows, Status status
       /*int orderBy,
       bool isDesc,
       String sortBy,
       bool showAll*/
       ) async {
-    return await ApiRequestBuilder<TransactionResponse<AccountTransaction>>(
+    return await ApiRequestBuilder<ReportResponse<AccountReport>>(
             method: HttpMethod.GET,
             endPoint: "api/withdraw/player/list",
-            params: status == null || status == Status.All
-                ? {
-                    "begincreate": startDate.toString(),
-                    "endcreate": endDate.toString(),
-                    "Page": page.toString(),
-                    "Rows": rows.toString(),
-                  }
-                : {
-                    "begincreate": startDate.toString(),
-                    "endcreate": endDate.toString(),
-                    "Page": page.toString(),
-                    "Rows": rows.toString(),
-                    "status": status.getJson().toString()
-                  },
-            converter: (json) => TransactionResponse.fromJson(json, (res) => AccountTransaction.fromJson(res as Map<String, dynamic>)),
+            params: {
+              "begincreate": startDate.toString(),
+              "endcreate": endDate.toString(),
+              "Page": page.toString(),
+              "Rows": rows.toString(),
+              "status": (status == null || status == Status.All) ? null : status.getJson().toString(),
+              "IsDesc": "true",
+              "SortBy": "CreatedOn",
+              "ShowAll": "false",
+              "OrderBy": "1"
+            },
+            converter: (json) =>
+                ReportResponse.fromJson(json, (res) => AccountReport.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<TransactionResponse<TransferTransaction>>> getTransferTransaction(
+  Future<EventResult<ReportResponse<TransferReport>>> getTransferReport(
     DateTime startDate,
     DateTime endDate,
     int page,
@@ -254,18 +245,21 @@ class UserRepository extends BaseRepository {
       String sortBy,
       bool showAll*/
   ) async {
-    return await ApiRequestBuilder<TransactionResponse<TransferTransaction>>(
+    return await ApiRequestBuilder<ReportResponse<TransferReport>>(
             method: HttpMethod.GET,
             endPoint: "api/game/balance/list",
             params: {
-              "begincreate": startDate.toString(),
-              "endcreate": endDate.toString(),
+              "beginrecord": startDate.toString(),
+              "endrecord": endDate.toString(),
               "Page": page.toString(),
               "Rows": rows.toString(),
               "OrderBy": "1",
-              "SortBy": "BalanceTime"
+              "SortBy": "BalanceTime",
+              "ShowAll": "false",
+              "IsDesc": "true"
             },
-            converter: (json) => TransactionResponse.fromJson(json, (res) => TransferTransaction.fromJson(res as Map<String, dynamic>)),
+            converter: (json) =>
+                ReportResponse.fromJson(json, (res) => TransferReport.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -311,6 +305,28 @@ class UserRepository extends BaseRepository {
   Future<EventResult<dynamic>> setAutoTransferValue() async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.POST, endPoint: "api/player/game/auto-transfer", jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult<ReportResponse2<PromotionReport>>> getPromotionReport(
+    DateTime startDate,
+    DateTime endDate,
+    int page,
+    int rows,
+  ) async {
+    return await ApiRequestBuilder<ReportResponse2<PromotionReport>>(
+            method: HttpMethod.GET,
+            endPoint: "api/playerpromotion/joined",
+            params: {
+              "page": page.toString(),
+              "rows": rows.toString(),
+              "sort": "promotionName",
+              "all": "false",
+              "desc": "true"
+            },
+            converter: (json) =>
+                ReportResponse2.fromJson(json, (res) => PromotionReport.fromJson(res as Map<String, dynamic>)),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 }

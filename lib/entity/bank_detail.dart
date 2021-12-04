@@ -6,10 +6,12 @@ part 'bank_detail.g.dart';
 @JsonSerializable()
 class BankDetail {
   //BankDetail();
-  BankDetail(this.address, this.bankAccount);
+  BankDetail(this.address, this.bankAccount, this.phone, this.username);
 
   String? address;
   String? bankAccount;
+  String? phone;
+  String? username;
 
   factory BankDetail.fromJson(Map<String, dynamic> json) => _$BankDetailFromJson(json);
 

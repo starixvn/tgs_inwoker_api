@@ -6,21 +6,19 @@ part of 'promotion.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Promotion _$PromotionFromJson(Map<String, dynamic> json) {
-  return Promotion(
-    json['id'] as String,
-    json['name'] as String,
-    json['from'] as String,
-    json['to'] as String,
-    (json['vipLevels'] as List<dynamic>).map((e) => e as int).toList(),
-    json['localization'] == null
-        ? null
-        : Localization.fromJson(json['localization'] as Map<String, dynamic>),
-    json['mobileBanner'] as String?,
-    json['content'] as String,
-    json['terms'] as String,
-  );
-}
+Promotion _$PromotionFromJson(Map<String, dynamic> json) => Promotion(
+      json['id'] as String,
+      json['name'] as String,
+      json['from'] as String,
+      json['to'] as String,
+      (json['vipLevels'] as List<dynamic>).map((e) => e as int).toList(),
+      json['localization'] == null
+          ? null
+          : Localization.fromJson(json['localization'] as Map<String, dynamic>),
+      json['mobileBanner'] as String?,
+      json['content'] as String,
+      json['terms'] as String,
+    );
 
 Map<String, dynamic> _$PromotionToJson(Promotion instance) => <String, dynamic>{
       'id': instance.id,

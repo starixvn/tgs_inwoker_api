@@ -1,15 +1,26 @@
 import 'package:api/entity/bank_type.dart';
+import 'package:api/entity/payment_qr_code.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:api/entity/transfer_limit.dart';
+
 part 'payment.g.dart';
 
 @JsonSerializable()
-
 class Payment {
   //Payment();
 
-  Payment(this.id, this.bankType, this.channelName, this.transferLimit, this.paymentId, this.paymentCode, this.methodId,
-      this.methodCode, this.order);
+  Payment(
+    this.id,
+    this.bankType,
+    this.channelName,
+    this.transferLimit,
+    this.paymentId,
+    this.paymentCode,
+    this.methodId,
+    this.methodCode,
+    this.order,
+    this.qrCode,
+  );
 
   String id;
   @JsonKey(name: "banktype")
@@ -28,8 +39,10 @@ class Payment {
   String methodCode;
   @JsonKey(name: "displayorder")
   int order;
+  @JsonKey(name: "extended")
+  PaymentQrCode qrCode;
 
   factory Payment.fromJson(Map<String, dynamic> json) => _$PaymentFromJson(json);
+
   Map<String, dynamic> toJson() => _$PaymentToJson(this);
 }
-

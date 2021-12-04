@@ -1,7 +1,5 @@
 part of api;
 
-
-
 class MessageRepository extends BaseRepository {
   static MessageRepository? _singleton;
   UserProfile? userProfile;
@@ -20,7 +18,7 @@ class MessageRepository extends BaseRepository {
     /*if (languageCode == "zh-TW")
       return "zh-CN";
     else*/
-      return languageCode;
+    return languageCode;
   }
 
   Future<EventResult<ListResponse<Message>>> getMessageList(int page, int rows) async {

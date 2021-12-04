@@ -6,18 +6,16 @@ part of 'game_provider.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GameProvider _$GameProviderFromJson(Map<String, dynamic> json) {
-  return GameProvider(
-    json['code'] as String,
-    json['name'] as String,
-    json['description'] as String?,
-    json['status'] as int,
-    json['transferwallet'] as bool,
-    (json['gametypes'] as List<dynamic>)
-        .map((e) => _$enumDecode(_$GameTypeEnumMap, e))
-        .toList(),
-  );
-}
+GameProvider _$GameProviderFromJson(Map<String, dynamic> json) => GameProvider(
+      json['code'] as String,
+      json['name'] as String,
+      json['description'] as String?,
+      json['status'] as int,
+      json['transferwallet'] as bool,
+      (json['gametypes'] as List<dynamic>)
+          .map((e) => $enumDecode(_$GameTypeEnumMap, e))
+          .toList(),
+    );
 
 Map<String, dynamic> _$GameProviderToJson(GameProvider instance) =>
     <String, dynamic>{
@@ -28,32 +26,6 @@ Map<String, dynamic> _$GameProviderToJson(GameProvider instance) =>
       'transferwallet': instance.transferWallet,
       'gametypes': instance.gameTypes.map((e) => _$GameTypeEnumMap[e]).toList(),
     };
-
-K _$enumDecode<K, V>(
-  Map<K, V> enumValues,
-  Object? source, {
-  K? unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError(
-      'A value must be provided. Supported values: '
-      '${enumValues.values.join(', ')}',
-    );
-  }
-
-  return enumValues.entries.singleWhere(
-    (e) => e.value == source,
-    orElse: () {
-      if (unknownValue == null) {
-        throw ArgumentError(
-          '`$source` is not one of the supported values: '
-          '${enumValues.values.join(', ')}',
-        );
-      }
-      return MapEntry(unknownValue, enumValues.values.first);
-    },
-  ).key;
-}
 
 const _$GameTypeEnumMap = {
   GameType.Sportsbook: 1,

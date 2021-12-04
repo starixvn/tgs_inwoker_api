@@ -6,14 +6,12 @@ part of 'localization.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Localization _$LocalizationFromJson(Map<String, dynamic> json) {
-  return Localization(
-    json['name'] as String?,
-    json['subSubject'] as String?,
-    json['content'] as String?,
-    json['mobileBanner'] as String?,
-  );
-}
+Localization _$LocalizationFromJson(Map<String, dynamic> json) => Localization(
+      json['name'] as String?,
+      json['subSubject'] as String?,
+      json['content'] as String?,
+      json['mobileBanner'] as String?,
+    )..subject = json['subject'] as String?;
 
 Map<String, dynamic> _$LocalizationToJson(Localization instance) =>
     <String, dynamic>{
@@ -21,4 +19,5 @@ Map<String, dynamic> _$LocalizationToJson(Localization instance) =>
       'subSubject': instance.subSubject,
       'content': instance.content,
       'mobileBanner': instance.mobileBanner,
+      'subject': instance.subject,
     };

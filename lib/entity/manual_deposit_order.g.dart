@@ -6,16 +6,16 @@ part of 'manual_deposit_order.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ManualDepositOrder _$ManualDepositOrderFromJson(Map<String, dynamic> json) {
-  return ManualDepositOrder(
-    json['methodname'] as String,
-    json['channelname'] as String,
-    (json['amount'] as num).toDouble(),
-    json['bankname'] as String,
-    json['bankaccountname'] as String,
-    json['bankaccount'] as String,
-  );
-}
+ManualDepositOrder _$ManualDepositOrderFromJson(Map<String, dynamic> json) =>
+    ManualDepositOrder(
+      json['methodname'] as String,
+      json['channelname'] as String,
+      (json['amount'] as num).toDouble(),
+      json['bankname'] as String,
+      json['bankaccountname'] as String,
+      json['bankaccount'] as String,
+      json['qrcode'] as String,
+    );
 
 Map<String, dynamic> _$ManualDepositOrderToJson(ManualDepositOrder instance) =>
     <String, dynamic>{
@@ -25,4 +25,5 @@ Map<String, dynamic> _$ManualDepositOrderToJson(ManualDepositOrder instance) =>
       'bankname': instance.bankName,
       'bankaccountname': instance.bankAccountName,
       'bankaccount': instance.bankAccount,
+      'qrcode': instance.qrCode,
     };

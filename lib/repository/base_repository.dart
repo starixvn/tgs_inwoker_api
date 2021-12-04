@@ -7,7 +7,7 @@ class BaseRepository extends ChangeNotifier {
         isAuthorization: false,
         isJWTAuthRequest: true,
         endPoint: "api/Auth/jwt",
-        params: {"client": env.jwtKey, "currency":env.currency},
+        params: {"client": env.jwtKey, "currency": env.currency},
         converter: (json) => LoginResponse.fromJson(json)).execute();
 
     if (apiState.isSuccess || apiState.isMaintenance) {
@@ -28,7 +28,7 @@ class BaseRepository extends ChangeNotifier {
     notifyListeners();
   }
 
-  getData(String url, jwtKey, currency){
+  getData(String url, jwtKey, currency) {
     env = EnvConfig(url, jwtKey, currency);
   }
 }

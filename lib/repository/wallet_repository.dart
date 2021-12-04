@@ -1,13 +1,13 @@
 part of api;
 
 class WalletRepository extends BaseRepository {
-  static late WalletRepository _singleton;
+  static WalletRepository? _singleton;
 
-  static WalletRepository getSingleton() {
+  static WalletRepository? getSingleton() {
     if (_singleton == null) {
       _singleton = WalletRepository();
     }
-    return _singleton;
+    return _singleton!;
   }
 
   Future<EventResult<GameWallet>> getGameWallet(String gpCode) async {
@@ -19,15 +19,12 @@ class WalletRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> fundTransfer(String gpCode,int amount,bool isFundOut) async {
+  Future<EventResult<dynamic>> fundTransfer(String gpCode, int amount, bool isFundOut) async {
     return await ApiRequestBuilder<dynamic>(
-        method: HttpMethod.PUT,
-        endPoint: "api/game/balance/fund/${isFundOut ? "out" : "in"}",
-        params: {
-          "gpcode":gpCode,
-          "amount": amount
-        },
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.PUT,
+            endPoint: "api/game/balance/fund/${isFundOut ? "out" : "in"}",
+            params: {"gpcode": gpCode, "amount": amount},
+            jwtRefresher: jwtAuth)
         .execute();
   }
 }

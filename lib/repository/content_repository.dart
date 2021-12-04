@@ -22,101 +22,98 @@ class ContentRepository extends BaseRepository {
 
   Future<EventResult<List<GameProvider>>> getGameProviderList() async {
     return await ApiRequestBuilder<List<GameProvider>>(
-        isAuthorization: false,
-        method: HttpMethod.GET,
-        endPoint: "api/GameProvider/list",
-        params: {
-          "platformtype": "1",
-          "language": await getLanguage(),
-          "currency": env.currency
-        },
-        converter: (json) => (json as List<dynamic>).map((e) => GameProvider.fromJson(e)).toList(),
-        consumer: (result) => setRepoValues(() {
-          gameProviderList = result;
-        }),
-        jwtRefresher: jwtAuth)
+            isAuthorization: false,
+            method: HttpMethod.GET,
+            endPoint: "api/GameProvider/list",
+            params: {"platformtype": "1", "language": await getLanguage(), "currency": env.currency},
+            converter: (json) => (json as List<dynamic>).map((e) => GameProvider.fromJson(e)).toList(),
+            consumer: (result) => setRepoValues(() {
+                  gameProviderList = result;
+                }),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<List<Game>>> getGameList(String gamePlatformCode, GameType gameType) async {
     return await ApiRequestBuilder<List<Game>>(
-        isAuthorization: false,
-        method: HttpMethod.GET,
-        endPoint: "api/Game/list",
-        params: {
-          "gpcode": gamePlatformCode,
-          "gametypes": gameType.getJsonValue.toString(),
-          "platformtype": "1",
-          "language": await getLanguage(),
-          "currency": "env.currency"
-        },
-        converter: (json) => (json as List<dynamic>).map((e) => Game.fromJson(e)).toList(),
-        jwtRefresher: jwtAuth)
+            isAuthorization: false,
+            method: HttpMethod.GET,
+            endPoint: "api/Game/list",
+            params: {
+              "gpcode": gamePlatformCode,
+              "gametypes": gameType.getJsonValue.toString(),
+              "platformtype": "1",
+              "language": await getLanguage(),
+              "currency": "env.currency"
+            },
+            converter: (json) => (json as List<dynamic>).map((e) => Game.fromJson(e)).toList(),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<GameUrlResponse>> getGameUrl(String gamePlatformCode, int gameId, String lobbyUrl) async {
     return await ApiRequestBuilder<GameUrlResponse>(
-        method: HttpMethod.POST,
-        endPoint: "api/Game/geturl",
-        params: {
-          "gpcode": gamePlatformCode,
-          "gid": gameId.toString(),
-          "language": await getLanguage(),
-          "extends": {"lobbyurl": lobbyUrl}
-        },
-        converter: (json) => GameUrlResponse.fromJson(json),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.POST,
+            endPoint: "api/Game/geturl",
+            params: {
+              "gpcode": gamePlatformCode,
+              "gid": gameId.toString(),
+              "language": await getLanguage(),
+              "extends": {"lobbyurl": lobbyUrl}
+            },
+            converter: (json) => GameUrlResponse.fromJson(json),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<GameUrlResponse>> getLobbyGameUrl(
       String gamePlatformCode, GameType gameType, String lobbyUrl) async {
     return await ApiRequestBuilder<GameUrlResponse>(
-        method: HttpMethod.POST,
-        endPoint: "api/Game/lobby/geturl",
-        params: {
-          "gpcode": gamePlatformCode,
-          "gtype": gameType.getJsonValue,
-          "language": await getLanguage(),
-          "extends": {"lobbyurl": lobbyUrl}
-        },
-        converter: (json) => GameUrlResponse.fromJson(json),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.POST,
+            endPoint: "api/Game/lobby/geturl",
+            params: {
+              "gpcode": gamePlatformCode,
+              "gtype": gameType.getJsonValue,
+              "language": await getLanguage(),
+              "extends": {"lobbyurl": lobbyUrl}
+            },
+            converter: (json) => GameUrlResponse.fromJson(json),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<List<Announcement>>> getAnnouncement() async {
     return await ApiRequestBuilder<List<Announcement>>(
-        method: HttpMethod.GET,
-        isAuthorization: false,
-        endPoint: "api/announcement/list/${await getLanguage()}",
-        converter: (json) => (json as List<dynamic>).map((e) => Announcement.fromJson(e)).toList(),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.GET,
+            isAuthorization: false,
+            endPoint: "api/announcement/list/${await getLanguage()}",
+            converter: (json) => (json as List<dynamic>).map((e) => Announcement.fromJson(e)).toList(),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<ListResponse<Promotion>>> getPromotionList(int page, int rows, bool desc, bool all, bool isUserProfileNotNull) async {
+  Future<EventResult<ListResponse<Promotion>>> getPromotionList(
+      int page, int rows, bool desc, bool all, bool isUserProfileNotNull) async {
     return await ApiRequestBuilder<ListResponse<Promotion>>(
-        method: HttpMethod.GET,
-        endPoint: isUserProfileNotNull
-            ? "api/promotion/${await getLanguage()}"
-            : "api/playerpromotion/${await getLanguage()}",
-        params: {
-          "page": page.toString(),
-          "rows": rows.toString(),
-          "desc": desc.toString(),
-          //"sort":"",
-          "all": all.toString(),
-        },
-        converter: (json) => ListResponse.fromJson(json, (res) => Promotion.fromJson(res as Map<String, dynamic>)),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.GET,
+            endPoint: isUserProfileNotNull
+                ? "api/promotion/${await getLanguage()}"
+                : "api/playerpromotion/${await getLanguage()}",
+            params: {
+              "page": page.toString(),
+              "rows": rows.toString(),
+              "desc": desc.toString(),
+              //"sort":"",
+              "all": all.toString(),
+            },
+            converter: (json) => ListResponse.fromJson(json, (res) => Promotion.fromJson(res as Map<String, dynamic>)),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> joinPromotion(String id) async {
     return await ApiRequestBuilder<dynamic>(
-        method: HttpMethod.POST, endPoint: "api/promotion/$id/join", jwtRefresher: jwtAuth)
+            method: HttpMethod.POST, endPoint: "api/promotion/$id/join", jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -137,51 +134,51 @@ class ContentRepository extends BaseRepository {
 
   Future<EventResult<List<int>>> getFavoriteGame(GameType gameType) async {
     return await ApiRequestBuilder<List<int>>(
-        method: HttpMethod.GET,
-        endPoint: "api/game/favorite/${gameType.getJsonValue}",
-        converter: (json) => json.cast<int>(),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.GET,
+            endPoint: "api/game/favorite/${gameType.getJsonValue}",
+            converter: (json) => json.cast<int>(),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> setFavoriteGame(int gameId) async {
     return await ApiRequestBuilder<dynamic>(
-        method: HttpMethod.PUT,
-        endPoint: "api/game/favorite/$gameId",
-        //converter: (json) => ListResponse.fromJson(json, (res) => Promotion.fromJson(res)),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.PUT,
+            endPoint: "api/game/favorite/$gameId",
+            //converter: (json) => ListResponse.fromJson(json, (res) => Promotion.fromJson(res)),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> deleteFavoriteGame(int gameId) async {
     return await ApiRequestBuilder<dynamic>(
-        method: HttpMethod.DELETE,
-        endPoint: "api/game/favorite/$gameId",
-        //converter: (json) => ListResponse.fromJson(json, (res) => Promotion.fromJson(res)),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.DELETE,
+            endPoint: "api/game/favorite/$gameId",
+            //converter: (json) => ListResponse.fromJson(json, (res) => Promotion.fromJson(res)),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<List<LanguageOption>>> getLanguageOption() async {
     return await ApiRequestBuilder<List<LanguageOption>>(
-        method: HttpMethod.GET,
-        endPoint: "api/brandlanguage",
-        converter: (json) => (json as List<dynamic>).map((e) => LanguageOption.fromJson(e)).toList(),
-        consumer: (result) => setRepoValues(() {
-          languageOptionList = result;
-        }),
-        jwtRefresher: jwtAuth,
-        isAuthorization: false)
+            method: HttpMethod.GET,
+            endPoint: "api/brandlanguage",
+            converter: (json) => (json as List<dynamic>).map((e) => LanguageOption.fromJson(e)).toList(),
+            consumer: (result) => setRepoValues(() {
+                  languageOptionList = result;
+                }),
+            jwtRefresher: jwtAuth,
+            isAuthorization: false)
         .execute();
   }
 
   Future<EventResult<List<HomeBanner>>> getBanner() async => await ApiRequestBuilder<List<HomeBanner>>(
-      method: HttpMethod.GET,
-      endPoint: "api/banner",
-      converter: (json) => (json as List<dynamic>).map((e) => HomeBanner.fromJson(e)).toList(),
-      jwtRefresher: jwtAuth,
-      isAuthorization: false,
-    ).execute();
+        method: HttpMethod.GET,
+        endPoint: "api/banner",
+        converter: (json) => (json as List<dynamic>).map((e) => HomeBanner.fromJson(e)).toList(),
+        jwtRefresher: jwtAuth,
+        isAuthorization: false,
+      ).execute();
 
   Future<EventResult<BrandLogo>> getBrandLogo() async {
     return await ApiRequestBuilder<BrandLogo>(

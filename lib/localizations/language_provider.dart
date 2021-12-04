@@ -6,12 +6,6 @@ import 'package:api/entity/language.dart';
 import 'my_localizations.dart';
 
 class LanguageProvider {
-  /*var languageTextMap = {
-    "en-US": "English",
-    "zh-CN": "简体中文",
-    "zh-TW": "繁体中文",
-    "th-TH": "Thai",
-  };*/
   List<Language> list = [];
   final contentRepo = ContentRepository.getSingleton();
   Map<String, Language> languageList = {
@@ -22,7 +16,7 @@ class LanguageProvider {
         "images/language/ic_lang_zh_tw.png"),
     "th-TH": Language("th-TH", "ไทย", Locale("th", ""), "th-TH", "images/language/ic_lang_th.png"),
     "id-ID": Language("id-ID", "Indonesia", Locale("id", ''), "id-ID", "images/language/ic_lang_en.png"),
-    "vi-VN": Language("vi-VN", "Tiếng Việt", Locale("vi", ''), "vi-VN", "images/language/ic_lang_en.png"),
+    "vi-VN": Language("vi-VN", "Tiếng Việt", Locale("vi", ''), "vi-VN", "images/language/ic_lang_vn.png"),
   };
 
   LanguageProvider() {

@@ -6,11 +6,9 @@ part of 'main_wallet.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MainWallet _$MainWalletFromJson(Map<String, dynamic> json) {
-  return MainWallet(
-    (json['main'] as num).toDouble(),
-  );
-}
+MainWallet _$MainWalletFromJson(Map<String, dynamic> json) => MainWallet(
+      (json['main'] as num).toDouble(),
+    );
 
 Map<String, dynamic> _$MainWalletToJson(MainWallet instance) =>
     <String, dynamic>{

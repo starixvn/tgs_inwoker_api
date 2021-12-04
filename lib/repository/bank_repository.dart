@@ -23,11 +23,11 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<String>> getManualDepositId(
-      String account, String amount, String paymentId, String promotionId) async {
+  Future<EventResult<String>> getManualBankDepositId(
+      String account, String amount, String paymentId, String? promotionId) async {
     return await ApiRequestBuilder<String>(
             method: HttpMethod.PUT,
-            endPoint: "api/deposit/manual",
+            endPoint: "api/deposit/manual/bank",
             params: {
               "account": account,
               "amount": amount,
@@ -38,12 +38,17 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ManualDepositOrder>> getManualDepositOrder(String id) async {
-    return await ApiRequestBuilder<ManualDepositOrder>(
-            method: HttpMethod.GET,
-            endPoint: "api/Deposit/manual",
-            params: id,
-            converter: (json) => ManualDepositOrder.fromJson(json),
+  Future<EventResult<String>> getManualThirdPartyDepositId(
+      String account, String amount, String paymentId, String? promotionId) async {
+    return await ApiRequestBuilder<String>(
+            method: HttpMethod.PUT,
+            endPoint: "api/deposit/manual/thirdparty",
+            params: {
+              "account": account,
+              "amount": amount,
+              "paymentid": paymentId,
+              "promotionid": promotionId,
+            },
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -76,27 +81,42 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> addBankCard(String paymentChannelId, BankType bankType,
-      {String? address, bankAccount, bankName, name, bankBranch}) async {
+  Future<EventResult<dynamic>> addBankCard(
+    String paymentChannelId,
+    BankType bankType, {
+    String? address,
+    String? bankAccount,
+    String? bankName,
+    String? name,
+    String? bankBranch,
+    String? phone,
+    String? realName,
+  }) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.POST,
             endPoint: "api/bankinfo",
-            params: address != null
-                ? {
+            params: (() {
+              switch (bankType) {
+                case BankType.BANK:
+                  return {
+                    "paymentchannelid": paymentChannelId,
+                    "banktype": bankType.getJson,
+                    "detail": {"bankAccount": bankAccount, "bankName": bankName, "name": name, "bankBranch": bankBranch}
+                  };
+                case BankType.CRYPTO:
+                  return {
                     "paymentchannelid": paymentChannelId,
                     "banktype": bankType.getJson,
                     "detail": {"address": address},
-                  }
-                : {
+                  };
+                default:
+                  return {
                     "paymentchannelid": paymentChannelId,
                     "banktype": bankType.getJson,
-                    "detail": {
-                      "bankAccount": bankAccount,
-                      "bankName": bankName,
-                      "name": name,
-                      "bankBranch": bankBranch
-                    },
-                  },
+                    "detail": {"phone": phone, "username": realName},
+                  };
+              }
+            }()),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -121,7 +141,8 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<DepositRedirect>> primePayDepositOrder(String amount, String paymentId, String promotionId) async {
+  Future<EventResult<DepositRedirect>> primePayDepositOrder(
+      String amount, String paymentId, String? promotionId) async {
     return await ApiRequestBuilder<DepositRedirect>(
             method: HttpMethod.POST,
             endPoint: "api/deposit/bank/primepay",
@@ -149,7 +170,7 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<DepositRedirectApplePay>> applePayDepositOrder(
-      String amount, String paymentId, String promotionId, String transName) async {
+      String amount, String paymentId, String? promotionId, String transName) async {
     return await ApiRequestBuilder<DepositRedirectApplePay>(
             method: HttpMethod.POST,
             endPoint: "api/deposit/bank/applepay",
@@ -175,7 +196,7 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<DepositRedirect>> umPayBankDepositOrder(
-      String amount, String paymentId, String promotionId) async {
+      String amount, String paymentId, String? promotionId) async {
     return await ApiRequestBuilder<DepositRedirect>(
             method: HttpMethod.POST,
             endPoint: "api/deposit/bank/umpay",
@@ -190,7 +211,7 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<DepositRedirect>> umPayCryptoDepositOrder(
-      String amount, String paymentId, String promotionId) async {
+      String amount, String paymentId, String? promotionId) async {
     return await ApiRequestBuilder<DepositRedirect>(
             method: HttpMethod.POST,
             endPoint: "api/deposit/crypto/umpay",
@@ -214,25 +235,68 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<DepositRedirect>> maticPayDepositOrder(String amount, String paymentId, String promotionId) async {
+  Future<EventResult<DepositRedirect>> maticPayDepositOrder(
+      String amount, String paymentId, String? promotionId) async {
     return await ApiRequestBuilder<DepositRedirect>(
-        method: HttpMethod.POST,
-        endPoint: "api/deposit/bank/maticpay",
-        params: {
-          "amount": amount,
-          "paymentid": paymentId,
-          "promotionid": promotionId,
-        },
-        converter: (json) => DepositRedirect.fromJson(json),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.POST,
+            endPoint: "api/deposit/bank/maticpay",
+            params: {
+              "amount": amount,
+              "paymentid": paymentId,
+              "promotionid": promotionId,
+            },
+            converter: (json) => DepositRedirect.fromJson(json),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<double>> getTurnoverAmount() async {
-    return await ApiRequestBuilder<double>(
-        method: HttpMethod.GET,
-        endPoint: "api/withdraw/player/amount",
-        jwtRefresher: jwtAuth)
+  Future<EventResult<dynamic>> getTurnoverAmount() async {
+    //return int or double
+    return await ApiRequestBuilder<dynamic>(
+            method: HttpMethod.GET, endPoint: "api/withdraw/player/amount", jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult<DepositRedirect>> help2PayDepositOrder(
+      String amount, String paymentId, String? promotionId) async {
+    return await ApiRequestBuilder<DepositRedirect>(
+            method: HttpMethod.POST,
+            endPoint: "api/deposit/bank/help2pay",
+            params: {
+              "amount": amount,
+              "paymentid": paymentId,
+              "promotionid": promotionId,
+            },
+            converter: (json) => DepositRedirect.fromJson(json),
+            jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult<dynamic>> getHelp2PayHtmlText(String url) async {
+    return await ApiRequestBuilder(
+            method: HttpMethod.GET,
+            endPoint: url,
+            /*params: {
+          "amount": amount,
+          "paymentid": paymentId,
+          "promotionid": promotionId,
+        },*/
+            //  converter: (json) => DepositRedirect.fromJson(json),
+            jwtRefresher: jwtAuth)
+        .executeWithoutBaseResponse();
+  }
+
+  Future<EventResult<DepositRedirect>> skyPayDepositOrder(String amount, String paymentId, String? promotionId) async {
+    return await ApiRequestBuilder<DepositRedirect>(
+            method: HttpMethod.POST,
+            endPoint: "api/deposit/bank/skypay",
+            params: {
+              "amount": amount,
+              "paymentid": paymentId,
+              "promotionid": promotionId,
+            },
+            converter: (json) => DepositRedirect.fromJson(json),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 }
