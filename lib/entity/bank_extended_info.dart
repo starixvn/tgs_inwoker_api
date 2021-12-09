@@ -10,10 +10,10 @@ class BankExtendedInfo {
 
   BankExtendedInfo(this.channel, this.systemId, this.systemKey, this.channelCurrency);
 
-  String channel;
-  String systemId;
-  String systemKey;
-  String channelCurrency;
+  String? channel;
+  String? systemId;
+  String? systemKey;
+  String? channelCurrency;
 
   factory BankExtendedInfo.fromJson(Map<String, dynamic> json) => _$BankExtendedInfoFromJson(json);
   Map<String, dynamic> toJson() => _$BankExtendedInfoToJson(this);

@@ -53,6 +53,16 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
+  Future<EventResult<ManualDepositOrder>> getManualDepositOrder(String id) async {
+    return await ApiRequestBuilder<ManualDepositOrder>(
+            method: HttpMethod.GET,
+            endPoint: "api/Deposit/manual",
+            params: id,
+            converter: (json) => ManualDepositOrder.fromJson(json),
+            jwtRefresher: jwtAuth)
+        .execute();
+  }
+
   Future<EventResult<dynamic>> uploadDepositImage(String imageFile, String id) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.MULTIPART,

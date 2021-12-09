@@ -33,7 +33,7 @@ class WithdrawalInfo {
   @JsonKey(name: "transferlimit")
   TransferLimit transferLimit;
   @JsonKey(name: "extended")
-  BankExtendedInfo bankExtendedInfo;
+  BankExtendedInfo? bankExtendedInfo;
 
 
   factory WithdrawalInfo.fromJson(Map<String, dynamic> json) => _$WithdrawalInfoFromJson(json);
