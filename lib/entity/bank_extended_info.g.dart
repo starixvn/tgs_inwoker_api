@@ -8,10 +8,10 @@ part of 'bank_extended_info.dart';
 
 BankExtendedInfo _$BankExtendedInfoFromJson(Map<String, dynamic> json) =>
     BankExtendedInfo(
-      json['channel'] as String,
-      json['systemId'] as String,
-      json['systemKey'] as String,
-      json['channelCurrency'] as String,
+      json['channel'] as String?,
+      json['systemId'] as String?,
+      json['systemKey'] as String?,
+      json['channelCurrency'] as String?,
     );
 
 Map<String, dynamic> _$BankExtendedInfoToJson(BankExtendedInfo instance) =>

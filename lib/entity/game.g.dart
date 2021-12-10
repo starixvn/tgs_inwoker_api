@@ -10,13 +10,13 @@ Game _$GameFromJson(Map<String, dynamic> json) => Game(
       json['id'] as int,
       json['code'] as String,
       json['name'] as String,
-      json['description'] as String,
+      json['description'] as String?,
       json['gpcode'] as String,
       json['isactive'] as bool,
       $enumDecode(_$GameTypeEnumMap, json['type']),
       GameTag.fromJson(json['tag'] as Map<String, dynamic>),
-      json['localizedName'] as String,
-      json['isFavourite'] as bool,
+      json['localizedName'] as String?,
+      json['isFavourite'] as bool?,
     );
 
 Map<String, dynamic> _$GameToJson(Game instance) => <String, dynamic>{

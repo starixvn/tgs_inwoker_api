@@ -18,7 +18,9 @@ WithdrawalInfo _$WithdrawalInfoFromJson(Map<String, dynamic> json) =>
       json['paymentcode'] as String,
       json['paymentid'] as String,
       TransferLimit.fromJson(json['transferlimit'] as Map<String, dynamic>),
-      BankExtendedInfo.fromJson(json['extended'] as Map<String, dynamic>),
+      json['extended'] == null
+          ? null
+          : BankExtendedInfo.fromJson(json['extended'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$WithdrawalInfoToJson(WithdrawalInfo instance) =>

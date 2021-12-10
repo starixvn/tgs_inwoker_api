@@ -192,4 +192,13 @@ class ContentRepository extends BaseRepository {
       }),
     ).execute();
   }
+
+  Future<EventResult<dynamic>> getBetConstructHtml() async {
+    return await ApiRequestBuilder<dynamic>(
+      method: HttpMethod.GET,
+      endPoint: "api/game/bc",
+      jwtRefresher: jwtAuth,
+    ).executeWithoutBaseResponse();
+  }
+
 }
