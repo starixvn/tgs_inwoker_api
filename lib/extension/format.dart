@@ -49,12 +49,26 @@ class Format {
     return f.format((percentage - 100) / 100);
   }
 
-  String dateFormat(DateTime date) {
-    return DateFormat("yyyy/MM/dd").format(date);
+  String dateFormat(DateTime? date) {
+    if (date != null)
+      return DateFormat("yyyy/MM/dd").format(date);
+    else
+      return "";
   }
 
-  String dateTimeFormat(String dateString) {
-    final date = DateTime.parse(dateString);
-    return DateFormat("yyyy/MM/dd HH:mm:ss").format(date.toLocal());
+  String dateTimeFormat(String? dateString) {
+    if (dateString != null) {
+      final date = DateTime.parse(dateString);
+      return DateFormat("yyyy/MM/dd HH:mm").format(date.toLocal());
+    } else
+      return "";
+  }
+
+  String dateTimezoneFormat(String? dateString) {
+    if (dateString != null) {
+      final date = DateTime.parse(dateString);
+      return DateFormat("yyyy-MM-dd hh:mm a").format(date.toLocal());
+    } else
+      return "";
   }
 }
