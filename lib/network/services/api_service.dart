@@ -9,7 +9,7 @@ Future<http.Response> api(HttpMethod method, final endPoint,
   }
 
 var header = isAutoHeader ? await _getHeader(isAuthorization) : Map<String, String>();
-var url = (isAssetUrl ? env.assestUrl : env.url) + endPoint;
+var url = (isAssetUrl ? env.assetUrl : env.url) + endPoint;
 
 var timeoutDuration = Duration(seconds: timeout);
 

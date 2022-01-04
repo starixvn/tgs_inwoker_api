@@ -5,7 +5,7 @@ class EnvConfig {
 
   String currency;
 
-  String assestUrl;
+  String assetUrl;
 
-  EnvConfig(this.url, this.jwtKey, this.currency, this.assestUrl);
+  EnvConfig(this.url, this.jwtKey, this.currency, this.assetUrl);
 }

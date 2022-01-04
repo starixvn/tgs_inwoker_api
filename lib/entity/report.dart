@@ -13,7 +13,7 @@ class Report {
   @JsonKey(name: 'createdon')
   String? createdOn;
   String? updatedOn;
-  Status? status;
+  Status status;
   double? amount;
   @JsonKey(name: 'canuploadcerts')
   bool? canUploadCerts;

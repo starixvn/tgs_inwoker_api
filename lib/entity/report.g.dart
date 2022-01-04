@@ -10,7 +10,7 @@ Report _$ReportFromJson(Map<String, dynamic> json) => Report(
       json['id'] as String?,
       json['createdon'] as String?,
       json['updatedOn'] as String?,
-      $enumDecodeNullable(_$StatusEnumMap, json['status']),
+      $enumDecode(_$StatusEnumMap, json['status']),
       (json['amount'] as num?)?.toDouble(),
       json['canuploadcerts'] as bool?,
       json['orderno'] as String?,

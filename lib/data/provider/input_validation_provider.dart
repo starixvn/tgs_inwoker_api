@@ -1,10 +1,14 @@
 class InputValidationProvider {
   validateUsernameLength(String username) {
-    return RegExp("^.{6,32}\$", caseSensitive: false, multiLine: false).hasMatch(username);
+    return RegExp("^.{6,16}\$", caseSensitive: false, multiLine: false).hasMatch(username);
   }
 
   validatePasswordLength(String password) {
     return RegExp("^.{6,20}\$", caseSensitive: false, multiLine: false).hasMatch(password);
+  }
+
+  validateInputLength(String input) {
+    return RegExp("^.{0,256}\$", caseSensitive: false, multiLine: false).hasMatch(input);
   }
 
   validateUsernamePassword(String username) {

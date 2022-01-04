@@ -34,7 +34,7 @@ class MessageRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> readMessage(List<String> id) async {
+  Future<EventResult<dynamic>> readMessage(List<String?> id) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.POST, endPoint: "api/letter", params: id, jwtRefresher: jwtAuth)
         .execute();

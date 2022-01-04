@@ -10,7 +10,7 @@ class WalletRepository extends BaseRepository {
     return _singleton!;
   }
 
-  Future<EventResult<GameWallet>> getGameWallet(String gpCode) async {
+  Future<EventResult<GameWallet>> getGameWallet(String? gpCode) async {
     return await ApiRequestBuilder<GameWallet>(
             method: HttpMethod.GET,
             endPoint: "api/game/balance/${gpCode}",
@@ -19,7 +19,7 @@ class WalletRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> fundTransfer(String gpCode, int amount, bool isFundOut) async {
+  Future<EventResult<dynamic>> fundTransfer(String? gpCode, int amount, bool isFundOut) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.PUT,
             endPoint: "api/game/balance/fund/${isFundOut ? "out" : "in"}",

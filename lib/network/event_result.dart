@@ -23,5 +23,5 @@ class EventResult<T> {
   EventResult.failure(int errorCode, String error, String errorMsgId)
       : this(errorCode: errorCode, error: error, isError: true, errorMsgId: errorMsgId);
 
-  EventResult.maintenance(T result) : this(result: result, isMaintenance: true);
+  EventResult.maintenance({T? result}) : this(result: result, isMaintenance: true);
 }
