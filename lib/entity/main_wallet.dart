@@ -7,7 +7,7 @@ class MainWallet {
 
   MainWallet(this.main);
 
-  double main;
+  double? main;
 
   factory MainWallet.fromJson(Map<String, dynamic> json) => _$MainWalletFromJson(json);
   Map<String, dynamic> toJson() => _$MainWalletToJson(this);
