@@ -8,12 +8,12 @@ class GameTag {
 
   GameTag(this.isNew, this.isHot, this.isRecommend);
 
-  @JsonKey(name:"new")
-  bool isNew;
-  @JsonKey(name:"hot")
-  bool isHot;
-  @JsonKey(name:"recommend")
-  bool isRecommend;
+  @JsonKey(name: "new")
+  bool? isNew;
+  @JsonKey(name: "hot")
+  bool? isHot;
+  @JsonKey(name: "recommend")
+  bool? isRecommend;
 
 
 

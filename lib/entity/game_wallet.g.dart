@@ -7,7 +7,7 @@ part of 'game_wallet.dart';
 // **************************************************************************
 
 GameWallet _$GameWalletFromJson(Map<String, dynamic> json) => GameWallet(
-      (json['balance'] as num).toDouble(),
+      (json['balance'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$GameWalletToJson(GameWallet instance) =>

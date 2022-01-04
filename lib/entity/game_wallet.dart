@@ -7,7 +7,7 @@ class GameWallet {
 
   GameWallet(this.balance);
 
-  double balance;
+  double? balance;
 
   factory GameWallet.fromJson(Map<String, dynamic> json) => _$GameWalletFromJson(json);
   Map<String, dynamic> toJson() => _$GameWalletToJson(this);

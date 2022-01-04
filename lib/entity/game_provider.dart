@@ -9,14 +9,14 @@ class GameProvider {
 
   GameProvider(this.code, this.name, this.description, this.status, this.transferWallet, this.gameTypes);
 
-  String code;
-  String name;
+  String? code;
+  String? name;
   String? description;
-  int status;
+  int? status;
   @JsonKey(name: "transferwallet")
-  bool transferWallet;
+  bool? transferWallet;
   @JsonKey(name: "gametypes")
-  List<GameType> gameTypes;
+  List<GameType>? gameTypes;
 
   factory GameProvider.fromJson(Map<String, dynamic> json) => _$GameProviderFromJson(json);
 

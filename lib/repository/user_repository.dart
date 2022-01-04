@@ -146,26 +146,31 @@ class UserRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ListResponse<BetReport>>> getReport(
-    DateTime startDate,
-    DateTime endDate,
-    int page,
-    int rows,
-  ) async {
-    return await ApiRequestBuilder<ListResponse<BetReport>>(
-            method: HttpMethod.GET,
-            endPoint: "api/playerreport/rounds",
-            params: {
-              "From": startDate.toString(),
-              "To": endDate.toString(),
-              "page": page.toString(),
-              "rows": rows.toString(),
-              "desc": "true",
-              "sort": "CreatedOn",
-              "all": "false",
-            },
-            converter: (json) => ListResponse.fromJson(json, (res) => BetReport.fromJson(res as Map<String, dynamic>)),
-            jwtRefresher: jwtAuth)
+  Future<EventResult<ListResponse<AccountReport>>> getAccountReport(
+      DateTime startDate,
+      DateTime endDate,
+      int page,
+      int rows,
+      /*int orderBy,
+      bool isDesc,
+      String sortBy,
+      bool showAll*/
+      ) async {
+    return await ApiRequestBuilder<ListResponse<AccountReport>>(
+        method: HttpMethod.GET,
+        endPoint: "api/playerreport/rounds",
+        params: {
+          "From": startDate.toString(),
+          "To": endDate.toString(),
+          "page": page.toString(),
+          "rows": rows.toString(),
+          "desc": "true",
+          "sort": "CreatedOn",
+          "all": "false",
+        },
+        converter: (json) =>
+            ListResponse.fromJson(json, (res) => AccountReport.fromJson(res as Map<String, dynamic>)),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -181,41 +186,41 @@ class UserRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ReportResponse<AccountReport>>> getAccountReport(
-    DateTime startDate,
-    DateTime endDate,
-    int page,
-    int rows,
-    Status status,
-  ) async {
-    return await ApiRequestBuilder<ReportResponse<AccountReport>>(
-            method: HttpMethod.GET,
-            endPoint: "api/deposit/player/list",
-            params: {
-              "begincreate": startDate.toString(),
-              "endcreate": endDate.toString(),
-              "Page": page.toString(),
-              "Rows": rows.toString(),
-              "status": (status == null || status == Status.All) ? null : status.getJson().toString(),
-              "IsDesc": "true",
-              "SortBy": "CreatedOn",
-              "ShowAll": "false",
-              "OrderBy": "1"
-            },
-            converter: (json) =>
-                ReportResponse.fromJson(json, (res) => AccountReport.fromJson(res as Map<String, dynamic>)),
-            jwtRefresher: jwtAuth)
-        .execute();
-  }
-
-  Future<EventResult<ReportResponse<AccountReport>>> getWithdrawReport(
+  Future<EventResult<ReportResponse<Report>>> getReport(
       DateTime startDate, DateTime endDate, int page, int rows, Status status
       /*int orderBy,
       bool isDesc,
       String sortBy,
       bool showAll*/
       ) async {
-    return await ApiRequestBuilder<ReportResponse<AccountReport>>(
+    return await ApiRequestBuilder<ReportResponse<Report>>(
+        method: HttpMethod.GET,
+        endPoint: "api/deposit/player/list",
+        params: {
+          "begincreate": startDate.toString(),
+          "endcreate": endDate.toString(),
+          "Page": page.toString(),
+          "Rows": rows.toString(),
+          "status": (status == null || status == Status.All) ? null : status.getJson().toString(),
+          "IsDesc": "true",
+          "SortBy": "CreatedOn",
+          "ShowAll": "false",
+          "OrderBy": "1"
+        },
+        converter: (json) =>
+            ReportResponse.fromJson(json, (res) => Report.fromJson(res as Map<String, dynamic>)),
+        jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult<ReportResponse<Report>>> getWithdrawReport(
+      DateTime startDate, DateTime endDate, int page, int rows, Status status
+      /*int orderBy,
+      bool isDesc,
+      String sortBy,
+      bool showAll*/
+      ) async {
+    return await ApiRequestBuilder<ReportResponse<Report>>(
             method: HttpMethod.GET,
             endPoint: "api/withdraw/player/list",
             params: {
@@ -230,7 +235,7 @@ class UserRepository extends BaseRepository {
               "OrderBy": "1"
             },
             converter: (json) =>
-                ReportResponse.fromJson(json, (res) => AccountReport.fromJson(res as Map<String, dynamic>)),
+                ReportResponse.fromJson(json, (res) => Report.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }

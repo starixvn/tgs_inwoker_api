@@ -7,7 +7,7 @@ part of 'brand_logo.dart';
 // **************************************************************************
 
 BrandLogo _$BrandLogoFromJson(Map<String, dynamic> json) => BrandLogo(
-      json['brandId'] as String,
+      json['brandId'] as String?,
       json['mobileLogoUrl'] as String?,
     )..hasInvitationCode = json['hasInvitationCode'] as bool?;
 

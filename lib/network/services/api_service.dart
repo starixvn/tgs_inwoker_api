@@ -4,19 +4,19 @@ http.Client? client;
 //const timeoutDuration = Duration(seconds: 3);
 
 Future<http.Response> api(HttpMethod method, final endPoint,
-    {final content, isAuthorization = true, imageContent, timeout = 3}) async {
-  if (client == null) {
+    {final content, isAuthorization = true, imageContent, timeout = 3, isAssetUrl = false,isAutoHeader = true}) async {  if (client == null) {
     client = http.Client();
   }
 
-  var header = await _getHeader(isAuthorization);
-  var url = env.url + endPoint;
-  var timeoutDuration = Duration(seconds: timeout);
+var header = isAutoHeader ? await _getHeader(isAuthorization) : Map<String, String>();
+var url = (isAssetUrl ? env.assestUrl : env.url) + endPoint;
+
+var timeoutDuration = Duration(seconds: timeout);
 
   var onTimeout = () {
     // CustomToast.show("Debug:Timeout -> $url");
     print("Debug:Timeout -> $url");
-    return api(method, endPoint, content: content, isAuthorization: isAuthorization, timeout: timeout);
+    return api(method, endPoint, content: content, isAuthorization: isAuthorization, timeout: timeout,isAssetUrl:isAssetUrl,isAutoHeader:isAutoHeader);
   };
   print("Api->${method.getName}:$url");
   print(content);

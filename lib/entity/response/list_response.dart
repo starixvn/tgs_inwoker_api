@@ -7,7 +7,7 @@ class ListResponse<T> {
   ListResponse(this.totalCount, this.items);
 
   @JsonKey(name: 'totalcount')
-  int totalCount;
+  int? totalCount;
   List<T>? items;
 
   factory ListResponse.fromJson(Map<String, dynamic> json, T Function(Object? json) fromJsonT,) => _$ListResponseFromJson(json, fromJsonT);

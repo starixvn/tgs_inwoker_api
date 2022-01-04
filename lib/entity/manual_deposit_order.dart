@@ -17,18 +17,18 @@ class ManualDepositOrder {
   );
 
   @JsonKey(name: "methodname")
-  String methodName;
+  String? methodName;
   @JsonKey(name: "channelname")
-  String channelName;
+  String? channelName;
   double amount;
   @JsonKey(name: "bankname")
-  String bankName;
+  String? bankName;
   @JsonKey(name: "bankaccountname")
-  String bankAccountName;
+  String? bankAccountName;
   @JsonKey(name: "bankaccount")
-  String bankAccount;
+  String? bankAccount;
   @JsonKey(name: "qrcode")
-  String qrCode;
+  String? qrCode;
 
   factory ManualDepositOrder.fromJson(Map<String, dynamic> json) => _$ManualDepositOrderFromJson(json);
 

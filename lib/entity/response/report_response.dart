@@ -6,7 +6,7 @@ part 'report_response.g.dart';
 class ReportResponse<T> {
   ReportResponse(this.totalCount, this.items);
 
-  int totalCount;
+  int? totalCount;
   List<T>? items;
 
   factory ReportResponse.fromJson(Map<String, dynamic> json, T Function(Object? json) fromJsonT,) => _$ReportResponseFromJson(json, fromJsonT);

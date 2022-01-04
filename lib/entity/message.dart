@@ -1,25 +1,27 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:api/entity/localization.dart';
-part 'message.g.dart';
-@JsonSerializable()
 
+part 'message.g.dart';
+
+@JsonSerializable()
 class Message {
   //Message();
 
   Message(this.id, this.createdOn, this.content, this.subject, this.isRead, this.localization);
 
   @JsonKey(name: 'id')
-  String id;
+  String? id;
   @JsonKey(name: 'createon')
-  String createdOn;
+  String? createdOn;
   @JsonKey(name: 'content')
-  String content;
+  String? content;
   @JsonKey(name: 'subject')
-  String subject;
+  String? subject;
   @JsonKey(name: 'isread')
-  bool isRead;
+  bool? isRead;
   Localization? localization;
 
   factory Message.fromJson(Map<String, dynamic> json) => _$MessageFromJson(json);
+
   Map<String, dynamic> toJson() => _$MessageToJson(this);
 }

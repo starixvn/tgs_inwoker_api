@@ -6,20 +6,22 @@ class UserProfile {
   //UserProfile();
 
   UserProfile(this.username, this.realname, this.phone, this.email, this.qq, this.wechat, this.isSetPayPassword,
-      this.identityAuthentication, this.vipLevel);
+      this.identityAuthentication, this.vipLevel, this.playerCode);
 
-  String username;
+  String? username;
   String? realname;
   String? phone;
   String? email;
   String? qq;
   String? wechat;
   @JsonKey(name: 'issetpaypassword')
-  bool isSetPayPassword;
+  bool? isSetPayPassword;
   @JsonKey(name: 'identityauthentication')
-  bool identityAuthentication;
+  bool? identityAuthentication;
   @JsonKey(name: 'viplevel')
-  int vipLevel;
+  int? vipLevel;
+  @JsonKey(name: 'playercode')
+  String? playerCode;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
   Map<String, dynamic> toJson() => _$UserProfileToJson(this);

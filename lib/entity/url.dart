@@ -11,7 +11,7 @@ class Url {
 
   Url(this.url);
 
-  String url;
+  String? url;
 
   factory Url.fromJson(Map<String, dynamic> json) => _$UrlFromJson(json);
   Map<String, dynamic> toJson() => _$UrlToJson(this);

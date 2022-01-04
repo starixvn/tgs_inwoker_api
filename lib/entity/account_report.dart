@@ -1,5 +1,5 @@
+import 'package:api/entity/bank_type.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:api/entity/status.dart';
 part 'account_report.g.dart';
 
 @JsonSerializable()
@@ -7,18 +7,16 @@ part 'account_report.g.dart';
 class AccountReport {
   //AccountReport();
 
-  AccountReport(this.id, this.createdOn, this.updatedOn, this.status, this.amount, this.canUploadCerts, this.orderNo);
+  AccountReport(
+      this.id, this.createdOn, this.gameProviderName, this.betAmount, this.validBetAmount, this.winLoss, this.gameName);
 
-  String id;
-  @JsonKey(name: 'createdon')
-  String createdOn;
-  String updatedOn;
-  Status status;
-  double amount;
-  @JsonKey(name: 'canuploadcerts')
-  bool canUploadCerts;
-  @JsonKey(name: 'orderno')
-  String orderNo;
+  String? id;
+  String? createdOn;
+  String? gameProviderName;
+  double? betAmount;
+  double? validBetAmount;
+  double? winLoss;
+  String? gameName;
 
   factory AccountReport.fromJson(Map<String, dynamic> json) => _$AccountReportFromJson(json);
   Map<String, dynamic> toJson() => _$AccountReportToJson(this);

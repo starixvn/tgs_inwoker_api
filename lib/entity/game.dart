@@ -11,35 +11,32 @@ class Game {
   //Game();
 
   Game(this.id, this.code, this.name, this.description, this.gamePlatformCode, this.isActive, this.type, this.tag,
-      this.localizedName, this.isFavourite);
+      this.isFavourite);
 
-  int id;
-  String code;
-  String name;
+  int? id;
+  String? code;
+  String? name;
   String? description;
   @JsonKey(name: "gpcode")
-  String gamePlatformCode;
+  String? gamePlatformCode;
   @JsonKey(name: "isactive")
-  bool isActive;
-  GameType type;
-  GameTag tag;
-  String? localizedName; // = getTranslated(context, code);
+  bool? isActive;
+  GameType? type;
+  GameTag? tag;
+
+  // String? localizedName; // = getTranslated(context, code);
   bool? isFavourite = false;
 
   String gamePlatformName() {
     switch (gamePlatformCode) {
       case "HABA":
         return "Habanero";
-        break;
       case "SBO":
         return "SBOBET";
-        break;
       case "PP":
         return "PragmaticPlay";
-        break;
       default:
-        return gamePlatformCode;
-        break;
+        return gamePlatformCode ?? "";
     }
   }
 

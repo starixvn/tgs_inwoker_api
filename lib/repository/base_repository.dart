@@ -28,7 +28,7 @@ class BaseRepository extends ChangeNotifier {
     notifyListeners();
   }
 
-  getData(String url, jwtKey, currency) {
-    env = EnvConfig(url, jwtKey, currency);
+  getData(String url, jwtKey, currency, assestUrl) {
+    env = EnvConfig(url, jwtKey, currency, assestUrl);
   }
 }

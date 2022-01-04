@@ -9,13 +9,13 @@ class DailyReport {
   DailyReport(this.betTime, this.betAmount, this.winLoss, this.turnover);
 
   @JsonKey(name: "bet_time")
-  String betTime;
+  String? betTime;
   @JsonKey(name: "bet_amount")
-  dynamic betAmount;
+  double? betAmount;
   @JsonKey(name: "win_loss")
-  dynamic winLoss;
+  double? winLoss;
   @JsonKey(name: "turnover")
-  dynamic turnover;
+  double? turnover;
 
   factory DailyReport.fromJson(Map<String, dynamic> json) => _$DailyReportFromJson(json);
   Map<String, dynamic> toJson() => _$DailyReportToJson(this);

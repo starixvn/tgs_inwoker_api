@@ -8,8 +8,8 @@ class BrandCommunication {
 
   BrandCommunication(this.type, this.phone, this.appId, this.qrCodeUrl);
 
-  String type;
-  String phone;
+  String? type;
+  String? phone;
   @JsonKey(name: 'appid')
   String? appId;
   @JsonKey(name: 'qrcodeurl')

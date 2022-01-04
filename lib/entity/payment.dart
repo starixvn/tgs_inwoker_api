@@ -22,25 +22,25 @@ class Payment {
     this.qrCode,
   );
 
-  String id;
+  String? id;
   @JsonKey(name: "banktype")
-  BankType bankType;
+  BankType? bankType;
   @JsonKey(name: "channelname")
-  String channelName;
+  String? channelName;
   @JsonKey(name: "transferlimit")
-  TransferLimit transferLimit;
+  TransferLimit? transferLimit;
   @JsonKey(name: "paymentid")
-  String paymentId;
+  String? paymentId;
   @JsonKey(name: "paymentcode")
-  String paymentCode;
+  String? paymentCode;
   @JsonKey(name: "methodid")
-  String methodId;
+  String? methodId;
   @JsonKey(name: "methodcode")
-  String methodCode;
+  String? methodCode;
   @JsonKey(name: "displayorder")
-  int order;
+  int? order;
   @JsonKey(name: "extended")
-  PaymentQrCode qrCode;
+  PaymentQrCode? qrCode;
 
   factory Payment.fromJson(Map<String, dynamic> json) => _$PaymentFromJson(json);
 
