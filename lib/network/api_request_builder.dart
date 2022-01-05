@@ -30,14 +30,18 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       this.jwtRefresher,
       this.consumer,
       this.imageContent,
-        this.timeout = 3,
-        this.isAssetUrl = false,
-        this.isAutoHeader = true});
-
+      this.timeout = 3,
+      this.isAssetUrl = false,
+      this.isAutoHeader = true});
 
   Future<EventResult<T>> execute() async {
     var response = await api(method, endPoint,
-        content: params, isAuthorization: isAuthorization, imageContent: imageContent, timeout: timeout,isAssetUrl:isAssetUrl,isAutoHeader:isAutoHeader);
+        content: params,
+        isAuthorization: isAuthorization,
+        imageContent: imageContent,
+        timeout: timeout,
+        isAssetUrl: isAssetUrl,
+        isAutoHeader: isAutoHeader);
     var result = resolveBaseResponse(response, converter, consumer);
     if (result.errorCode == 101 && retryCounter < 2 && !isJWTAuthRequest) {
       retryCounter++;
@@ -62,8 +66,11 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       var dataToConvert = baseResponse.data ?? value;
       var result = converter == null ? dataToConvert as T : converter(dataToConvert);
       if (onSuccess != null) onSuccess(result);
-      if (response.statusCode == 503 ||response.statusCode == 403|| baseResponse.error == 403 || baseResponse.errorMsgId == "UnderMaintenance")
-        return EventResult.maintenance(result:result);
+      if (response.statusCode == 503 ||
+          response.statusCode == 403 ||
+          baseResponse.error == 403 ||
+          baseResponse.errorMsgId == "UnderMaintenance")
+        return EventResult.maintenance(result: result);
       else
         return EventResult.success(result);
     } else {
@@ -73,7 +80,12 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
 
   Future<EventResult<dynamic>> executeWithoutBaseResponse() async {
     var response = await api(method, endPoint,
-        content: params, isAuthorization: isAuthorization, imageContent: imageContent, timeout: timeout);
+        content: params,
+        isAuthorization: isAuthorization,
+        imageContent: imageContent,
+        timeout: timeout,
+        isAssetUrl: isAssetUrl,
+        isAutoHeader: isAutoHeader);
     var result = resolveWithoutBaseResponse(response, converter, consumer);
     // if (retryCounter < 2 && !isJWTAuthRequest) {
     //   retryCounter++;
