@@ -1,4 +1,6 @@
 import 'package:api/api.dart';
+import 'package:api/entity/env_config.dart';
+import 'package:api/init.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:api/entity/language.dart';
@@ -22,7 +24,7 @@ class LanguageProvider {
   LanguageProvider() {
     var languageOptionList = contentRepo.languageOptionList;
     if (languageOptionList?.isEmpty ?? true) {
-      list.add(languageList["en-US"]!);
+      list.add(languageList[env.defaultLang]!);
     } else {
       languageOptionList!.forEach((languageOption) {
         var code = languageOption.code;
@@ -44,7 +46,12 @@ class LanguageProvider {
   Future<Locale?> getLocale() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     String? languageCode = _prefs.getString("LANGUAGE_CODE");
-    return _locale(languageCode != null ? list.singleWhere((e) => e.apiCode == languageCode) : null);
+    Locale? currLocale;
+    if (languageCode != null) {
+      currLocale = _locale(list.singleWhere((e) => e.apiCode == languageCode));
+    } else
+      currLocale = _locale(list.singleWhere((e) => e.apiCode == env.defaultLang));
+    return currLocale;
   }
 
   Locale? _locale(Language? language) {
