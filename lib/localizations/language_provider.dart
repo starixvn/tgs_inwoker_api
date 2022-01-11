@@ -11,7 +11,7 @@ class LanguageProvider {
   static LanguageProvider? _singleton;
   List<Language> list = [];
   final contentRepo = ContentRepository.getSingleton();
-  Map<String, Language> languageList = {
+  Map<String, Language> _languageList = {
     "en-US": Language("en", "English", Locale("en", ''), "en-US", "images/language/ic_lang_en.png"),
     "zh-CN": Language("zh_Hans", "简体中文", Locale.fromSubtags(languageCode: "zh", scriptCode: "Hans"), "zh-CN",
         "images/language/ic_lang_zh.png"),
@@ -29,14 +29,28 @@ class LanguageProvider {
     return _singleton!;
   }
 
-  LanguageProvider() {
+  LanguageProvider() {}
+
+  refreshLangList() async {
     var languageOptionList = contentRepo.languageOptionList;
+    list.clear();
     if (languageOptionList?.isEmpty ?? true) {
-      list.add(languageList[env.defaultLang]!);
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      String? languageCode = _prefs.getString("LANGUAGE_CODE");
+      if (languageCode != null) {
+        _languageList.forEach((key, value) {
+          if (key == languageCode) {
+            list.add(value);
+            return;
+          }
+        });
+      } else {
+        list.add(_languageList[env.defaultLang]!);
+      }
     } else {
       languageOptionList!.forEach((languageOption) {
         var code = languageOption.code;
-        languageList.forEach((key, value) {
+        _languageList.forEach((key, value) {
           if (key == code) {
             list.add(value);
           }
