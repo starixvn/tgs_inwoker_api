@@ -8,6 +8,7 @@ import 'package:api/entity/language.dart';
 import 'my_localizations.dart';
 
 class LanguageProvider {
+  static LanguageProvider? _singleton;
   List<Language> list = [];
   final contentRepo = ContentRepository.getSingleton();
   Map<String, Language> languageList = {
@@ -20,6 +21,13 @@ class LanguageProvider {
     "id-ID": Language("id-ID", "Indonesia", Locale("id", ''), "id-ID", "images/language/ic_lang_en.png"),
     "vi-VN": Language("vi-VN", "Tiếng Việt", Locale("vi", ''), "vi-VN", "images/language/ic_lang_vn.png"),
   };
+
+  static LanguageProvider getSingleton() {
+    if (_singleton == null) {
+      _singleton = LanguageProvider();
+    }
+    return _singleton!;
+  }
 
   LanguageProvider() {
     var languageOptionList = contentRepo.languageOptionList;
