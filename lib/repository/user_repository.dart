@@ -27,22 +27,24 @@ class UserRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<RegisterResponse>> register(
-      String username, String password, String rpassword, String invitationCode) async {
+  Future<EventResult<RegisterResponse>> register(String username, String password, String rpassword,
+      String? invitationCode, bool isAgent) async {
     return await ApiRequestBuilder<RegisterResponse>(
-            isAuthorization: false,
-            endPoint: "api/Player/create",
-            params: {
-              "username": username,
-              "currency": env.currency,
-              "pwd": password,
-              "confirmpwd": rpassword,
-              "invitationcode": invitationCode,
-              "agent": true,
-              "testplayer": true
-            },
-            converter: (json) => RegisterResponse.fromJson(json),
-            jwtRefresher: jwtAuth)
+        isAuthorization: false,
+        endPoint: "api/Player/create/",
+        params: {
+          "username": username,
+          //upper = player
+          "upper": isAgent ? "" : invitationCode,
+          "pwd": password,
+          "confirmpwd": rpassword,
+          //invitation code = agent
+          "invitationcode": isAgent ? invitationCode : "",
+          "agent": true,
+          "testplayer": true
+        },
+        converter: (json) => RegisterResponse.fromJson(json),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
