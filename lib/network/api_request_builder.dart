@@ -19,31 +19,37 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
   int timeout;
   bool isAssetUrl;
   bool isAutoHeader;
+  bool isWithoutBaseResponse;
 
-  ApiRequestBuilder(
-      {this.isAuthorization = true,
-      this.isJWTAuthRequest = false,
-      this.method = HttpMethod.POST,
-      this.endPoint,
-      this.params,
-      this.converter,
-      this.jwtRefresher,
-      this.consumer,
-      this.imageContent,
-      this.timeout = 3,
-      this.isAssetUrl = false,
-      this.isAutoHeader = true});
+  ApiRequestBuilder({
+    this.isAuthorization = true,
+    this.isJWTAuthRequest = false,
+    this.method = HttpMethod.POST,
+    this.endPoint,
+    this.params,
+    this.converter,
+    this.jwtRefresher,
+    this.consumer,
+    this.imageContent,
+    this.timeout = 3,
+    this.isAssetUrl = false,
+    this.isAutoHeader = true,
+    this.isWithoutBaseResponse = false,
+  });
 
   Future<EventResult<T>> execute() async {
-    var response = await api(method, endPoint,
-        content: params,
-        isAuthorization: isAuthorization,
-        imageContent: imageContent,
-        timeout: timeout,
-        isAssetUrl: isAssetUrl,
-        isAutoHeader: isAutoHeader);
-    var result = resolveBaseResponse(response, converter, consumer);
-    if (result.errorCode == 101 && retryCounter < 2 && !isJWTAuthRequest) {
+    var response = await api(
+      method,
+      endPoint,
+      content: params,
+      isAuthorization: isAuthorization,
+      imageContent: imageContent,
+      timeout: timeout,
+      isAssetUrl: isAssetUrl,
+      isAutoHeader: isAutoHeader,
+    );
+    var result = resolveBaseResponse(response, isWithoutBaseResponse, converter, consumer);
+    if (result.errorCode == 101 && retryCounter < 2 && !isJWTAuthRequest && !isWithoutBaseResponse) {
       retryCounter++;
       await jwtRefresher!();
       return execute();
@@ -51,34 +57,42 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
     return result;
   }
 
-  EventResult<T> resolveBaseResponse<T>(http.Response response,
+  EventResult<T> resolveBaseResponse<T>(http.Response response, bool isWithoutBaseResponse,
       [ResponseResultConverter<T>? converter, void Function(T)? onSuccess]) {
-    var value = json.decode(response.body);
-    print(value);
-    var baseResponse = BaseResponse.fromJson(value);
-    if (baseResponse.error == null ||
-        (baseResponse.error == 0 && baseResponse.errorMsgId == null && (baseResponse.msg?.isEmpty ?? false)) ||
-        (baseResponse.success == null &&
-            baseResponse.error == 0 &&
-            baseResponse.errorMsgId == null &&
-            (baseResponse.msg?.isEmpty ?? false)) ||
-        (baseResponse.success ?? false)) {
-      var dataToConvert = baseResponse.data ?? value;
-      var result = converter == null ? dataToConvert as T : converter(dataToConvert);
-      if (onSuccess != null) onSuccess(result);
-      if (response.statusCode == 503 ||
-          response.statusCode == 403 ||
-          baseResponse.error == 403 ||
-          baseResponse.errorMsgId == "UnderMaintenance")
-        return EventResult.maintenance(result: result);
-      else
-        return EventResult.success(result);
+    if (!isWithoutBaseResponse) {
+      var value = json.decode(response.body);
+      print(value);
+      var baseResponse = BaseResponse.fromJson(value);
+      if (baseResponse.error == null ||
+          (baseResponse.error == 0 && baseResponse.errorMsgId == null && (baseResponse.msg?.isEmpty ?? false)) ||
+          (baseResponse.success == null &&
+              baseResponse.error == 0 &&
+              baseResponse.errorMsgId == null &&
+              (baseResponse.msg?.isEmpty ?? false)) ||
+          (baseResponse.success ?? false)) {
+        var dataToConvert = baseResponse.data ?? value;
+        var result = converter == null ? dataToConvert as T : converter(dataToConvert);
+        if (onSuccess != null) onSuccess(result);
+        if (response.statusCode == 503 ||
+            response.statusCode == 403 ||
+            baseResponse.error == 403 ||
+            baseResponse.errorMsgId == "UnderMaintenance")
+          return EventResult.maintenance(result: result);
+        else
+          return EventResult.success(result);
+      } else {
+        return EventResult.failure(baseResponse.error!, baseResponse.msg!, baseResponse.errorMsgId!);
+      }
     } else {
-      return EventResult.failure(baseResponse.error!, baseResponse.msg!, baseResponse.errorMsgId!);
+      var value = response.body;
+      print(value);
+      var result = converter == null ? value as T : converter(value);
+      // if (value != null) {
+      return EventResult.success(result);
     }
   }
-
-  Future<EventResult<dynamic>> executeWithoutBaseResponse() async {
+/*
+  Future<EventResult<T>> executeWithoutBaseResponse() async {
     var response = await api(method, endPoint,
         content: params,
         isAuthorization: isAuthorization,
@@ -95,10 +109,11 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
     return result;
   }
 
-  EventResult<dynamic> resolveWithoutBaseResponse<T>(http.Response response,
+  EventResult<T> resolveWithoutBaseResponse<T>(http.Response response,
       [ResponseResultConverter<T>? converter, void Function(T)? onSuccess]) {
     var value = response.body;
+    var result = converter == null ? value as T : converter(value);
     // if (value != null) {
-    return EventResult.success(value);
-  }
+    return EventResult.success(result);
+  }*/
 }
