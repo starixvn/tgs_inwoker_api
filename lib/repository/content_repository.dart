@@ -6,6 +6,7 @@ class ContentRepository extends BaseRepository {
   List<GameProvider>? gameProviderList;
   List<LanguageOption>? languageOptionList;
   BrandLogo? brandLogo;
+  EnvFeaturesConfig? featuresConfig;
 
   static ContentRepository getSingleton() {
     if (_singleton == null) {
@@ -220,6 +221,9 @@ class ContentRepository extends BaseRepository {
       isAutoHeader: false,
       isWithoutBaseResponse: true,
       converter: (json) => EnvFeaturesConfig.fromJson(json),
+      consumer: (result) => setRepoValues(() {
+        featuresConfig = result;
+      }),
     ).execute();
   }
 }

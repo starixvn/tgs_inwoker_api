@@ -60,6 +60,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
   EventResult<T> resolveBaseResponse<T>(http.Response response, bool isWithoutBaseResponse,
       [ResponseResultConverter<T>? converter, void Function(T)? onSuccess]) {
     if (!isWithoutBaseResponse) {
+      //need to convert to BaseResponse
       var value = json.decode(response.body);
       print(value);
       var baseResponse = BaseResponse.fromJson(value);
@@ -84,10 +85,11 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
         return EventResult.failure(baseResponse.error!, baseResponse.msg!, baseResponse.errorMsgId!);
       }
     } else {
+      //doesnt need to convert to BaseResponse
       var value = response.body;
       print(value);
-      var result = converter == null ? value as T : converter(value);
-      // if (value != null) {
+      var result = converter == null ? value as T : converter(json.decode(value));
+      if (onSuccess != null) onSuccess(result);
       return EventResult.success(result);
     }
   }
