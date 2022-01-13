@@ -203,10 +203,16 @@ class ContentRepository extends BaseRepository {
 
   Future<EventResult<dynamic>> getVersionJson(String brand) async {
     return await ApiRequestBuilder<dynamic>(
-        method: HttpMethod.GET,
-        endPoint: "version_${brand}.json",
-        isAssetUrl: true,
-        isAutoHeader: false
+            method: HttpMethod.GET, endPoint: "version_${brand}.json", isAssetUrl: true, isAutoHeader: false)
+        .executeWithoutBaseResponse();
+  }
+
+  Future<EventResult<dynamic>> getEnvFeaturesJson(String brand) async {
+    return await ApiRequestBuilder<dynamic>(
+      method: HttpMethod.GET,
+      endPoint: "features_${brand}.json",
+      isAssetUrl: true,
+      isAutoHeader: false,
     ).executeWithoutBaseResponse();
   }
 }
