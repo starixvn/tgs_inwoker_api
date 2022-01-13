@@ -94,33 +94,33 @@ class BankRepository extends BaseRepository {
   Future<EventResult<dynamic>> addBankCard(String? paymentChannelId, BankType bankType,
       {String? address, bankAccount, bankName, name, bankBranch, phone, realName}) async {
     return await ApiRequestBuilder<dynamic>(
-        method: HttpMethod.POST,
-        endPoint: "api/bankinfo",
-        params: (() {
-          switch (bankType) {
-            case BankType.BANK:
-              return {
-                "paymentchannelid": paymentChannelId,
-                "banktype": bankType.getJson,
-                "detail": {"bankAccount": bankAccount, "bankName": bankName, "name": name, "bankBranch": bankBranch}
-              };
-              break;
-            case BankType.CRYPTO:
-              return {
-                "paymentchannelid": paymentChannelId,
-                "banktype": bankType.getJson,
-                "detail": {"address": address},
-              };
-            default:
-              return {
-                "paymentchannelid": paymentChannelId,
-                "banktype": bankType.getJson,
-                "detail": {"phone": phone, "username": realName},
-              };
-              break;
-          }
-        }()),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.POST,
+            endPoint: "api/bankinfo",
+            params: (() {
+              switch (bankType) {
+                case BankType.BANK:
+                  return {
+                    "paymentchannelid": paymentChannelId,
+                    "banktype": bankType.getJson,
+                    "detail": {"bankAccount": bankAccount, "bankName": bankName, "name": name, "bankBranch": bankBranch}
+                  };
+                  break;
+                case BankType.CRYPTO:
+                  return {
+                    "paymentchannelid": paymentChannelId,
+                    "banktype": bankType.getJson,
+                    "detail": {"address": address},
+                  };
+                default:
+                  return {
+                    "paymentchannelid": paymentChannelId,
+                    "banktype": bankType.getJson,
+                    "detail": {"phone": phone, "username": realName},
+                  };
+                  break;
+              }
+            }()),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -277,16 +277,17 @@ class BankRepository extends BaseRepository {
 
   Future<EventResult<dynamic>> getHelp2PayHtmlText(String url) async {
     return await ApiRequestBuilder(
-            method: HttpMethod.GET,
-            endPoint: url,
-            /*params: {
+      method: HttpMethod.GET,
+      endPoint: url,
+      /*params: {
           "amount": amount,
           "paymentid": paymentId,
           "promotionid": promotionId,
         },*/
-            //  converter: (json) => DepositRedirect.fromJson(json),
-            jwtRefresher: jwtAuth)
-        .executeWithoutBaseResponse();
+      //  converter: (json) => DepositRedirect.fromJson(json),
+      jwtRefresher: jwtAuth,
+      isWithoutBaseResponse: true,
+    ).execute();
   }
 
   Future<EventResult<DepositRedirect>> skyPayDepositOrder(String amount, String? paymentId, String? promotionId) async {

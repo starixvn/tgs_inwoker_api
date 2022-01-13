@@ -198,15 +198,28 @@ class ContentRepository extends BaseRepository {
       method: HttpMethod.GET,
       endPoint: "api/game/bc",
       jwtRefresher: jwtAuth,
-    ).executeWithoutBaseResponse();
+      isWithoutBaseResponse: true,
+    ).execute();
   }
 
   Future<EventResult<dynamic>> getVersionJson(String brand) async {
     return await ApiRequestBuilder<dynamic>(
-        method: HttpMethod.GET,
-        endPoint: "version_${brand}.json",
-        isAssetUrl: true,
-        isAutoHeader: false
-    ).executeWithoutBaseResponse();
+      method: HttpMethod.GET,
+      endPoint: "version_${brand}.json",
+      isAssetUrl: true,
+      isAutoHeader: false,
+      isWithoutBaseResponse: true,
+    ).execute();
+  }
+
+  Future<EventResult<EnvFeaturesConfig>> getEnvFeaturesJson(String brand) async {
+    return await ApiRequestBuilder<EnvFeaturesConfig>(
+      method: HttpMethod.GET,
+      endPoint: "features_${brand}.json",
+      isAssetUrl: true,
+      isAutoHeader: false,
+      isWithoutBaseResponse: true,
+      converter: (json) => EnvFeaturesConfig.fromJson(json),
+    ).execute();
   }
 }
