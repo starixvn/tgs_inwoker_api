@@ -12,6 +12,10 @@ class PaymentQrCode {
   String? qrCode;
   String? qrCodeFileUrl;
 
+  String? name;
+  String? logo;
+  String? bankAccount;
+
 
   factory PaymentQrCode.fromJson(Map<String, dynamic> json) => _$PaymentQrCodeFromJson(json);
   Map<String, dynamic> toJson() => _$PaymentQrCodeToJson(this);
