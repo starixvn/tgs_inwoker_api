@@ -24,6 +24,7 @@ class LanguageProvider {
   String _brandName = "";
 
   static LanguageProvider getSingleton() {
+    //test water
     if (_singleton == null) {
       _singleton = LanguageProvider();
     }
