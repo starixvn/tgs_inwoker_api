@@ -86,7 +86,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       }
     } else {
       //doesnt need to convert to BaseResponse
-      var value = response.body;
+      var value = utf8.decode(response.bodyBytes);
       print(value);
       var result = converter == null ? value as T : converter(json.decode(value));
       if (onSuccess != null) onSuccess(result);
