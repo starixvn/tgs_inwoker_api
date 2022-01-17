@@ -45,7 +45,7 @@ extension GameTypeExtension on GameType {
   String getName(BuildContext context, bool isRenameShootFish) {
     switch (this) {
       case GameType.Sportsbook:
-        return getTranslatedText(context, "cat_sport");
+        return getTranslatedText(context, "cat_sport", isByBrand: true);
       case GameType.ESports:
         return getTranslatedText(context, "cat_e_sports");
       case GameType.LiveDealerLobby:
@@ -104,5 +104,6 @@ extension GameTypeExtension on GameType {
 
   int? get getJsonValue => json[this];
 
-  getTranslatedText(BuildContext context, String key) => LanguageProvider().getTranslated(context, key);
+  getTranslatedText(BuildContext context, String key, {bool isByBrand = false}) =>
+      LanguageProvider.getSingleton().getTranslated(context, key, isByBrand: isByBrand);
 }
