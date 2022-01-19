@@ -89,10 +89,11 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       //doesnt need to convert to BaseResponse
       var value;
       if (response.statusCode == 200) {
-        value = response.body;
+        value = utf8.decode(response.bodyBytes);
       } else if (isFeatures ?? false) {
         value = getJson();
       }
+
       var result = converter == null ? value as T : converter(json.decode(value));
       if (onSuccess != null) onSuccess(result);
       return EventResult.success(result);

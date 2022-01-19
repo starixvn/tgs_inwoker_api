@@ -21,8 +21,10 @@ class LanguageProvider {
     "id-ID": Language("id-ID", "Indonesia", Locale("id", ''), "id-ID", "images/language/ic_lang_en.png"),
     "vi-VN": Language("vi-VN", "Tiếng Việt", Locale("vi", ''), "vi-VN", "images/language/ic_lang_vn.png"),
   };
+  String _brandName = "";
 
   static LanguageProvider getSingleton() {
+    //test water
     if (_singleton == null) {
       _singleton = LanguageProvider();
     }
@@ -30,6 +32,10 @@ class LanguageProvider {
   }
 
   LanguageProvider() {}
+
+  init(String brandName) {
+    _brandName = brandName;
+  }
 
   refreshLangList() async {
     var languageOptionList = contentRepo.languageOptionList;
@@ -84,7 +90,12 @@ class LanguageProvider {
     }
   }
 
-  String? getTranslated(BuildContext context, String? key) {
+  String? getTranslated(BuildContext context, String? key, {bool isByBrand = false}) {
+    if (isByBrand && key != null) {
+      String newKey = _brandName + "_" + key;
+      String? translatedText = MyLocalizations.of(context)?.translate(newKey);
+      if (translatedText != null && translatedText != newKey) return translatedText;
+    }
     return MyLocalizations.of(context)?.translate(key) ?? key;
   }
 
