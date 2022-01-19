@@ -22,9 +22,9 @@ class LanguageProvider {
     "vi-VN": Language("vi-VN", "Tiếng Việt", Locale("vi", ''), "vi-VN", "images/language/ic_lang_vn.png"),
   };
   String _brandName = "";
+  Locale? _currentLang = null;
 
   static LanguageProvider getSingleton() {
-    //test water
     if (_singleton == null) {
       _singleton = LanguageProvider();
     }
@@ -79,6 +79,7 @@ class LanguageProvider {
       currLocale = _locale(list.singleWhere((e) => e.apiCode == languageCode));
     } else
       currLocale = _locale(list.singleWhere((e) => e.apiCode == env.defaultLang));
+    _currentLang = currLocale;
     return currLocale;
   }
 
@@ -101,5 +102,9 @@ class LanguageProvider {
 
   getCurrentLanguage(Locale _locale) {
     return list.singleWhere((e) => e.locale == _locale);
+  }
+
+  isMandarin() {
+    return _currentLang == null ? true : _currentLang?.languageCode == "zh";
   }
 }
