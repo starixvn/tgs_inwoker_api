@@ -224,6 +224,7 @@ class ContentRepository extends BaseRepository {
       consumer: (result) => setRepoValues(() {
         featuresConfig = result;
       }),
+        isFeatures: true
     ).execute();
   }
 }
