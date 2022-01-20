@@ -9,13 +9,16 @@ part of 'payment_qr_code.dart';
 PaymentQrCode _$PaymentQrCodeFromJson(Map<String, dynamic> json) =>
     PaymentQrCode()
       ..qrCode = json['qrCode'] as String?
+      ..qrCodeFileUrl = json['qrCodeFileUrl'] as String?
       ..name = json['name'] as String?
       ..logo = json['logo'] as String?
-      ..bankAccount = json['bankAccount'] as String?
-      ..qrCodeFileUrl = json['qrCodeFileUrl'] as String?;
+      ..bankAccount = json['bankAccount'] as String?;
 
 Map<String, dynamic> _$PaymentQrCodeToJson(PaymentQrCode instance) =>
     <String, dynamic>{
       'qrCode': instance.qrCode,
       'qrCodeFileUrl': instance.qrCodeFileUrl,
+      'name': instance.name,
+      'logo': instance.logo,
+      'bankAccount': instance.bankAccount,
     };

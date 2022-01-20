@@ -7,26 +7,29 @@ class EnvFeaturesConfig {
   //EnvFeaturesConfig();
 
   EnvFeaturesConfig(
-      this.smsVerification,
-      this.emailVerification,
-      this.icVerification,
-      this.icVerificationUpload,
-      this.qqWeChat,
-      this.sportsHideLogo,
-      this.popupAnnouncement,
-      this.withdrawalHundredDigit,
-      this.depositManualApplePayHideBankAcc,
-      this.addCardBankBranch,
-      this.addCardDisplayFPS,
-      this.deposit_DualPage,
-      this.menuItemSortingHK28,
-      this.homePageFirstSection6Widget,
-      this.gamePageSpecificBackground,
-      this.menuItemShootFish,
-      this.haveDownloadFeature,
-      this.displayPhone,
-      this.customVIP,
-      this.addCardEnglishName);
+    this.smsVerification,
+    this.emailVerification,
+    this.icVerification,
+    this.icVerificationUpload,
+    this.qqWeChat,
+    this.sportsHideLogo,
+    this.popupAnnouncement,
+    this.withdrawalHundredDigit,
+    this.depositManualApplePayHideBankAcc,
+    this.addCardBankBranch,
+    this.addCardDisplayFPS,
+    this.deposit_DualPage,
+    this.menuItemSortingHK28,
+    this.homePageFirstSection6Widget,
+    this.gamePageSpecificBackground,
+    this.menuItemShootFish,
+    this.haveDownloadFeature,
+    this.displayPhone,
+    this.customVIP,
+    this.addCardEnglishName,
+    this.changesNotAllowed,
+    this.haveAffiliateFeature,
+  );
 
   @JsonKey(name: "SMSVerification")
   bool smsVerification;
@@ -68,6 +71,10 @@ class EnvFeaturesConfig {
   bool customVIP;
   @JsonKey(name: "AddCard_EnglishName")
   bool addCardEnglishName;
+  @JsonKey(name: "ChangesNotAllowed")
+  bool changesNotAllowed;
+  @JsonKey(name: "HaveAffiliateFeature")
+  bool haveAffiliateFeature;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
