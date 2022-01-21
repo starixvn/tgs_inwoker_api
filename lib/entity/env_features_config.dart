@@ -75,6 +75,8 @@ class EnvFeaturesConfig {
   bool changesNotAllowed;
   @JsonKey(name: "HaveAffiliateFeature")
   bool haveAffiliateFeature;
+  @JsonKey(name: "PhonePrefix")
+  String? phonePrefix;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 

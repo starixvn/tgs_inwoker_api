@@ -30,7 +30,7 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       json['AddCard_EnglishName'] as bool,
       json['ChangesNotAllowed'] as bool,
       json['HaveAffiliateFeature'] as bool,
-    );
+    )..phonePrefix = json['PhonePrefix'] as String?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -57,4 +57,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'AddCard_EnglishName': instance.addCardEnglishName,
       'ChangesNotAllowed': instance.changesNotAllowed,
       'HaveAffiliateFeature': instance.haveAffiliateFeature,
+      'PhonePrefix': instance.phonePrefix,
     };
