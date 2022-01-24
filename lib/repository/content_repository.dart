@@ -63,7 +63,8 @@ class ContentRepository extends BaseRepository {
               "extends": {"lobbyurl": lobbyUrl}
             },
             converter: (json) => GameUrlResponse.fromJson(json),
-            jwtRefresher: jwtAuth)
+            jwtRefresher: jwtAuth,
+            timeout: 20)
         .execute();
   }
 
@@ -79,7 +80,8 @@ class ContentRepository extends BaseRepository {
               "extends": {"lobbyurl": lobbyUrl}
             },
             converter: (json) => GameUrlResponse.fromJson(json),
-            jwtRefresher: jwtAuth)
+            jwtRefresher: jwtAuth,
+            timeout: 20)
         .execute();
   }
 
@@ -215,16 +217,16 @@ class ContentRepository extends BaseRepository {
 
   Future<EventResult<EnvFeaturesConfig>> getEnvFeaturesJson(String brand) async {
     return await ApiRequestBuilder<EnvFeaturesConfig>(
-      method: HttpMethod.GET,
-      endPoint: "features_${brand}.json",
-      isAssetUrl: true,
-      isAutoHeader: false,
-      isWithoutBaseResponse: true,
-      converter: (json) => EnvFeaturesConfig.fromJson(json),
-      consumer: (result) => setRepoValues(() {
-        featuresConfig = result;
-      }),
-        isFeatures: true
-    ).execute();
+            method: HttpMethod.GET,
+            endPoint: "features_${brand}.json",
+            isAssetUrl: true,
+            isAutoHeader: false,
+            isWithoutBaseResponse: true,
+            converter: (json) => EnvFeaturesConfig.fromJson(json),
+            consumer: (result) => setRepoValues(() {
+                  featuresConfig = result;
+                }),
+            isFeatures: true)
+        .execute();
   }
 }
