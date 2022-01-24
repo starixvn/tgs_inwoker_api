@@ -58,8 +58,8 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
     return result;
   }
 
-  Future<EventResult<T>>  resolveBaseResponse<T>(http.Response response, bool isWithoutBaseResponse,
-      [ResponseResultConverter<T>? converter, void Function(T)? onSuccess, bool? isFeatures]) async{
+  Future<EventResult<T>> resolveBaseResponse<T>(http.Response response, bool isWithoutBaseResponse,
+      [ResponseResultConverter<T>? converter, void Function(T)? onSuccess, bool? isFeatures]) async {
     if (!isWithoutBaseResponse) {
       //need to convert to BaseResponse
       var value = json.decode(response.body);
@@ -83,7 +83,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
         else
           return EventResult.success(result);
       } else {
-        return EventResult.failure(baseResponse.error!, baseResponse.msg!, baseResponse.errorMsgId!);
+        return EventResult.failure(baseResponse.error!, baseResponse.msg!, baseResponse.errorMsgId ?? "");
       }
     } else {
       //doesnt need to convert to BaseResponse
@@ -99,7 +99,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
     }
   }
 
-  Future<String> getJson() async{
+  Future<String> getJson() async {
     return await rootBundle.loadString('features/features_default.json');
   }
 /*
