@@ -7,29 +7,29 @@ class EnvFeaturesConfig {
   //EnvFeaturesConfig();
 
   EnvFeaturesConfig(
-    this.smsVerification,
-    this.emailVerification,
-    this.icVerification,
-    this.icVerificationUpload,
-    this.qqWeChat,
-    this.sportsHideLogo,
-    this.popupAnnouncement,
-    this.withdrawalHundredDigit,
-    this.depositManualApplePayHideBankAcc,
-    this.addCardBankBranch,
-    this.addCardDisplayFPS,
-    this.deposit_DualPage,
-    this.menuItemSortingHK28,
-    this.homePageFirstSection6Widget,
-    this.gamePageSpecificBackground,
-    this.menuItemShootFish,
-    this.haveDownloadFeature,
-    this.displayPhone,
-    this.customVIP,
-    this.addCardEnglishName,
-    this.changesNotAllowed,
-    this.haveAffiliateFeature,
-  );
+      this.smsVerification,
+      this.emailVerification,
+      this.icVerification,
+      this.icVerificationUpload,
+      this.qqWeChat,
+      this.sportsHideLogo,
+      this.popupAnnouncement,
+      this.withdrawalHundredDigit,
+      this.depositManualApplePayHideBankAcc,
+      this.addCardBankBranch,
+      this.addCardDisplayFPS,
+      this.deposit_DualPage,
+      this.menuItemSortingHK28,
+      this.homePageFirstSection6Widget,
+      this.gamePageSpecificBackground,
+      this.menuItemShootFish,
+      this.haveDownloadFeature,
+      this.displayPhone,
+      this.customVIP,
+      this.addCardEnglishName,
+      this.changesNotAllowed,
+      this.haveAffiliateFeature,
+      this.homePageDisplayBalance);
 
   @JsonKey(name: "SMSVerification")
   bool smsVerification;
@@ -77,6 +77,8 @@ class EnvFeaturesConfig {
   bool haveAffiliateFeature;
   @JsonKey(name: "PhonePrefix")
   String? phonePrefix;
+  @JsonKey(name: "HomePageDisplayBalance")
+  bool? homePageDisplayBalance;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 

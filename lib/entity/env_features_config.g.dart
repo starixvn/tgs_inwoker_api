@@ -6,8 +6,7 @@ part of 'env_features_config.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
-    EnvFeaturesConfig(
+EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) => EnvFeaturesConfig(
       json['SMSVerification'] as bool,
       json['EmailVerification'] as bool,
       json['ICVerification'] as bool,
@@ -30,10 +29,10 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       json['AddCard_EnglishName'] as bool,
       json['ChangesNotAllowed'] as bool,
       json['HaveAffiliateFeature'] as bool,
+      json['HomePageDisplayBalance'] as bool?,
     )..phonePrefix = json['PhonePrefix'] as String?;
 
-Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) => <String, dynamic>{
       'SMSVerification': instance.smsVerification,
       'EmailVerification': instance.emailVerification,
       'ICVerification': instance.icVerification,
@@ -42,8 +41,7 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'SportsHideLogo': instance.sportsHideLogo,
       'PopupAnnouncement': instance.popupAnnouncement,
       'Withdrawal_HundredDigit': instance.withdrawalHundredDigit,
-      'Deposit_ManualApplePayHideBankAcc':
-          instance.depositManualApplePayHideBankAcc,
+      'Deposit_ManualApplePayHideBankAcc': instance.depositManualApplePayHideBankAcc,
       'AddCard_BankBranch': instance.addCardBankBranch,
       'AddCard_DisplayFPS': instance.addCardDisplayFPS,
       'Deposit_DualPage': instance.deposit_DualPage,
@@ -58,4 +56,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'ChangesNotAllowed': instance.changesNotAllowed,
       'HaveAffiliateFeature': instance.haveAffiliateFeature,
       'PhonePrefix': instance.phonePrefix,
+      'HomePageDisplayBalance': instance.homePageDisplayBalance,
     };
