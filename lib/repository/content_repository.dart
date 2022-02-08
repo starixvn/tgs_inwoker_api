@@ -229,4 +229,20 @@ class ContentRepository extends BaseRepository {
             isFeatures: true)
         .execute();
   }
+
+  Future<EventResult<ListResponse<Vip>>> getVip(int page, int rows, bool desc, bool all) async {
+    return await ApiRequestBuilder<ListResponse<Vip>>(
+            method: HttpMethod.GET,
+            endPoint: "api/vip",
+            params: {
+              "page": page.toString(),
+              "rows": rows.toString(),
+              "desc": desc.toString(),
+              //"sort":"",
+              "all": all.toString(),
+            },
+            converter: (json) => ListResponse.fromJson(json, (res) => Vip.fromJson(res as Map<String, dynamic>)),
+            jwtRefresher: jwtAuth)
+        .execute();
+  }
 }
