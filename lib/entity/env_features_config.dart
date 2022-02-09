@@ -32,49 +32,49 @@ class EnvFeaturesConfig {
       this.homePageDisplayBalance);
 
   @JsonKey(name: "SMSVerification")
-  bool smsVerification;
+  bool? smsVerification;
   @JsonKey(name: "EmailVerification")
-  bool emailVerification;
+  bool? emailVerification;
   @JsonKey(name: "ICVerification")
-  bool icVerification;
+  bool? icVerification;
   @JsonKey(name: "ICVerificationUpload")
-  bool icVerificationUpload;
+  bool? icVerificationUpload;
   @JsonKey(name: "QQWeChat")
-  bool qqWeChat;
+  bool? qqWeChat;
   @JsonKey(name: "SportsHideLogo")
-  bool sportsHideLogo;
+  bool? sportsHideLogo;
   @JsonKey(name: "PopupAnnouncement")
-  bool popupAnnouncement;
+  bool? popupAnnouncement;
   @JsonKey(name: "Withdrawal_HundredDigit")
-  bool withdrawalHundredDigit;
+  bool? withdrawalHundredDigit;
   @JsonKey(name: "Deposit_ManualApplePayHideBankAcc")
-  bool depositManualApplePayHideBankAcc;
+  bool? depositManualApplePayHideBankAcc;
   @JsonKey(name: "AddCard_BankBranch")
-  bool addCardBankBranch;
+  bool? addCardBankBranch;
   @JsonKey(name: "AddCard_DisplayFPS")
-  bool addCardDisplayFPS;
+  bool? addCardDisplayFPS;
   @JsonKey(name: "Deposit_DualPage")
-  bool deposit_DualPage;
+  bool? deposit_DualPage;
   @JsonKey(name: "MenuItem_Sorting_HK28")
-  bool menuItemSortingHK28;
+  bool? menuItemSortingHK28;
   @JsonKey(name: "HomePage_FirstSection6Widget")
-  bool homePageFirstSection6Widget;
+  bool? homePageFirstSection6Widget;
   @JsonKey(name: "GamePage_SpecificBackground")
-  bool gamePageSpecificBackground;
+  bool? gamePageSpecificBackground;
   @JsonKey(name: "MenuItem_ShootFish")
-  bool menuItemShootFish;
+  bool? menuItemShootFish;
   @JsonKey(name: "HaveDownloadFeature")
-  bool haveDownloadFeature;
+  bool? haveDownloadFeature;
   @JsonKey(name: "DisplayPhone")
-  bool displayPhone;
+  bool? displayPhone;
   @JsonKey(name: "CustomVIP")
-  bool customVIP;
+  bool? customVIP;
   @JsonKey(name: "AddCard_EnglishName")
-  bool addCardEnglishName;
+  bool? addCardEnglishName;
   @JsonKey(name: "ChangesNotAllowed")
-  bool changesNotAllowed;
+  bool? changesNotAllowed;
   @JsonKey(name: "HaveAffiliateFeature")
-  bool haveAffiliateFeature;
+  bool? haveAffiliateFeature;
   @JsonKey(name: "PhonePrefix")
   String? phonePrefix;
   @JsonKey(name: "HomePageDisplayBalance")
