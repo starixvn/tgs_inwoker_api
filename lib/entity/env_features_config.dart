@@ -29,7 +29,9 @@ class EnvFeaturesConfig {
       this.addCardEnglishName,
       this.changesNotAllowed,
       this.haveAffiliateFeature,
-      this.homePageDisplayBalance);
+      this.phonePrefix,
+      this.homePageDisplayBalance,
+      this.onlineUser);
 
   @JsonKey(name: "SMSVerification")
   bool? smsVerification;
@@ -79,6 +81,8 @@ class EnvFeaturesConfig {
   String? phonePrefix;
   @JsonKey(name: "HomePageDisplayBalance")
   bool? homePageDisplayBalance;
+  @JsonKey(name: "OnlineUser")
+  bool? onlineUser;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
