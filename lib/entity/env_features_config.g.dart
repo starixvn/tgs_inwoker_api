@@ -33,6 +33,7 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       json['PhonePrefix'] as String?,
       json['HomePageDisplayBalance'] as bool?,
       json['OnlineUser'] as bool?,
+      json['BackgroundMusic'] as bool?,
     );
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
@@ -63,4 +64,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'PhonePrefix': instance.phonePrefix,
       'HomePageDisplayBalance': instance.homePageDisplayBalance,
       'OnlineUser': instance.onlineUser,
+      'BackgroundMusic': instance.backgroundMusic,
     };
