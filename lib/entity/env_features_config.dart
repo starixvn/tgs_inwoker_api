@@ -87,6 +87,12 @@ class EnvFeaturesConfig {
   bool? onlineUser;
   @JsonKey(name: "BackgroundMusic")
   bool? backgroundMusic;
+  @JsonKey(name: "CustomDepositInput")
+  bool? customDepositInput;
+  @JsonKey(name: "AddCard_InputAddFPS")
+  bool? addCardInputAddFPS;
+  @JsonKey(name: "Deposit_RemoveName")
+  bool? depositRemoveName;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 

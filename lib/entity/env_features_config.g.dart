@@ -34,7 +34,10 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       json['HomePageDisplayBalance'] as bool?,
       json['OnlineUser'] as bool?,
       json['BackgroundMusic'] as bool?,
-    );
+    )
+      ..customDepositInput = json['CustomDepositInput'] as bool?
+      ..addCardInputAddFPS = json['AddCard_InputAddFPS'] as bool?
+      ..depositRemoveName = json['Deposit_RemoveName'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -65,4 +68,7 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'HomePageDisplayBalance': instance.homePageDisplayBalance,
       'OnlineUser': instance.onlineUser,
       'BackgroundMusic': instance.backgroundMusic,
+      'CustomDepositInput': instance.customDepositInput,
+      'AddCard_InputAddFPS': instance.addCardInputAddFPS,
+      'Deposit_RemoveName': instance.depositRemoveName,
     };
