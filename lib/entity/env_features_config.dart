@@ -93,6 +93,8 @@ class EnvFeaturesConfig {
   bool? addCardInputAddFPS;
   @JsonKey(name: "Deposit_RemoveName")
   bool? depositRemoveName;
+  @JsonKey(name: "DepositNotification")
+  bool? depositNotification;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
