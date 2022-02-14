@@ -9,7 +9,7 @@ class MainWallet {
 
   double? main;
 
-  double totalBalance;
+  double? totalBalance;
 
   factory MainWallet.fromJson(Map<String, dynamic> json) => _$MainWalletFromJson(json);
   Map<String, dynamic> toJson() => _$MainWalletToJson(this);

@@ -8,7 +8,7 @@ part of 'main_wallet.dart';
 
 MainWallet _$MainWalletFromJson(Map<String, dynamic> json) => MainWallet(
       (json['main'] as num?)?.toDouble(),
-      (json['totalBalance'] as num).toDouble(),
+      (json['totalBalance'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$MainWalletToJson(MainWallet instance) =>
