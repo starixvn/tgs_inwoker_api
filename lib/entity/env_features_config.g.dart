@@ -38,7 +38,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..customDepositInput = json['CustomDepositInput'] as bool?
       ..addCardInputAddFPS = json['AddCard_InputAddFPS'] as bool?
       ..depositRemoveName = json['Deposit_RemoveName'] as bool?
-      ..depositNotification = json['DepositNotification'] as bool?;
+      ..depositNotification = json['DepositNotification'] as bool?
+      ..addCardHideChannelBranch = json['AddCard_HideChannelBranch'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -73,4 +74,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'AddCard_InputAddFPS': instance.addCardInputAddFPS,
       'Deposit_RemoveName': instance.depositRemoveName,
       'DepositNotification': instance.depositNotification,
+      'AddCard_HideChannelBranch': instance.addCardHideChannelBranch,
     };
