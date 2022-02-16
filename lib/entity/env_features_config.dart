@@ -97,7 +97,7 @@ class EnvFeaturesConfig {
   bool? depositNotification;
   @JsonKey(name: "AddCard_HideChannel")
   bool? addCardHideChannel;
-  @JsonKey(name: "AddCard_BankDropDown")
+  @JsonKey(name: "AddCard_BankDropdown")
   bool? addCardBankDropDown;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);

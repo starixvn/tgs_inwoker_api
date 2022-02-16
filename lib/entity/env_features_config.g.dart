@@ -40,7 +40,7 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..depositRemoveName = json['Deposit_RemoveName'] as bool?
       ..depositNotification = json['DepositNotification'] as bool?
       ..addCardHideChannel = json['AddCard_HideChannel'] as bool?
-      ..addCardBankDropDown = json['AddCard_BankDropDown'] as bool?;
+      ..addCardBankDropDown = json['AddCard_BankDropdown'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -76,5 +76,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'Deposit_RemoveName': instance.depositRemoveName,
       'DepositNotification': instance.depositNotification,
       'AddCard_HideChannel': instance.addCardHideChannel,
-      'AddCard_BankDropDown': instance.addCardBankDropDown,
+      'AddCard_BankDropdown': instance.addCardBankDropDown,
     };
