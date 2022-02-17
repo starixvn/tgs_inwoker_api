@@ -18,7 +18,7 @@ Promotion _$PromotionFromJson(Map<String, dynamic> json) => Promotion(
       json['mobileBanner'] as String?,
       json['content'] as String?,
       json['terms'] as String?,
-    );
+    )..promotionType = json['promotionType'] as String?;
 
 Map<String, dynamic> _$PromotionToJson(Promotion instance) => <String, dynamic>{
       'id': instance.id,
@@ -30,4 +30,5 @@ Map<String, dynamic> _$PromotionToJson(Promotion instance) => <String, dynamic>{
       'mobileBanner': instance.mobileBanner,
       'content': instance.content,
       'terms': instance.terms,
+      'promotionType': instance.promotionType,
     };
