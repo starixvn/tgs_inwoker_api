@@ -80,7 +80,8 @@ var timeoutDuration = Duration(seconds: timeout);
       break;
 
     case HttpMethod.MULTIPART:
-      var request = http.MultipartRequest("POST", Uri.parse(url + "/" + content));
+      var _content = content == null ? url : url + "/" + content;
+      var request = http.MultipartRequest("POST", Uri.parse(_content));
       header.forEach((k, v) {
         request.headers[k] = v;
       });

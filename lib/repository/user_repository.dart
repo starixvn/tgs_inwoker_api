@@ -338,4 +338,13 @@ class UserRepository extends BaseRepository {
             jwtRefresher: jwtAuth)
         .execute();
   }
+
+  Future<EventResult<dynamic>> uploadIdImage(String imageFile) async {
+    return await ApiRequestBuilder<dynamic>(
+        method: HttpMethod.MULTIPART,
+        endPoint: "api/player/identity/upload",
+        imageContent: imageFile,
+        jwtRefresher: jwtAuth)
+        .execute();
+  }
 }
