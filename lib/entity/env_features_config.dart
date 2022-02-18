@@ -103,6 +103,8 @@ class EnvFeaturesConfig {
   bool? depositCustomBankNameTranslation;
   @JsonKey(name: "Deposit_AddTips")
   bool? depositAddTips;
+  @JsonKey(name: "AddCard_DisplayGCash")
+  bool? addCardDisplayGCash;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
