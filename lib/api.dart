@@ -50,6 +50,8 @@ import 'package:api/entity/response/BaseResponse.dart';
 import 'package:api/entity/game_wallet.dart';
 import 'init.dart';
 import 'package:flutter/material.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:path/path.dart' as p;
 
 part 'network/services/api_service.dart';
 
