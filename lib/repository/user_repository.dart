@@ -339,7 +339,7 @@ class UserRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> uploadIdImage(String imageFile) async {
+  Future<EventResult<dynamic>> uploadIdImage(File imageFile) async {
     return await ApiRequestBuilder<dynamic>(
         method: HttpMethod.MULTIPART,
         endPoint: "api/player/identity/upload",

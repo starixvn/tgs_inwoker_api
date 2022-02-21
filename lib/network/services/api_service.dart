@@ -91,9 +91,10 @@ Future<http.Response> api(HttpMethod method, final endPoint,
       header.forEach((k, v) {
         request.headers[k] = v;
       });
+      String imageExtension = (p.extension(imageContent.path).replaceAll(".", "")).toString();
       //request.files.add(await http.MultipartFile.fromPath('file', imageContent));
       request.files.add(await http.MultipartFile.fromPath('file', imageContent.path,
-          contentType: new MediaType('image', p.extension(imageContent))));
+          contentType: MediaType('image', imageExtension)));
       var imageRes = await request.send();
       response = await http.Response.fromStream(imageRes).timeout(timeoutDuration, onTimeout: onTimeout);
       ;

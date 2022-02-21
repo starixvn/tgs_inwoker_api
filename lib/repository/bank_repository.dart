@@ -63,7 +63,7 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> uploadDepositImage(String imageFile, String id) async {
+  Future<EventResult<dynamic>> uploadDepositImage(File imageFile, String id) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.MULTIPART,
             endPoint: "api/Deposit/manual",
