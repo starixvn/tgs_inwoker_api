@@ -1,3 +1,4 @@
+import 'package:api/entity/identity_status.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'user_profile.g.dart';
 @JsonSerializable()
@@ -23,7 +24,7 @@ class UserProfile {
   @JsonKey(name: 'playercode')
   String? playerCode;
   @JsonKey(name: 'identityformstatus')
-  bool? identityFormStatus;
+  IdentityStatus? identityFormStatus;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
   Map<String, dynamic> toJson() => _$UserProfileToJson(this);
