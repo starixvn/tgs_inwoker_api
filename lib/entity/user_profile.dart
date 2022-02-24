@@ -22,6 +22,8 @@ class UserProfile {
   int? vipLevel;
   @JsonKey(name: 'playercode')
   String? playerCode;
+  @JsonKey(name: 'identityformstatus')
+  bool? identityFormStatus;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
   Map<String, dynamic> toJson() => _$UserProfileToJson(this);

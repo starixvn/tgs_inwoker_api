@@ -17,7 +17,7 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile(
       json['identityauthentication'] as bool?,
       json['viplevel'] as int?,
       json['playercode'] as String?,
-    );
+    )..identityFormStatus = json['identityformstatus'] as bool?;
 
 Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
     <String, dynamic>{
@@ -31,4 +31,5 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
       'identityauthentication': instance.identityAuthentication,
       'viplevel': instance.vipLevel,
       'playercode': instance.playerCode,
+      'identityformstatus': instance.identityFormStatus,
     };
