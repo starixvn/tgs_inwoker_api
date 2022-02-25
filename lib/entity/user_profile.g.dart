@@ -37,7 +37,8 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
     };
 
 const _$IdentityStatusEnumMap = {
-  IdentityStatus.WaitingVerify: 0,
-  IdentityStatus.Approve: 1,
-  IdentityStatus.Reject: 2,
+  IdentityStatus.New: 0,
+  IdentityStatus.WaitingVerify: 1,
+  IdentityStatus.Approve: 2,
+  IdentityStatus.Reject: 3,
 };
