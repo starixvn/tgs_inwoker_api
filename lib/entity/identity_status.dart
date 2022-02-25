@@ -4,12 +4,10 @@ import 'package:api/localizations/language_provider.dart';
 
 enum IdentityStatus {
   @JsonValue(0)
-  New,
-  @JsonValue(1)
   WaitingVerify,
-  @JsonValue(2)
+  @JsonValue(1)
   Approve,
-  @JsonValue(3)
+  @JsonValue(2)
   Reject
 }
 
@@ -37,14 +35,12 @@ extension IdentityStatusExtension on IdentityStatus {
 
   int getJson() {
     switch (this) {
-      case IdentityStatus.New:
-        return 0;
       case IdentityStatus.WaitingVerify:
-        return 1;
+        return 0;
       case IdentityStatus.Approve:
-        return 2;
+        return 1;
       case IdentityStatus.Reject:
-        return 3;
+        return 2;
       default:
         return 0;
     }
