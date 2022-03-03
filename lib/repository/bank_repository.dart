@@ -2,8 +2,7 @@ part of api;
 
 class BankRepository extends BaseRepository {
   static BankRepository? _singleton;
-  UserProfile? userProfile;
-  List<GameProvider>? gameProviderList;
+  List<BankCard>? bankCardList;
 
   static BankRepository getSingleton() {
     if (_singleton == null) {
@@ -87,6 +86,9 @@ class BankRepository extends BaseRepository {
             method: HttpMethod.GET,
             endPoint: "api/bankinfo",
             converter: (json) => (json as List<dynamic>).map((e) => BankCard.fromJson(e)).toList(),
+            consumer: (result) => setRepoValues(() {
+                  bankCardList = result;
+                }),
             jwtRefresher: jwtAuth)
         .execute();
   }
