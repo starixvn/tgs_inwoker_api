@@ -109,6 +109,8 @@ class EnvFeaturesConfig {
   bool? navigateToAddCard;
   @JsonKey(name: "AddCard_NotAllowedEditDelete")
   bool? addCardNotAllowedEditDelete;
+  @JsonKey(name: "Profile_NotAllowChangePhone")
+  bool? profileNotAllowChangePhone;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
