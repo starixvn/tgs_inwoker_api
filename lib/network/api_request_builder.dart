@@ -50,7 +50,10 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       isAutoHeader: isAutoHeader,
     );
     var result = await resolveBaseResponse(response, isWithoutBaseResponse, converter, consumer, isFeatures);
-    if (result.errorCode == 101 && retryCounter < 2 && !isJWTAuthRequest && !isWithoutBaseResponse) {
+    if ((result.errorCode == 101 || result.errorCode == 102) &&
+        retryCounter < 2 &&
+        !isJWTAuthRequest &&
+        !isWithoutBaseResponse) {
       retryCounter++;
       await jwtRefresher!();
       return execute();
