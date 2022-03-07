@@ -21,7 +21,7 @@ Payment _$PaymentFromJson(Map<String, dynamic> json) => Payment(
       json['displayorder'] as int?,
       json['extended'] == null
           ? null
-          : PaymentQrCode.fromJson(json['extended'] as Map<String, dynamic>),
+          : PaymentExtended.fromJson(json['extended'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
