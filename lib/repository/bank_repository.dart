@@ -23,18 +23,19 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<String>> getManualBankDepositId(
-      String account, String amount, String? paymentId, String? promotionId, String? name) async {
+      String account, String amount, String? paymentId, String? promotionId, String? name, String? bankType) async {
     return await ApiRequestBuilder<String>(
-            method: HttpMethod.PUT,
-            endPoint: "api/deposit/manual/bank",
-            params: {
-              "account": account,
-              "amount": amount,
-              "paymentid": paymentId,
-              "promotionid": promotionId,
-              "name": name,
-            },
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.PUT,
+        endPoint: "api/deposit/manual/bank",
+        params: {
+          "account": account,
+          "amount": amount,
+          "paymentid": paymentId,
+          "promotionid": promotionId,
+          "name": name,
+          "banktype":bankType
+        },
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
