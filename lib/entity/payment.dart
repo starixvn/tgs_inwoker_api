@@ -41,6 +41,8 @@ class Payment {
   int? order;
   @JsonKey(name: "extended")
   PaymentExtended? qrCode;
+  @JsonKey(name: "channelid")
+  String? channelId;
 
   factory Payment.fromJson(Map<String, dynamic> json) => _$PaymentFromJson(json);
 
