@@ -111,6 +111,8 @@ class EnvFeaturesConfig {
   bool? addCardNotAllowedEditDelete;
   @JsonKey(name: "Profile_NotAllowChangePhone")
   bool? profileNotAllowChangePhone;
+  @JsonKey(name: "Deposit_AutofillFirstCard")
+  bool? depositAutoFillFirstCard;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 

@@ -49,7 +49,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..addCardNotAllowedEditDelete =
           json['AddCard_NotAllowedEditDelete'] as bool?
       ..profileNotAllowChangePhone =
-          json['Profile_NotAllowChangePhone'] as bool?;
+          json['Profile_NotAllowChangePhone'] as bool?
+      ..depositAutoFillFirstCard = json['Deposit_AutofillFirstCard'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -93,4 +94,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'NavigateToAddCard': instance.navigateToAddCard,
       'AddCard_NotAllowedEditDelete': instance.addCardNotAllowedEditDelete,
       'Profile_NotAllowChangePhone': instance.profileNotAllowChangePhone,
+      'Deposit_AutofillFirstCard': instance.depositAutoFillFirstCard,
     };
