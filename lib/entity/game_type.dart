@@ -96,7 +96,7 @@ extension GameTypeExtension on GameType {
       case GameType.CardGameLobby:
         return "chess";
       case GameType.ESports:
-        return "sports";
+        return "esports";
       default:
         return "";
     }
