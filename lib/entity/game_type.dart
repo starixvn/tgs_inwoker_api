@@ -82,9 +82,9 @@ extension GameTypeExtension on GameType {
   String getImagePath() {
     switch (this) {
       case GameType.Slot:
-        return "slotGame";
+        return "slot";
       case GameType.EGame:
-        return "eGame";
+        return "table";
       case GameType.Sportsbook:
         return "sports";
       case GameType.LiveDealerLobby:
@@ -94,9 +94,9 @@ extension GameTypeExtension on GameType {
       case GameType.Fishing:
         return "fish";
       case GameType.CardGameLobby:
-        return "qipai";
+        return "chess";
       case GameType.ESports:
-        return "esports";
+        return "sports";
       default:
         return "";
     }
