@@ -64,8 +64,15 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
   Future<EventResult<T>> resolveBaseResponse<T>(http.Response response, bool isWithoutBaseResponse,
       [ResponseResultConverter<T>? converter, void Function(T)? onSuccess, bool? isFeatures]) async {
     if (!isWithoutBaseResponse) {
+      var value;
       //need to convert to BaseResponse
-      var value = json.decode(response.body);
+      try {
+        value = json.decode(response.body);
+      } on Exception catch (_) {
+        print("throwing new error");
+        return EventResult.failure();
+        //throw Exception("Error on server");
+      }
       print(value);
       var baseResponse = BaseResponse.fromJson(value);
       if (baseResponse.error == null ||
@@ -86,7 +93,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
         else
           return EventResult.success(result);
       } else {
-        return EventResult.failure(baseResponse.error!, baseResponse.msg!, baseResponse.errorMsgId ?? "");
+        return EventResult.failure(errorCode:baseResponse.error!, error:baseResponse.msg!, errorMsgId:baseResponse.errorMsgId ?? "");
       }
     } else {
       //doesnt need to convert to BaseResponse

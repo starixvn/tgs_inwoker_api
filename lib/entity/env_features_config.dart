@@ -113,6 +113,10 @@ class EnvFeaturesConfig {
   bool? profileNotAllowChangePhone;
   @JsonKey(name: "Deposit_AutofillFirstCard")
   bool? depositAutoFillFirstCard;
+  @JsonKey(name: "AddCard_MaximumCardAllowed")
+  int? addCardMaximumCardAllowed;
+  @JsonKey(name: "AddCard_DisableCreateUpdateDelete")
+  bool? addCardDisableCreateUpdateDelete;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
