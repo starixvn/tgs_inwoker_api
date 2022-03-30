@@ -21,8 +21,8 @@ Payment _$PaymentFromJson(Map<String, dynamic> json) => Payment(
       json['displayorder'] as int?,
       json['extended'] == null
           ? null
-          : PaymentQrCode.fromJson(json['extended'] as Map<String, dynamic>),
-    );
+          : PaymentExtended.fromJson(json['extended'] as Map<String, dynamic>),
+    )..channelId = json['channelid'] as String?;
 
 Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
       'id': instance.id,
@@ -35,6 +35,7 @@ Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
       'methodcode': instance.methodCode,
       'displayorder': instance.order,
       'extended': instance.qrCode,
+      'channelid': instance.channelId,
     };
 
 const _$BankTypeEnumMap = {

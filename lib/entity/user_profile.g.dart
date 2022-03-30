@@ -17,7 +17,10 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile(
       json['identityauthentication'] as bool?,
       json['viplevel'] as int?,
       json['playercode'] as String?,
-    );
+    )
+      ..identityFormStatus = $enumDecodeNullable(
+          _$IdentityStatusEnumMap, json['identityformstatus'])
+      ..identityFormId = json['identityformid'] as String?;
 
 Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
     <String, dynamic>{
@@ -31,4 +34,13 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
       'identityauthentication': instance.identityAuthentication,
       'viplevel': instance.vipLevel,
       'playercode': instance.playerCode,
+      'identityformstatus':
+          _$IdentityStatusEnumMap[instance.identityFormStatus],
+      'identityformid': instance.identityFormId,
     };
+
+const _$IdentityStatusEnumMap = {
+  IdentityStatus.WaitingVerify: 0,
+  IdentityStatus.Approve: 1,
+  IdentityStatus.Reject: 2,
+};
