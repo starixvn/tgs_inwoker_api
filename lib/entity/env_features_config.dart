@@ -117,6 +117,8 @@ class EnvFeaturesConfig {
   int? addCardMaximumCardAllowed;
   @JsonKey(name: "AddCard_DisableCreateUpdateDelete")
   bool? addCardDisableCreateUpdateDelete;
+  @JsonKey(name: "PopupPromotion")
+  bool? popupPromotion;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
