@@ -361,6 +361,21 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
+  Future<EventResult<DepositRedirect>> malakiPayDepositOrder(String amount,
+      String? paymentId, String? promotionId, String? type) async {
+    return await ApiRequestBuilder<DepositRedirect>(
+            method: HttpMethod.POST,
+            endPoint: "api/deposit/$type/malakipay",
+            params: {
+              "amount": amount,
+              "paymentid": paymentId,
+              "promotionid": promotionId,
+            },
+            converter: (json) => DepositRedirect.fromJson(json),
+            jwtRefresher: jwtAuth)
+        .execute();
+  }
+
   Future<EventResult<DepositRedirect>> performDeposit(
       String amount,
       String? paymentId,
