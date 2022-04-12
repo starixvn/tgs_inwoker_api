@@ -1,5 +1,5 @@
 import 'package:api/entity/bank_type.dart';
-import 'package:api/entity/payment_qr_code.dart';
+import 'package:api/entity/payment_extended.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:api/entity/transfer_limit.dart';
 
@@ -40,7 +40,9 @@ class Payment {
   @JsonKey(name: "displayorder")
   int? order;
   @JsonKey(name: "extended")
-  PaymentQrCode? qrCode;
+  PaymentExtended? qrCode;
+  @JsonKey(name: "channelid")
+  String? channelId;
 
   factory Payment.fromJson(Map<String, dynamic> json) => _$PaymentFromJson(json);
 

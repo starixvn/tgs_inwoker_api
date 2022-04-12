@@ -2,6 +2,7 @@ library api;
 
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:api/entity/brand_logo.dart';
 import 'package:api/entity/env_features_config.dart';
 import 'package:api/entity/home_banner.dart';
@@ -10,6 +11,8 @@ import 'package:api/entity/live_chat.dart';
 import 'package:api/entity/promotion_report.dart';
 import 'package:api/entity/response/report_response2.dart';
 import 'package:api/entity/umpay_exchange_rate.dart';
+import 'package:api/entity/vip.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:api/entity/env_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,6 +51,8 @@ import 'package:api/entity/response/BaseResponse.dart';
 import 'package:api/entity/game_wallet.dart';
 import 'init.dart';
 import 'package:flutter/material.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:path/path.dart' as p;
 
 part 'network/services/api_service.dart';
 

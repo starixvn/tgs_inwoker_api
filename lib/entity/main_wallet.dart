@@ -5,9 +5,11 @@ part 'main_wallet.g.dart';
 class MainWallet {
   //MainWallet();
 
-  MainWallet(this.main);
+  MainWallet(this.main, this.totalBalance);
 
   double? main;
+
+  double? totalBalance;
 
   factory MainWallet.fromJson(Map<String, dynamic> json) => _$MainWalletFromJson(json);
   Map<String, dynamic> toJson() => _$MainWalletToJson(this);

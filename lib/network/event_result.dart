@@ -4,7 +4,7 @@ class EventResult<T> {
   int? errorCode;
   bool isLoading, isSuccess, isError, isMaintenance;
   bool isHandled = false; //always false when init
-  String errorMsgId;
+  String? errorMsgId;
 
   EventResult(
       {this.result,
@@ -20,7 +20,7 @@ class EventResult<T> {
 
   EventResult.success(T result) : this(result: result, isSuccess: true);
 
-  EventResult.failure(int errorCode, String error, String errorMsgId)
+  EventResult.failure({int? errorCode, String? error, String? errorMsgId})
       : this(errorCode: errorCode, error: error, isError: true, errorMsgId: errorMsgId);
 
   EventResult.maintenance({T? result}) : this(result: result, isMaintenance: true);

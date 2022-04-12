@@ -2,8 +2,7 @@ part of api;
 
 class BankRepository extends BaseRepository {
   static BankRepository? _singleton;
-  UserProfile? userProfile;
-  List<GameProvider>? gameProviderList;
+  List<BankCard>? bankCardList;
 
   static BankRepository getSingleton() {
     if (_singleton == null) {
@@ -24,17 +23,19 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<String>> getManualBankDepositId(
-      String account, String amount, String? paymentId, String? promotionId) async {
+      String account, String amount, String? paymentId, String? promotionId, String? name, String? bankType) async {
     return await ApiRequestBuilder<String>(
-            method: HttpMethod.PUT,
-            endPoint: "api/deposit/manual/bank",
-            params: {
-              "account": account,
-              "amount": amount,
-              "paymentid": paymentId,
-              "promotionid": promotionId,
-            },
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.PUT,
+        endPoint: "api/deposit/manual/bank",
+        params: {
+          "account": account,
+          "amount": amount,
+          "paymentid": paymentId,
+          "promotionid": promotionId,
+          "name": name,
+          "banktype":bankType
+        },
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -63,7 +64,7 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> uploadDepositImage(String imageFile, String id) async {
+  Future<EventResult<dynamic>> uploadDepositImage(File imageFile, String id) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.MULTIPART,
             endPoint: "api/Deposit/manual",
@@ -87,6 +88,9 @@ class BankRepository extends BaseRepository {
             method: HttpMethod.GET,
             endPoint: "api/bankinfo",
             converter: (json) => (json as List<dynamic>).map((e) => BankCard.fromJson(e)).toList(),
+            consumer: (result) => setRepoValues(() {
+                  bankCardList = result;
+                }),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -301,6 +305,20 @@ class BankRepository extends BaseRepository {
             },
             converter: (json) => DepositRedirect.fromJson(json),
             jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult<DepositRedirect>> zeroNineNinePayDepositOrder(String amount, String? paymentId, String? promotionId) async {
+    return await ApiRequestBuilder<DepositRedirect>(
+        method: HttpMethod.POST,
+        endPoint: "api/deposit/bank/zeronineninepay",
+        params: {
+          "amount": amount,
+          "paymentid": paymentId,
+          "promotionid": promotionId,
+        },
+        converter: (json) => DepositRedirect.fromJson(json),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 }

@@ -42,25 +42,25 @@ enum GameType {
 }
 
 extension GameTypeExtension on GameType {
-  String getName(BuildContext context) {
-    switch(this){
+  String getName(BuildContext context, bool isRenameShootFish) {
+    switch (this) {
       case GameType.Sportsbook:
-        return getTranslatedText(context, "cat_sport");
-      case GameType.ESports: 
-        return getTranslatedText(context,  "cat_e_sports");
+        return getTranslatedText(context, "cat_sport", isByBrand: true);
+      case GameType.ESports:
+        return getTranslatedText(context, "cat_e_sports");
       case GameType.LiveDealerLobby:
-        return getTranslatedText(context,  "cat_livecasino");
+        return getTranslatedText(context, "cat_livecasino");
       case GameType.CardGameLobby:
-        return getTranslatedText(context,  "cat_qipai");
+        return getTranslatedText(context, "cat_qipai");
       case GameType.Fishing:
-        return getTranslatedText(context,  "cat_fish");
+        return getTranslatedText(context, isRenameShootFish ? "cat_shoot_fish" : "cat_fish");
       case GameType.LotteryLobby:
-        return getTranslatedText(context,  "cat_lottery");
-      case GameType.Slot: 
-        return getTranslatedText(context,  "cat_slotgame");
+        return getTranslatedText(context, "cat_lottery");
+      case GameType.Slot:
+        return getTranslatedText(context, "cat_slotgame");
       case GameType.EGame:
-        return getTranslatedText(context,  "cat_e_game");
-      default :
+        return getTranslatedText(context, "cat_e_game");
+      default:
         return "";
     }
   }
@@ -73,37 +73,37 @@ extension GameTypeExtension on GameType {
     GameType.CardGame: 7,
     GameType.CardGameLobby: 8,
     GameType.Fishing: 9,
-    GameType.Lottery:13,
+    GameType.Lottery: 13,
     GameType.LotteryLobby: 14,
     GameType.Slot: 15,
     GameType.EGame: 16,
   };
 
   String getImagePath() {
-    switch(this){
+    switch (this) {
       case GameType.Slot:
-        return   "slotGame" ;
+        return "slot";
       case GameType.EGame:
-        return   "eGame" ;
+        return "table";
       case GameType.Sportsbook:
-        return   "sports" ;
+        return "sports";
       case GameType.LiveDealerLobby:
-        return   "live" ;
+        return "live";
       case GameType.LotteryLobby:
-        return   "lottery" ;
+        return "lottery";
       case GameType.Fishing:
-        return   "fish" ;
+        return "fish";
       case GameType.CardGameLobby:
-        return   "qipai" ;
+        return "chess";
       case GameType.ESports:
-        return   "esports" ;
-      default :
+        return "esports";
+      default:
         return "";
     }
   }
 
   int? get getJsonValue => json[this];
 
-  getTranslatedText(BuildContext context, String key) => LanguageProvider().getTranslated(context, key);
-
+  getTranslatedText(BuildContext context, String key, {bool isByBrand = false}) =>
+      LanguageProvider.getSingleton().getTranslated(context, key, isByBrand: isByBrand);
 }

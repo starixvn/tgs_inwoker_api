@@ -6,6 +6,7 @@ class ContentRepository extends BaseRepository {
   List<GameProvider>? gameProviderList;
   List<LanguageOption>? languageOptionList;
   BrandLogo? brandLogo;
+  EnvFeaturesConfig? featuresConfig;
 
   static ContentRepository getSingleton() {
     if (_singleton == null) {
@@ -62,7 +63,8 @@ class ContentRepository extends BaseRepository {
               "extends": {"lobbyurl": lobbyUrl}
             },
             converter: (json) => GameUrlResponse.fromJson(json),
-            jwtRefresher: jwtAuth)
+            jwtRefresher: jwtAuth,
+            timeout: 20)
         .execute();
   }
 
@@ -78,7 +80,8 @@ class ContentRepository extends BaseRepository {
               "extends": {"lobbyurl": lobbyUrl}
             },
             converter: (json) => GameUrlResponse.fromJson(json),
-            jwtRefresher: jwtAuth)
+            jwtRefresher: jwtAuth,
+            timeout: 20)
         .execute();
   }
 
@@ -214,12 +217,32 @@ class ContentRepository extends BaseRepository {
 
   Future<EventResult<EnvFeaturesConfig>> getEnvFeaturesJson(String brand) async {
     return await ApiRequestBuilder<EnvFeaturesConfig>(
-      method: HttpMethod.GET,
-      endPoint: "features_${brand}.json",
-      isAssetUrl: true,
-      isAutoHeader: false,
-      isWithoutBaseResponse: true,
-      converter: (json) => EnvFeaturesConfig.fromJson(json),
-    ).execute();
+            method: HttpMethod.GET,
+            endPoint: "features_${brand}.json",
+            isAssetUrl: true,
+            isAutoHeader: false,
+            isWithoutBaseResponse: true,
+            converter: (json) => EnvFeaturesConfig.fromJson(json),
+            consumer: (result) => setRepoValues(() {
+                  featuresConfig = result;
+                }),
+            isFeatures: true)
+        .execute();
+  }
+
+  Future<EventResult<ListResponse<Vip>>> getVip(int page, int rows, bool desc, bool all) async {
+    return await ApiRequestBuilder<ListResponse<Vip>>(
+            method: HttpMethod.GET,
+            endPoint: "api/vip",
+            params: {
+              "page": page.toString(),
+              "rows": rows.toString(),
+              "desc": desc.toString(),
+              //"sort":"",
+              "all": all.toString(),
+            },
+            converter: (json) => ListResponse.fromJson(json, (res) => Vip.fromJson(res as Map<String, dynamic>)),
+            jwtRefresher: jwtAuth)
+        .execute();
   }
 }

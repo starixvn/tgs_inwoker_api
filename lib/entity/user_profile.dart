@@ -1,3 +1,4 @@
+import 'package:api/entity/identity_status.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'user_profile.g.dart';
 @JsonSerializable()
@@ -22,6 +23,10 @@ class UserProfile {
   int? vipLevel;
   @JsonKey(name: 'playercode')
   String? playerCode;
+  @JsonKey(name: 'identityformstatus')
+  IdentityStatus? identityFormStatus;
+  @JsonKey(name: 'identityformid')
+  String? identityFormId;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
   Map<String, dynamic> toJson() => _$UserProfileToJson(this);

@@ -19,6 +19,7 @@ class Promotion {
   String? mobileBanner;
   String? content;
   String? terms;
+  String? promotionType;
 
   factory Promotion.fromJson(Map<String, dynamic> json) => _$PromotionFromJson(json);
 

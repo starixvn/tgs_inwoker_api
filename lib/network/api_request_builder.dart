@@ -20,22 +20,23 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
   bool isAssetUrl;
   bool isAutoHeader;
   bool isWithoutBaseResponse;
+  bool isFeatures;
 
-  ApiRequestBuilder({
-    this.isAuthorization = true,
-    this.isJWTAuthRequest = false,
-    this.method = HttpMethod.POST,
-    this.endPoint,
-    this.params,
-    this.converter,
-    this.jwtRefresher,
-    this.consumer,
-    this.imageContent,
-    this.timeout = 3,
-    this.isAssetUrl = false,
-    this.isAutoHeader = true,
-    this.isWithoutBaseResponse = false,
-  });
+  ApiRequestBuilder(
+      {this.isAuthorization = true,
+      this.isJWTAuthRequest = false,
+      this.method = HttpMethod.POST,
+      this.endPoint,
+      this.params,
+      this.converter,
+      this.jwtRefresher,
+      this.consumer,
+      this.imageContent,
+      this.timeout = 3,
+      this.isAssetUrl = false,
+      this.isAutoHeader = true,
+      this.isWithoutBaseResponse = false,
+      this.isFeatures = false});
 
   Future<EventResult<T>> execute() async {
     var response = await api(
@@ -48,8 +49,11 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       isAssetUrl: isAssetUrl,
       isAutoHeader: isAutoHeader,
     );
-    var result = resolveBaseResponse(response, isWithoutBaseResponse, converter, consumer);
-    if (result.errorCode == 101 && retryCounter < 2 && !isJWTAuthRequest && !isWithoutBaseResponse) {
+    var result = await resolveBaseResponse(response, isWithoutBaseResponse, converter, consumer, isFeatures);
+    if ((result.errorCode == 101 || result.errorCode == 102) &&
+        retryCounter < 2 &&
+        !isJWTAuthRequest &&
+        !isWithoutBaseResponse) {
       retryCounter++;
       await jwtRefresher!();
       return execute();
@@ -57,10 +61,18 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
     return result;
   }
 
-  EventResult<T> resolveBaseResponse<T>(http.Response response, bool isWithoutBaseResponse,
-      [ResponseResultConverter<T>? converter, void Function(T)? onSuccess]) {
+  Future<EventResult<T>> resolveBaseResponse<T>(http.Response response, bool isWithoutBaseResponse,
+      [ResponseResultConverter<T>? converter, void Function(T)? onSuccess, bool? isFeatures]) async {
     if (!isWithoutBaseResponse) {
-      var value = json.decode(response.body);
+      var value;
+      //need to convert to BaseResponse
+      try {
+        value = json.decode(response.body);
+      } on Exception catch (_) {
+        print("throwing new error");
+        return EventResult.failure();
+        //throw Exception("Error on server");
+      }
       print(value);
       var baseResponse = BaseResponse.fromJson(value);
       if (baseResponse.error == null ||
@@ -81,15 +93,24 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
         else
           return EventResult.success(result);
       } else {
-        return EventResult.failure(baseResponse.error!, baseResponse.msg!, baseResponse.errorMsgId!);
+        return EventResult.failure(errorCode:baseResponse.error!, error:baseResponse.msg!, errorMsgId:baseResponse.errorMsgId ?? "");
       }
     } else {
-      var value = response.body;
-      print(value);
-      var result = converter == null ? value as T : converter(value);
-      // if (value != null) {
+      //doesnt need to convert to BaseResponse
+      var value;
+      if (response.statusCode == 200) {
+        value = utf8.decode(response.bodyBytes);
+      } else if (isFeatures ?? false) {
+        value = await getJson();
+      }
+      var result = converter == null ? value as T : converter(json.decode(value));
+      if (onSuccess != null) onSuccess(result);
       return EventResult.success(result);
     }
+  }
+
+  Future<String> getJson() async {
+    return await rootBundle.loadString('features/features_default.json');
   }
 /*
   Future<EventResult<T>> executeWithoutBaseResponse() async {

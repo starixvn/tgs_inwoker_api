@@ -13,14 +13,16 @@ class LanguageProvider {
   final contentRepo = ContentRepository.getSingleton();
   Map<String, Language> _languageList = {
     "en-US": Language("en", "English", Locale("en", ''), "en-US", "images/language/ic_lang_en.png"),
-    "zh-CN": Language("zh_Hans", "简体中文", Locale.fromSubtags(languageCode: "zh", scriptCode: "Hans"), "zh-CN",
+    "zh-CN": Language("zh_Hans", "简体", Locale.fromSubtags(languageCode: "zh", scriptCode: "Hans"), "zh-CN",
         "images/language/ic_lang_zh.png"),
-    "zh-TW": Language("zh_Hant", "繁体中文", Locale.fromSubtags(languageCode: "zh", scriptCode: "Hant"), "zh-TW",
+    "zh-TW": Language("zh_Hant", "繁體", Locale.fromSubtags(languageCode: "zh", scriptCode: "Hant"), "zh-TW",
         "images/language/ic_lang_zh_tw.png"),
     "th-TH": Language("th-TH", "ไทย", Locale("th", ""), "th-TH", "images/language/ic_lang_th.png"),
     "id-ID": Language("id-ID", "Indonesia", Locale("id", ''), "id-ID", "images/language/ic_lang_en.png"),
     "vi-VN": Language("vi-VN", "Tiếng Việt", Locale("vi", ''), "vi-VN", "images/language/ic_lang_vn.png"),
   };
+  String _brandName = "";
+  Locale? _currentLang = null;
 
   static LanguageProvider getSingleton() {
     if (_singleton == null) {
@@ -30,6 +32,10 @@ class LanguageProvider {
   }
 
   LanguageProvider() {}
+
+  init(String brandName) {
+    _brandName = brandName;
+  }
 
   refreshLangList() async {
     var languageOptionList = contentRepo.languageOptionList;
@@ -73,6 +79,7 @@ class LanguageProvider {
       currLocale = _locale(list.singleWhere((e) => e.apiCode == languageCode));
     } else
       currLocale = _locale(list.singleWhere((e) => e.apiCode == env.defaultLang));
+    _currentLang = currLocale;
     return currLocale;
   }
 
@@ -84,11 +91,20 @@ class LanguageProvider {
     }
   }
 
-  String? getTranslated(BuildContext context, String? key) {
+  String? getTranslated(BuildContext context, String? key, {bool isByBrand = false}) {
+    if (isByBrand && key != null) {
+      String newKey = _brandName + "_" + key;
+      String? translatedText = MyLocalizations.of(context)?.translate(newKey);
+      if (translatedText != null && translatedText != newKey) return translatedText;
+    }
     return MyLocalizations.of(context)?.translate(key) ?? key;
   }
 
   getCurrentLanguage(Locale _locale) {
     return list.singleWhere((e) => e.locale == _locale);
+  }
+
+  isMandarin() {
+    return _currentLang == null ? true : _currentLang?.languageCode == "zh";
   }
 }

@@ -4,19 +4,25 @@ http.Client? client;
 //const timeoutDuration = Duration(seconds: 3);
 
 Future<http.Response> api(HttpMethod method, final endPoint,
-    {final content, isAuthorization = true, imageContent, timeout = 3, isAssetUrl = false,isAutoHeader = true}) async {  if (client == null) {
+    {final content, isAuthorization = true, imageContent, timeout = 3, isAssetUrl = false, isAutoHeader = true}) async {
+  if (client == null) {
     client = http.Client();
   }
 
-var header = isAutoHeader ? await _getHeader(isAuthorization) : Map<String, String>();
-var url = (isAssetUrl ? env.assetUrl : env.url) + endPoint;
+  var header = isAutoHeader ? await _getHeader(isAuthorization) : Map<String, String>();
+  var url = (isAssetUrl ? env.assetUrl : env.url) + endPoint;
 
-var timeoutDuration = Duration(seconds: timeout);
+  var timeoutDuration = Duration(seconds: timeout);
 
   var onTimeout = () {
     // CustomToast.show("Debug:Timeout -> $url");
     print("Debug:Timeout -> $url");
-    return api(method, endPoint, content: content, isAuthorization: isAuthorization, timeout: timeout,isAssetUrl:isAssetUrl,isAutoHeader:isAutoHeader);
+    return api(method, endPoint,
+        content: content,
+        isAuthorization: isAuthorization,
+        timeout: timeout,
+        isAssetUrl: isAssetUrl,
+        isAutoHeader: isAutoHeader);
   };
   print("Api->${method.getName}:$url");
   print(content);
@@ -80,11 +86,15 @@ var timeoutDuration = Duration(seconds: timeout);
       break;
 
     case HttpMethod.MULTIPART:
-      var request = http.MultipartRequest("POST", Uri.parse(url + "/" + content));
+      var _content = content == null ? url : url + "/" + content;
+      var request = http.MultipartRequest("POST", Uri.parse(_content));
       header.forEach((k, v) {
         request.headers[k] = v;
       });
-      request.files.add(await http.MultipartFile.fromPath('file', imageContent));
+      String imageExtension = (p.extension(imageContent.path).replaceAll(".", "")).toString();
+      //request.files.add(await http.MultipartFile.fromPath('file', imageContent));
+      request.files.add(await http.MultipartFile.fromPath('file', imageContent.path,
+          contentType: MediaType('image', imageExtension)));
       var imageRes = await request.send();
       response = await http.Response.fromStream(imageRes).timeout(timeoutDuration, onTimeout: onTimeout);
       ;
