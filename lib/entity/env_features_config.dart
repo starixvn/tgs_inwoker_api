@@ -119,6 +119,8 @@ class EnvFeaturesConfig {
   bool? addCardDisableCreateUpdateDelete;
   @JsonKey(name: "PopupPromotion")
   bool? popupPromotion;
+  @JsonKey(name: "T9_CustomHome")
+  bool? t9CustomHome;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
