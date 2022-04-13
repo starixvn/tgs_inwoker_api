@@ -27,6 +27,12 @@ class UserProfile {
   IdentityStatus? identityFormStatus;
   @JsonKey(name: 'identityformid')
   String? identityFormId;
+  @JsonKey(name: 'facebookMessenger')
+  String? facebookMessenger;
+  String? line;
+  String? viber;
+  String? telegram;
+  String? whatsapp;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
   Map<String, dynamic> toJson() => _$UserProfileToJson(this);
