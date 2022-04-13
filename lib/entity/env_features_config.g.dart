@@ -55,7 +55,10 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..addCardDisableCreateUpdateDelete =
           json['AddCard_DisableCreateUpdateDelete'] as bool?
       ..popupPromotion = json['PopupPromotion'] as bool?
-      ..t9CustomHome = json['T9_CustomHome'] as bool?;
+      ..t9CustomHome = json['T9_CustomHome'] as bool?
+      ..customMessaging = (json['CustomMessaging'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList();
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -105,4 +108,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
           instance.addCardDisableCreateUpdateDelete,
       'PopupPromotion': instance.popupPromotion,
       'T9_CustomHome': instance.t9CustomHome,
+      'CustomMessaging': instance.customMessaging,
     };
