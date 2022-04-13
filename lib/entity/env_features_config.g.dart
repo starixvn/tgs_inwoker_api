@@ -54,7 +54,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..addCardMaximumCardAllowed = json['AddCard_MaximumCardAllowed'] as int?
       ..addCardDisableCreateUpdateDelete =
           json['AddCard_DisableCreateUpdateDelete'] as bool?
-      ..popupPromotion = json['PopupPromotion'] as bool?;
+      ..popupPromotion = json['PopupPromotion'] as bool?
+      ..t9CustomHome = json['T9_CustomHome'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -103,4 +104,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'AddCard_DisableCreateUpdateDelete':
           instance.addCardDisableCreateUpdateDelete,
       'PopupPromotion': instance.popupPromotion,
+      'T9_CustomHome': instance.t9CustomHome,
     };
