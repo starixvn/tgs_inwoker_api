@@ -123,6 +123,8 @@ class EnvFeaturesConfig {
   bool? t9CustomHome;
   @JsonKey(name: "CustomMessaging")
   List<String>? customMessaging;
+  @JsonKey(name: "HomePage_Animated")
+  bool? homePageAnimated;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
