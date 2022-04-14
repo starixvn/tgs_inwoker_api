@@ -21,7 +21,7 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile(
       ..identityFormStatus = $enumDecodeNullable(
           _$IdentityStatusEnumMap, json['identityformstatus'])
       ..identityFormId = json['identityformid'] as String?
-      ..facebookMessenger = json['facebookMessenger'] as String?
+      ..facebookMessenger = json['facebookmessenger'] as String?
       ..line = json['line'] as String?
       ..viber = json['viber'] as String?
       ..telegram = json['telegram'] as String?
@@ -42,7 +42,7 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
       'identityformstatus':
           _$IdentityStatusEnumMap[instance.identityFormStatus],
       'identityformid': instance.identityFormId,
-      'facebookMessenger': instance.facebookMessenger,
+      'facebookmessenger': instance.facebookMessenger,
       'line': instance.line,
       'viber': instance.viber,
       'telegram': instance.telegram,
