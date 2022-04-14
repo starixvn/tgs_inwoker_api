@@ -27,7 +27,7 @@ class UserProfile {
   IdentityStatus? identityFormStatus;
   @JsonKey(name: 'identityformid')
   String? identityFormId;
-  @JsonKey(name: 'facebookMessenger')
+  @JsonKey(name: 'facebookmessenger')
   String? facebookMessenger;
   String? line;
   String? viber;
