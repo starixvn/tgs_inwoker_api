@@ -29,11 +29,11 @@ extension ProfileInfoItemExtension on ProfileInfoItem {
     ProfileInfoItem.LOGIN_PASSWORD: "edit_password",
     //ProfileInfoItem.PAY_PASSWORD: "pay_password",
     //ProfileInfoItem.RESET_PAY_PASSWORD: "reset_pay_password",
-    ProfileInfoItem.MESSENGER:"Messenger",
-    ProfileInfoItem.TELEGRAM:"Telegram",
-    ProfileInfoItem.LINE:"Line",
-    ProfileInfoItem.VIBER:"Viber",
-    ProfileInfoItem.WHATSAPP:"Whatsapp",
+    ProfileInfoItem.MESSENGER:"messenger",
+    ProfileInfoItem.TELEGRAM:"telegram",
+    ProfileInfoItem.LINE:"line",
+    ProfileInfoItem.VIBER:"viber",
+    ProfileInfoItem.WHATSAPP:"whatsapp",
   };
 
   static const imagePath = {
@@ -46,11 +46,11 @@ extension ProfileInfoItemExtension on ProfileInfoItem {
     ProfileInfoItem.LOGIN_PASSWORD: "images/profile_info/ic_profile_info_lock.png",
     //ProfileInfoItem.PAY_PASSWORD: "images/profile_info/ic_profile_info_withdraw_password.png",
     //ProfileInfoItem.RESET_PAY_PASSWORD: "images/profile_info/ic_profile_info_withdraw_password.png",
-    ProfileInfoItem.MESSENGER:"images/support/support_messenger.png",
-    ProfileInfoItem.TELEGRAM:"images/support/support_telegram.png",
-    ProfileInfoItem.LINE:"images/support/support_line.png",
-    ProfileInfoItem.VIBER:"images/support/support_viber.png",
-    ProfileInfoItem.WHATSAPP:"images/support/support_whatsapp.png",
+    ProfileInfoItem.MESSENGER: "images/contact/messenger.svg",
+    ProfileInfoItem.TELEGRAM: "images/contact/telegram.svg",
+    ProfileInfoItem.LINE: "images/contact/line.svg",
+    ProfileInfoItem.VIBER: "images/contact/viber.svg",
+    ProfileInfoItem.WHATSAPP: "images/contact/whatsapp.svg",
   };
 
   static const navigationPath = {
@@ -63,14 +63,12 @@ extension ProfileInfoItemExtension on ProfileInfoItem {
     ProfileInfoItem.LOGIN_PASSWORD: "edit_password",
     //ProfileInfoItem.PAY_PASSWORD: "pay_password",
     //ProfileInfoItem.RESET_PAY_PASSWORD: "reset_pay_password",
-    ProfileInfoItem.MESSENGER:"messenger",
-    ProfileInfoItem.TELEGRAM:"telegram",
-    ProfileInfoItem.LINE:"line",
-    ProfileInfoItem.VIBER:"viber",
-    ProfileInfoItem.WHATSAPP:"whatsapp",
+    ProfileInfoItem.MESSENGER: "messenger",
+    ProfileInfoItem.TELEGRAM: "telegram",
+    ProfileInfoItem.LINE: "line",
+    ProfileInfoItem.VIBER: "viber",
+    ProfileInfoItem.WHATSAPP: "whatsapp",
   };
-
-
 
   String? getDisplayName(BuildContext context) => getTranslatedText(context, name[this]!);
 
