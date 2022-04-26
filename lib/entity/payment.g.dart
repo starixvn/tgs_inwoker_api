@@ -42,5 +42,6 @@ const _$BankTypeEnumMap = {
   BankType.BANK: 'Bank',
   BankType.CRYPTO: 'Crypto',
   BankType.THIRD_PARTY: 'ThirdParty',
+  BankType.USDT: 'Usdt',
   BankType.FPS: 'FPS',
 };

@@ -9,6 +9,8 @@ enum BankType {
   CRYPTO,
   @JsonValue("ThirdParty")
   THIRD_PARTY,
+  @JsonValue("Usdt")
+  USDT,
   FPS,
 }
 
@@ -17,6 +19,7 @@ extension BankTypeExtension on BankType {
     BankType.BANK: "Bank",
     BankType.CRYPTO: "Crypto",
     BankType.THIRD_PARTY: "ThirdParty",
+    BankType.USDT: "Usdt",
     BankType.FPS: "FPS",
   };
 
@@ -30,6 +33,8 @@ extension BankTypeExtension on BankType {
         return getTranslatedText(context, "crypto");
       case BankType.THIRD_PARTY:
         return "Third Party";
+      case BankType.USDT:
+        return "Usdt";
       case BankType.FPS:
         return "FPS";
       default:
@@ -37,5 +42,6 @@ extension BankTypeExtension on BankType {
     }
   }
 
-  getTranslatedText(BuildContext context, String key) => LanguageProvider().getTranslated(context, key);
+  getTranslatedText(BuildContext context, String key) =>
+      LanguageProvider().getTranslated(context, key);
 }
