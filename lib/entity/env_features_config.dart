@@ -125,6 +125,8 @@ class EnvFeaturesConfig {
   List<String>? customMessaging;
   @JsonKey(name: "HomePage_Animated")
   bool? homePageAnimated;
+  @JsonKey(name: "Report_ShowRoundsTotal")
+  bool? reportShowRoundsTotal;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);

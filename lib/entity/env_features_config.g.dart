@@ -59,7 +59,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..customMessaging = (json['CustomMessaging'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList()
-      ..homePageAnimated = json['HomePage_Animated'] as bool?;
+      ..homePageAnimated = json['HomePage_Animated'] as bool?
+      ..reportShowRoundsTotal = json['Report_ShowRoundsTotal'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -111,4 +112,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'T9_CustomHome': instance.t9CustomHome,
       'CustomMessaging': instance.customMessaging,
       'HomePage_Animated': instance.homePageAnimated,
+      'Report_ShowRoundsTotal': instance.reportShowRoundsTotal,
     };

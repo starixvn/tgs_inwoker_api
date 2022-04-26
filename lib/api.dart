@@ -10,6 +10,7 @@ import 'package:api/entity/language_option.dart';
 import 'package:api/entity/live_chat.dart';
 import 'package:api/entity/promotion_report.dart';
 import 'package:api/entity/response/report_response2.dart';
+import 'package:api/entity/round_report_total.dart';
 import 'package:api/entity/umpay_exchange_rate.dart';
 import 'package:api/entity/vip.dart';
 import 'package:flutter/services.dart';

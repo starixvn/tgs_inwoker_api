@@ -13,7 +13,8 @@ class UserRepository extends BaseRepository {
     return _singleton!;
   }
 
-  Future<EventResult<LoginResponse>> login(String username, String password) async {
+  Future<EventResult<LoginResponse>> login(
+      String username, String password) async {
     return await ApiRequestBuilder<LoginResponse>(
             isAuthorization: false,
             endPoint: "api/Player/login",
@@ -28,7 +29,11 @@ class UserRepository extends BaseRepository {
   }
 
   Future<EventResult<RegisterResponse>> register(
-      String username, String password, String rpassword, String? invitationCode, bool isAgent) async {
+      String username,
+      String password,
+      String rpassword,
+      String? invitationCode,
+      bool isAgent) async {
     return await ApiRequestBuilder<RegisterResponse>(
             isAuthorization: false,
             endPoint: "api/Player/create/",
@@ -62,7 +67,9 @@ class UserRepository extends BaseRepository {
 
   Future<EventResult<dynamic>> logout() async {
     var apiState = await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.DELETE, endPoint: "api/Player/logout", jwtRefresher: jwtAuth)
+            method: HttpMethod.DELETE,
+            endPoint: "api/Player/logout",
+            jwtRefresher: jwtAuth)
         .execute();
     await clearSession();
     return apiState;
@@ -78,7 +85,8 @@ class UserRepository extends BaseRepository {
     return jwtAuth();
   }
 
-  Future<EventResult<CheckUsernameResponse>> checkUsername(String username) async {
+  Future<EventResult<CheckUsernameResponse>> checkUsername(
+      String username) async {
     return await ApiRequestBuilder<CheckUsernameResponse>(
             method: HttpMethod.GET,
             endPoint: "api/player/checkUsername",
@@ -112,7 +120,8 @@ class UserRepository extends BaseRepository {
         .execute();
   }*/
 
-  Future<EventResult<EditPasswordResponse>> editPassword(String oldPassword, String newPassword) async {
+  Future<EventResult<EditPasswordResponse>> editPassword(
+      String oldPassword, String newPassword) async {
     return await ApiRequestBuilder<EditPasswordResponse>(
             method: HttpMethod.PUT,
             endPoint: "api/player/password",
@@ -170,8 +179,27 @@ class UserRepository extends BaseRepository {
               "sort": "CreatedOn",
               "all": "false",
             },
-            converter: (json) =>
-                ListResponse.fromJson(json, (res) => AccountReport.fromJson(res as Map<String, dynamic>)),
+            converter: (json) => ListResponse.fromJson(json,
+                (res) => AccountReport.fromJson(res as Map<String, dynamic>)),
+            jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult<ListResponse<AccountReportTotal>>> getAccountReportTotal(
+    DateTime startDate,
+    DateTime endDate,
+  ) async {
+    return await ApiRequestBuilder<ListResponse<AccountReportTotal>>(
+            method: HttpMethod.GET,
+            endPoint: "api/playerreport/rounds/total",
+            params: {
+              "From": startDate.toString(),
+              "To": endDate.toString(),
+            },
+            converter: (json) => ListResponse.fromJson(
+                json,
+                (res) =>
+                    AccountReportTotal.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -203,13 +231,16 @@ class UserRepository extends BaseRepository {
               "endcreate": endDate.toString(),
               "Page": page.toString(),
               "Rows": rows.toString(),
-              "status": (status == null || status == Status.All) ? null : status.getJson().toString(),
+              "status": (status == null || status == Status.All)
+                  ? null
+                  : status.getJson().toString(),
               "IsDesc": "true",
               "SortBy": "CreatedOn",
               "ShowAll": "false",
               "OrderBy": "1"
             },
-            converter: (json) => ReportResponse.fromJson(json, (res) => Report.fromJson(res as Map<String, dynamic>)),
+            converter: (json) => ReportResponse.fromJson(
+                json, (res) => Report.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -229,13 +260,16 @@ class UserRepository extends BaseRepository {
               "endcreate": endDate.toString(),
               "Page": page.toString(),
               "Rows": rows.toString(),
-              "status": (status == null || status == Status.All) ? null : status.getJson().toString(),
+              "status": (status == null || status == Status.All)
+                  ? null
+                  : status.getJson().toString(),
               "IsDesc": "true",
               "SortBy": "CreatedOn",
               "ShowAll": "false",
               "OrderBy": "1"
             },
-            converter: (json) => ReportResponse.fromJson(json, (res) => Report.fromJson(res as Map<String, dynamic>)),
+            converter: (json) => ReportResponse.fromJson(
+                json, (res) => Report.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -263,8 +297,8 @@ class UserRepository extends BaseRepository {
               "ShowAll": "false",
               "IsDesc": "true"
             },
-            converter: (json) =>
-                ReportResponse.fromJson(json, (res) => TransferReport.fromJson(res as Map<String, dynamic>)),
+            converter: (json) => ReportResponse.fromJson(json,
+                (res) => TransferReport.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -273,7 +307,9 @@ class UserRepository extends BaseRepository {
     return await ApiRequestBuilder<List<BrandCommunication>>(
       method: HttpMethod.GET,
       endPoint: "api/brandcommunication",
-      converter: (json) => (json as List<dynamic>).map((e) => BrandCommunication.fromJson(e)).toList(),
+      converter: (json) => (json as List<dynamic>)
+          .map((e) => BrandCommunication.fromJson(e))
+          .toList(),
       jwtRefresher: jwtAuth,
       isAuthorization: false,
     ).execute();
@@ -303,13 +339,17 @@ class UserRepository extends BaseRepository {
 
   Future<EventResult<bool>> getAutoTransferValue() async {
     return await ApiRequestBuilder<bool>(
-            method: HttpMethod.GET, endPoint: "api/player/game/auto-transfer", jwtRefresher: jwtAuth)
+            method: HttpMethod.GET,
+            endPoint: "api/player/game/auto-transfer",
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> setAutoTransferValue() async {
     return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.POST, endPoint: "api/player/game/auto-transfer", jwtRefresher: jwtAuth)
+            method: HttpMethod.POST,
+            endPoint: "api/player/game/auto-transfer",
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -331,8 +371,8 @@ class UserRepository extends BaseRepository {
               "all": "false",
               "desc": "true"
             },
-            converter: (json) =>
-                ReportResponse2.fromJson(json, (res) => PromotionReport.fromJson(res as Map<String, dynamic>)),
+            converter: (json) => ReportResponse2.fromJson(json,
+                (res) => PromotionReport.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -346,7 +386,8 @@ class UserRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> setMessagingAppID(String messagingCode, String messagingID) async {
+  Future<EventResult<dynamic>> setMessagingAppID(
+      String messagingCode, String messagingID) async {
     var paramName = messagingCode == "fb" ? "facebookmessenger" : messagingCode;
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.PATCH,
