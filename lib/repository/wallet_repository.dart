@@ -32,7 +32,7 @@ class WalletRepository extends BaseRepository {
   Future<EventResult<dynamic>> withdrawAllFund() async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.POST,
-            endPoint: "api/game/balance/fund/in}",
+            endPoint: "api/game/balance/fund/in",
             jwtRefresher: jwtAuth)
         .execute();
   }
