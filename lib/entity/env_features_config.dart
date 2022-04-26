@@ -126,7 +126,8 @@ class EnvFeaturesConfig {
   @JsonKey(name: "HomePage_Animated")
   bool? homePageAnimated;
 
-  factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
+  factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
+      _$EnvFeaturesConfigFromJson(json);
 
   Map<String, dynamic> toJson() => _$EnvFeaturesConfigToJson(this);
 }
