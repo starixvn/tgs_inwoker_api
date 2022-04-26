@@ -29,8 +29,7 @@ class WalletRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> withdrawAllFund(
-      String? gpCode, int amount, bool isFundOut) async {
+  Future<EventResult<dynamic>> withdrawAllFund() async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.POST,
             endPoint: "api/game/balance/fund/in}",
