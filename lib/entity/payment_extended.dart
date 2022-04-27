@@ -5,7 +5,6 @@ import 'package:api/entity/transfer_limit.dart';
 part 'payment_extended.g.dart';
 
 @JsonSerializable()
-
 class PaymentExtended {
   PaymentExtended();
 
@@ -15,13 +14,13 @@ class PaymentExtended {
   String? name;
   String? logo;
   String? bankAccount;
+  String? address;
 
   String? email;
   String? fpsId;
   String? phone;
 
-
-  factory PaymentExtended.fromJson(Map<String, dynamic> json) => _$PaymentExtendedFromJson(json);
+  factory PaymentExtended.fromJson(Map<String, dynamic> json) =>
+      _$PaymentExtendedFromJson(json);
   Map<String, dynamic> toJson() => _$PaymentExtendedToJson(this);
 }
-
