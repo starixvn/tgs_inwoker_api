@@ -33,6 +33,7 @@ class UserProfile {
   String? viber;
   String? telegram;
   String? whatsapp;
+  String? birthdate;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
   Map<String, dynamic> toJson() => _$UserProfileToJson(this);

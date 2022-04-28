@@ -16,6 +16,7 @@ enum ProfileInfoItem {
   LINE,
   VIBER,
   WHATSAPP,
+  BIRTHDATE,
 }
 
 extension ProfileInfoItemExtension on ProfileInfoItem {
@@ -34,6 +35,7 @@ extension ProfileInfoItemExtension on ProfileInfoItem {
     ProfileInfoItem.LINE:"line",
     ProfileInfoItem.VIBER:"viber",
     ProfileInfoItem.WHATSAPP:"whatsapp",
+    ProfileInfoItem.BIRTHDATE:"birthdate",
   };
 
   static const imagePath = {
@@ -51,6 +53,7 @@ extension ProfileInfoItemExtension on ProfileInfoItem {
     ProfileInfoItem.LINE: "images/contact/line.svg",
     ProfileInfoItem.VIBER: "images/contact/viber.svg",
     ProfileInfoItem.WHATSAPP: "images/contact/whatsapp.svg",
+    ProfileInfoItem.BIRTHDATE: "images/profile_info/ic_profile_info_birthdate.png",
   };
 
   static const navigationPath = {
@@ -68,6 +71,7 @@ extension ProfileInfoItemExtension on ProfileInfoItem {
     ProfileInfoItem.LINE: "line",
     ProfileInfoItem.VIBER: "viber",
     ProfileInfoItem.WHATSAPP: "whatsapp",
+    ProfileInfoItem.BIRTHDATE: "birthdate",
   };
 
   String? getDisplayName(BuildContext context) => getTranslatedText(context, name[this]!);
