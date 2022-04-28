@@ -1,23 +1,23 @@
-import 'package:api/entity/bank_detail.dart';
-import 'package:api/entity/bank_type.dart';
+import 'package:api/entity/deposit_dialog_content.dart';
+import 'package:api/entity/main_dialog_content.dart';
+import 'package:api/entity/marquees.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:api/entity/localization.dart';
+
 part 'announcement.g.dart';
 
 @JsonSerializable()
-
 class Announcement {
   //Announcement();
 
-  Announcement(this.subject, this.content, this.from, this.to, this.localization);
+  Announcement(this.deposit, this.main, this.marquees);
 
-  String? subject;
-  String? content;
-  int? from;
-  int? to;
-  Localization? localization;
+  @JsonKey(name: "deposits")
+  List<DepositDialogContent> deposit;
+  @JsonKey(name: "mains")
+  List<MainDialogContent> main;
+  List<Marquees> marquees;
 
   factory Announcement.fromJson(Map<String, dynamic> json) => _$AnnouncementFromJson(json);
-  Map<String, dynamic> toJson() => _$AnnouncementToJson(this);
 
+  Map<String, dynamic> toJson() => _$AnnouncementToJson(this);
 }

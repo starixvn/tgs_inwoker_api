@@ -7,6 +7,7 @@ class ContentRepository extends BaseRepository {
   List<LanguageOption>? languageOptionList;
   BrandLogo? brandLogo;
   EnvFeaturesConfig? featuresConfig;
+  Announcement? announcement;
 
   static ContentRepository getSingleton() {
     if (_singleton == null) {
@@ -85,13 +86,17 @@ class ContentRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<List<Announcement>>> getAnnouncement() async {
-    return await ApiRequestBuilder<List<Announcement>>(
-            method: HttpMethod.GET,
-            isAuthorization: false,
-            endPoint: "api/announcement/list/${await getLanguage()}",
-            converter: (json) => (json as List<dynamic>).map((e) => Announcement.fromJson(e)).toList(),
-            jwtRefresher: jwtAuth)
+  Future<EventResult<Announcement>> getAnnouncement() async {
+    return await ApiRequestBuilder<Announcement>(
+        method: HttpMethod.GET,
+        isAuthorization: false,
+        endPoint: "api/announcement/list/${await getLanguage()}",
+        converter: (json) => Announcement.fromJson(json),
+        consumer: (result) =>
+            setRepoValues(() {
+              announcement = result;
+            }),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 

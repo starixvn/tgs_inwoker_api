@@ -7,20 +7,20 @@ part of 'announcement.dart';
 // **************************************************************************
 
 Announcement _$AnnouncementFromJson(Map<String, dynamic> json) => Announcement(
-      json['subject'] as String?,
-      json['content'] as String?,
-      json['from'] as int?,
-      json['to'] as int?,
-      json['localization'] == null
-          ? null
-          : Localization.fromJson(json['localization'] as Map<String, dynamic>),
+      (json['deposits'] as List<dynamic>)
+          .map((e) => DepositDialogContent.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['mains'] as List<dynamic>)
+          .map((e) => MainDialogContent.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['marquees'] as List<dynamic>)
+          .map((e) => Marquees.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$AnnouncementToJson(Announcement instance) =>
     <String, dynamic>{
-      'subject': instance.subject,
-      'content': instance.content,
-      'from': instance.from,
-      'to': instance.to,
-      'localization': instance.localization,
+      'deposits': instance.deposit,
+      'mains': instance.main,
+      'marquees': instance.marquees,
     };
