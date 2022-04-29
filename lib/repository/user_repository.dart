@@ -176,19 +176,18 @@ class UserRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ListResponse<AccountReportTotal>>> getAccountReportTotal(
+  Future<EventResult<AccountReportTotal>> getAccountReportTotal(
     DateTime startDate,
     DateTime endDate,
   ) async {
-    return await ApiRequestBuilder<ListResponse<AccountReportTotal>>(
+    return await ApiRequestBuilder<AccountReportTotal>(
             method: HttpMethod.GET,
             endPoint: "api/playerreport/rounds/total",
             params: {
               "From": startDate.toString(),
               "To": endDate.toString(),
             },
-            converter: (json) =>
-                ListResponse.fromJson(json, (res) => AccountReportTotal.fromJson(res as Map<String, dynamic>)),
+            converter: (json) => AccountReportTotal.fromJson(json),
             jwtRefresher: jwtAuth)
         .execute();
   }
