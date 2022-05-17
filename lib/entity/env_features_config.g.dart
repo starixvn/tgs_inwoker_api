@@ -60,7 +60,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
           ?.map((e) => e as String)
           .toList()
       ..homePageAnimated = json['HomePage_Animated'] as bool?
-      ..reportShowRoundsTotal = json['Report_ShowRoundsTotal'] as bool?;
+      ..reportShowRoundsTotal = json['Report_ShowRoundsTotal'] as bool?
+      ..addCardHideCertainField = json['AddCard_HideCertainField'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -113,4 +114,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'CustomMessaging': instance.customMessaging,
       'HomePage_Animated': instance.homePageAnimated,
       'Report_ShowRoundsTotal': instance.reportShowRoundsTotal,
+      'AddCard_HideCertainField': instance.addCardHideCertainField,
     };

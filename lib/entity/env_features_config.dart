@@ -127,6 +127,8 @@ class EnvFeaturesConfig {
   bool? homePageAnimated;
   @JsonKey(name: "Report_ShowRoundsTotal")
   bool? reportShowRoundsTotal;
+  @JsonKey(name: "AddCard_HideCertainField")
+  bool? addCardHideCertainField;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
