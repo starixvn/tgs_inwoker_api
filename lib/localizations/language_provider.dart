@@ -18,7 +18,7 @@ class LanguageProvider {
     "zh-TW": Language("zh_Hant", "繁體", Locale.fromSubtags(languageCode: "zh", scriptCode: "Hant"), "zh-TW",
         "images/language/ic_lang_zh_tw.png"),
     "th-TH": Language("th-TH", "ไทย", Locale("th", ""), "th-TH", "images/language/ic_lang_th.png"),
-    "id-ID": Language("id-ID", "Indonesia", Locale("id", ''), "id-ID", "images/language/ic_lang_en.png"),
+    "id-ID": Language("id-ID", "Indonesia", Locale("id", ''), "id-ID", "images/language/ic_lang_id.png"),
     "vi-VN": Language("vi-VN", "Tiếng Việt", Locale("vi", ''), "vi-VN", "images/language/ic_lang_vn.png"),
   };
   String _brandName = "";
