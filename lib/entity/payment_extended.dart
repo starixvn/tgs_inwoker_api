@@ -19,6 +19,7 @@ class PaymentExtended {
   String? email;
   String? fpsId;
   String? phone;
+  double? rate;
 
   factory PaymentExtended.fromJson(Map<String, dynamic> json) =>
       _$PaymentExtendedFromJson(json);
