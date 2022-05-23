@@ -129,13 +129,14 @@ class EnvFeaturesConfig {
   bool? reportShowRoundsTotal;
   @JsonKey(name: "AddCard_HideCertainField")
   bool? addCardHideCertainField;
-  @JsonKey(name:"Withdrawal_USDT_ExchangeRate")
+  @JsonKey(name: "Withdrawal_USDT_ExchangeRate")
   double? withdrawalUSDTExchangeRate;
   @JsonKey(name: "Register_ShowPhone")
   bool? registerShowPhone;
+  @JsonKey(name: "Profile_DisableEditPhone")
+  bool? profileDisableEditPhone;
 
-  factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
-      _$EnvFeaturesConfigFromJson(json);
+  factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
   Map<String, dynamic> toJson() => _$EnvFeaturesConfigToJson(this);
 }

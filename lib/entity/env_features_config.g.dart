@@ -64,7 +64,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..addCardHideCertainField = json['AddCard_HideCertainField'] as bool?
       ..withdrawalUSDTExchangeRate =
           (json['Withdrawal_USDT_ExchangeRate'] as num?)?.toDouble()
-      ..registerShowPhone = json['Register_ShowPhone'] as bool?;
+      ..registerShowPhone = json['Register_ShowPhone'] as bool?
+      ..profileDisableEditPhone = json['Profile_DisableEditPhone'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -120,4 +121,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'AddCard_HideCertainField': instance.addCardHideCertainField,
       'Withdrawal_USDT_ExchangeRate': instance.withdrawalUSDTExchangeRate,
       'Register_ShowPhone': instance.registerShowPhone,
+      'Profile_DisableEditPhone': instance.profileDisableEditPhone,
     };
