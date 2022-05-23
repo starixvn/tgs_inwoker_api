@@ -63,7 +63,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..reportShowRoundsTotal = json['Report_ShowRoundsTotal'] as bool?
       ..addCardHideCertainField = json['AddCard_HideCertainField'] as bool?
       ..withdrawalUSDTExchangeRate =
-          (json['Withdrawal_USDT_ExchangeRate'] as num?)?.toDouble();
+          (json['Withdrawal_USDT_ExchangeRate'] as num?)?.toDouble()
+      ..registerShowPhone = json['Register_ShowPhone'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -118,4 +119,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'Report_ShowRoundsTotal': instance.reportShowRoundsTotal,
       'AddCard_HideCertainField': instance.addCardHideCertainField,
       'Withdrawal_USDT_ExchangeRate': instance.withdrawalUSDTExchangeRate,
+      'Register_ShowPhone': instance.registerShowPhone,
     };

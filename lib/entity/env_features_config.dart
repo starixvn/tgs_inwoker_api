@@ -131,6 +131,8 @@ class EnvFeaturesConfig {
   bool? addCardHideCertainField;
   @JsonKey(name:"Withdrawal_USDT_ExchangeRate")
   double? withdrawalUSDTExchangeRate;
+  @JsonKey(name: "Register_ShowPhone")
+  bool? registerShowPhone;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
