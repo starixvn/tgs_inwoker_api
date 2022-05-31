@@ -123,6 +123,12 @@ class BankRepository extends BaseRepository {
                     "banktype": bankType.getJson,
                     "detail": {"address": address},
                   };
+                case BankType.USDT:
+                  return {
+                    "paymentchannelid": paymentChannelId,
+                    "banktype": bankType.getJson,
+                    "detail": {"address": address},
+                  };
                 default:
                   return {
                     "paymentchannelid": paymentChannelId,
