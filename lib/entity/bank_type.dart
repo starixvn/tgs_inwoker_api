@@ -12,6 +12,8 @@ enum BankType {
   @JsonValue("Usdt")
   USDT,
   FPS,
+  @JsonValue("EWallet")
+  EWALLET,
 }
 
 extension BankTypeExtension on BankType {
@@ -21,6 +23,7 @@ extension BankTypeExtension on BankType {
     BankType.THIRD_PARTY: "ThirdParty",
     BankType.USDT: "Usdt",
     BankType.FPS: "FPS",
+    BankType.EWALLET: "EWallet",
   };
 
   String? get getJson => json[this];
@@ -37,11 +40,12 @@ extension BankTypeExtension on BankType {
         return "Usdt";
       case BankType.FPS:
         return "FPS";
+      case BankType.EWALLET:
+        return "E-wallet";
       default:
         return "";
     }
   }
 
-  getTranslatedText(BuildContext context, String key) =>
-      LanguageProvider().getTranslated(context, key);
+  getTranslatedText(BuildContext context, String key) => LanguageProvider().getTranslated(context, key);
 }
