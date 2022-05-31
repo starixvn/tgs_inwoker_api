@@ -14,6 +14,8 @@ enum BankType {
   FPS,
   @JsonValue("EWallet")
   EWALLET,
+  @JsonValue("Pulsa")
+  PULSA,
 }
 
 extension BankTypeExtension on BankType {
@@ -24,6 +26,7 @@ extension BankTypeExtension on BankType {
     BankType.USDT: "Usdt",
     BankType.FPS: "FPS",
     BankType.EWALLET: "EWallet",
+    BankType.PULSA: "Pulsa",
   };
 
   String? get getJson => json[this];
@@ -42,6 +45,8 @@ extension BankTypeExtension on BankType {
         return "FPS";
       case BankType.EWALLET:
         return "E-wallet";
+      case BankType.PULSA:
+        return "Pulsa";
       default:
         return "";
     }
