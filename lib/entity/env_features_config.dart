@@ -137,6 +137,8 @@ class EnvFeaturesConfig {
   bool? profileDisableEditPhone;
   @JsonKey(name: "HomePage_DisplayVIP")
   bool? homePageDisplayVIP;
+  @JsonKey(name: "Profile_DisableVerifyPhone")
+  bool? profileDisableVerifyPhone;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
