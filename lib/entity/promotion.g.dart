@@ -18,7 +18,14 @@ Promotion _$PromotionFromJson(Map<String, dynamic> json) => Promotion(
       json['mobileBanner'] as String?,
       json['content'] as String?,
       json['terms'] as String?,
-    )..promotionType = json['promotionType'] as String?;
+    )
+      ..promotionType = json['promotionType'] as String?
+      ..campaignDetails = json['campaignDetail'] == null
+          ? null
+          : ListResponse<CampaignDetails>.fromJson(
+              json['campaignDetail'] as Map<String, dynamic>,
+              (value) =>
+                  CampaignDetails.fromJson(value as Map<String, dynamic>));
 
 Map<String, dynamic> _$PromotionToJson(Promotion instance) => <String, dynamic>{
       'id': instance.id,
@@ -31,4 +38,7 @@ Map<String, dynamic> _$PromotionToJson(Promotion instance) => <String, dynamic>{
       'content': instance.content,
       'terms': instance.terms,
       'promotionType': instance.promotionType,
+      'campaignDetail': instance.campaignDetails?.toJson(
+        (value) => value,
+      ),
     };

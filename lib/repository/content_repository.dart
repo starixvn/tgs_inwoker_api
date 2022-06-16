@@ -8,6 +8,7 @@ class ContentRepository extends BaseRepository {
   BrandLogo? brandLogo;
   EnvFeaturesConfig? featuresConfig;
   Announcement? announcement;
+  List<CampaignDetails>? campaignDetails;
 
   static ContentRepository getSingleton() {
     if (_singleton == null) {
@@ -88,32 +89,21 @@ class ContentRepository extends BaseRepository {
 
   Future<EventResult<Announcement>> getAnnouncement() async {
     return await ApiRequestBuilder<Announcement>(
-        method: HttpMethod.GET,
-        isAuthorization: false,
-        endPoint: "api/announcement/list/${await getLanguage()}",
-        converter: (json) => Announcement.fromJson(json),
-        consumer: (result) =>
-            setRepoValues(() {
-              announcement = result;
-            }),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.GET,
+            isAuthorization: false,
+            endPoint: "api/announcement/list/${await getLanguage()}",
+            converter: (json) => Announcement.fromJson(json),
+            consumer: (result) => setRepoValues(() {
+                  announcement = result;
+                }),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<ListResponse<Promotion>>> getPromotionList(
-      int page, int rows, bool desc, bool all, bool isUserProfileNotNull) async {
+  Future<EventResult<ListResponse<Promotion>>> getPromotionList() async {
     return await ApiRequestBuilder<ListResponse<Promotion>>(
             method: HttpMethod.GET,
-            endPoint: isUserProfileNotNull
-                ? "api/promotion/${await getLanguage()}"
-                : "api/playerpromotion/${await getLanguage()}",
-            params: {
-              "page": page.toString(),
-              "rows": rows.toString(),
-              "desc": desc.toString(),
-              //"sort":"",
-              "all": all.toString(),
-            },
+            endPoint: "api/promotion",
             converter: (json) => ListResponse.fromJson(json, (res) => Promotion.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
@@ -249,5 +239,25 @@ class ContentRepository extends BaseRepository {
             converter: (json) => ListResponse.fromJson(json, (res) => Vip.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
+  }
+
+  Future<EventResult<Roulette>> getRouletteTodayResult(String promotionId) async {
+    //會回傳當日的結果，如果有結果代表已經玩過
+    return await ApiRequestBuilder<Roulette>(
+      method: HttpMethod.GET,
+      endPoint: "api/sie/roulette/$promotionId",
+      jwtRefresher: jwtAuth,
+      converter: (json) => Roulette.fromJson(json),
+    ).execute();
+  }
+
+  Future<EventResult<Roulette>> getRouletteResult(String promotionId) async {
+    //會回傳遊玩結果，如果未玩過則產生結果，如果已玩過，則回傳已玩過結果
+    return await ApiRequestBuilder<Roulette>(
+      method: HttpMethod.POST,
+      endPoint: "api/sie/roulette/$promotionId",
+      jwtRefresher: jwtAuth,
+      converter: (json) => Roulette.fromJson(json),
+    ).execute();
   }
 }
