@@ -40,7 +40,9 @@ Future<http.Response> api(HttpMethod method, final endPoint,
     case HttpMethod.GET:
       {
         var queryParams;
-        if (content is String)
+        if (content == null)
+          queryParams = "";
+        else if (content is String)
           queryParams = "/" + content;
         else
           queryParams = "?" + Uri(queryParameters: content).query;

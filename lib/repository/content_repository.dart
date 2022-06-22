@@ -100,12 +100,12 @@ class ContentRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ListResponse<Promotion>>> getPromotionList() async {
-    return await ApiRequestBuilder<ListResponse<Promotion>>(
-            method: HttpMethod.GET,
-            endPoint: "api/promotion",
-            converter: (json) => ListResponse.fromJson(json, (res) => Promotion.fromJson(res as Map<String, dynamic>)),
-            jwtRefresher: jwtAuth)
+  Future<EventResult<List<Promotion>>> getPromotionList() async {
+    return await ApiRequestBuilder<List<Promotion>>(
+        method: HttpMethod.GET,
+        endPoint: "api/promotion",
+        converter: (json) => (json as List<dynamic>).map((e) => Promotion.fromJson(e)).toList(),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 

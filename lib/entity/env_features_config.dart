@@ -141,6 +141,8 @@ class EnvFeaturesConfig {
   bool? profileDisableVerifyPhone;
   @JsonKey(name: "MenuItem_Sorting_PISO")
   bool? menuItemSortingPISO;
+  @JsonKey(name: "HomePage_PromoRoulette")
+  bool? homePagePromoRoulette;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
