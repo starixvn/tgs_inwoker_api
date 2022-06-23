@@ -60,6 +60,8 @@ extension GameTypeExtension on GameType {
         return getTranslatedText(context, "cat_slotgame");
       case GameType.EGame:
         return getTranslatedText(context, "cat_e_game");
+      case GameType.VirtualSports:
+        return getTranslatedText(context, "cat_e_sports");
       default:
         return "";
     }
@@ -67,6 +69,7 @@ extension GameTypeExtension on GameType {
 
   static const json = {
     GameType.Sportsbook: 1,
+    GameType.VirtualSports: 2,
     GameType.ESports: 4,
     GameType.LiveDealer: 5,
     GameType.LiveDealerLobby: 6,
@@ -97,6 +100,8 @@ extension GameTypeExtension on GameType {
         return "chess";
       case GameType.ESports:
         return "esports";
+      case GameType.VirtualSports:
+        return "sports";
       default:
         return "";
     }

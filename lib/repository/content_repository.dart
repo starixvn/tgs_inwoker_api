@@ -47,7 +47,7 @@ class ContentRepository extends BaseRepository {
               "gametypes": gameType.getJsonValue.toString(),
               "platformtype": "1",
               "language": await getLanguage(),
-              "currency": "env.currency"
+              "currency": env.currency
             },
             converter: (json) => (json as List<dynamic>).map((e) => Game.fromJson(e)).toList(),
             jwtRefresher: jwtAuth)
