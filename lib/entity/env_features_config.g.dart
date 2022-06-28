@@ -69,7 +69,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..homePageDisplayVIP = json['HomePage_DisplayVIP'] as bool?
       ..profileDisableVerifyPhone = json['Profile_DisableVerifyPhone'] as bool?
       ..menuItemSortingPISO = json['MenuItem_Sorting_PISO'] as bool?
-      ..homePagePromoRoulette = json['HomePage_PromoRoulette'] as bool?;
+      ..homePagePromoRoulette = json['HomePage_PromoRoulette'] as bool?
+      ..registerShowEmail = json['Register_ShowEmail'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -130,4 +131,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'Profile_DisableVerifyPhone': instance.profileDisableVerifyPhone,
       'MenuItem_Sorting_PISO': instance.menuItemSortingPISO,
       'HomePage_PromoRoulette': instance.homePagePromoRoulette,
+      'Register_ShowEmail': instance.registerShowEmail,
     };

@@ -144,7 +144,11 @@ class EnvFeaturesConfig {
   @JsonKey(name: "HomePage_PromoRoulette")
   bool? homePagePromoRoulette;
 
-  factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
+  @JsonKey(name: "Register_ShowEmail")
+  bool? registerShowEmail;
+
+  factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
+      _$EnvFeaturesConfigFromJson(json);
 
   Map<String, dynamic> toJson() => _$EnvFeaturesConfigToJson(this);
 }
