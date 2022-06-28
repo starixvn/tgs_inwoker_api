@@ -146,6 +146,8 @@ class EnvFeaturesConfig {
 
   @JsonKey(name: "Register_ShowEmail")
   bool? registerShowEmail;
+  @JsonKey(name: "Register_CustomFlow_IDR")
+  bool? idrRegisterCustomFlow;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
