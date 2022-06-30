@@ -61,7 +61,7 @@ extension GameTypeExtension on GameType {
       case GameType.EGame:
         return getTranslatedText(context, "cat_e_game");
       case GameType.VirtualSports:
-        return getTranslatedText(context, "cat_sports");
+        return getTranslatedText(context, "cat_sport");
       default:
         return "";
     }
