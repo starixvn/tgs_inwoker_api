@@ -71,7 +71,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..menuItemSortingPISO = json['MenuItem_Sorting_PISO'] as bool?
       ..homePagePromoRoulette = json['HomePage_PromoRoulette'] as bool?
       ..registerShowEmail = json['Register_ShowEmail'] as bool?
-      ..idrRegisterCustomFlow = json['Register_CustomFlow_IDR'] as bool?;
+      ..idrRegisterCustomFlow = json['Register_CustomFlow_IDR'] as bool?
+      ..newTransferUI = json['NewTransferUI'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -134,4 +135,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'HomePage_PromoRoulette': instance.homePagePromoRoulette,
       'Register_ShowEmail': instance.registerShowEmail,
       'Register_CustomFlow_IDR': instance.idrRegisterCustomFlow,
+      'NewTransferUI': instance.newTransferUI,
     };

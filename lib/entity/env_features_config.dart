@@ -143,11 +143,12 @@ class EnvFeaturesConfig {
   bool? menuItemSortingPISO;
   @JsonKey(name: "HomePage_PromoRoulette")
   bool? homePagePromoRoulette;
-
   @JsonKey(name: "Register_ShowEmail")
   bool? registerShowEmail;
   @JsonKey(name: "Register_CustomFlow_IDR")
   bool? idrRegisterCustomFlow;
+  @JsonKey(name: "NewTransferUI")
+  bool? newTransferUI;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
