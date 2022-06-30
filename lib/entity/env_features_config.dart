@@ -149,6 +149,8 @@ class EnvFeaturesConfig {
   bool? idrRegisterCustomFlow;
   @JsonKey(name: "NewTransferUI")
   bool? newTransferUI;
+  @JsonKey(name: "PromoRoulette_SMSVerification")
+  bool? promoRouletteSMSVerification;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
