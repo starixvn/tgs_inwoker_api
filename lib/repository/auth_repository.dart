@@ -114,7 +114,6 @@ class AuthenticationRepository extends BaseRepository {
         "phone": phone
       },
       jwtRefresher: jwtAuth,
-      converter: (json) => BaseResponse.fromJson(json),
     ).execute();
   }
 
@@ -125,7 +124,6 @@ class AuthenticationRepository extends BaseRepository {
       endPoint: "api/player/init-phone",
       params: {"securitykey": securityKey, "validatecode": validateCode},
       jwtRefresher: jwtAuth,
-      converter: (json) => BaseResponse.fromJson(json),
     ).execute();
   }
 
@@ -139,7 +137,6 @@ class AuthenticationRepository extends BaseRepository {
         "email": email,
       },
       jwtRefresher: jwtAuth,
-      converter: (json) => BaseResponse.fromJson(json),
     ).execute();
   }
 
@@ -150,7 +147,6 @@ class AuthenticationRepository extends BaseRepository {
       endPoint: "api/player/init-email",
       params: {"securitykey": securityKey, "validatecode": validateCode},
       jwtRefresher: jwtAuth,
-      converter: (json) => BaseResponse.fromJson(json),
     ).execute();
   }
 }
