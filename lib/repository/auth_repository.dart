@@ -103,9 +103,9 @@ class AuthenticationRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> getReVerifyCode(
+  Future<EventResult<BaseResponse>> getReVerifyCode(
       String username, String password, String areaCode, String phone) async {
-    return await ApiRequestBuilder<dynamic>(
+    return await ApiRequestBuilder<BaseResponse>(
         endPoint: "api/player/init-phone",
         params: {
           "username": username,
@@ -117,9 +117,9 @@ class AuthenticationRepository extends BaseRepository {
         converter: (json) => BaseResponse.fromJson(json)).execute();
   }
 
-  Future<EventResult<dynamic>> phoneReVerify(
+  Future<EventResult<BaseResponse>> phoneReVerify(
       String securityKey, validateCode) async {
-    return await ApiRequestBuilder<dynamic>(
+    return await ApiRequestBuilder<BaseResponse>(
         method: HttpMethod.PUT,
         endPoint: "api/player/init-phone",
         params: {"securitykey": securityKey, "validatecode": validateCode},
@@ -127,10 +127,10 @@ class AuthenticationRepository extends BaseRepository {
         converter: (json) => BaseResponse.fromJson(json)).execute();
   }
 
-  Future<EventResult<dynamic>> getEmailVerifyCode(
+  Future<EventResult<BaseResponse>> getEmailVerifyCode(
     String email,
   ) async {
-    return await ApiRequestBuilder<dynamic>(
+    return await ApiRequestBuilder<BaseResponse>(
         method: HttpMethod.POST,
         endPoint: "api/player/init-email",
         params: {
@@ -140,9 +140,9 @@ class AuthenticationRepository extends BaseRepository {
         converter: (json) => BaseResponse.fromJson(json)).execute();
   }
 
-  Future<EventResult<dynamic>> emailVerification(
+  Future<EventResult<BaseResponse>> emailVerification(
       String securityKey, validateCode) async {
-    return await ApiRequestBuilder<dynamic>(
+    return await ApiRequestBuilder<BaseResponse>(
         method: HttpMethod.PUT,
         endPoint: "api/player/init-email",
         params: {"securitykey": securityKey, "validatecode": validateCode},
