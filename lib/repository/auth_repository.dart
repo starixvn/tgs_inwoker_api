@@ -103,50 +103,50 @@ class AuthenticationRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<BaseResponse>> getReVerifyCode(
+  Future<EventResult<dynamic>> getReVerifyCode(
       String username, String password, String areaCode, String phone) async {
-    return await ApiRequestBuilder<BaseResponse>(
-        endPoint: "api/player/init-phone",
-        params: {
-          "username": username,
-          "pwd": password,
-          "areacode": areaCode,
-          "phone": phone
-        },
-        jwtRefresher: jwtAuth,
-        converter: (json) => BaseResponse.fromJson(json)).execute();
+    return await ApiRequestBuilder<dynamic>(
+      endPoint: "api/player/init-phone",
+      params: {
+        "username": username,
+        "pwd": password,
+        "areacode": areaCode,
+        "phone": phone
+      },
+      jwtRefresher: jwtAuth,
+    ).execute();
   }
 
-  Future<EventResult<BaseResponse>> phoneReVerify(
+  Future<EventResult<dynamic>> phoneReVerify(
       String securityKey, validateCode) async {
-    return await ApiRequestBuilder<BaseResponse>(
-        method: HttpMethod.PUT,
-        endPoint: "api/player/init-phone",
-        params: {"securitykey": securityKey, "validatecode": validateCode},
-        jwtRefresher: jwtAuth,
-        converter: (json) => BaseResponse.fromJson(json)).execute();
+    return await ApiRequestBuilder<dynamic>(
+      method: HttpMethod.PUT,
+      endPoint: "api/player/init-phone",
+      params: {"securitykey": securityKey, "validatecode": validateCode},
+      jwtRefresher: jwtAuth,
+    ).execute();
   }
 
-  Future<EventResult<BaseResponse>> getEmailVerifyCode(
+  Future<EventResult<dynamic>> getEmailVerifyCode(
     String email,
   ) async {
-    return await ApiRequestBuilder<BaseResponse>(
-        method: HttpMethod.POST,
-        endPoint: "api/player/init-email",
-        params: {
-          "email": email,
-        },
-        jwtRefresher: jwtAuth,
-        converter: (json) => BaseResponse.fromJson(json)).execute();
+    return await ApiRequestBuilder<dynamic>(
+      method: HttpMethod.POST,
+      endPoint: "api/player/init-email",
+      params: {
+        "email": email,
+      },
+      jwtRefresher: jwtAuth,
+    ).execute();
   }
 
-  Future<EventResult<BaseResponse>> emailVerification(
+  Future<EventResult<dynamic>> emailVerification(
       String securityKey, validateCode) async {
-    return await ApiRequestBuilder<BaseResponse>(
-        method: HttpMethod.PUT,
-        endPoint: "api/player/init-email",
-        params: {"securitykey": securityKey, "validatecode": validateCode},
-        jwtRefresher: jwtAuth,
-        converter: (json) => BaseResponse.fromJson(json)).execute();
+    return await ApiRequestBuilder<dynamic>(
+      method: HttpMethod.PUT,
+      endPoint: "api/player/init-email",
+      params: {"securitykey": securityKey, "validatecode": validateCode},
+      jwtRefresher: jwtAuth,
+    ).execute();
   }
 }
