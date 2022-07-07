@@ -9,6 +9,7 @@ class ContentRepository extends BaseRepository {
   EnvFeaturesConfig? featuresConfig;
   Announcement? announcement;
   List<CampaignDetails>? campaignDetails;
+  List<GameProvider2>? gameProvider2List;
 
   static ContentRepository getSingleton() {
     if (_singleton == null) {
@@ -32,6 +33,20 @@ class ContentRepository extends BaseRepository {
             converter: (json) => (json as List<dynamic>).map((e) => GameProvider.fromJson(e)).toList(),
             consumer: (result) => setRepoValues(() {
                   gameProviderList = result;
+                  gameProvider2List = [];
+                  result!.forEach((e) {
+                    if (e.gameTypes != null) {
+                      e.gameTypes!.forEach((element) {
+                        if ((!(element == GameType.VirtualSportsLobby || element == GameType.VirtualSports) ||
+                            (element == GameType.VirtualSports && e.code == "PPTF"))) {
+                          gameProvider2List!.add(GameProvider2(element, e.code, e.name, e.description, e.status, e.transferWallet));
+
+                          //sort list with gameType for displaying VirtualSports after Sportsbook
+                          gameProvider2List!.sort(((a, b) => (a.gameType.toString()).compareTo(b.gameType.toString())));
+                        }
+                      });
+                    }
+                  });
                 }),
             jwtRefresher: jwtAuth)
         .execute();
@@ -102,10 +117,10 @@ class ContentRepository extends BaseRepository {
 
   Future<EventResult<List<Promotion>>> getPromotionList() async {
     return await ApiRequestBuilder<List<Promotion>>(
-        method: HttpMethod.GET,
-        endPoint: "api/promotion",
-        converter: (json) => (json as List<dynamic>).map((e) => Promotion.fromJson(e)).toList(),
-        jwtRefresher: jwtAuth)
+            method: HttpMethod.GET,
+            endPoint: "api/promotion",
+            converter: (json) => (json as List<dynamic>).map((e) => Promotion.fromJson(e)).toList(),
+            jwtRefresher: jwtAuth)
         .execute();
   }
 

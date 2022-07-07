@@ -13,6 +13,7 @@ GameProvider2 _$GameProvider2FromJson(Map<String, dynamic> json) =>
       json['name'] as String?,
       json['description'] as String?,
       json['status'] as int?,
+      json['transferwallet'] as bool?,
     );
 
 Map<String, dynamic> _$GameProvider2ToJson(GameProvider2 instance) =>
@@ -22,6 +23,7 @@ Map<String, dynamic> _$GameProvider2ToJson(GameProvider2 instance) =>
       'name': instance.name,
       'description': instance.description,
       'status': instance.status,
+      'transferwallet': instance.transferWallet,
     };
 
 const _$GameTypeEnumMap = {
