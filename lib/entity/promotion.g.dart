@@ -12,9 +12,9 @@ Promotion _$PromotionFromJson(Map<String, dynamic> json) => Promotion(
       json['from'] as String?,
       json['to'] as String?,
       (json['vipLevels'] as List<dynamic>?)?.map((e) => e as int).toList(),
-      json['localization'] == null
-          ? null
-          : Localization.fromJson(json['localization'] as Map<String, dynamic>),
+      (json['localization'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, Localization.fromJson(e as Map<String, dynamic>)),
+      ),
       json['mobileBanner'] as String?,
       json['content'] as String?,
       json['terms'] as String?,

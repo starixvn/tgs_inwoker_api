@@ -17,7 +17,7 @@ class Promotion {
   String? from;
   String? to;
   List<int>? vipLevels;
-  Localization? localization;
+  Map<String, Localization>? localization;
   String? mobileBanner;
   String? content;
   String? terms;
