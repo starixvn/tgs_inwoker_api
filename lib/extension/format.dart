@@ -71,4 +71,12 @@ class Format {
     } else
       return "";
   }
+
+  String timezoneFormat(String? dateString) {
+    if (dateString != null) {
+      final date = DateTime.parse(dateString);
+      return DateFormat("hh:mm a").format(date.toLocal());
+    } else
+      return "";
+  }
 }

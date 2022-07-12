@@ -74,7 +74,11 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..idrRegisterCustomFlow = json['Register_CustomFlow_IDR'] as bool?
       ..newTransferUI = json['NewTransferUI'] as bool?
       ..promoRouletteSMSVerification =
-          json['PromoRoulette_SMSVerification'] as bool?;
+          json['PromoRoulette_SMSVerification'] as bool?
+      ..maintenanceDetail =
+          (json['Maintenance_Detail'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      );
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -139,4 +143,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'Register_CustomFlow_IDR': instance.idrRegisterCustomFlow,
       'NewTransferUI': instance.newTransferUI,
       'PromoRoulette_SMSVerification': instance.promoRouletteSMSVerification,
+      'Maintenance_Detail': instance.maintenanceDetail,
     };

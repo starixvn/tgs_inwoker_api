@@ -151,6 +151,8 @@ class EnvFeaturesConfig {
   bool? newTransferUI;
   @JsonKey(name: "PromoRoulette_SMSVerification")
   bool? promoRouletteSMSVerification;
+  @JsonKey(name: "Maintenance_Detail")
+  Map<String,String>? maintenanceDetail;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
