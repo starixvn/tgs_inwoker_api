@@ -384,4 +384,22 @@ class UserRepository extends BaseRepository {
             jwtRefresher: jwtAuth)
         .execute();
   }
+
+  Future<EventResult<IdrRegisterLoginResponse<RegisterResponse>>> idrRegister(
+      String username, String password) async {
+    return await ApiRequestBuilder<IdrRegisterLoginResponse<RegisterResponse>>(
+            isAuthorization: false,
+            endPoint: "api/Player/register/",
+            params: {
+              "type": "CreatePlayer",
+              "input": {
+                "username": username,
+                "pwd": password,
+              },
+            },
+            converter: (json) => IdrRegisterLoginResponse.fromJson(
+                json, (res) => RegisterResponse.fromJson(res as Map<String, dynamic>)),
+            jwtRefresher: jwtAuth)
+        .execute();
+  }
 }

@@ -20,7 +20,7 @@ Map<String, dynamic> _$ReportToJson(Report instance) => <String, dynamic>{
       'id': instance.id,
       'createdon': instance.createdOn,
       'updatedOn': instance.updatedOn,
-      'status': _$StatusEnumMap[instance.status],
+      'status': _$StatusEnumMap[instance.status]!,
       'amount': instance.amount,
       'canuploadcerts': instance.canUploadCerts,
       'orderno': instance.orderNo,

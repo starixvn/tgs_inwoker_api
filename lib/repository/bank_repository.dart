@@ -104,42 +104,69 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<dynamic>> addBankCard(String? paymentChannelId, BankType bankType,
-      {String? address, bankAccount, bankName, name, bankBranch, phone, realName}) async {
+      {String? address, bankAccount, bankName, name, bankBranch, phone, realName, bool isRegister = false}) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.POST,
-            endPoint: "api/bankinfo",
-            params: (() {
-              switch (bankType) {
-                case BankType.BANK:
-                  return {
-                    "paymentchannelid": paymentChannelId,
-                    "banktype": bankType.getJson,
-                    "detail": {"bankAccount": bankAccount, "bankName": bankName, "name": name, "bankBranch": bankBranch}
-                  };
-                  break;
-                case BankType.CRYPTO:
-                  return {
-                    "paymentchannelid": paymentChannelId,
-                    "banktype": bankType.getJson,
-                    "detail": {"address": address},
-                  };
-                case BankType.USDT:
-                  return {
-                    "paymentchannelid": paymentChannelId,
-                    "banktype": bankType.getJson,
-                    "detail": {"address": address},
-                  };
-                default:
-                  return {
-                    "paymentchannelid": paymentChannelId,
-                    "banktype": bankType.getJson,
-                    "detail": {"phone": phone, "username": realName},
-                  };
-                  break;
-              }
-            }()),
+            endPoint: isRegister ? "api/player/register" : "api/bankinfo",
+            params: isRegister
+                ? {
+              "type":"SetWithdrawBankInfo",
+              "input": _getBankTypeParams(
+                bankType,
+                paymentChannelId,
+                address: address,
+                bankAccount: bankAccount,
+                bankName: bankName,
+                name: name,
+                bankBranch: bankBranch,
+                phone: phone,
+                realName: realName,
+              )
+            }
+                : _getBankTypeParams(
+                    bankType,
+                    paymentChannelId,
+                    address: address,
+                    bankAccount: bankAccount,
+                    bankName: bankName,
+                    name: name,
+                    bankBranch: bankBranch,
+                    phone: phone,
+                    realName: realName,
+                  ),
             jwtRefresher: jwtAuth)
         .execute();
+  }
+
+  _getBankTypeParams(BankType bankType, String? paymentChannelId,
+      {String? address, bankAccount, bankName, name, bankBranch, phone, realName}) {
+    switch (bankType) {
+      case BankType.BANK:
+        return {
+          "paymentchannelid": paymentChannelId,
+          "banktype": bankType.getJson,
+          "detail": {"bankAccount": bankAccount, "bankName": bankName, "name": name, "bankBranch": bankBranch}
+        };
+        break;
+      case BankType.CRYPTO:
+        return {
+          "paymentchannelid": paymentChannelId,
+          "banktype": bankType.getJson,
+          "detail": {"address": address},
+        };
+      case BankType.USDT:
+        return {
+          "paymentchannelid": paymentChannelId,
+          "banktype": bankType.getJson,
+          "detail": {"address": address},
+        };
+      default:
+        return {
+          "paymentchannelid": paymentChannelId,
+          "banktype": bankType.getJson,
+          "detail": {"phone": phone, "username": realName},
+        };
+    }
   }
 
   Future<EventResult<dynamic>> deleteBankCard(String? bankInfoId) async {

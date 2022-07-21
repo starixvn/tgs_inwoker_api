@@ -25,7 +25,7 @@ Map<String, dynamic> _$GameProviderToJson(GameProvider instance) =>
       'status': instance.status,
       'transferwallet': instance.transferWallet,
       'gametypes':
-          instance.gameTypes?.map((e) => _$GameTypeEnumMap[e]).toList(),
+          instance.gameTypes?.map((e) => _$GameTypeEnumMap[e]!).toList(),
     };
 
 const _$GameTypeEnumMap = {
