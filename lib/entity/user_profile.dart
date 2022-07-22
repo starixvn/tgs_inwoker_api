@@ -34,6 +34,8 @@ class UserProfile {
   String? telegram;
   String? whatsapp;
   String? birthdate;
+  @JsonKey(name: 'registercompleted')
+  bool? registerCompleted;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) => _$UserProfileFromJson(json);
   Map<String, dynamic> toJson() => _$UserProfileToJson(this);

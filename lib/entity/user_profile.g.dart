@@ -26,7 +26,8 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile(
       ..viber = json['viber'] as String?
       ..telegram = json['telegram'] as String?
       ..whatsapp = json['whatsapp'] as String?
-      ..birthdate = json['birthdate'] as String?;
+      ..birthdate = json['birthdate'] as String?
+      ..registerCompleted = json['registercompleted'] as bool?;
 
 Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
     <String, dynamic>{
@@ -49,6 +50,7 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
       'telegram': instance.telegram,
       'whatsapp': instance.whatsapp,
       'birthdate': instance.birthdate,
+      'registercompleted': instance.registerCompleted,
     };
 
 const _$IdentityStatusEnumMap = {
