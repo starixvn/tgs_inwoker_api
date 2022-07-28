@@ -78,7 +78,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..maintenanceDetail =
           (json['Maintenance_Detail'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, e as String),
-      );
+      )
+      ..addCardBankCustomIdr = json['AddCard_Bank_Custom_IDR'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -144,4 +145,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'NewTransferUI': instance.newTransferUI,
       'PromoRoulette_SMSVerification': instance.promoRouletteSMSVerification,
       'Maintenance_Detail': instance.maintenanceDetail,
+      'AddCard_Bank_Custom_IDR': instance.addCardBankCustomIdr,
     };
