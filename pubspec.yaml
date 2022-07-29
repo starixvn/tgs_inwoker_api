@@ -24,12 +24,12 @@ dependencies:
   dart_style: ^2.2.1
   http_multi_server: ^3.2.1
   path_provider: ^2.0.11
-  _fe_analyzer_shared: ^31.0.0
+  _fe_analyzer_shared: ^43.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  analyzer: ^2.8.0
+  analyzer: ^4.3.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
