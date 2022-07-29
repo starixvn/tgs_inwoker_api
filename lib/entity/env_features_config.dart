@@ -159,6 +159,8 @@ class EnvFeaturesConfig {
   bool? forcedVerification;
   @JsonKey(name: "AddCard_EWalletCustoms")
   bool? addCardEWalletCustom;
+  @JsonKey(name: "MAX_PHONE_LENGTH")
+  int? maxPhoneLength;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
