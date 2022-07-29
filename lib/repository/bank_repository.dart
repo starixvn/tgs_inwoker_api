@@ -178,7 +178,7 @@ class BankRepository extends BaseRepository {
         return {
           "paymentchannelid": paymentChannelId,
           "banktype": bankType.getJson,
-          "detail": {"phone": phone, "eMoneyName": bankName},
+          "detail": {"phone": phone, "eMoneyName": name},
         };
       case BankType.CRYPTO:
         return {
