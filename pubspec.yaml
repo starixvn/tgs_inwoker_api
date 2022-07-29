@@ -24,6 +24,7 @@ dependencies:
   dart_style: ^2.2.1
   http_multi_server: ^3.2.1
   path_provider: ^2.0.11
+  _fe_analyzer_shared: ^31.0.0
 
 dev_dependencies:
   flutter_test:
