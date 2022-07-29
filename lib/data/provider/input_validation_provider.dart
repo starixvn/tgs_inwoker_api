@@ -12,7 +12,7 @@ class InputValidationProvider {
   }
 
   validatePhoneLength(String input, int phoneLength) {
-    return RegExp("^[0-9]{$phoneLength}\$", caseSensitive: false, multiLine: false).hasMatch(input);
+    return RegExp("^[0-9]{8,$phoneLength}\$", caseSensitive: false, multiLine: false).hasMatch(input);
   }
 
   validateUsernamePassword(String username) {
