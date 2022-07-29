@@ -152,11 +152,13 @@ class EnvFeaturesConfig {
   @JsonKey(name: "PromoRoulette_SMSVerification")
   bool? promoRouletteSMSVerification;
   @JsonKey(name: "Maintenance_Detail")
-  Map<String,String>? maintenanceDetail;
+  Map<String, String>? maintenanceDetail;
   @JsonKey(name: "AddCard_Bank_Custom_IDR")
   bool? addCardBankCustomIdr;
   @JsonKey(name: "ForcedVerification")
   bool? forcedVerification;
+  @JsonKey(name: "AddCard_EWalletCustoms")
+  bool? addCardEWalletCustom;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
