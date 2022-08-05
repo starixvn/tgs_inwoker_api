@@ -275,4 +275,12 @@ class ContentRepository extends BaseRepository {
       converter: (json) => Roulette.fromJson(json),
     ).execute();
   }
+
+  Future<EventResult<dynamic>> getMaintenanceDetails() async {
+    return await ApiRequestBuilder<dynamic>(
+      method: HttpMethod.GET,
+      endPoint: "api/brand/maintenance",
+      jwtRefresher: jwtAuth,
+    ).execute();
+  }
 }
