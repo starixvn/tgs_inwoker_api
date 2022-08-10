@@ -161,6 +161,8 @@ class EnvFeaturesConfig {
   bool? addCardEWalletCustom;
   @JsonKey(name: "MAX_PHONE_LENGTH")
   int? maxPhoneLength;
+  @JsonKey(name: "MergeEVORTNT")
+  bool? mergeEVORTNT;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);

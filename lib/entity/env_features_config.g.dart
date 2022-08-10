@@ -82,7 +82,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..addCardBankCustomIdr = json['AddCard_Bank_Custom_IDR'] as bool?
       ..forcedVerification = json['ForcedVerification'] as bool?
       ..addCardEWalletCustom = json['AddCard_EWalletCustoms'] as bool?
-      ..maxPhoneLength = json['MAX_PHONE_LENGTH'] as int?;
+      ..maxPhoneLength = json['MAX_PHONE_LENGTH'] as int?
+      ..mergeEVORTNT = json['MergeEVORTNT'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -152,4 +153,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'ForcedVerification': instance.forcedVerification,
       'AddCard_EWalletCustoms': instance.addCardEWalletCustom,
       'MAX_PHONE_LENGTH': instance.maxPhoneLength,
+      'MergeEVORTNT': instance.mergeEVORTNT,
     };
