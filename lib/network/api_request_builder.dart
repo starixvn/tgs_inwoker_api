@@ -22,21 +22,22 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
   bool isWithoutBaseResponse;
   bool isFeatures;
 
-  ApiRequestBuilder(
-      {this.isAuthorization = true,
-      this.isJWTAuthRequest = false,
-      this.method = HttpMethod.POST,
-      this.endPoint,
-      this.params,
-      this.converter,
-      this.jwtRefresher,
-      this.consumer,
-      this.imageContent,
-      this.timeout = 3,
-      this.isAssetUrl = false,
-      this.isAutoHeader = true,
-      this.isWithoutBaseResponse = false,
-      this.isFeatures = false});
+  ApiRequestBuilder({
+    this.isAuthorization = true,
+    this.isJWTAuthRequest = false,
+    this.method = HttpMethod.POST,
+    this.endPoint,
+    this.params,
+    this.converter,
+    this.jwtRefresher,
+    this.consumer,
+    this.imageContent,
+    this.timeout = 3,
+    this.isAssetUrl = false,
+    this.isAutoHeader = true,
+    this.isWithoutBaseResponse = false,
+    this.isFeatures = false,
+  });
 
   Future<EventResult<T>> execute() async {
     var response = await api(
@@ -70,7 +71,12 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
         value = json.decode(response.body);
       } on Exception catch (_) {
         print("throwing new error");
-        return EventResult.failure();
+        if (response.statusCode == 503 ||
+            response.statusCode == 403)
+          return EventResult.maintenance();
+
+        else
+          return EventResult.failure();
         //throw Exception("Error on server");
       }
       print(value);
@@ -88,30 +94,40 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
         if (response.statusCode == 503 ||
             response.statusCode == 403 ||
             baseResponse.error == 403 ||
-            baseResponse.errorMsgId == "UnderMaintenance")
+            baseResponse.errorMsgId == "UnderMaintenance") {
           return EventResult.maintenance(result: result);
+        }
         else
           return EventResult.success(result);
       } else {
-        return EventResult.failure(errorCode:baseResponse.error!, error:baseResponse.msg!, errorMsgId:baseResponse.errorMsgId ?? "");
+        return EventResult.failure(
+            errorCode: baseResponse.error!, error: baseResponse.msg!, errorMsgId: baseResponse.errorMsgId ?? "");
       }
     } else {
       //doesnt need to convert to BaseResponse
       var value;
-      if (response.statusCode == 200) {
-        value = utf8.decode(response.bodyBytes);
-      } else if (isFeatures ?? false) {
-        value = await getJson();
+      if (response.statusCode == 503 ||
+          response.statusCode == 403) {
+        return EventResult.maintenance();
       }
-      var result = converter == null ? value as T : converter(json.decode(value));
-      if (onSuccess != null) onSuccess(result);
-      return EventResult.success(result);
+      else {
+        if (response.statusCode == 200) {
+          value = utf8.decode(response.bodyBytes);
+        } else if (isFeatures ?? false) {
+          value = await getJson();
+        }
+        var result = converter == null ? value as T : converter(json.decode(value));
+        if (onSuccess != null) onSuccess(result);
+        return EventResult.success(result);
+      }
     }
   }
 
   Future<String> getJson() async {
     return await rootBundle.loadString('features/features_default.json');
   }
+
+
 /*
   Future<EventResult<T>> executeWithoutBaseResponse() async {
     var response = await api(method, endPoint,
