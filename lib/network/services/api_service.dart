@@ -3,8 +3,17 @@ part of api;
 http.Client? client;
 //const timeoutDuration = Duration(seconds: 3);
 
-Future<http.Response> api(HttpMethod method, final endPoint,
-    {final content, isAuthorization = true, imageContent, timeout = 3, isAssetUrl = false, isAutoHeader = true}) async {
+Future<http.Response> api(
+  HttpMethod method,
+  final endPoint, {
+  final content,
+  isAuthorization = true,
+  imageContent,
+  timeout = 3,
+  isAssetUrl = false,
+  isAutoHeader = true,
+  isGameMaintenance = false,
+}) async {
   if (client == null) {
     client = http.Client();
   }
@@ -29,14 +38,24 @@ Future<http.Response> api(HttpMethod method, final endPoint,
   http.Response response;
   switch (method) {
     case HttpMethod.POST:
-      response = await client!
-          .post(
-            Uri.parse(url),
-            headers: header,
-            body: jsonEncode(content),
-          )
-          .timeout(timeoutDuration, onTimeout: onTimeout);
-      break;
+      try {
+        response = await client!
+            .post(
+              Uri.parse(url),
+              headers: header,
+              body: jsonEncode(content),
+            )
+            .timeout(timeoutDuration, onTimeout: onTimeout);
+        break;
+      } catch (e) {
+        if (e.toString() == "Connection closed while receiving data")
+          //to detect api is Maintenance but not returning 503 code
+          response = http.Response('', 503);
+        else
+          return response = http.Response('{"errmsgid":"$e"}', 200);
+        break;
+      }
+
     case HttpMethod.GET:
       {
         var queryParams;
@@ -49,43 +68,81 @@ Future<http.Response> api(HttpMethod method, final endPoint,
 
         print("Api->Start ${method.getName}:$url");
 
+        try {
+          response = await client!
+              .get(
+                Uri.parse(url + queryParams),
+                headers: header,
+              )
+              .timeout(timeoutDuration, onTimeout: onTimeout);
+          print("Api->End ${method.getName}:$url");
+          break;
+        } catch (e) {
+          if (e.toString() == "Connection closed while receiving data")
+            //to detect api is Maintenance but not returning 503 code
+            response = http.Response('', 503);
+          else
+            return response = http.Response('{"errmsgid":"$e"}', 200);
+          break;
+        }
+      }
+    case HttpMethod.DELETE:
+      try {
         response = await client!
-            .get(
-              Uri.parse(url + queryParams),
+            .delete(
+              Uri.parse(url),
               headers: header,
             )
             .timeout(timeoutDuration, onTimeout: onTimeout);
-        ;
-        print("Api->End ${method.getName}:$url");
+        break;
+      } catch (e) {
+        if (e.toString() == "Connection closed while receiving data")
+          //to detect api is Maintenance but not returning 503 code
+          response = http.Response('', 503);
+        else
+          return response = http.Response('{"errmsgid":"$e"}', 200);
+
+        break;
       }
-      break;
-    case HttpMethod.DELETE:
-      response = await client!
-          .delete(
-            Uri.parse(url),
-            headers: header,
-          )
-          .timeout(timeoutDuration, onTimeout: onTimeout);
-      ;
-      break;
+
     case HttpMethod.PATCH:
-      response = await client!
-          .patch(
-            Uri.parse(url),
-            headers: header,
-            body: jsonEncode(content),
-          )
-          .timeout(timeoutDuration, onTimeout: onTimeout);
-      break;
+      try {
+        response = await client!
+            .patch(
+              Uri.parse(url),
+              headers: header,
+              body: jsonEncode(content),
+            )
+            .timeout(timeoutDuration, onTimeout: onTimeout);
+        break;
+      } catch (e) {
+        if (e.toString() == "Connection closed while receiving data")
+          //to detect api is Maintenance but not returning 503 code
+          response = http.Response('', 503);
+        else
+          return response = http.Response('{"errmsgid":"$e"}', 200);
+
+        break;
+      }
     case HttpMethod.PUT:
-      response = await client!
-          .put(
-            Uri.parse(url),
-            headers: header,
-            body: jsonEncode(content),
-          )
-          .timeout(timeoutDuration, onTimeout: onTimeout);
-      break;
+      try {
+        response = await client!
+            .put(
+              Uri.parse(url),
+              headers: header,
+              body: jsonEncode(content),
+            )
+            .timeout(timeoutDuration, onTimeout: onTimeout);
+        break;
+      } catch (e) {
+        if (e.toString() == "Connection closed while receiving data")
+          //to detect api is Maintenance but not returning 503 code
+          response = http.Response('', 503);
+        else
+          return response = http.Response('{"errmsgid":"$e"}', 200);
+
+        break;
+      }
 
     case HttpMethod.MULTIPART:
       var _content = content == null ? url : url + "/" + content;
@@ -98,18 +155,37 @@ Future<http.Response> api(HttpMethod method, final endPoint,
       request.files.add(await http.MultipartFile.fromPath('file', imageContent.path,
           contentType: MediaType('image', imageExtension)));
       var imageRes = await request.send();
-      response = await http.Response.fromStream(imageRes).timeout(timeoutDuration, onTimeout: onTimeout);
-      ;
-      break;
+      try {
+        response = await http.Response.fromStream(imageRes).timeout(timeoutDuration, onTimeout: onTimeout);
+        break;
+      } catch (e) {
+        if (e.toString() == "Connection closed while receiving data")
+          //to detect api is Maintenance but not returning 503 code
+          response = http.Response('', 503);
+        else
+          return response = http.Response('{"errmsgid":"$e"}', 200);
+
+        break;
+      }
     default:
-      response = await client!
-          .post(
-            Uri.parse(url),
-            headers: header,
-            body: jsonEncode(content),
-          )
-          .timeout(timeoutDuration, onTimeout: onTimeout);
-      break;
+      try {
+        response = await client!
+            .post(
+              Uri.parse(url),
+              headers: header,
+              body: jsonEncode(content),
+            )
+            .timeout(timeoutDuration, onTimeout: onTimeout);
+        break;
+      } catch (e) {
+        if (e.toString() == "Connection closed while receiving data")
+          //to detect api is Maintenance but not returning 503 code
+          response = http.Response('', 503);
+        else
+          return response = http.Response('{"errmsgid":"$e"}', 200);
+
+        break;
+      }
   }
 
   log("Api<-Done:${response.statusCode} \n ${response.body}");

@@ -10,6 +10,7 @@ class ContentRepository extends BaseRepository {
   Announcement? announcement;
   List<CampaignDetails>? campaignDetails;
   List<GameProvider2>? gameProvider2List;
+  String? maintenanceBeginTime, maintenanceEndTime, maintenanceContent;
 
   static ContentRepository getSingleton() {
     if (_singleton == null) {
@@ -39,7 +40,8 @@ class ContentRepository extends BaseRepository {
                       e.gameTypes!.forEach((element) {
                         if ((!(element == GameType.VirtualSportsLobby || element == GameType.VirtualSports) ||
                             (element == GameType.VirtualSports && e.code == "PPTF"))) {
-                          gameProvider2List!.add(GameProvider2(element, e.code, e.name, e.description, e.status, e.transferWallet));
+                          gameProvider2List!
+                              .add(GameProvider2(element, e.code, e.name, e.description, e.status, e.transferWallet));
 
                           //sort list with gameType for displaying VirtualSports after Sportsbook
                           gameProvider2List!.sort(((a, b) => (a.gameType.toString()).compareTo(b.gameType.toString())));
@@ -281,6 +283,11 @@ class ContentRepository extends BaseRepository {
       method: HttpMethod.GET,
       endPoint: "api/brand/maintenance",
       jwtRefresher: jwtAuth,
+      consumer: (result) => setRepoValues(() {
+        maintenanceBeginTime = result["beginTime"];
+        maintenanceEndTime = result["endTime"];
+        maintenanceContent = result["content"];
+      }),
     ).execute();
   }
 }
