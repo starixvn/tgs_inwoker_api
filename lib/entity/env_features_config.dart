@@ -163,6 +163,8 @@ class EnvFeaturesConfig {
   int? maxPhoneLength;
   @JsonKey(name: "MergeEVORTNT")
   bool? mergeEVORTNT;
+  @JsonKey(name: "HideMarquee")
+  bool? hideMarquee;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
