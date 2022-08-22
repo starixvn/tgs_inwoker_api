@@ -290,4 +290,13 @@ class ContentRepository extends BaseRepository {
       }),
     ).execute();
   }
+
+  Future<EventResult<List<PromotionRoulette>>> getRouletteCount() async {
+    return await ApiRequestBuilder<List<PromotionRoulette>>(
+      method: HttpMethod.GET,
+      endPoint: "api/promotion/roulette/count",
+      jwtRefresher: jwtAuth,
+      converter: (json) => (json as List<dynamic>).map((e) => PromotionRoulette.fromJson(e)).toList(),
+    ).execute();
+  }
 }
