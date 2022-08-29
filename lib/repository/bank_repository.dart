@@ -319,8 +319,7 @@ class BankRepository extends BaseRepository {
             method: HttpMethod.GET,
             endPoint: "api/deposit/crypto/umpay/exchangerate",
             params: paymentId,
-            converter: (json) =>
-                UmPayExchangeRate.fromJson(json["rate"]["USDT"]["HKD"]),
+            converter: (json) => UmPayExchangeRate.fromJson(json["rate"]),
             jwtRefresher: jwtAuth)
         .execute();
   }
