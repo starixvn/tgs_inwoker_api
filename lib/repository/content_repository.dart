@@ -299,4 +299,24 @@ class ContentRepository extends BaseRepository {
       converter: (json) => (json as List<dynamic>).map((e) => PromotionRoulette.fromJson(e)).toList(),
     ).execute();
   }
+
+  Future<EventResult<dynamic>> getDepositRoulettePrize(String promoId) async {
+    //用 promotion id 查詢輪盤獎項
+    return await ApiRequestBuilder<dynamic>(
+      method: HttpMethod.GET,
+      endPoint: "api/dar/setting/$promoId",
+      jwtRefresher: jwtAuth,
+      // converter: (json) => Roulette.fromJson(json),
+    ).execute();
+  }
+
+  Future<EventResult<dynamic>> getDepositRoulette(String promoId) async {
+    //用 player token + promotion id 遊玩輪盤
+    return await ApiRequestBuilder<dynamic>(
+      method: HttpMethod.POST,
+      endPoint: "api/dar/setting/$promoId",
+      jwtRefresher: jwtAuth,
+      // converter: (json) => Roulette.fromJson(json),
+    ).execute();
+  }
 }
