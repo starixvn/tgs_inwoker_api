@@ -313,14 +313,25 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<UmPayExchangeRate>> getUmPayExchangeRate(
+  Future<EventResult<List<UmPayExchangeRate>>> getUmPayExchangeRate(
       String? paymentId) async {
-    return await ApiRequestBuilder<UmPayExchangeRate>(
+    return await ApiRequestBuilder<List<UmPayExchangeRate>>(
             method: HttpMethod.GET,
             endPoint: "api/deposit/crypto/umpay/exchangerate",
             params: paymentId,
-            converter: (json) =>
-                UmPayExchangeRate.fromJson(json["rate"]["USDT"]["HKD"]),
+            converter: (json) {
+              List<UmPayExchangeRate> list = [];
+              json.values.forEach((first) {
+                first.values.forEach((second) {
+                  second.forEach((key, value) {
+                    if (key == "HKD") {
+                      list.add(UmPayExchangeRate.fromJson(value));
+                    }
+                  });
+                });
+              });
+              return list;
+            },
             jwtRefresher: jwtAuth)
         .execute();
   }
