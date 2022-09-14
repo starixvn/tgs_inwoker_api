@@ -18,9 +18,9 @@ Promotion _$PromotionFromJson(Map<String, dynamic> json) => Promotion(
       json['mobileBanner'] as String?,
       json['content'] as String?,
       json['terms'] as String?,
+      json['order'] as int?,
     )
       ..promotionType = json['promotionType'] as String?
-      ..order = json['order'] as int?
       ..campaignDetails = json['campaignDetail'] == null
           ? null
           : ListResponse<CampaignDetails>.fromJson(

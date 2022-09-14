@@ -9,8 +9,17 @@ part 'promotion.g.dart';
 class Promotion {
   //Promotion();
 
-  Promotion(this.id, this.name, this.from, this.to, this.vipLevels,
-      this.localization, this.mobileBanner, this.content, this.terms);
+  Promotion(
+      this.id,
+      this.name,
+      this.from,
+      this.to,
+      this.vipLevels,
+      this.localization,
+      this.mobileBanner,
+      this.content,
+      this.terms,
+      this.order);
 
   String? id;
   String? name;
