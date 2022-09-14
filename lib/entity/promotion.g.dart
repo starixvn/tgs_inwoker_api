@@ -20,6 +20,7 @@ Promotion _$PromotionFromJson(Map<String, dynamic> json) => Promotion(
       json['terms'] as String?,
     )
       ..promotionType = json['promotionType'] as String?
+      ..order = json['order'] as int?
       ..campaignDetails = json['campaignDetail'] == null
           ? null
           : ListResponse<CampaignDetails>.fromJson(
@@ -38,6 +39,7 @@ Map<String, dynamic> _$PromotionToJson(Promotion instance) => <String, dynamic>{
       'content': instance.content,
       'terms': instance.terms,
       'promotionType': instance.promotionType,
+      'order': instance.order,
       'campaignDetail': instance.campaignDetails?.toJson(
         (value) => value,
       ),

@@ -9,8 +9,8 @@ part 'promotion.g.dart';
 class Promotion {
   //Promotion();
 
-  Promotion(this.id, this.name, this.from, this.to, this.vipLevels, this.localization, this.mobileBanner, this.content,
-      this.terms);
+  Promotion(this.id, this.name, this.from, this.to, this.vipLevels,
+      this.localization, this.mobileBanner, this.content, this.terms);
 
   String? id;
   String? name;
@@ -22,10 +22,12 @@ class Promotion {
   String? content;
   String? terms;
   String? promotionType;
+  int? order;
   @JsonKey(name: "campaignDetail")
   ListResponse<CampaignDetails>? campaignDetails;
 
-  factory Promotion.fromJson(Map<String, dynamic> json) => _$PromotionFromJson(json);
+  factory Promotion.fromJson(Map<String, dynamic> json) =>
+      _$PromotionFromJson(json);
 
   Map<String, dynamic> toJson() => _$PromotionToJson(this);
 }
