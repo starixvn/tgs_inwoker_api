@@ -45,7 +45,7 @@ class Payment {
   @JsonKey(name: "channelid")
   String? channelId;
   @JsonKey(name: "feepercentile")
-  int? fees;
+  double? fees;
 
   factory Payment.fromJson(Map<String, dynamic> json) =>
       _$PaymentFromJson(json);

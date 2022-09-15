@@ -22,7 +22,7 @@ Payment _$PaymentFromJson(Map<String, dynamic> json) => Payment(
       json['extended'] == null
           ? null
           : PaymentExtended.fromJson(json['extended'] as Map<String, dynamic>),
-      json['feepercentile'] as int?,
+      (json['feepercentile'] as num?)?.toDouble(),
     )..channelId = json['channelid'] as String?;
 
 Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
