@@ -10,8 +10,18 @@ part 'withdrawal_info.g.dart';
 class WithdrawalInfo {
   //WithdrawalInfo();
 
-  WithdrawalInfo(this.id, this.bankType, this.channelId, this.channelName, this.channelCode, this.methodCode,
-      this.methodId, this.paymentCode, this.paymentId, this.transferLimit, this.bankExtendedInfo);
+  WithdrawalInfo(
+      this.id,
+      this.bankType,
+      this.channelId,
+      this.channelName,
+      this.channelCode,
+      this.methodCode,
+      this.methodId,
+      this.paymentCode,
+      this.paymentId,
+      this.transferLimit,
+      this.bankExtendedInfo);
 
   String? id;
   @JsonKey(name: "banktype")
@@ -34,8 +44,10 @@ class WithdrawalInfo {
   TransferLimit? transferLimit;
   @JsonKey(name: "extended")
   BankExtendedInfo? bankExtendedInfo;
+  double? fees;
 
-  factory WithdrawalInfo.fromJson(Map<String, dynamic> json) => _$WithdrawalInfoFromJson(json);
+  factory WithdrawalInfo.fromJson(Map<String, dynamic> json) =>
+      _$WithdrawalInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$WithdrawalInfoToJson(this);
 }
