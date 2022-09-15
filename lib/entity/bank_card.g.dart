@@ -13,9 +13,12 @@ BankCard _$BankCardFromJson(Map<String, dynamic> json) => BankCard(
       json['detail'] == null
           ? null
           : BankDetail.fromJson(json['detail'] as Map<String, dynamic>),
-    )..transferLimit = json['transferLimit'] == null
-        ? null
-        : TransferLimit.fromJson(json['transferLimit'] as Map<String, dynamic>);
+    )
+      ..transferLimit = json['transferLimit'] == null
+          ? null
+          : TransferLimit.fromJson(
+              json['transferLimit'] as Map<String, dynamic>)
+      ..fees = (json['fees'] as num?)?.toDouble();
 
 Map<String, dynamic> _$BankCardToJson(BankCard instance) => <String, dynamic>{
       'id': instance.id,
@@ -23,6 +26,7 @@ Map<String, dynamic> _$BankCardToJson(BankCard instance) => <String, dynamic>{
       'banktype': _$BankTypeEnumMap[instance.bankType],
       'detail': instance.bankDetail,
       'transferLimit': instance.transferLimit,
+      'fees': instance.fees,
     };
 
 const _$BankTypeEnumMap = {
