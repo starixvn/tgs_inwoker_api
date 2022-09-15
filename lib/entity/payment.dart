@@ -20,7 +20,6 @@ class Payment {
     this.methodCode,
     this.order,
     this.qrCode,
-    this.fees,
   );
 
   String? id;
@@ -44,8 +43,6 @@ class Payment {
   PaymentExtended? qrCode;
   @JsonKey(name: "channelid")
   String? channelId;
-  @JsonKey(name: "feepercentile")
-  int? fees;
 
   factory Payment.fromJson(Map<String, dynamic> json) =>
       _$PaymentFromJson(json);
