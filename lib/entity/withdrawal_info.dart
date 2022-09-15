@@ -44,6 +44,7 @@ class WithdrawalInfo {
   TransferLimit? transferLimit;
   @JsonKey(name: "extended")
   BankExtendedInfo? bankExtendedInfo;
+  @JsonKey(name: "feepercentile")
   double? fees;
 
   factory WithdrawalInfo.fromJson(Map<String, dynamic> json) =>

@@ -24,7 +24,7 @@ WithdrawalInfo _$WithdrawalInfoFromJson(Map<String, dynamic> json) =>
       json['extended'] == null
           ? null
           : BankExtendedInfo.fromJson(json['extended'] as Map<String, dynamic>),
-    )..fees = (json['fees'] as num?)?.toDouble();
+    )..fees = (json['feepercentile'] as num?)?.toDouble();
 
 Map<String, dynamic> _$WithdrawalInfoToJson(WithdrawalInfo instance) =>
     <String, dynamic>{
@@ -39,7 +39,7 @@ Map<String, dynamic> _$WithdrawalInfoToJson(WithdrawalInfo instance) =>
       'paymentid': instance.paymentId,
       'transferlimit': instance.transferLimit,
       'extended': instance.bankExtendedInfo,
-      'fees': instance.fees,
+      'feepercentile': instance.fees,
     };
 
 const _$BankTypeEnumMap = {
