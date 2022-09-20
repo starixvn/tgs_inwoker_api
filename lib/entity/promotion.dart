@@ -1,4 +1,5 @@
 import 'package:api/entity/campaign_details.dart';
+import 'package:api/entity/deposit_campaign_details.dart';
 import 'package:api/entity/response/list_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:api/entity/localization.dart';
@@ -33,7 +34,8 @@ class Promotion {
   String? promotionType;
   int? order;
   @JsonKey(name: "campaignDetail")
-  ListResponse<CampaignDetails>? campaignDetails;
+  ListResponse<DepositCampaignDetails>? campaignDetails;
+  // ListResponse<CampaignDetails>? campaignDetails;
 
   factory Promotion.fromJson(Map<String, dynamic> json) =>
       _$PromotionFromJson(json);
