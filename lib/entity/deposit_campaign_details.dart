@@ -11,7 +11,9 @@ class DepositCampaignDetails {
     this.rouletteItems,
   );
 
+  @JsonKey(name: "depositItems")
   List? depositItems;
+  @JsonKey(name: "rouletteItems")
   List? rouletteItems;
 
   factory DepositCampaignDetails.fromJson(Map<String, dynamic> json) =>

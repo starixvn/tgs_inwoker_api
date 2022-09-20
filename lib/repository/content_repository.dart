@@ -339,7 +339,7 @@ class ContentRepository extends BaseRepository {
       method: HttpMethod.GET,
       endPoint: "api/dar/setting/$promoId",
       jwtRefresher: jwtAuth,
-      converter: (json) => (json["rouletteItems"] as List<dynamic>)
+      converter: (json) => (json as List<dynamic>)
           .map((e) => DepositCampaignDetails.fromJson(e))
           .toList(),
     ).execute();
