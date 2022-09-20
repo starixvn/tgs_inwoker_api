@@ -8,14 +8,12 @@ part of 'campaign_details.dart';
 
 CampaignDetails _$CampaignDetailsFromJson(Map<String, dynamic> json) =>
     CampaignDetails(
-      json['id'] as String?,
-      json['title'] as String?,
-      json['bonus'] as int?,
+      json['depositItems'] as List<dynamic>?,
+      json['rouletteItems'] as List<dynamic>?,
     );
 
 Map<String, dynamic> _$CampaignDetailsToJson(CampaignDetails instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'bonus': instance.bonus,
+      'depositItems': instance.depositItems,
+      'rouletteItems': instance.rouletteItems,
     };

@@ -9,13 +9,13 @@ part 'campaign_details.g.dart';
 class CampaignDetails {
   //CampaignDetails();
 
-  CampaignDetails(this.id, this.title, this.bonus);
+  CampaignDetails(this.depositItems, this.rouletteItems);
 
-  String? id;
-  String? title;
-  int? bonus;
+  List? depositItems;
+  List? rouletteItems;
 
-  factory CampaignDetails.fromJson(Map<String, dynamic> json) => _$CampaignDetailsFromJson(json);
+  factory CampaignDetails.fromJson(Map<String, dynamic> json) =>
+      _$CampaignDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$CampaignDetailsToJson(this);
 }

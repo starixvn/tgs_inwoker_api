@@ -8,7 +8,7 @@ class ContentRepository extends BaseRepository {
   BrandLogo? brandLogo;
   EnvFeaturesConfig? featuresConfig;
   Announcement? announcement;
-  List<DepositCampaignDetails>? campaignDetails;
+  List<CampaignDetails>? campaignDetails;
   List<GameProvider2>? gameProvider2List;
   String? maintenanceBeginTime, maintenanceEndTime, maintenanceContent;
 
@@ -332,15 +332,15 @@ class ContentRepository extends BaseRepository {
     ).execute();
   }
 
-  Future<EventResult<List<DepositCampaignDetails>>> getDepositRoulettePrize(
+  Future<EventResult<List<CampaignDetails>>> getDepositRoulettePrize(
       String promoId) async {
     //用 promotion id 查詢輪盤獎項
-    return await ApiRequestBuilder<List<DepositCampaignDetails>>(
+    return await ApiRequestBuilder<List<CampaignDetails>>(
       method: HttpMethod.GET,
       endPoint: "api/dar/setting/$promoId",
       jwtRefresher: jwtAuth,
       converter: (json) => (json as List<dynamic>)
-          .map((e) => DepositCampaignDetails.fromJson(e))
+          .map((e) => CampaignDetails.fromJson(e))
           .toList(),
     ).execute();
   }
