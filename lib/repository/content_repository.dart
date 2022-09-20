@@ -30,21 +30,36 @@ class ContentRepository extends BaseRepository {
             isAuthorization: false,
             method: HttpMethod.GET,
             endPoint: "api/GameProvider/list",
-            params: {"platformtype": "1", "language": await getLanguage(), "currency": env.currency},
-            converter: (json) => (json as List<dynamic>).map((e) => GameProvider.fromJson(e)).toList(),
+            params: {
+              "platformtype": "1",
+              "language": await getLanguage(),
+              "currency": env.currency
+            },
+            converter: (json) => (json as List<dynamic>)
+                .map((e) => GameProvider.fromJson(e))
+                .toList(),
             consumer: (result) => setRepoValues(() {
                   gameProviderList = result;
                   gameProvider2List = [];
                   result!.forEach((e) {
                     if (e.gameTypes != null) {
                       e.gameTypes!.forEach((element) {
-                        if ((!(element == GameType.VirtualSportsLobby || element == GameType.VirtualSports) ||
-                            (element == GameType.VirtualSports && e.code == "PPTF"))) {
-                          gameProvider2List!
-                              .add(GameProvider2(element, e.code, e.name, e.description, e.status, e.transferWallet));
+                        if ((!(element == GameType.VirtualSportsLobby ||
+                                element == GameType.VirtualSports) ||
+                            (element == GameType.VirtualSports &&
+                                e.code == "PPTF"))) {
+                          gameProvider2List!.add(GameProvider2(
+                              element,
+                              e.code,
+                              e.name,
+                              e.description,
+                              e.status,
+                              e.transferWallet));
 
                           //sort list with gameType for displaying VirtualSports after Sportsbook
-                          gameProvider2List!.sort(((a, b) => (a.gameType.toString()).compareTo(b.gameType.toString())));
+                          gameProvider2List!.sort(((a, b) =>
+                              (a.gameType.toString())
+                                  .compareTo(b.gameType.toString())));
                         }
                       });
                     }
@@ -54,7 +69,8 @@ class ContentRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<List<Game>>> getGameList(String gamePlatformCode, GameType gameType) async {
+  Future<EventResult<List<Game>>> getGameList(
+      String gamePlatformCode, GameType gameType) async {
     return await ApiRequestBuilder<List<Game>>(
             isAuthorization: false,
             method: HttpMethod.GET,
@@ -66,12 +82,14 @@ class ContentRepository extends BaseRepository {
               "language": await getLanguage(),
               "currency": env.currency
             },
-            converter: (json) => (json as List<dynamic>).map((e) => Game.fromJson(e)).toList(),
+            converter: (json) =>
+                (json as List<dynamic>).map((e) => Game.fromJson(e)).toList(),
             jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<GameUrlResponse>> getGameUrl(String gamePlatformCode, int gameId, String lobbyUrl) async {
+  Future<EventResult<GameUrlResponse>> getGameUrl(
+      String gamePlatformCode, int gameId, String lobbyUrl) async {
     return await ApiRequestBuilder<GameUrlResponse>(
             method: HttpMethod.POST,
             endPoint: "api/Game/geturl",
@@ -121,14 +139,18 @@ class ContentRepository extends BaseRepository {
     return await ApiRequestBuilder<List<Promotion>>(
             method: HttpMethod.GET,
             endPoint: "api/promotion",
-            converter: (json) => (json as List<dynamic>).map((e) => Promotion.fromJson(e)).toList(),
+            converter: (json) => (json as List<dynamic>)
+                .map((e) => Promotion.fromJson(e))
+                .toList(),
             jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> joinPromotion(String id) async {
     return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.POST, endPoint: "api/promotion/$id/join", jwtRefresher: jwtAuth)
+            method: HttpMethod.POST,
+            endPoint: "api/promotion/$id/join",
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -178,7 +200,9 @@ class ContentRepository extends BaseRepository {
     return await ApiRequestBuilder<List<LanguageOption>>(
             method: HttpMethod.GET,
             endPoint: "api/brandlanguage",
-            converter: (json) => (json as List<dynamic>).map((e) => LanguageOption.fromJson(e)).toList(),
+            converter: (json) => (json as List<dynamic>)
+                .map((e) => LanguageOption.fromJson(e))
+                .toList(),
             consumer: (result) => setRepoValues(() {
                   languageOptionList = result;
                 }),
@@ -187,10 +211,12 @@ class ContentRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<List<HomeBanner>>> getBanner() async => await ApiRequestBuilder<List<HomeBanner>>(
+  Future<EventResult<List<HomeBanner>>> getBanner() async =>
+      await ApiRequestBuilder<List<HomeBanner>>(
         method: HttpMethod.GET,
         endPoint: "api/banner",
-        converter: (json) => (json as List<dynamic>).map((e) => HomeBanner.fromJson(e)).toList(),
+        converter: (json) =>
+            (json as List<dynamic>).map((e) => HomeBanner.fromJson(e)).toList(),
         jwtRefresher: jwtAuth,
         isAuthorization: false,
       ).execute();
@@ -227,7 +253,8 @@ class ContentRepository extends BaseRepository {
     ).execute();
   }
 
-  Future<EventResult<EnvFeaturesConfig>> getEnvFeaturesJson(String brand) async {
+  Future<EventResult<EnvFeaturesConfig>> getEnvFeaturesJson(
+      String brand) async {
     return await ApiRequestBuilder<EnvFeaturesConfig>(
             method: HttpMethod.GET,
             endPoint: "features_${brand}.json",
@@ -242,7 +269,8 @@ class ContentRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ListResponse<Vip>>> getVip(int page, int rows, bool desc, bool all) async {
+  Future<EventResult<ListResponse<Vip>>> getVip(
+      int page, int rows, bool desc, bool all) async {
     return await ApiRequestBuilder<ListResponse<Vip>>(
             method: HttpMethod.GET,
             endPoint: "api/vip",
@@ -253,12 +281,14 @@ class ContentRepository extends BaseRepository {
               //"sort":"",
               "all": all.toString(),
             },
-            converter: (json) => ListResponse.fromJson(json, (res) => Vip.fromJson(res as Map<String, dynamic>)),
+            converter: (json) => ListResponse.fromJson(
+                json, (res) => Vip.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<Roulette>> getRouletteTodayResult(String promotionId) async {
+  Future<EventResult<Roulette>> getRouletteTodayResult(
+      String promotionId) async {
     //會回傳當日的結果，如果有結果代表已經玩過
     return await ApiRequestBuilder<Roulette>(
       method: HttpMethod.GET,
@@ -296,17 +326,22 @@ class ContentRepository extends BaseRepository {
       method: HttpMethod.GET,
       endPoint: "api/promotion/roulette/count",
       jwtRefresher: jwtAuth,
-      converter: (json) => (json as List<dynamic>).map((e) => PromotionRoulette.fromJson(e)).toList(),
+      converter: (json) => (json as List<dynamic>)
+          .map((e) => PromotionRoulette.fromJson(e))
+          .toList(),
     ).execute();
   }
 
-  Future<EventResult<List<CampaignDetails>>> getDepositRoulettePrize(String promoId) async {
+  Future<EventResult<List<CampaignDetails>>> getDepositRoulettePrize(
+      String promoId) async {
     //用 promotion id 查詢輪盤獎項
     return await ApiRequestBuilder<List<CampaignDetails>>(
       method: HttpMethod.GET,
       endPoint: "api/dar/setting/$promoId",
       jwtRefresher: jwtAuth,
-      converter: (json) => (json["rouletteitems"] as List<dynamic>).map((e) => CampaignDetails.fromJson(e)).toList(),
+      converter: (json) => (json["rouletteItems"] as List<dynamic>)
+          .map((e) => CampaignDetails.fromJson(e))
+          .toList(),
     ).execute();
   }
 
