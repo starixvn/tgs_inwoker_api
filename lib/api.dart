@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:api/entity/account_report_total.dart';
 import 'package:api/entity/brand_logo.dart';
 import 'package:api/entity/campaign_details.dart';
+import 'package:api/entity/deposit_campaign_details.dart';
 import 'package:api/entity/env_features_config.dart';
 import 'package:api/entity/game_provider2.dart';
 import 'package:api/entity/home_banner.dart';
