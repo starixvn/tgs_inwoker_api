@@ -14,6 +14,10 @@ class CampaignDetails {
   String? id;
   String? title;
   int? bonus;
+  @JsonKey(name: "depositItems")
+  List? depositItems;
+  @JsonKey(name: "rouletteItems")
+  List? rouletteItems;
 
   factory CampaignDetails.fromJson(Map<String, dynamic> json) =>
       _$CampaignDetailsFromJson(json);
