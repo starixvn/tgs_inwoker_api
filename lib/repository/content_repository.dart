@@ -8,7 +8,7 @@ class ContentRepository extends BaseRepository {
   BrandLogo? brandLogo;
   EnvFeaturesConfig? featuresConfig;
   Announcement? announcement;
-  List<CampaignDetails>? campaignDetails;
+  CampaignDetails? campaignDetails;
   List<GameProvider2>? gameProvider2List;
   String? maintenanceBeginTime, maintenanceEndTime, maintenanceContent;
 
@@ -339,7 +339,7 @@ class ContentRepository extends BaseRepository {
       method: HttpMethod.GET,
       endPoint: "api/dar/setting/$promoId",
       jwtRefresher: jwtAuth,
-      converter: (json) => (json["rouletteItems"] as List<dynamic>)
+      converter: (json) => (json as List<dynamic>)
           .map((e) => CampaignDetails.fromJson(e))
           .toList(),
     ).execute();
