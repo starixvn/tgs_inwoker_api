@@ -1,5 +1,4 @@
 import 'package:api/entity/campaign_details.dart';
-import 'package:api/entity/deposit_campaign_details.dart';
 import 'package:api/entity/response/list_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:api/entity/localization.dart';
