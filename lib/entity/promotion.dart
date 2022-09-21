@@ -33,7 +33,7 @@ class Promotion {
   String? promotionType;
   int? order;
   @JsonKey(name: "campaignDetail")
-  ListResponse<CampaignDetails>? campaignDetails;
+  CampaignDetails? campaignDetails;
 
   factory Promotion.fromJson(Map<String, dynamic> json) =>
       _$PromotionFromJson(json);
