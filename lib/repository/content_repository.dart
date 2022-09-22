@@ -349,7 +349,7 @@ class ContentRepository extends BaseRepository {
     //用 player token + promotion id 遊玩輪盤
     return await ApiRequestBuilder<Roulette>(
       method: HttpMethod.POST,
-      endPoint: "api/dar/setting/$promoId",
+      endPoint: "api/dar/$promoId",
       jwtRefresher: jwtAuth,
       converter: (json) => Roulette.fromJson(json),
     ).execute();
