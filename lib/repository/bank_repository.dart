@@ -31,6 +31,7 @@ class BankRepository extends BaseRepository {
     String? promotionId,
     String? name,
     String? bankType,
+    String? note,
   ) async {
     return await ApiRequestBuilder<String>(
             method: HttpMethod.PUT,
@@ -41,7 +42,8 @@ class BankRepository extends BaseRepository {
               "paymentid": paymentId,
               "promotionid": promotionId,
               "name": name,
-              "banktype": bankType
+              "banktype": bankType,
+              "note": note
             },
             jwtRefresher: jwtAuth)
         .execute();

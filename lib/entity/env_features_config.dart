@@ -7,33 +7,33 @@ class EnvFeaturesConfig {
   //EnvFeaturesConfig();
 
   EnvFeaturesConfig(
-    this.smsVerification,
-    this.emailVerification,
-    this.icVerification,
-    this.icVerificationUpload,
-    this.qqWeChat,
-    this.sportsHideLogo,
-    this.popupAnnouncement,
-    this.withdrawalHundredDigit,
-    this.depositManualApplePayHideBankAcc,
-    this.addCardBankBranch,
-    this.addCardDisplayFPS,
-    this.deposit_DualPage,
-    this.menuItemSortingHK28,
-    this.homePageFirstSection6Widget,
-    this.gamePageSpecificBackground,
-    this.menuItemShootFish,
-    this.haveDownloadFeature,
-    this.displayPhone,
-    this.customVIP,
-    this.addCardEnglishName,
-    this.changesNotAllowed,
-    this.haveAffiliateFeature,
-    this.phonePrefix,
-    this.homePageDisplayBalance,
-    this.onlineUser,
-    this.backgroundMusic,
-  );
+      this.smsVerification,
+      this.emailVerification,
+      this.icVerification,
+      this.icVerificationUpload,
+      this.qqWeChat,
+      this.sportsHideLogo,
+      this.popupAnnouncement,
+      this.withdrawalHundredDigit,
+      this.depositManualApplePayHideBankAcc,
+      this.addCardBankBranch,
+      this.addCardDisplayFPS,
+      this.deposit_DualPage,
+      this.menuItemSortingHK28,
+      this.homePageFirstSection6Widget,
+      this.gamePageSpecificBackground,
+      this.menuItemShootFish,
+      this.haveDownloadFeature,
+      this.displayPhone,
+      this.customVIP,
+      this.addCardEnglishName,
+      this.changesNotAllowed,
+      this.haveAffiliateFeature,
+      this.phonePrefix,
+      this.homePageDisplayBalance,
+      this.onlineUser,
+      this.backgroundMusic,
+      this.addPlayerNote);
 
   @JsonKey(name: "SMSVerification")
   bool? smsVerification;
@@ -165,6 +165,8 @@ class EnvFeaturesConfig {
   bool? mergeEVORTNT;
   @JsonKey(name: "HideMarquee")
   bool? hideMarquee;
+  @JsonKey(name: "Deposit_Withdrawal_PlayerNote")
+  bool? addPlayerNote;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);

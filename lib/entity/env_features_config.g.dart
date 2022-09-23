@@ -34,6 +34,7 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       json['HomePageDisplayBalance'] as bool?,
       json['OnlineUser'] as bool?,
       json['BackgroundMusic'] as bool?,
+      json['Deposit_Withdrawal_PlayerNote'] as bool?,
     )
       ..customDepositInput = json['CustomDepositInput'] as bool?
       ..addCardInputAddFPS = json['AddCard_InputAddFPS'] as bool?
@@ -156,4 +157,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'MAX_PHONE_LENGTH': instance.maxPhoneLength,
       'MergeEVORTNT': instance.mergeEVORTNT,
       'HideMarquee': instance.hideMarquee,
+      'Deposit_Withdrawal_PlayerNote': instance.addPlayerNote,
     };
