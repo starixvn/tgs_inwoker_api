@@ -242,7 +242,7 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<dynamic>> withdraw(
-      int amount, String bankInfoId, String payPassword) async {
+      int amount, String bankInfoId, String payPassword, String? note) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.POST,
             endPoint: "api/withdraw",
@@ -250,6 +250,7 @@ class BankRepository extends BaseRepository {
               "amount": amount.toString(),
               "bankinfoid": bankInfoId,
               "paypassword": payPassword,
+              "note": note
             },
             jwtRefresher: jwtAuth)
         .execute();
