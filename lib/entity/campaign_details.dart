@@ -18,6 +18,14 @@ class CampaignDetails {
   List? depositItems;
   @JsonKey(name: "rouletteItems")
   List? rouletteItems;
+  @JsonKey(name: "depositMinimumLimit")
+  int? depositMinimumLimit;
+  @JsonKey(name: "bonusAmountLimit")
+  int? bonusAmountLimit;
+  @JsonKey(name: "percentage")
+  int? percentage;
+  @JsonKey(name: "turnoverMultiple")
+  int? turnoverMultiple;
 
   factory CampaignDetails.fromJson(Map<String, dynamic> json) =>
       _$CampaignDetailsFromJson(json);
