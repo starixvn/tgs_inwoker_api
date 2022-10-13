@@ -124,9 +124,8 @@ class EnvFeaturesConfig {
   @JsonKey(name: "WGSports_UseIframe")
   bool? wgSportsUseIframe;
 
-  
-
-  factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
+  factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
+      _$EnvFeaturesConfigFromJson(json);
 
   Map<String, dynamic> toJson() => _$EnvFeaturesConfigToJson(this);
 }
