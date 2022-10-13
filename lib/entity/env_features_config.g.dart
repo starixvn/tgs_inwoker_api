@@ -34,7 +34,6 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       json['HomePageDisplayBalance'] as bool?,
       json['OnlineUser'] as bool?,
       json['BackgroundMusic'] as bool?,
-      json['Deposit_Withdrawal_PlayerNote'] as bool?,
     )
       ..customDepositInput = json['CustomDepositInput'] as bool?
       ..addCardInputAddFPS = json['AddCard_InputAddFPS'] as bool?
@@ -57,35 +56,7 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
           json['AddCard_DisableCreateUpdateDelete'] as bool?
       ..popupPromotion = json['PopupPromotion'] as bool?
       ..t9CustomHome = json['T9_CustomHome'] as bool?
-      ..customMessaging = (json['CustomMessaging'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList()
-      ..homePageAnimated = json['HomePage_Animated'] as bool?
-      ..reportShowRoundsTotal = json['Report_ShowRoundsTotal'] as bool?
-      ..addCardHideCertainField = json['AddCard_HideCertainField'] as bool?
-      ..withdrawalUSDTExchangeRate =
-          (json['Withdrawal_USDT_ExchangeRate'] as num?)?.toDouble()
-      ..registerShowPhone = json['Register_ShowPhone'] as bool?
-      ..profileDisableEditPhone = json['Profile_DisableEditPhone'] as bool?
-      ..homePageDisplayVIP = json['HomePage_DisplayVIP'] as bool?
-      ..profileDisableVerifyPhone = json['Profile_DisableVerifyPhone'] as bool?
-      ..menuItemSortingPISO = json['MenuItem_Sorting_PISO'] as bool?
-      ..homePagePromoRoulette = json['HomePage_PromoRoulette'] as bool?
-      ..registerShowEmail = json['Register_ShowEmail'] as bool?
-      ..idrRegisterCustomFlow = json['Register_CustomFlow_IDR'] as bool?
-      ..newTransferUI = json['NewTransferUI'] as bool?
-      ..promoRouletteSMSVerification =
-          json['PromoRoulette_SMSVerification'] as bool?
-      ..maintenanceDetail =
-          (json['Maintenance_Detail'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as String),
-      )
-      ..addCardBankCustomIdr = json['AddCard_Bank_Custom_IDR'] as bool?
-      ..forcedVerification = json['ForcedVerification'] as bool?
-      ..addCardEWalletCustom = json['AddCard_EWalletCustoms'] as bool?
-      ..maxPhoneLength = json['MAX_PHONE_LENGTH'] as int?
-      ..mergeEVORTNT = json['MergeEVORTNT'] as bool?
-      ..hideMarquee = json['HideMarquee'] as bool?;
+      ..wgSportsUseIframe = json['WGSports_UseIframe'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -135,27 +106,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
           instance.addCardDisableCreateUpdateDelete,
       'PopupPromotion': instance.popupPromotion,
       'T9_CustomHome': instance.t9CustomHome,
-      'CustomMessaging': instance.customMessaging,
-      'HomePage_Animated': instance.homePageAnimated,
-      'Report_ShowRoundsTotal': instance.reportShowRoundsTotal,
-      'AddCard_HideCertainField': instance.addCardHideCertainField,
-      'Withdrawal_USDT_ExchangeRate': instance.withdrawalUSDTExchangeRate,
-      'Register_ShowPhone': instance.registerShowPhone,
-      'Profile_DisableEditPhone': instance.profileDisableEditPhone,
-      'HomePage_DisplayVIP': instance.homePageDisplayVIP,
-      'Profile_DisableVerifyPhone': instance.profileDisableVerifyPhone,
-      'MenuItem_Sorting_PISO': instance.menuItemSortingPISO,
-      'HomePage_PromoRoulette': instance.homePagePromoRoulette,
-      'Register_ShowEmail': instance.registerShowEmail,
-      'Register_CustomFlow_IDR': instance.idrRegisterCustomFlow,
-      'NewTransferUI': instance.newTransferUI,
-      'PromoRoulette_SMSVerification': instance.promoRouletteSMSVerification,
-      'Maintenance_Detail': instance.maintenanceDetail,
-      'AddCard_Bank_Custom_IDR': instance.addCardBankCustomIdr,
-      'ForcedVerification': instance.forcedVerification,
-      'AddCard_EWalletCustoms': instance.addCardEWalletCustom,
-      'MAX_PHONE_LENGTH': instance.maxPhoneLength,
-      'MergeEVORTNT': instance.mergeEVORTNT,
-      'HideMarquee': instance.hideMarquee,
-      'Deposit_Withdrawal_PlayerNote': instance.addPlayerNote,
+      'WGSports_UseIframe': instance.wgSportsUseIframe,
     };
