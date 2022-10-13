@@ -170,7 +170,7 @@ class EnvFeaturesConfig {
   @JsonKey(name: "WGSports_UseIframe")
   bool? wgSportsUseIframe;
   @JsonKey(name: "Home_OnlineUsers")
-  List? homeOnlineUsers;
+  dynamic? homeOnlineUsers;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
