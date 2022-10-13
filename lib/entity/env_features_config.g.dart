@@ -86,7 +86,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..maxPhoneLength = json['MAX_PHONE_LENGTH'] as int?
       ..mergeEVORTNT = json['MergeEVORTNT'] as bool?
       ..hideMarquee = json['HideMarquee'] as bool?
-      ..wgSportsUseIframe = json['WGSports_UseIframe'] as bool?;
+      ..wgSportsUseIframe = json['WGSports_UseIframe'] as bool?
+      ..homeOnlineUsers = json['Home_OnlineUsers'] as List<dynamic>?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -160,4 +161,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'HideMarquee': instance.hideMarquee,
       'Deposit_Withdrawal_PlayerNote': instance.addPlayerNote,
       'WGSports_UseIframe': instance.wgSportsUseIframe,
+      'Home_OnlineUsers': instance.homeOnlineUsers,
     };
