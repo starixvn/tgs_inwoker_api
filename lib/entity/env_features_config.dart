@@ -7,33 +7,33 @@ class EnvFeaturesConfig {
   //EnvFeaturesConfig();
 
   EnvFeaturesConfig(
-    this.smsVerification,
-    this.emailVerification,
-    this.icVerification,
-    this.icVerificationUpload,
-    this.qqWeChat,
-    this.sportsHideLogo,
-    this.popupAnnouncement,
-    this.withdrawalHundredDigit,
-    this.depositManualApplePayHideBankAcc,
-    this.addCardBankBranch,
-    this.addCardDisplayFPS,
-    this.deposit_DualPage,
-    this.menuItemSortingHK28,
-    this.homePageFirstSection6Widget,
-    this.gamePageSpecificBackground,
-    this.menuItemShootFish,
-    this.haveDownloadFeature,
-    this.displayPhone,
-    this.customVIP,
-    this.addCardEnglishName,
-    this.changesNotAllowed,
-    this.haveAffiliateFeature,
-    this.phonePrefix,
-    this.homePageDisplayBalance,
-    this.onlineUser,
-    this.backgroundMusic,
-  );
+      this.smsVerification,
+      this.emailVerification,
+      this.icVerification,
+      this.icVerificationUpload,
+      this.qqWeChat,
+      this.sportsHideLogo,
+      this.popupAnnouncement,
+      this.withdrawalHundredDigit,
+      this.depositManualApplePayHideBankAcc,
+      this.addCardBankBranch,
+      this.addCardDisplayFPS,
+      this.deposit_DualPage,
+      this.menuItemSortingHK28,
+      this.homePageFirstSection6Widget,
+      this.gamePageSpecificBackground,
+      this.menuItemShootFish,
+      this.haveDownloadFeature,
+      this.displayPhone,
+      this.customVIP,
+      this.addCardEnglishName,
+      this.changesNotAllowed,
+      this.haveAffiliateFeature,
+      this.phonePrefix,
+      this.homePageDisplayBalance,
+      this.onlineUser,
+      this.backgroundMusic,
+      this.addPlayerNote);
 
   @JsonKey(name: "SMSVerification")
   bool? smsVerification;
@@ -121,6 +121,52 @@ class EnvFeaturesConfig {
   bool? popupPromotion;
   @JsonKey(name: "T9_CustomHome")
   bool? t9CustomHome;
+  @JsonKey(name: "CustomMessaging")
+  List<String>? customMessaging;
+  @JsonKey(name: "HomePage_Animated")
+  bool? homePageAnimated;
+  @JsonKey(name: "Report_ShowRoundsTotal")
+  bool? reportShowRoundsTotal;
+  @JsonKey(name: "AddCard_HideCertainField")
+  bool? addCardHideCertainField;
+  @JsonKey(name: "Withdrawal_USDT_ExchangeRate")
+  double? withdrawalUSDTExchangeRate;
+  @JsonKey(name: "Register_ShowPhone")
+  bool? registerShowPhone;
+  @JsonKey(name: "Profile_DisableEditPhone")
+  bool? profileDisableEditPhone;
+  @JsonKey(name: "HomePage_DisplayVIP")
+  bool? homePageDisplayVIP;
+  @JsonKey(name: "Profile_DisableVerifyPhone")
+  bool? profileDisableVerifyPhone;
+  @JsonKey(name: "MenuItem_Sorting_PISO")
+  bool? menuItemSortingPISO;
+  @JsonKey(name: "HomePage_PromoRoulette")
+  bool? homePagePromoRoulette;
+  @JsonKey(name: "Register_ShowEmail")
+  bool? registerShowEmail;
+  @JsonKey(name: "Register_CustomFlow_IDR")
+  bool? idrRegisterCustomFlow;
+  @JsonKey(name: "NewTransferUI")
+  bool? newTransferUI;
+  @JsonKey(name: "PromoRoulette_SMSVerification")
+  bool? promoRouletteSMSVerification;
+  @JsonKey(name: "Maintenance_Detail")
+  Map<String, String>? maintenanceDetail;
+  @JsonKey(name: "AddCard_Bank_Custom_IDR")
+  bool? addCardBankCustomIdr;
+  @JsonKey(name: "ForcedVerification")
+  bool? forcedVerification;
+  @JsonKey(name: "AddCard_EWalletCustoms")
+  bool? addCardEWalletCustom;
+  @JsonKey(name: "MAX_PHONE_LENGTH")
+  int? maxPhoneLength;
+  @JsonKey(name: "MergeEVORTNT")
+  bool? mergeEVORTNT;
+  @JsonKey(name: "HideMarquee")
+  bool? hideMarquee;
+  @JsonKey(name: "Deposit_Withdrawal_PlayerNote")
+  bool? addPlayerNote;
   @JsonKey(name: "WGSports_UseIframe")
   bool? wgSportsUseIframe;
 
