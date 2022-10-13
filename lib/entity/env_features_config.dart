@@ -121,6 +121,10 @@ class EnvFeaturesConfig {
   bool? popupPromotion;
   @JsonKey(name: "T9_CustomHome")
   bool? t9CustomHome;
+  @JsonKey(name: "WGSports_UseIframe")
+  bool? wgSportsUseIframe;
+
+  
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) => _$EnvFeaturesConfigFromJson(json);
 
