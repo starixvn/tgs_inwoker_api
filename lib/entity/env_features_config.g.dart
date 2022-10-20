@@ -87,7 +87,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..mergeEVORTNT = json['MergeEVORTNT'] as bool?
       ..hideMarquee = json['HideMarquee'] as bool?
       ..wgSportsUseIframe = json['WGSports_UseIframe'] as bool?
-      ..homeOnlineUsers = json['Home_OnlineUsers'];
+      ..homeOnlineUsers = json['Home_OnlineUsers']
+      ..depositAddCard = json['Deposit_AddCard'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -162,4 +163,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'Deposit_Withdrawal_PlayerNote': instance.addPlayerNote,
       'WGSports_UseIframe': instance.wgSportsUseIframe,
       'Home_OnlineUsers': instance.homeOnlineUsers,
+      'Deposit_AddCard': instance.depositAddCard,
     };
