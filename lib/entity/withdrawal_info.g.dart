@@ -6,8 +6,7 @@ part of 'withdrawal_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-WithdrawalInfo _$WithdrawalInfoFromJson(Map<String, dynamic> json) =>
-    WithdrawalInfo(
+WithdrawalInfo _$WithdrawalInfoFromJson(Map<String, dynamic> json) => WithdrawalInfo(
       json['id'] as String?,
       $enumDecodeNullable(_$BankTypeEnumMap, json['banktype']),
       json['channelid'] as String?,
@@ -17,17 +16,11 @@ WithdrawalInfo _$WithdrawalInfoFromJson(Map<String, dynamic> json) =>
       json['methodid'] as String?,
       json['paymentcode'] as String?,
       json['paymentid'] as String?,
-      json['transferlimit'] == null
-          ? null
-          : TransferLimit.fromJson(
-              json['transferlimit'] as Map<String, dynamic>),
-      json['extended'] == null
-          ? null
-          : BankExtendedInfo.fromJson(json['extended'] as Map<String, dynamic>),
+      json['transferlimit'] == null ? null : TransferLimit.fromJson(json['transferlimit'] as Map<String, dynamic>),
+      json['extended'] == null ? null : BankExtendedInfo.fromJson(json['extended'] as Map<String, dynamic>),
     )..fees = (json['feepercentile'] as num?)?.toDouble();
 
-Map<String, dynamic> _$WithdrawalInfoToJson(WithdrawalInfo instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$WithdrawalInfoToJson(WithdrawalInfo instance) => <String, dynamic>{
       'id': instance.id,
       'banktype': _$BankTypeEnumMap[instance.bankType],
       'channelid': instance.channelId,
@@ -50,4 +43,5 @@ const _$BankTypeEnumMap = {
   BankType.FPS: 'FPS',
   BankType.EWALLET: 'EWallet',
   BankType.PULSA: 'Pulsa',
+  BankType.H5: 'H5',
 };

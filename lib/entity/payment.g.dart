@@ -10,18 +10,13 @@ Payment _$PaymentFromJson(Map<String, dynamic> json) => Payment(
       json['id'] as String?,
       $enumDecodeNullable(_$BankTypeEnumMap, json['banktype']),
       json['channelname'] as String?,
-      json['transferlimit'] == null
-          ? null
-          : TransferLimit.fromJson(
-              json['transferlimit'] as Map<String, dynamic>),
+      json['transferlimit'] == null ? null : TransferLimit.fromJson(json['transferlimit'] as Map<String, dynamic>),
       json['paymentid'] as String?,
       json['paymentcode'] as String?,
       json['methodid'] as String?,
       json['methodcode'] as String?,
       json['displayorder'] as int?,
-      json['extended'] == null
-          ? null
-          : PaymentExtended.fromJson(json['extended'] as Map<String, dynamic>),
+      json['extended'] == null ? null : PaymentExtended.fromJson(json['extended'] as Map<String, dynamic>),
       (json['feepercentile'] as num?)?.toDouble(),
     )..channelId = json['channelid'] as String?;
 
@@ -48,4 +43,5 @@ const _$BankTypeEnumMap = {
   BankType.FPS: 'FPS',
   BankType.EWALLET: 'EWallet',
   BankType.PULSA: 'Pulsa',
+  BankType.H5: 'H5',
 };
