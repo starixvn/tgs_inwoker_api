@@ -243,6 +243,15 @@ class ContentRepository extends BaseRepository {
     ).execute();
   }
 
+  Future<EventResult<dynamic>> getSM01Cockfight() async {
+    return await ApiRequestBuilder<dynamic>(
+      method: HttpMethod.GET,
+      endPoint: "api/game/sm01",
+      jwtRefresher: jwtAuth,
+      isWithoutBaseResponse: true,
+    ).execute();
+  }
+
   Future<EventResult<dynamic>> getVersionJson(String brand) async {
     return await ApiRequestBuilder<dynamic>(
       method: HttpMethod.GET,

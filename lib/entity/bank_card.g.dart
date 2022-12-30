@@ -9,11 +9,15 @@ part of 'bank_card.dart';
 BankCard _$BankCardFromJson(Map<String, dynamic> json) => BankCard(
       json['id'] as String?,
       json['paymentchannelid'] as String?,
-      $enumDecodeNullable(_$BankTypeEnumMap, json['banktype'].toString().replaceAll(new RegExp(r"\s+"), "")),
-      json['detail'] == null ? null : BankDetail.fromJson(json['detail'] as Map<String, dynamic>),
+      $enumDecodeNullable(_$BankTypeEnumMap, json['banktype']),
+      json['detail'] == null
+          ? null
+          : BankDetail.fromJson(json['detail'] as Map<String, dynamic>),
     )
-      ..transferLimit =
-          json['transferLimit'] == null ? null : TransferLimit.fromJson(json['transferLimit'] as Map<String, dynamic>)
+      ..transferLimit = json['transferLimit'] == null
+          ? null
+          : TransferLimit.fromJson(
+              json['transferLimit'] as Map<String, dynamic>)
       ..fees = (json['fees'] as num?)?.toDouble();
 
 Map<String, dynamic> _$BankCardToJson(BankCard instance) => <String, dynamic>{
