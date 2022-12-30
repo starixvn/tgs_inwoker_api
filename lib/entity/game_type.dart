@@ -39,6 +39,8 @@ enum GameType {
   Slot,
   @JsonValue(16)
   EGame,
+  @JsonValue(17)
+  Cockfight,
 }
 
 extension GameTypeExtension on GameType {
@@ -53,13 +55,16 @@ extension GameTypeExtension on GameType {
       case GameType.CardGameLobby:
         return getTranslatedText(context, "cat_qipai");
       case GameType.Fishing:
-        return getTranslatedText(context, isRenameShootFish ? "cat_shoot_fish" : "cat_fish");
+        return getTranslatedText(
+            context, isRenameShootFish ? "cat_shoot_fish" : "cat_fish");
       case GameType.LotteryLobby:
         return getTranslatedText(context, "cat_lottery");
       case GameType.Slot:
         return getTranslatedText(context, "cat_slotgame");
       case GameType.EGame:
         return getTranslatedText(context, "cat_e_game");
+      case GameType.Cockfight:
+        return getTranslatedText(context, "cat_e_cockfight");
       case GameType.VirtualSports:
         return getTranslatedText(context, "cat_sport");
       default:
@@ -109,6 +114,8 @@ extension GameTypeExtension on GameType {
 
   int? get getJsonValue => json[this];
 
-  getTranslatedText(BuildContext context, String key, {bool isByBrand = false}) =>
-      LanguageProvider.getSingleton().getTranslated(context, key, isByBrand: isByBrand);
+  getTranslatedText(BuildContext context, String key,
+          {bool isByBrand = false}) =>
+      LanguageProvider.getSingleton()
+          .getTranslated(context, key, isByBrand: isByBrand);
 }
