@@ -85,6 +85,7 @@ extension GameTypeExtension on GameType {
     GameType.LotteryLobby: 14,
     GameType.Slot: 15,
     GameType.EGame: 16,
+    GameType.Cockfight: 17,
   };
 
   String getImagePath() {
@@ -107,6 +108,8 @@ extension GameTypeExtension on GameType {
         return "esports";
       case GameType.VirtualSports:
         return "sports";
+      case GameType.Cockfight:
+        return "cockfight";
       default:
         return "";
     }
