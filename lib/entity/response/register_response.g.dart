@@ -8,13 +8,14 @@ part of 'register_response.dart';
 
 RegisterResponse _$RegisterResponseFromJson(Map<String, dynamic> json) =>
     RegisterResponse(
-      json['uid'] as String?,
-      json['isnew'] as bool?,
-    )..nextStepType = json['nextStepType'] as String?;
+      json['nextStepType'] as String?,
+      json['isCompleted'] as bool?,
+      json['stepResponse'],
+    );
 
 Map<String, dynamic> _$RegisterResponseToJson(RegisterResponse instance) =>
     <String, dynamic>{
-      'uid': instance.uid,
-      'isnew': instance.isNew,
       'nextStepType': instance.nextStepType,
+      'isCompleted': instance.isCompleted,
+      'stepResponse': instance.stepResponse,
     };
