@@ -10,6 +10,7 @@ class RegisterResponse {
   String? uid;
   @JsonKey(name: 'isnew')
   bool? isNew;
+  String? nextStepType;
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) => _$RegisterResponseFromJson(json);
   Map<String, dynamic> toJson() => _$RegisterResponseToJson(this);

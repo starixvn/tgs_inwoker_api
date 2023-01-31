@@ -10,10 +10,11 @@ RegisterResponse _$RegisterResponseFromJson(Map<String, dynamic> json) =>
     RegisterResponse(
       json['uid'] as String?,
       json['isnew'] as bool?,
-    );
+    )..nextStepType = json['nextStepType'] as String?;
 
 Map<String, dynamic> _$RegisterResponseToJson(RegisterResponse instance) =>
     <String, dynamic>{
       'uid': instance.uid,
       'isnew': instance.isNew,
+      'nextStepType': instance.nextStepType,
     };
