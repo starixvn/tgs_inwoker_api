@@ -1,18 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'campaign_details_item.dart';
+part of 'roulette_prize_details.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CampaignDetailsItem _$CampaignDetailsItemFromJson(Map<String, dynamic> json) =>
-    CampaignDetailsItem(
+RoulettePrizeDetails _$RoulettePrizeDetailsFromJson(
+        Map<String, dynamic> json) =>
+    RoulettePrizeDetails(
       json['title'] as String?,
     );
 
-Map<String, dynamic> _$CampaignDetailsItemToJson(
-        CampaignDetailsItem instance) =>
+Map<String, dynamic> _$RoulettePrizeDetailsToJson(
+        RoulettePrizeDetails instance) =>
     <String, dynamic>{
       'title': instance.title,
     };

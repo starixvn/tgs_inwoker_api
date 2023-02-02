@@ -1,7 +1,3 @@
-import 'package:api/entity/bank_detail.dart';
-import 'package:api/entity/bank_type.dart';
-import 'package:api/entity/campaign_details_item.dart';
-import 'package:api/entity/transfer_limit.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'campaign_details.g.dart';
@@ -18,7 +14,7 @@ class CampaignDetails {
   @JsonKey(name: "depositItems")
   List? depositItems;
   @JsonKey(name: "rouletteItems")
-  List<CampaignDetailsItem>? rouletteItems;
+  List? rouletteItems;
   @JsonKey(name: "depositMinimumLimit")
   int? depositMinimumLimit;
   @JsonKey(name: "bonusAmountLimit")
