@@ -363,4 +363,13 @@ class ContentRepository extends BaseRepository {
       converter: (json) => Roulette.fromJson(json),
     ).execute();
   }
+
+  Future<EventResult<RouletteHistoryRecord>> getDepositRouletteHistoryRecord(String promoId) async {
+    return await ApiRequestBuilder<RouletteHistoryRecord>(
+      method: HttpMethod.GET,
+      endPoint: "api/dar/roulette/$promoId",
+      jwtRefresher: jwtAuth,
+      converter: (json) => RouletteHistoryRecord.fromJson(json),
+    ).execute();
+  }
 }

@@ -10,7 +10,10 @@ RegisterResponse _$RegisterResponseFromJson(Map<String, dynamic> json) =>
     RegisterResponse(
       json['nextStepType'] as String?,
       json['isCompleted'] as bool?,
-      json['stepResponse'],
+      json['stepResponse'] == null
+          ? null
+          : RegisterStepResponse.fromJson(
+              json['stepResponse'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$RegisterResponseToJson(RegisterResponse instance) =>

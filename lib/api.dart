@@ -18,6 +18,7 @@ import 'package:api/entity/promotion_roulette.dart';
 import 'package:api/entity/response/idr_register_login_response.dart';
 import 'package:api/entity/response/report_response2.dart';
 import 'package:api/entity/roulette.dart';
+import 'package:api/entity/roulette_history_record.dart';
 import 'package:api/entity/umpay_exchange_rate.dart';
 import 'package:api/entity/vip.dart';
 import 'package:flutter/services.dart';
