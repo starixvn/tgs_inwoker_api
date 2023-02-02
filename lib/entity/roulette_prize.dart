@@ -12,7 +12,7 @@ class RoulettePrize {
 
   RoulettePrize(this.rouletteItems);
 
-  @JsonKey(name: "rouletteItems")
+  @JsonKey(name: "rouletteitems")
   List<RoulettePrizeDetails>? rouletteItems;
 
 
