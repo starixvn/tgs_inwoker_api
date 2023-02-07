@@ -22,7 +22,9 @@ class AuthenticationRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> submitVerifyCode(String securityKey, String validateCode, {bool isPhone = false}) async {
+  Future<EventResult<dynamic>> submitVerifyCode(
+      String securityKey, String validateCode,
+      {bool isPhone = false}) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.PUT,
             endPoint: isPhone ? "api/player/phone" : "api/player/email",
@@ -42,7 +44,8 @@ class AuthenticationRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> getForgotPasswordCode(String? email, String? phone, String? areaCode) async {
+  Future<EventResult<dynamic>> getForgotPasswordCode(
+      String? email, String? phone, String? areaCode) async {
     return await ApiRequestBuilder<dynamic>(
             isAuthorization: false,
             endPoint: "api/player/password/forgot",
@@ -56,38 +59,52 @@ class AuthenticationRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> resetPassword(String securityKey, String validateCode, String newPassword) async {
+  Future<EventResult<dynamic>> resetPassword(
+      String securityKey, String validateCode, String newPassword) async {
     return await ApiRequestBuilder<dynamic>(
             isAuthorization: false,
             endPoint: "api/player/password/reset",
-            params: {"securitykey": securityKey, "validatecode": validateCode, "newpwd": newPassword},
+            params: {
+              "securitykey": securityKey,
+              "validatecode": validateCode,
+              "newpwd": newPassword
+            },
             jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> addPayPassword(String password) async {
     return await ApiRequestBuilder<dynamic>(
-            endPoint: "api/pay/password", params: {"pwd": password}, jwtRefresher: jwtAuth)
+            endPoint: "api/pay/password",
+            params: {"pwd": password},
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> getPayPasswordCode() async {
     return await ApiRequestBuilder<dynamic>(
-            endPoint: "api/pay/password/validate-code", params: {}, jwtRefresher: jwtAuth)
-        .execute();
-  }
-
-  Future<EventResult<dynamic>> payPasswordVerify(String password, String code, String securityKey) async {
-    return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.PATCH,
-            endPoint: "api/pay/password",
-            params: {"newpwd": password, "validatecode": code, "securitykey": securityKey},
+            endPoint: "api/pay/password/validate-code",
+            params: {},
             jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<dynamic>> getReVerifyCode(
-      String username, String password, String areaCode, String phone, String nextStepType,
+  Future<EventResult<dynamic>> payPasswordVerify(
+      String password, String code, String securityKey) async {
+    return await ApiRequestBuilder<dynamic>(
+            method: HttpMethod.PATCH,
+            endPoint: "api/pay/password",
+            params: {
+              "newpwd": password,
+              "validatecode": code,
+              "securitykey": securityKey
+            },
+            jwtRefresher: jwtAuth)
+        .execute();
+  }
+
+  Future<EventResult<dynamic>> getReVerifyCode(String username, String password,
+      String areaCode, String phone, String nextStepType,
       {bool isIdrRegister = false}) async {
     return await ApiRequestBuilder<dynamic>(
       endPoint: "api/player/${isIdrRegister ? "register" : "init-phone"}",
@@ -104,12 +121,18 @@ class AuthenticationRepository extends BaseRepository {
                     "data": {"areacode": areaCode, "phone": phone}
                   }
                 }
-          : {"username": username, "pwd": password, "areacode": areaCode, "phone": phone},
+          : {
+              "username": username,
+              "pwd": password,
+              "areacode": areaCode,
+              "phone": phone
+            },
       jwtRefresher: jwtAuth,
     ).execute();
   }
 
-  Future<EventResult<dynamic>> phoneReVerify(String securityKey, validateCode, {bool isIdrRegister = false}) async {
+  Future<EventResult<dynamic>> phoneReVerify(String securityKey, validateCode,
+      {bool isIdrRegister = false}) async {
     return await ApiRequestBuilder<dynamic>(
       method: isIdrRegister ? HttpMethod.POST : HttpMethod.PUT,
       endPoint: "api/player/${isIdrRegister ? "register" : "init-phone"}",
@@ -118,7 +141,10 @@ class AuthenticationRepository extends BaseRepository {
               "type": "InitPhone",
               "input": {
                 "input": "Valid",
-                "data": {"securitykey": securityKey, "validatecode": validateCode}
+                "data": {
+                  "securitykey": securityKey,
+                  "validatecode": validateCode
+                }
               }
             }
           : {"securitykey": securityKey, "validatecode": validateCode},
@@ -126,7 +152,8 @@ class AuthenticationRepository extends BaseRepository {
     ).execute();
   }
 
-  Future<EventResult<dynamic>> getEmailVerifyCode(String email, {bool isIdrRegister = false}) async {
+  Future<EventResult<dynamic>> getEmailVerifyCode(String email,
+      {bool isIdrRegister = false}) async {
     return await ApiRequestBuilder<dynamic>(
       method: HttpMethod.POST,
       endPoint: "api/player/${isIdrRegister ? "register" : "init-email"}",
@@ -145,7 +172,9 @@ class AuthenticationRepository extends BaseRepository {
     ).execute();
   }
 
-  Future<EventResult<dynamic>> emailVerification(String securityKey, validateCode, {bool isIdrRegister = false}) async {
+  Future<EventResult<dynamic>> emailVerification(
+      String securityKey, validateCode,
+      {bool isIdrRegister = false}) async {
     return await ApiRequestBuilder<dynamic>(
       method: isIdrRegister ? HttpMethod.POST : HttpMethod.PUT,
       endPoint: "api/player/${isIdrRegister ? "register" : "init-email"}",
@@ -154,7 +183,10 @@ class AuthenticationRepository extends BaseRepository {
               "type": "InitMail",
               "input": {
                 "input": "Valid",
-                "data": {"securitykey": securityKey, "validatecode": validateCode}
+                "data": {
+                  "securitykey": securityKey,
+                  "validatecode": validateCode
+                }
               }
             }
           : {"securitykey": securityKey, "validatecode": validateCode},
