@@ -157,6 +157,8 @@ class EnvFeaturesConfig {
   bool? addCardBankCustomIdr;
   @JsonKey(name: "ForcedVerification")
   bool? forcedVerification;
+  @JsonKey(name: "InitPhone_WithoutVerify")
+  bool? initPhoneWithoutVerify;
   @JsonKey(name: "AddCard_EWalletCustoms")
   bool? addCardEWalletCustom;
   @JsonKey(name: "MAX_PHONE_LENGTH")
