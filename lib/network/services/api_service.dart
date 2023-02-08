@@ -9,7 +9,7 @@ Future<http.Response> api(
   final content,
   isAuthorization = true,
   imageContent,
-  timeout = 3,
+  timeout = 100,
   isAssetUrl = false,
   isAutoHeader = true,
   isGameMaintenance = false,

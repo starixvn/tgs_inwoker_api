@@ -32,7 +32,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
     this.jwtRefresher,
     this.consumer,
     this.imageContent,
-    this.timeout = 3,
+    this.timeout = 100,
     this.isAssetUrl = false,
     this.isAutoHeader = true,
     this.isWithoutBaseResponse = false,

@@ -18,7 +18,7 @@ class AuthenticationRepository extends BaseRepository {
               "email": email,
             },
             jwtRefresher: jwtAuth,
-            timeout: 10)
+    )
         .execute();
   }
 
@@ -55,7 +55,7 @@ class AuthenticationRepository extends BaseRepository {
               "areaCode": areaCode,
             },
             jwtRefresher: jwtAuth,
-            timeout: 10)
+    )
         .execute();
   }
 

@@ -82,8 +82,7 @@ class ContentRepository extends BaseRepository {
               "extends": {"lobbyurl": lobbyUrl}
             },
             converter: (json) => GameUrlResponse.fromJson(json),
-            jwtRefresher: jwtAuth,
-            timeout: 20)
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -99,8 +98,7 @@ class ContentRepository extends BaseRepository {
               "extends": {"lobbyurl": lobbyUrl}
             },
             converter: (json) => GameUrlResponse.fromJson(json),
-            jwtRefresher: jwtAuth,
-            timeout: 20)
+            jwtRefresher: jwtAuth)
         .execute();
   }
 
