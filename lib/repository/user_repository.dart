@@ -439,4 +439,25 @@ class UserRepository extends BaseRepository {
             jwtRefresher: jwtAuth)
         .execute();
   }
+
+  Future<EventResult<ReportResponse<Report>>> getTransactionsReport(
+    DateTime from,
+    DateTime to,
+    int page,
+    int rows,
+  ) async {
+    return await ApiRequestBuilder<ReportResponse<Report>>(
+            method: HttpMethod.GET,
+            endPoint: "api/transaction",
+            params: {
+              "from": from.toString(),
+              "to": to.toString(),
+              "page": page.toString(),
+              "rows": rows.toString(),
+            },
+            converter: (json) => ReportResponse.fromJson(
+                json, (res) => Report.fromJson(res as Map<String, dynamic>)),
+            jwtRefresher: jwtAuth)
+        .execute();
+  }
 }
