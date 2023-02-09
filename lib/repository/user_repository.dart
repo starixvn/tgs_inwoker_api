@@ -440,7 +440,7 @@ class UserRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ReportResponse<Report>>> getTransactionsReport(
+  Future<EventResult<ReportResponse<Report>>> getBalanceChangesRecord(
     DateTime from,
     DateTime to,
     int page,
