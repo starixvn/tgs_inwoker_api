@@ -5,7 +5,7 @@ import 'dart:core';
 import 'dart:developer';
 import 'dart:io';
 import 'package:api/entity/account_report_total.dart';
-import 'package:api/entity/balance_changes_record.dart';
+import 'package:api/entity/balance_changes.dart';
 import 'package:api/entity/brand_logo.dart';
 import 'package:api/entity/campaign_details.dart';
 import 'package:api/entity/deposit_campaign_details.dart';

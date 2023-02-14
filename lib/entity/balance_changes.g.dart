@@ -6,17 +6,15 @@ part of 'balance_changes.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BalanceChangesRecord _$BalanceChangesRecordFromJson(
-        Map<String, dynamic> json) =>
-    BalanceChangesRecord(
-      json['amount'] as String?,
+BalanceChanges _$BalanceChangesFromJson(Map<String, dynamic> json) =>
+    BalanceChanges(
+      (json['amount'] as num?)?.toDouble(),
       json['id'] as String?,
       json['recordedon'] as String?,
       json['type'] as String?,
     );
 
-Map<String, dynamic> _$BalanceChangesRecordToJson(
-        BalanceChangesRecord instance) =>
+Map<String, dynamic> _$BalanceChangesToJson(BalanceChanges instance) =>
     <String, dynamic>{
       'amount': instance.amount,
       'id': instance.id,
