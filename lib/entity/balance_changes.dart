@@ -1,3 +1,4 @@
+import 'package:api/entity/balance_changes_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'balance_changes.g.dart';

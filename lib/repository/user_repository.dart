@@ -440,13 +440,13 @@ class UserRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ReportResponse<Report>>> getBalanceChangesRecord(
+  Future<EventResult<ReportResponse<BalanceChanges>>> getBalanceChangesRecord(
     DateTime from,
     DateTime to,
     int page,
     int rows,
   ) async {
-    return await ApiRequestBuilder<ReportResponse<Report>>(
+    return await ApiRequestBuilder<ReportResponse<BalanceChanges>>(
             method: HttpMethod.GET,
             endPoint: "api/transaction",
             params: {
@@ -455,8 +455,8 @@ class UserRepository extends BaseRepository {
               "page": page.toString(),
               "rows": rows.toString(),
             },
-            converter: (json) => ReportResponse.fromJson(
-                json, (res) => Report.fromJson(res as Map<String, dynamic>)),
+            converter: (json) => ReportResponse.fromJson(json,
+                (res) => BalanceChanges.fromJson(res as Map<String, dynamic>)),
             jwtRefresher: jwtAuth)
         .execute();
   }
