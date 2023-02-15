@@ -20,7 +20,7 @@ class CampaignDetails {
   @JsonKey(name: "bonusAmountLimit")
   int? bonusAmountLimit;
   @JsonKey(name: "percentage")
-  int? percentage;
+  double? percentage;
   @JsonKey(name: "turnoverMultiple")
   int? turnoverMultiple;
 

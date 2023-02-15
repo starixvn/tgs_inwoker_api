@@ -16,7 +16,7 @@ CampaignDetails _$CampaignDetailsFromJson(Map<String, dynamic> json) =>
       ..rouletteItems = json['rouletteItems'] as List<dynamic>?
       ..depositMinimumLimit = json['depositMinimumLimit'] as int?
       ..bonusAmountLimit = json['bonusAmountLimit'] as int?
-      ..percentage = json['percentage'] as int?
+      ..percentage = (json['percentage'] as num?)?.toDouble()
       ..turnoverMultiple = json['turnoverMultiple'] as int?;
 
 Map<String, dynamic> _$CampaignDetailsToJson(CampaignDetails instance) =>
