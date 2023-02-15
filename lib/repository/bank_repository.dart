@@ -25,14 +25,14 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<String>> getManualDepositId(
-    String account,
-    String amount,
-    String? paymentId,
-    String? promotionId,
-    String? name,
-    String? bankType,
-    String? note,
-  ) async {
+      String account,
+      String amount,
+      String? paymentId,
+      String? promotionId,
+      String? name,
+      String? bankType,
+      String? note,
+      String? phone) async {
     return await ApiRequestBuilder<String>(
             method: HttpMethod.PUT,
             endPoint: "api/deposit/manual/${(bankType ?? "").toLowerCase()}",
@@ -43,7 +43,8 @@ class BankRepository extends BaseRepository {
               "promotionid": promotionId,
               "name": name,
               "banktype": bankType,
-              "note": note
+              "note": note,
+              "phone": phone
             },
             jwtRefresher: jwtAuth)
         .execute();
