@@ -44,6 +44,8 @@ class Payment {
   PaymentExtended? qrCode;
   @JsonKey(name: "channelid")
   String? channelId;
+  @JsonKey(name: "channelcode")
+  String? channelCode;
   @JsonKey(name: "feepercentile")
   double? fees;
 

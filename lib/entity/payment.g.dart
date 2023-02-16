@@ -23,7 +23,9 @@ Payment _$PaymentFromJson(Map<String, dynamic> json) => Payment(
           ? null
           : PaymentExtended.fromJson(json['extended'] as Map<String, dynamic>),
       (json['feepercentile'] as num?)?.toDouble(),
-    )..channelId = json['channelid'] as String?;
+    )
+      ..channelId = json['channelid'] as String?
+      ..channelCode = json['channelcode'] as String?;
 
 Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
       'id': instance.id,
@@ -37,6 +39,7 @@ Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
       'displayorder': instance.order,
       'extended': instance.qrCode,
       'channelid': instance.channelId,
+      'channelcode': instance.channelCode,
       'feepercentile': instance.fees,
     };
 
