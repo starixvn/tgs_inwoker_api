@@ -335,4 +335,14 @@ class ContentRepository extends BaseRepository {
       converter: (json) => (json as List<dynamic>).map((e) => RouletteHistoryRecord.fromJson(e)).toList(),
     ).execute();
   }
+
+  Future<EventResult<AffiliateStatusResponse>> getAffiliateStatus() async {
+    return await ApiRequestBuilder<AffiliateStatusResponse>(
+            method: HttpMethod.GET,
+            endPoint: "api/brandallagent/check",
+            converter: (json) => AffiliateStatusResponse.fromJson(json),
+            jwtRefresher: jwtAuth,
+            isAuthorization: false)
+        .execute();
+  }
 }
