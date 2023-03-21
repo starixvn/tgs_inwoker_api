@@ -345,4 +345,14 @@ class ContentRepository extends BaseRepository {
             isAuthorization: false)
         .execute();
   }
+
+  Future<EventResult<List<AffiliateRebateDetails>>> getBrandAllAgent() async {
+    return await ApiRequestBuilder<List<AffiliateRebateDetails>>(
+      method: HttpMethod.GET,
+      endPoint: "api/brandallagent",
+      jwtRefresher: jwtAuth,
+      converter: (json) => (json as List<dynamic>).map((e) => AffiliateRebateDetails.fromJson(e)).toList(),
+    ).execute();
+  }
+
 }
