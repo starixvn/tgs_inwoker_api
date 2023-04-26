@@ -115,7 +115,7 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<dynamic>> addBankCard(
-      String? paymentChannelId, BankType bankType,
+      String? paymentChannelId, String bankType,
       {String? address,
       bankAccount,
       bankName,
@@ -157,7 +157,7 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  _getBankTypeParams(BankType bankType, String? paymentChannelId,
+  _getBankTypeParams(String bankType, String? paymentChannelId,
       {String? address,
       bankAccount,
       bankName,
@@ -166,10 +166,10 @@ class BankRepository extends BaseRepository {
       phone,
       realName}) {
     switch (bankType) {
-      case BankType.BANK:
+      case "Bank":
         return {
           "paymentchannelid": paymentChannelId,
-          "banktype": bankType.getJson,
+          "banktype": bankType,
           "detail": {
             "bankAccount": bankAccount,
             "bankName": bankName,
@@ -177,28 +177,28 @@ class BankRepository extends BaseRepository {
             "bankBranch": bankBranch
           }
         };
-      case BankType.EWALLET:
+      case "EWallet":
         return {
           "paymentchannelid": paymentChannelId,
-          "banktype": bankType.getJson,
+          "banktype": bankType,
           "detail": {"phone": phone, "eMoneyName": name},
         };
-      case BankType.CRYPTO:
+      case "Crypto":
         return {
           "paymentchannelid": paymentChannelId,
-          "banktype": bankType.getJson,
+          "banktype": bankType,
           "detail": {"address": address},
         };
-      case BankType.USDT:
+      case "Usdt":
         return {
           "paymentchannelid": paymentChannelId,
-          "banktype": bankType.getJson,
+          "banktype": bankType,
           "detail": {"address": address},
         };
       default:
         return {
           "paymentchannelid": paymentChannelId,
-          "banktype": bankType.getJson,
+          "banktype": bankType,
           "detail": {"phone": phone, "username": realName},
         };
     }

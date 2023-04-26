@@ -8,7 +8,7 @@ part of 'payment.dart';
 
 Payment _$PaymentFromJson(Map<String, dynamic> json) => Payment(
       json['id'] as String?,
-      $enumDecodeNullable(_$BankTypeEnumMap, json['banktype']),
+      json['banktype'] as String?,
       json['channelname'] as String?,
       json['transferlimit'] == null
           ? null
@@ -29,7 +29,7 @@ Payment _$PaymentFromJson(Map<String, dynamic> json) => Payment(
 
 Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
       'id': instance.id,
-      'banktype': _$BankTypeEnumMap[instance.bankType],
+      'banktype': instance.bankType,
       'channelname': instance.channelName,
       'transferlimit': instance.transferLimit,
       'paymentid': instance.paymentId,
@@ -42,14 +42,3 @@ Map<String, dynamic> _$PaymentToJson(Payment instance) => <String, dynamic>{
       'channelcode': instance.channelCode,
       'feepercentile': instance.fees,
     };
-
-const _$BankTypeEnumMap = {
-  BankType.BANK: 'Bank',
-  BankType.CRYPTO: 'Crypto',
-  BankType.THIRD_PARTY: 'ThirdParty',
-  BankType.USDT: 'Usdt',
-  BankType.FPS: 'FPS',
-  BankType.EWALLET: 'EWallet',
-  BankType.PULSA: 'Pulsa',
-  BankType.H5: 'H5',
-};

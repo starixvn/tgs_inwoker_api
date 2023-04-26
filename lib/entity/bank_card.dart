@@ -14,7 +14,7 @@ class BankCard {
   @JsonKey(name: "paymentchannelid")
   String? paymentChannelId;
   @JsonKey(name: "banktype")
-  BankType? bankType;
+  String? bankType;
   @JsonKey(name: "detail")
   BankDetail? bankDetail;
   TransferLimit? transferLimit;

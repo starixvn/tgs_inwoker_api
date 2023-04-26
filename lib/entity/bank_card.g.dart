@@ -9,7 +9,7 @@ part of 'bank_card.dart';
 BankCard _$BankCardFromJson(Map<String, dynamic> json) => BankCard(
       json['id'] as String?,
       json['paymentchannelid'] as String?,
-      $enumDecodeNullable(_$BankTypeEnumMap, json['banktype']),
+      json['banktype'] as String?,
       json['detail'] == null
           ? null
           : BankDetail.fromJson(json['detail'] as Map<String, dynamic>),
@@ -23,19 +23,8 @@ BankCard _$BankCardFromJson(Map<String, dynamic> json) => BankCard(
 Map<String, dynamic> _$BankCardToJson(BankCard instance) => <String, dynamic>{
       'id': instance.id,
       'paymentchannelid': instance.paymentChannelId,
-      'banktype': _$BankTypeEnumMap[instance.bankType],
+      'banktype': instance.bankType,
       'detail': instance.bankDetail,
       'transferLimit': instance.transferLimit,
       'fees': instance.fees,
     };
-
-const _$BankTypeEnumMap = {
-  BankType.BANK: 'Bank',
-  BankType.CRYPTO: 'Crypto',
-  BankType.THIRD_PARTY: 'ThirdParty',
-  BankType.USDT: 'Usdt',
-  BankType.FPS: 'FPS',
-  BankType.EWALLET: 'EWallet',
-  BankType.PULSA: 'Pulsa',
-  BankType.H5: 'H5',
-};

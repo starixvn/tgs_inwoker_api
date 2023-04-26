@@ -9,7 +9,7 @@ part of 'withdrawal_info.dart';
 WithdrawalInfo _$WithdrawalInfoFromJson(Map<String, dynamic> json) =>
     WithdrawalInfo(
       json['id'] as String?,
-      $enumDecodeNullable(_$BankTypeEnumMap, json['banktype']),
+      json['banktype'] as String?,
       json['channelid'] as String?,
       json['channelname'] as String?,
       json['channelcode'] as String?,
@@ -29,7 +29,7 @@ WithdrawalInfo _$WithdrawalInfoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$WithdrawalInfoToJson(WithdrawalInfo instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'banktype': _$BankTypeEnumMap[instance.bankType],
+      'banktype': instance.bankType,
       'channelid': instance.channelId,
       'channelname': instance.channelName,
       'channelcode': instance.channelCode,
@@ -41,14 +41,3 @@ Map<String, dynamic> _$WithdrawalInfoToJson(WithdrawalInfo instance) =>
       'extended': instance.bankExtendedInfo,
       'feepercentile': instance.fees,
     };
-
-const _$BankTypeEnumMap = {
-  BankType.BANK: 'Bank',
-  BankType.CRYPTO: 'Crypto',
-  BankType.THIRD_PARTY: 'ThirdParty',
-  BankType.USDT: 'Usdt',
-  BankType.FPS: 'FPS',
-  BankType.EWALLET: 'EWallet',
-  BankType.PULSA: 'Pulsa',
-  BankType.H5: 'H5',
-};

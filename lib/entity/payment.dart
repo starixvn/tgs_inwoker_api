@@ -25,7 +25,7 @@ class Payment {
 
   String? id;
   @JsonKey(name: "banktype")
-  BankType? bankType;
+  String? bankType;
   @JsonKey(name: "channelname")
   String? channelName;
   @JsonKey(name: "transferlimit")

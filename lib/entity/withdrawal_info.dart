@@ -25,7 +25,7 @@ class WithdrawalInfo {
 
   String? id;
   @JsonKey(name: "banktype")
-  BankType? bankType;
+  String? bankType;
   @JsonKey(name: "channelid")
   String? channelId;
   @JsonKey(name: "channelname")
