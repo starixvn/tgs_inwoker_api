@@ -6,13 +6,13 @@ class DepositPayload {
   DepositPayload(
       this.amount, this.brandPaymentId, this.formId, this.orderNo, this.paymentMethod, this.status, this.updatedOn);
 
-  int amount;
-  String brandPaymentId;
-  String formId;
-  String orderNo;
-  String paymentMethod;
-  String status;
-  String updatedOn;
+  double? amount;
+  String? brandPaymentId;
+  String? formId;
+  String? orderNo;
+  String? paymentMethod;
+  int? status;
+  String? updatedOn;
 
   factory DepositPayload.fromJson(Map<String, dynamic> json) =>
       _$DepositPayloadFromJson(json);

@@ -4,10 +4,10 @@ part 'ws_response.g.dart';
 
 @JsonSerializable()
 class WsResponse {
-  WsResponse(this.payload, this.isRead, this.type);
+  WsResponse(this.payload, this.type);
 
  DepositPayload? payload;
- bool? isRead;
+
  String? type;
 
   factory WsResponse.fromJson(Map<String, dynamic> json) =>

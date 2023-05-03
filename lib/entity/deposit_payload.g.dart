@@ -8,13 +8,13 @@ part of 'deposit_payload.dart';
 
 DepositPayload _$DepositPayloadFromJson(Map<String, dynamic> json) =>
     DepositPayload(
-      json['amount'] as int,
-      json['brandPaymentId'] as String,
-      json['formId'] as String,
-      json['orderNo'] as String,
-      json['paymentMethod'] as String,
-      json['status'] as String,
-      json['updatedOn'] as String,
+      (json['amount'] as num?)?.toDouble(),
+      json['brandPaymentId'] as String?,
+      json['formId'] as String?,
+      json['orderNo'] as String?,
+      json['paymentMethod'] as String?,
+      json['status'] as int?,
+      json['updatedOn'] as String?,
     );
 
 Map<String, dynamic> _$DepositPayloadToJson(DepositPayload instance) =>
