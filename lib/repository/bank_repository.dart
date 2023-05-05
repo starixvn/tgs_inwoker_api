@@ -3,6 +3,7 @@ part of api;
 class BankRepository extends BaseRepository {
   static BankRepository? _singleton;
   List<BankCard>? bankCardList;
+  List<Payment>? depositPaymentList;
 
   static BankRepository getSingleton() {
     if (_singleton == null) {
@@ -16,23 +17,17 @@ class BankRepository extends BaseRepository {
             method: HttpMethod.GET,
             endPoint: "api/Deposit",
             converter: (json) {
-              return (json as List<dynamic>)
-                  .map((e) => Payment.fromJson(e))
-                  .toList();
+              return (json as List<dynamic>).map((e) => Payment.fromJson(e)).toList();
             },
+            consumer: (result) => setRepoValues(() {
+                  depositPaymentList = result;
+                }),
             jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<String>> getManualDepositId(
-      String account,
-      String amount,
-      String? paymentId,
-      String? promotionId,
-      String? name,
-      String? bankType,
-      String? note,
-      String? phone) async {
+  Future<EventResult<String>> getManualDepositId(String account, String amount, String? paymentId, String? promotionId,
+      String? name, String? bankType, String? note, String? phone) async {
     return await ApiRequestBuilder<String>(
             method: HttpMethod.PUT,
             endPoint: "api/deposit/manual/${(bankType ?? "").toLowerCase()}",
@@ -67,8 +62,7 @@ class BankRepository extends BaseRepository {
         .execute();
   }*/
 
-  Future<EventResult<ManualDepositOrder>> getManualDepositOrder(
-      String? id) async {
+  Future<EventResult<ManualDepositOrder>> getManualDepositOrder(String? id) async {
     return await ApiRequestBuilder<ManualDepositOrder>(
             method: HttpMethod.GET,
             endPoint: "api/Deposit/manual",
@@ -78,8 +72,7 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> uploadDepositImage(
-      File imageFile, String id) async {
+  Future<EventResult<dynamic>> uploadDepositImage(File imageFile, String id) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.MULTIPART,
             endPoint: "api/Deposit/manual",
@@ -93,9 +86,7 @@ class BankRepository extends BaseRepository {
     return await ApiRequestBuilder<List<WithdrawalInfo>>(
             method: HttpMethod.GET,
             endPoint: "api/withdraw",
-            converter: (json) => (json as List<dynamic>)
-                .map((e) => WithdrawalInfo.fromJson(e))
-                .toList(),
+            converter: (json) => (json as List<dynamic>).map((e) => WithdrawalInfo.fromJson(e)).toList(),
             jwtRefresher: jwtAuth)
         .execute();
   }
@@ -104,9 +95,7 @@ class BankRepository extends BaseRepository {
     return await ApiRequestBuilder<List<BankCard>>(
             method: HttpMethod.GET,
             endPoint: "api/bankinfo",
-            converter: (json) => (json as List<dynamic>)
-                .map((e) => BankCard.fromJson(e))
-                .toList(),
+            converter: (json) => (json as List<dynamic>).map((e) => BankCard.fromJson(e)).toList(),
             consumer: (result) => setRepoValues(() {
                   bankCardList = result;
                 }),
@@ -114,16 +103,8 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> addBankCard(
-      String? paymentChannelId, String bankType,
-      {String? address,
-      bankAccount,
-      bankName,
-      name,
-      bankBranch,
-      phone,
-      realName,
-      bool isRegister = false}) async {
+  Future<EventResult<dynamic>> addBankCard(String? paymentChannelId, String bankType,
+      {String? address, bankAccount, bankName, name, bankBranch, phone, realName, bool isRegister = false}) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.POST,
             endPoint: isRegister ? "api/player/register" : "api/bankinfo",
@@ -158,24 +139,13 @@ class BankRepository extends BaseRepository {
   }
 
   _getBankTypeParams(String bankType, String? paymentChannelId,
-      {String? address,
-      bankAccount,
-      bankName,
-      name,
-      bankBranch,
-      phone,
-      realName}) {
+      {String? address, bankAccount, bankName, name, bankBranch, phone, realName}) {
     switch (bankType) {
       case "Bank":
         return {
           "paymentchannelid": paymentChannelId,
           "banktype": bankType,
-          "detail": {
-            "bankAccount": bankAccount,
-            "bankName": bankName,
-            "name": name,
-            "bankBranch": bankBranch
-          }
+          "detail": {"bankAccount": bankAccount, "bankName": bankName, "name": name, "bankBranch": bankBranch}
         };
       case "EWallet":
         return {
@@ -206,14 +176,11 @@ class BankRepository extends BaseRepository {
 
   Future<EventResult<dynamic>> deleteBankCard(String? bankInfoId) async {
     return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.DELETE,
-            endPoint: "api/bankinfo/$bankInfoId",
-            jwtRefresher: jwtAuth)
+            method: HttpMethod.DELETE, endPoint: "api/bankinfo/$bankInfoId", jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<DepositRedirect>> leePayDepositOrder(
-      String amount, String? paymentId, String? promotionId) async {
+  Future<EventResult<DepositRedirect>> leePayDepositOrder(String amount, String? paymentId, String? promotionId) async {
     return await ApiRequestBuilder<DepositRedirect>(
             method: HttpMethod.PUT,
             endPoint: "api/deposit/crypto/leepay",
@@ -242,26 +209,17 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<dynamic>> withdraw(
-      int amount, String bankInfoId, String payPassword, String? note) async {
+  Future<EventResult<dynamic>> withdraw(int amount, String bankInfoId, String payPassword, String? note) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.POST,
             endPoint: "api/withdraw",
-            params: {
-              "amount": amount.toString(),
-              "bankinfoid": bankInfoId,
-              "paypassword": payPassword,
-              "note": note
-            },
+            params: {"amount": amount.toString(), "bankinfoid": bankInfoId, "paypassword": payPassword, "note": note},
             jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<DepositRedirectApplePay>> applePayDepositOrder(
-      String amount,
-      String? paymentId,
-      String? promotionId,
-      String transName) async {
+      String amount, String? paymentId, String? promotionId, String transName) async {
     return await ApiRequestBuilder<DepositRedirectApplePay>(
             method: HttpMethod.POST,
             endPoint: "api/deposit/bank/applepay",
@@ -276,8 +234,7 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<ExchangeRate>> getLeePayExchangeRate(
-      String? paymentId) async {
+  Future<EventResult<ExchangeRate>> getLeePayExchangeRate(String? paymentId) async {
     return await ApiRequestBuilder<ExchangeRate>(
             method: HttpMethod.GET,
             endPoint: "api/deposit/crypto/leepay/exchangerate",
@@ -317,8 +274,7 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<List<UmPayExchangeRate>>> getUmPayExchangeRate(
-      String? paymentId) async {
+  Future<EventResult<List<UmPayExchangeRate>>> getUmPayExchangeRate(String? paymentId) async {
     return await ApiRequestBuilder<List<UmPayExchangeRate>>(
             method: HttpMethod.GET,
             endPoint: "api/deposit/crypto/umpay/exchangerate",
@@ -358,9 +314,7 @@ class BankRepository extends BaseRepository {
   Future<EventResult<dynamic>> getTurnoverAmount() async {
     //return int or double
     return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.GET,
-            endPoint: "api/withdraw/player/amount",
-            jwtRefresher: jwtAuth)
+            method: HttpMethod.GET, endPoint: "api/withdraw/player/amount", jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -394,8 +348,7 @@ class BankRepository extends BaseRepository {
     ).execute();
   }
 
-  Future<EventResult<DepositRedirect>> skyPayDepositOrder(
-      String amount, String? paymentId, String? promotionId) async {
+  Future<EventResult<DepositRedirect>> skyPayDepositOrder(String amount, String? paymentId, String? promotionId) async {
     return await ApiRequestBuilder<DepositRedirect>(
             method: HttpMethod.POST,
             endPoint: "api/deposit/bank/skypay",
@@ -424,8 +377,8 @@ class BankRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<DepositRedirect>> malakiPayDepositOrder(String amount,
-      String? paymentId, String? promotionId, String? type) async {
+  Future<EventResult<DepositRedirect>> malakiPayDepositOrder(
+      String amount, String? paymentId, String? promotionId, String? type) async {
     return await ApiRequestBuilder<DepositRedirect>(
             method: HttpMethod.POST,
             endPoint: "api/deposit/$type/malakipay",
@@ -440,11 +393,7 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<DepositRedirect>> performDeposit(
-      String amount,
-      String? paymentId,
-      String? promotionId,
-      String? type,
-      String? paymentcode) async {
+      String amount, String? paymentId, String? promotionId, String? type, String? paymentcode) async {
     return await ApiRequestBuilder<DepositRedirect>(
             method: HttpMethod.POST,
             endPoint: "api/deposit/$type/${paymentcode!.toLowerCase()}",

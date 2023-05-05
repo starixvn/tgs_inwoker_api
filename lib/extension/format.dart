@@ -87,4 +87,12 @@ class Format {
     } else
       return "";
   }
+
+  String dateTimeWithSecondFormat(String? dateString) {
+    if (dateString != null) {
+      final date = DateTime.parse(dateString);
+      return DateFormat("yyyy/MM/dd HH:mm:ss").format(date.toLocal());
+    } else
+      return "";
+  }
 }
