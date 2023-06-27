@@ -17,7 +17,8 @@ PaymentExtended _$PaymentExtendedFromJson(Map<String, dynamic> json) =>
       ..email = json['email'] as String?
       ..fpsId = json['fpsId'] as String?
       ..phone = json['phone'] as String?
-      ..rate = (json['rate'] as num?)?.toDouble();
+      ..rate = (json['rate'] as num?)?.toDouble()
+      ..eMoneyName = json['eMoneyName'] as String?;
 
 Map<String, dynamic> _$PaymentExtendedToJson(PaymentExtended instance) =>
     <String, dynamic>{
@@ -31,4 +32,5 @@ Map<String, dynamic> _$PaymentExtendedToJson(PaymentExtended instance) =>
       'fpsId': instance.fpsId,
       'phone': instance.phone,
       'rate': instance.rate,
+      'eMoneyName': instance.eMoneyName,
     };
