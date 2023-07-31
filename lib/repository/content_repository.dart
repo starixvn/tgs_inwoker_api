@@ -11,6 +11,7 @@ class ContentRepository extends BaseRepository {
   CampaignDetails? campaignDetails;
   List<GameProvider2>? gameProvider2List;
   String? maintenanceBeginTime, maintenanceEndTime, maintenanceContent;
+  String announcementInStr = "";
 
   static ContentRepository getSingleton() {
     if (_singleton == null) {
@@ -40,8 +41,7 @@ class ContentRepository extends BaseRepository {
                       e.gameTypes!.forEach((element) {
                         if ((!(element == GameType.VirtualSportsLobby || element == GameType.VirtualSports) ||
                             (element == GameType.VirtualSports && e.code == "PPTF"))) {
-                          gameProvider2List!
-                              .add(GameProvider2(element, e.code, e.name, e.description, e.status, e.transferWallet));
+                          gameProvider2List!.add(GameProvider2(element, e.code, e.name, e.description, e.status, e.transferWallet));
 
                           //sort list with gameType for displaying VirtualSports after Sportsbook
                           gameProvider2List!.sort(((a, b) => (a.gameType.toString()).compareTo(b.gameType.toString())));
@@ -86,8 +86,7 @@ class ContentRepository extends BaseRepository {
         .execute();
   }
 
-  Future<EventResult<GameUrlResponse>> getLobbyGameUrl(
-      String gamePlatformCode, GameType gameType, String lobbyUrl) async {
+  Future<EventResult<GameUrlResponse>> getLobbyGameUrl(String gamePlatformCode, GameType gameType, String lobbyUrl) async {
     return await ApiRequestBuilder<GameUrlResponse>(
             method: HttpMethod.POST,
             endPoint: "api/Game/lobby/geturl",
@@ -110,9 +109,27 @@ class ContentRepository extends BaseRepository {
             converter: (json) => Announcement.fromJson(json),
             consumer: (result) => setRepoValues(() {
                   announcement = result;
+                  List<Marquees> _list = result.marquees;
+                  if (_list.isNotEmpty) {
+                    _list.asMap().forEach((index, element) {
+                      if (index == 0)
+                        announcementInStr = _getAnnouncementContent(element);
+                      else
+                        announcementInStr = announcementInStr + " " + _getAnnouncementContent(element);
+                    });
+                  }
                 }),
             jwtRefresher: jwtAuth)
         .execute();
+  }
+
+  _getAnnouncementContent(Marquees text) {
+    if (text.localization?.content?.isNotEmpty ?? false)
+      return text.localization!.content;
+    else if (text.content?.isNotEmpty ?? false)
+      return text.content;
+    else
+      return "";
   }
 
   Future<EventResult<List<Promotion>>> getPromotionList() async {
@@ -125,9 +142,7 @@ class ContentRepository extends BaseRepository {
   }
 
   Future<EventResult<dynamic>> joinPromotion(String id) async {
-    return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.POST, endPoint: "api/promotion/$id/join", jwtRefresher: jwtAuth)
-        .execute();
+    return await ApiRequestBuilder<dynamic>(method: HttpMethod.POST, endPoint: "api/promotion/$id/join", jwtRefresher: jwtAuth).execute();
   }
 
   /*Future<EventResult<ListResponse<Promotion>>> getPlayerPromotionList(int page, int rows, bool desc, bool all) async {
@@ -147,10 +162,7 @@ class ContentRepository extends BaseRepository {
 
   Future<EventResult<List<int>>> getFavoriteGame(GameType? gameType) async {
     return await ApiRequestBuilder<List<int>>(
-            method: HttpMethod.GET,
-            endPoint: "api/game/favorite/${gameType?.getJsonValue}",
-            converter: (json) => json.cast<int>(),
-            jwtRefresher: jwtAuth)
+            method: HttpMethod.GET, endPoint: "api/game/favorite/${gameType?.getJsonValue}", converter: (json) => json.cast<int>(), jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -354,5 +366,4 @@ class ContentRepository extends BaseRepository {
       converter: (json) => (json as List<dynamic>).map((e) => AffiliateRebateDetails.fromJson(e)).toList(),
     ).execute();
   }
-
 }

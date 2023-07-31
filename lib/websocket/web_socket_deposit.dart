@@ -53,7 +53,7 @@ class WebSocketDeposit {
           .build();
 
       hubConnection!.start();
-      print('${hubConnection!.baseUrl}');
+      print('SignalR url::${hubConnection!.baseUrl}');
 
       hubConnection!.onclose(onConnectionClosed);
 
@@ -63,6 +63,7 @@ class WebSocketDeposit {
         print('SignalR connection failed.');
       }
       hubConnection!.on('notify', (arguments) {
+        print("signalR connect success");
         if (arguments?.isNotEmpty ?? false) {
           WsResponse response = WsResponse.fromJson(arguments![0] as Map<String, dynamic>);
           // Handle the event data here

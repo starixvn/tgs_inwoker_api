@@ -62,6 +62,7 @@ import 'package:api/entity/status.dart';
 import 'package:api/entity/main_wallet.dart';
 import 'package:api/entity/response/BaseResponse.dart';
 import 'package:api/entity/game_wallet.dart';
+import 'package:api/entity/marquees.dart';
 import 'init.dart';
 import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
