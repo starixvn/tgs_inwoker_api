@@ -20,6 +20,8 @@ class LanguageProvider {
     "th-TH": Language("th-TH", "ไทย", Locale("th", ""), "th-TH", "images/language/ic_lang_th.png"),
     "id-ID": Language("id-ID", "Indonesia", Locale("id", ''), "id-ID", "images/language/ic_lang_id.png"),
     "vi-VN": Language("vi-VN", "Tiếng Việt", Locale("vi", ''), "vi-VN", "images/language/ic_lang_vn.png"),
+    "hi-IN": Language("hi-IN", "हिन्दी", Locale("hi", ''), "hi-IN", "images/language/ic_lang_in.png"),
+    "ta-IN": Language("ta-IN", "தமிழ்", Locale("ta", ''), "ta-IN", "images/language/ic_lang_in.png"),
   };
   String _brandName = "";
   Locale? _currentLang = null;
