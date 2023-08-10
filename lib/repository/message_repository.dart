@@ -68,7 +68,7 @@ class MessageRepository extends BaseRepository {
   Future<EventResult<dynamic>> replyStationLetter(String id, String content) async {
     return await ApiRequestBuilder<dynamic>(
       method: HttpMethod.PUT,
-      endPoint: "api/station-letter/$id/:reply",
+      endPoint: "api/station-letter/$id:reply",
       params: {"content": content},
       jwtRefresher: jwtAuth,
     ).execute();

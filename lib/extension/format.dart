@@ -56,6 +56,15 @@ class Format {
       return "";
   }
 
+  String reversedDateFormat(String? dateString) {
+    if (dateString != null) {
+      final date = DateTime.parse(dateString);
+      return DateFormat("dd/MM/yyyy").format(date);
+    }
+    else
+      return "";
+  }
+
   String dateTimeFormat(String? dateString) {
     if (dateString != null) {
       final date = DateTime.parse(dateString);

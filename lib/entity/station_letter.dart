@@ -19,6 +19,8 @@ class StationLetter {
   String? subject;
   bool? haveRead;
   bool? replied;
+  String? sender;
+  String? sentOn;
 
   factory StationLetter.fromJson(Map<String, dynamic> json) => _$StationLetterFromJson(json);
 

@@ -14,7 +14,9 @@ StationLetter _$StationLetterFromJson(Map<String, dynamic> json) =>
       json['subject'] as String?,
       json['haveRead'] as bool?,
       json['replied'] as bool?,
-    );
+    )
+      ..sender = json['sender'] as String?
+      ..sentOn = json['sentOn'] as String?;
 
 Map<String, dynamic> _$StationLetterToJson(StationLetter instance) =>
     <String, dynamic>{
@@ -24,4 +26,6 @@ Map<String, dynamic> _$StationLetterToJson(StationLetter instance) =>
       'subject': instance.subject,
       'haveRead': instance.haveRead,
       'replied': instance.replied,
+      'sender': instance.sender,
+      'sentOn': instance.sentOn,
     };
