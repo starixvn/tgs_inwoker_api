@@ -135,8 +135,7 @@ class EnvFeaturesConfig {
   bool? registerShowPhone;
   @JsonKey(name: "Profile_DisableEditPhone")
   bool? profileDisableEditPhone;
-  @JsonKey(name: "HomePage_DisplayVIP")
-  bool? homePageDisplayVIP;
+
   @JsonKey(name: "Profile_DisableVerifyPhone")
   bool? profileDisableVerifyPhone;
   @JsonKey(name: "MenuItem_Sorting_PISO")
@@ -177,6 +176,15 @@ class EnvFeaturesConfig {
   bool? depositAddCard;
   @JsonKey(name: "Deposit_AccountNameManualInput")
   bool? depositAccountNameManualInput;
+
+  //check for display all vip icon for example profile page
+  @JsonKey(name: "HaveVIPFeature")
+  bool? haveVIPFeature;
+
+  //if haveVIPFeature is true, then check homePageDisplayVIP whether display at home page
+  @JsonKey(name: "HomePage_DisplayVIP")
+  bool? homePageDisplayVIP;
+
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);

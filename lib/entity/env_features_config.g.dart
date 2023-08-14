@@ -67,7 +67,6 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
           (json['Withdrawal_USDT_ExchangeRate'] as num?)?.toDouble()
       ..registerShowPhone = json['Register_ShowPhone'] as bool?
       ..profileDisableEditPhone = json['Profile_DisableEditPhone'] as bool?
-      ..homePageDisplayVIP = json['HomePage_DisplayVIP'] as bool?
       ..profileDisableVerifyPhone = json['Profile_DisableVerifyPhone'] as bool?
       ..menuItemSortingPISO = json['MenuItem_Sorting_PISO'] as bool?
       ..homePagePromoRoulette = json['HomePage_PromoRoulette'] as bool?
@@ -91,7 +90,9 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..homeOnlineUsers = json['Home_OnlineUsers']
       ..depositAddCard = json['Deposit_AddCard'] as bool?
       ..depositAccountNameManualInput =
-          json['Deposit_AccountNameManualInput'] as bool?;
+          json['Deposit_AccountNameManualInput'] as bool?
+      ..haveVIPFeature = json['HaveVIPFeature'] as bool?
+      ..homePageDisplayVIP = json['HomePage_DisplayVIP'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -148,7 +149,6 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'Withdrawal_USDT_ExchangeRate': instance.withdrawalUSDTExchangeRate,
       'Register_ShowPhone': instance.registerShowPhone,
       'Profile_DisableEditPhone': instance.profileDisableEditPhone,
-      'HomePage_DisplayVIP': instance.homePageDisplayVIP,
       'Profile_DisableVerifyPhone': instance.profileDisableVerifyPhone,
       'MenuItem_Sorting_PISO': instance.menuItemSortingPISO,
       'HomePage_PromoRoulette': instance.homePagePromoRoulette,
@@ -169,4 +169,6 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'Home_OnlineUsers': instance.homeOnlineUsers,
       'Deposit_AddCard': instance.depositAddCard,
       'Deposit_AccountNameManualInput': instance.depositAccountNameManualInput,
+      'HaveVIPFeature': instance.haveVIPFeature,
+      'HomePage_DisplayVIP': instance.homePageDisplayVIP,
     };
