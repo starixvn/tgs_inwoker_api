@@ -175,6 +175,8 @@ class EnvFeaturesConfig {
   dynamic? homeOnlineUsers;
   @JsonKey(name: "Deposit_AddCard")
   bool? depositAddCard;
+  @JsonKey(name: "Deposit_AccountNameManualInput")
+  bool? depositAccountNameManualInput;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
