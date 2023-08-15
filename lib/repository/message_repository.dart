@@ -84,9 +84,9 @@ class MessageRepository extends BaseRepository {
 
   Future<EventResult<ListResponse<DeliveryBox>>> getDeliveryBoxList(int page, int row) async {
     return await ApiRequestBuilder<ListResponse<DeliveryBox>>(
-      method: HttpMethod.PUT,
+      method: HttpMethod.GET,
       endPoint: "api/delivery-box",
-      params: {"page": page, "rows": row},
+      params: {"page": page.toString(), "rows": row.toString()},
       converter: (json) => ListResponse.fromJson(json, (res) => DeliveryBox.fromJson(res as Map<String, dynamic>)),
       jwtRefresher: jwtAuth,
     ).execute();

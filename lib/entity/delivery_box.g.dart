@@ -7,10 +7,10 @@ part of 'delivery_box.dart';
 // **************************************************************************
 
 DeliveryBox _$DeliveryBoxFromJson(Map<String, dynamic> json) => DeliveryBox(
-      json['comeFrom'] as String?,
+      json['comeFrom'],
       json['content'] as String?,
       json['id'] as String?,
-      json['receiver'] as String?,
+      (json['receiver'] as List<dynamic>?)?.map((e) => e as String).toList(),
       json['receiverType'] as String?,
       json['sender'] as String?,
       json['sentOn'] as String?,

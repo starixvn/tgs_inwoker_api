@@ -9,10 +9,13 @@ class DeliveryBox {
 
   DeliveryBox(this.comeFrom, this.content, this.id, this.receiver, this.receiverType, this.sender, this.sentOn, this.subject);
 
-  String? comeFrom;
+  dynamic? comeFrom;
+  @JsonKey(name: 'content')
   String? content;
   String? id;
-  String? receiver;
+  @JsonKey(name: 'receiver')
+  List<String>? receiver;
+  @JsonKey(name: 'receiverType')
   String? receiverType;
   String? sender;
   String? sentOn;
