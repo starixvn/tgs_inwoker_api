@@ -178,10 +178,12 @@ class EnvFeaturesConfig {
   bool? depositAccountNameManualInput;
 
   //check for display all vip icon for example profile page
+  //default is true
   @JsonKey(name: "HaveVIPFeature")
   bool? haveVIPFeature;
 
   //if haveVIPFeature is true, then check homePageDisplayVIP whether display at home page
+  //default is true
   @JsonKey(name: "HomePage_DisplayVIP")
   bool? homePageDisplayVIP;
 
