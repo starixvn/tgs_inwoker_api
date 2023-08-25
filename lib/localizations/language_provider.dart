@@ -22,6 +22,7 @@ class LanguageProvider {
     "vi-VN": Language("vi-VN", "Tiếng Việt", Locale("vi", ''), "vi-VN", "images/language/ic_lang_vn.png"),
     "hi-IN": Language("hi-IN", "हिन्दी", Locale("hi", ''), "hi-IN", "images/language/ic_lang_in.png"),
     "ta-IN": Language("ta-IN", "தமிழ்", Locale("ta", ''), "ta-IN", "images/language/ic_lang_in.png"),
+    "tgl-PH": Language("fil", "Filipino", Locale("fil", ''), "tgl-PH", "images/language/ic_lang_ph.png"),
   };
   String _brandName = "";
   Locale? _currentLang = null;

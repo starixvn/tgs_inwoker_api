@@ -33,7 +33,7 @@ class _MyLocalizationsDelegate extends LocalizationsDelegate<MyLocalizations> {
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'zh', 'id', 'vi', 'th', 'ta', 'hi'].contains(locale.languageCode);
+    return ['en', 'zh', 'id', 'vi', 'th', 'ta', 'hi', 'fil'].contains(locale.languageCode);
   }
 
   @override
