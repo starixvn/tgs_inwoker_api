@@ -92,7 +92,11 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..depositAccountNameManualInput =
           json['Deposit_AccountNameManualInput'] as bool?
       ..haveVIPFeature = json['HaveVIPFeature'] as bool?
-      ..homePageDisplayVIP = json['HomePage_DisplayVIP'] as bool?;
+      ..homePageDisplayVIP = json['HomePage_DisplayVIP'] as bool?
+      ..liveChatVendor = json['LiveChatVendor'] == null
+          ? null
+          : LiveChatVendor.fromJson(
+              json['LiveChatVendor'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -171,4 +175,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'Deposit_AccountNameManualInput': instance.depositAccountNameManualInput,
       'HaveVIPFeature': instance.haveVIPFeature,
       'HomePage_DisplayVIP': instance.homePageDisplayVIP,
+      'LiveChatVendor': instance.liveChatVendor,
     };

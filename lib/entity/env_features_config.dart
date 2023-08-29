@@ -1,3 +1,4 @@
+import 'package:api/entity/live_chat_vendor.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'env_features_config.g.dart';
@@ -186,6 +187,9 @@ class EnvFeaturesConfig {
   //default is true
   @JsonKey(name: "HomePage_DisplayVIP")
   bool? homePageDisplayVIP;
+
+  @JsonKey(name: "LiveChatVendor")
+  LiveChatVendor? liveChatVendor;
 
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
