@@ -192,6 +192,10 @@ class EnvFeaturesConfig {
   LiveChatVendor? liveChatVendor;
 
 
+  @JsonKey(name: "DedicatedHomeBanner")
+  DedicatedHomeBanner? dedicatedHomeBanner;
+
+
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
 
