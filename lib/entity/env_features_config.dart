@@ -1,3 +1,4 @@
+import 'package:api/entity/dedicated_home_banner.dart';
 import 'package:api/entity/live_chat_vendor.dart';
 import 'package:json_annotation/json_annotation.dart';
 
