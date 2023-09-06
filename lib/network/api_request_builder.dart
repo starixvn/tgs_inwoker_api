@@ -51,10 +51,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       isAutoHeader: isAutoHeader,
     );
     var result = await resolveBaseResponse(response, isWithoutBaseResponse, converter, consumer, isFeatures);
-    if ((result.errorCode == 101 || result.errorCode == 102) &&
-        retryCounter < 2 &&
-        !isJWTAuthRequest &&
-        !isWithoutBaseResponse) {
+    if ((result.errorCode == 101 || result.errorCode == 102) && retryCounter < 2 && !isJWTAuthRequest && !isWithoutBaseResponse) {
       retryCounter++;
       await jwtRefresher!();
       return execute();
@@ -71,46 +68,38 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
         value = json.decode(response.body);
       } on Exception catch (_) {
         print("throwing new error");
-        if (response.statusCode == 503 ||
-            response.statusCode == 403)
+        if (response.statusCode == 503 || response.statusCode == 403)
           return EventResult.maintenance();
-
-        else
+        else {
+          mixpanel.track("On error: $method $endPoint: ", properties: {'params':params, 'errorMsgID':""});
           return EventResult.failure();
+        }
         //throw Exception("Error on server");
       }
       print(value);
       var baseResponse = BaseResponse.fromJson(value);
       if (baseResponse.error == null ||
+          (baseResponse.errorMsgId?.isEmpty ?? true) ||
           (baseResponse.error == 0 && baseResponse.errorMsgId == null && (baseResponse.msg?.isEmpty ?? false)) ||
-          (baseResponse.success == null &&
-              baseResponse.error == 0 &&
-              baseResponse.errorMsgId == null &&
-              (baseResponse.msg?.isEmpty ?? false)) ||
+          (baseResponse.success == null && baseResponse.error == 0 && baseResponse.errorMsgId == null && (baseResponse.msg?.isEmpty ?? false)) ||
           (baseResponse.success ?? false)) {
         var dataToConvert = baseResponse.data ?? value;
         var result = converter == null ? dataToConvert as T : converter(dataToConvert);
         if (onSuccess != null) onSuccess(result);
-        if (response.statusCode == 503 ||
-            response.statusCode == 403 ||
-            baseResponse.error == 403 ||
-            baseResponse.errorMsgId == "UnderMaintenance") {
+        if (response.statusCode == 503 || response.statusCode == 403 || baseResponse.error == 403 || baseResponse.errorMsgId == "UnderMaintenance") {
           return EventResult.maintenance(result: result);
-        }
-        else
+        } else
           return EventResult.success(result);
       } else {
-        return EventResult.failure(
-            errorCode: baseResponse.error!, error: baseResponse.msg!, errorMsgId: baseResponse.errorMsgId ?? "");
+        mixpanel.track("On error: $method $endPoint: ", properties: {'params':params, 'errorMsgID':baseResponse.errorMsgId ?? ""});
+        return EventResult.failure(errorCode: baseResponse.error!, error: baseResponse.msg!, errorMsgId: baseResponse.errorMsgId ?? "");
       }
     } else {
       //doesnt need to convert to BaseResponse
       var value;
-      if (response.statusCode == 503 ||
-          response.statusCode == 403) {
+      if (response.statusCode == 503 || response.statusCode == 403) {
         return EventResult.maintenance();
-      }
-      else {
+      } else {
         if (response.statusCode == 200) {
           value = utf8.decode(response.bodyBytes);
         } else if (isFeatures ?? false) {
@@ -126,7 +115,6 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
   Future<String> getJson() async {
     return await rootBundle.loadString('features/features_default.json');
   }
-
 
 /*
   Future<EventResult<T>> executeWithoutBaseResponse() async {
