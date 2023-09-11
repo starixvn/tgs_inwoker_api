@@ -14,7 +14,8 @@ BankDetail _$BankDetailFromJson(Map<String, dynamic> json) => BankDetail(
     )
       ..name = json['name'] as String?
       ..bankName = json['bankName'] as String?
-      ..bankBranch = json['bankBranch'] as String?;
+      ..bankBranch = json['bankBranch'] as String?
+      ..IFSCcode = json['IFSCcode'] as String?;
 
 Map<String, dynamic> _$BankDetailToJson(BankDetail instance) =>
     <String, dynamic>{
@@ -25,4 +26,5 @@ Map<String, dynamic> _$BankDetailToJson(BankDetail instance) =>
       'name': instance.name,
       'bankName': instance.bankName,
       'bankBranch': instance.bankBranch,
+      'IFSCcode': instance.IFSCcode,
     };

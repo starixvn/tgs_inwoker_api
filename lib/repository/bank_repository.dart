@@ -104,7 +104,7 @@ class BankRepository extends BaseRepository {
   }
 
   Future<EventResult<dynamic>> addBankCard(String? paymentChannelId, String bankType,
-      {String? address, bankAccount, bankName, name, bankBranch, phone, realName, bool isRegister = false}) async {
+      {String? address, bankAccount, bankName, name, bankBranch, phone, realName, IFSCcode, bool isRegister = false}) async {
     return await ApiRequestBuilder<dynamic>(
             method: HttpMethod.POST,
             endPoint: isRegister ? "api/player/register" : "api/bankinfo",
@@ -121,6 +121,7 @@ class BankRepository extends BaseRepository {
                       bankBranch: bankBranch,
                       phone: phone,
                       realName: realName,
+                      IFSCcode: IFSCcode,
                     )
                   }
                 : _getBankTypeParams(
@@ -133,19 +134,20 @@ class BankRepository extends BaseRepository {
                     bankBranch: bankBranch,
                     phone: phone,
                     realName: realName,
+              IFSCcode: IFSCcode,
                   ),
             jwtRefresher: jwtAuth)
         .execute();
   }
 
   _getBankTypeParams(String bankType, String? paymentChannelId,
-      {String? address, bankAccount, bankName, name, bankBranch, phone, realName}) {
+      {String? address, bankAccount, bankName, name, bankBranch, phone, realName, IFSCcode}) {
     switch (bankType) {
       case "Bank":
         return {
           "paymentchannelid": paymentChannelId,
           "banktype": bankType,
-          "detail": {"bankAccount": bankAccount, "bankName": bankName, "name": name, "bankBranch": bankBranch}
+          "detail": {"bankAccount": bankAccount, "bankName": bankName, "name": name, "bankBranch": bankBranch, "IFSCcode": IFSCcode}
         };
       case "EWallet":
         return {
