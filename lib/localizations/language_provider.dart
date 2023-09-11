@@ -1,5 +1,6 @@
 import 'package:api/api.dart';
 import 'package:api/entity/env_config.dart';
+import 'package:api/extension/list_extension.dart';
 import 'package:api/init.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,10 +14,8 @@ class LanguageProvider {
   final contentRepo = ContentRepository.getSingleton();
   Map<String, Language> _languageList = {
     "en-US": Language("en", "English", Locale("en", ''), "en-US", "images/language/ic_lang_en.png"),
-    "zh-CN": Language("zh_Hans", "简体", Locale.fromSubtags(languageCode: "zh", scriptCode: "Hans"), "zh-CN",
-        "images/language/ic_lang_zh.png"),
-    "zh-TW": Language("zh_Hant", "繁體", Locale.fromSubtags(languageCode: "zh", scriptCode: "Hant"), "zh-TW",
-        "images/language/ic_lang_zh_tw.png"),
+    "zh-CN": Language("zh_Hans", "简体", Locale.fromSubtags(languageCode: "zh", scriptCode: "Hans"), "zh-CN", "images/language/ic_lang_zh.png"),
+    "zh-TW": Language("zh_Hant", "繁體", Locale.fromSubtags(languageCode: "zh", scriptCode: "Hant"), "zh-TW", "images/language/ic_lang_zh_tw.png"),
     "th-TH": Language("th-TH", "ไทย", Locale("th", ""), "th-TH", "images/language/ic_lang_th.png"),
     "id-ID": Language("id-ID", "Indonesia", Locale("id", ''), "id-ID", "images/language/ic_lang_id.png"),
     "vi-VN": Language("vi-VN", "Tiếng Việt", Locale("vi", ''), "vi-VN", "images/language/ic_lang_vn.png"),
@@ -38,6 +37,17 @@ class LanguageProvider {
 
   init(String brandName) {
     _brandName = brandName;
+  }
+
+  Locale getDefaultLocale() {
+    Locale? locale;
+    _languageList.forEach((key, value) {
+      if (key == env.defaultLang) {
+        locale = value.locale;
+        list.add(value);
+      }
+    });
+    return locale ?? Locale("th", '');
   }
 
   refreshLangList() async {
@@ -79,9 +89,9 @@ class LanguageProvider {
     String? languageCode = _prefs.getString("LANGUAGE_CODE");
     Locale? currLocale;
     if (languageCode != null) {
-      currLocale = _locale(list.singleWhere((e) => e.apiCode == languageCode));
+      currLocale = _locale(list.singleWhereOrNull((e) => e.apiCode == languageCode));
     } else
-      currLocale = _locale(list.singleWhere((e) => e.apiCode == env.defaultLang));
+      currLocale = _locale(list.singleWhereOrNull((e) => e.apiCode == env.defaultLang));
     _currentLang = currLocale;
     return currLocale;
   }

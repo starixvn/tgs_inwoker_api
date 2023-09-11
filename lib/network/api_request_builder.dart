@@ -71,7 +71,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
         if (response.statusCode == 503 || response.statusCode == 403)
           return EventResult.maintenance();
         else {
-          mixpanel.track("On error: $method $endPoint: ", properties: {'params':params, 'errorMsgID':""});
+          mixpanel.track("On error: $method $endPoint: ", properties: {'params': params, 'errorMsgID': ""});
           return EventResult.failure();
         }
         //throw Exception("Error on server");
@@ -91,7 +91,12 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
         } else
           return EventResult.success(result);
       } else {
-        mixpanel.track("On error: $method $endPoint: ", properties: {'params':params, 'errorMsgID':baseResponse.errorMsgId ?? ""});
+        mixpanel.track("On error: $method $endPoint: ", properties: {
+          'params': params,
+          'errorMsgID': baseResponse.errorMsgId ?? "",
+          'errorCode': baseResponse.error ?? 0,
+          "error": baseResponse.msg ?? "",
+        });
         return EventResult.failure(errorCode: baseResponse.error!, error: baseResponse.msg!, errorMsgId: baseResponse.errorMsgId ?? "");
       }
     } else {
