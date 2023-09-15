@@ -196,6 +196,11 @@ class EnvFeaturesConfig {
   @JsonKey(name: "DedicatedHomeBanner")
   DedicatedHomeBanner? dedicatedHomeBanner;
 
+  @JsonKey(name: "WapPromoPageVariant")
+  int? wapPromoPageVariant;
+  @JsonKey(name: "HideBankNameIfFilled")
+  bool? hideBankNameIfFilled;
+
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);

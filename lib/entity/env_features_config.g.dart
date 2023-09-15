@@ -43,18 +43,18 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..addCardHideChannel = json['AddCard_HideChannel'] as bool?
       ..addCardBankDropDown = json['AddCard_BankDropdown'] as bool?
       ..depositCustomBankNameTranslation =
-      json['Deposit_CustomBankNameTranslation'] as bool?
+          json['Deposit_CustomBankNameTranslation'] as bool?
       ..depositAddTips = json['Deposit_AddTips'] as bool?
       ..addCardDisplayGCash = json['AddCard_DisplayGCash'] as bool?
       ..navigateToAddCard = json['NavigateToAddCard'] as bool?
       ..addCardNotAllowedEditDelete =
-      json['AddCard_NotAllowedEditDelete'] as bool?
+          json['AddCard_NotAllowedEditDelete'] as bool?
       ..profileNotAllowChangePhone =
-      json['Profile_NotAllowChangePhone'] as bool?
+          json['Profile_NotAllowChangePhone'] as bool?
       ..depositAutoFillFirstCard = json['Deposit_AutofillFirstCard'] as bool?
       ..addCardMaximumCardAllowed = json['AddCard_MaximumCardAllowed'] as int?
       ..addCardDisableCreateUpdateDelete =
-      json['AddCard_DisableCreateUpdateDelete'] as bool?
+          json['AddCard_DisableCreateUpdateDelete'] as bool?
       ..popupPromotion = json['PopupPromotion'] as bool?
       ..t9CustomHome = json['T9_CustomHome'] as bool?
       ..customMessaging = (json['CustomMessaging'] as List<dynamic>?)
@@ -64,7 +64,7 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..reportShowRoundsTotal = json['Report_ShowRoundsTotal'] as bool?
       ..addCardHideCertainField = json['AddCard_HideCertainField'] as bool?
       ..withdrawalUSDTExchangeRate =
-      (json['Withdrawal_USDT_ExchangeRate'] as num?)?.toDouble()
+          (json['Withdrawal_USDT_ExchangeRate'] as num?)?.toDouble()
       ..registerShowPhone = json['Register_ShowPhone'] as bool?
       ..profileDisableEditPhone = json['Profile_DisableEditPhone'] as bool?
       ..profileDisableVerifyPhone = json['Profile_DisableVerifyPhone'] as bool?
@@ -74,10 +74,10 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..idrRegisterCustomFlow = json['Register_CustomFlow_IDR'] as bool?
       ..newTransferUI = json['NewTransferUI'] as bool?
       ..promoRouletteSMSVerification =
-      json['PromoRoulette_SMSVerification'] as bool?
+          json['PromoRoulette_SMSVerification'] as bool?
       ..maintenanceDetail =
-      (json['Maintenance_Detail'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(k, e as String),
+          (json['Maintenance_Detail'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
       )
       ..addCardBankCustomIdr = json['AddCard_Bank_Custom_IDR'] as bool?
       ..forcedVerification = json['ForcedVerification'] as bool?
@@ -90,13 +90,19 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
       ..homeOnlineUsers = json['Home_OnlineUsers']
       ..depositAddCard = json['Deposit_AddCard'] as bool?
       ..depositAccountNameManualInput =
-      json['Deposit_AccountNameManualInput'] as bool?
+          json['Deposit_AccountNameManualInput'] as bool?
       ..haveVIPFeature = json['HaveVIPFeature'] as bool?
       ..homePageDisplayVIP = json['HomePage_DisplayVIP'] as bool?
+      ..liveChatVendor = json['LiveChatVendor'] == null
+          ? null
+          : LiveChatVendor.fromJson(
+              json['LiveChatVendor'] as Map<String, dynamic>)
       ..dedicatedHomeBanner = json['DedicatedHomeBanner'] == null
           ? null
           : DedicatedHomeBanner.fromJson(
-          json['DedicatedHomeBanner'] as Map<String, dynamic>);
+              json['DedicatedHomeBanner'] as Map<String, dynamic>)
+      ..wapPromoPageVariant = json['WapPromoPageVariant'] as int?
+      ..hideBankNameIfFilled = json['HideBankNameIfFilled'] as bool?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -109,7 +115,7 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'PopupAnnouncement': instance.popupAnnouncement,
       'Withdrawal_HundredDigit': instance.withdrawalHundredDigit,
       'Deposit_ManualApplePayHideBankAcc':
-      instance.depositManualApplePayHideBankAcc,
+          instance.depositManualApplePayHideBankAcc,
       'AddCard_BankBranch': instance.addCardBankBranch,
       'AddCard_DisplayFPS': instance.addCardDisplayFPS,
       'Deposit_DualPage': instance.deposit_DualPage,
@@ -134,7 +140,7 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'AddCard_HideChannel': instance.addCardHideChannel,
       'AddCard_BankDropdown': instance.addCardBankDropDown,
       'Deposit_CustomBankNameTranslation':
-      instance.depositCustomBankNameTranslation,
+          instance.depositCustomBankNameTranslation,
       'Deposit_AddTips': instance.depositAddTips,
       'AddCard_DisplayGCash': instance.addCardDisplayGCash,
       'NavigateToAddCard': instance.navigateToAddCard,
@@ -143,7 +149,7 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'Deposit_AutofillFirstCard': instance.depositAutoFillFirstCard,
       'AddCard_MaximumCardAllowed': instance.addCardMaximumCardAllowed,
       'AddCard_DisableCreateUpdateDelete':
-      instance.addCardDisableCreateUpdateDelete,
+          instance.addCardDisableCreateUpdateDelete,
       'PopupPromotion': instance.popupPromotion,
       'T9_CustomHome': instance.t9CustomHome,
       'CustomMessaging': instance.customMessaging,
@@ -175,5 +181,8 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'Deposit_AccountNameManualInput': instance.depositAccountNameManualInput,
       'HaveVIPFeature': instance.haveVIPFeature,
       'HomePage_DisplayVIP': instance.homePageDisplayVIP,
+      'LiveChatVendor': instance.liveChatVendor,
       'DedicatedHomeBanner': instance.dedicatedHomeBanner,
+      'WapPromoPageVariant': instance.wapPromoPageVariant,
+      'HideBankNameIfFilled': instance.hideBankNameIfFilled,
     };
