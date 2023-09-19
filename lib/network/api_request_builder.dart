@@ -21,6 +21,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
   bool isAutoHeader;
   bool isWithoutBaseResponse;
   bool isFeatures;
+  bool isRealnameMultipart;
 
   ApiRequestBuilder({
     this.isAuthorization = true,
@@ -37,6 +38,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
     this.isAutoHeader = true,
     this.isWithoutBaseResponse = false,
     this.isFeatures = false,
+    this.isRealnameMultipart = false,
   });
 
   Future<EventResult<T>> execute() async {
@@ -49,6 +51,7 @@ class ApiRequestBuilder<T> extends ChangeNotifier {
       timeout: timeout,
       isAssetUrl: isAssetUrl,
       isAutoHeader: isAutoHeader,
+      isRealnameMultipart: isRealnameMultipart,
     );
     var result = await resolveBaseResponse(response, isWithoutBaseResponse, converter, consumer, isFeatures);
     if ((result.errorCode == 101 || result.errorCode == 102) &&

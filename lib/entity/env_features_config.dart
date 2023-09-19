@@ -191,7 +191,7 @@ class EnvFeaturesConfig {
 
   @JsonKey(name: "LiveChatVendor")
   LiveChatVendor? liveChatVendor;
-  
+
   @JsonKey(name: "DedicatedHomeBanner")
   DedicatedHomeBanner? dedicatedHomeBanner;
 

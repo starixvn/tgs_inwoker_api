@@ -13,63 +13,62 @@ class UserRepository extends BaseRepository {
     return _singleton!;
   }
 
-  Future<EventResult<LoginResponse>> login(
-      String username, String password) async {
+  Future<EventResult<LoginResponse>> login(String username, String password) async {
     return await ApiRequestBuilder<LoginResponse>(
-            isAuthorization: false,
-            endPoint: "api/Player/login",
-            params: {
-              "username": username,
-              "password": password,
-              "platformtype": 1,
-            },
-            converter: (json) => LoginResponse.fromJson(json),
-            jwtRefresher: jwtAuth)
+        isAuthorization: false,
+        endPoint: "api/Player/login",
+        params: {
+          "username": username,
+          "password": password,
+          "platformtype": 1,
+        },
+        converter: (json) => LoginResponse.fromJson(json),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<RegisterResponse>> register(
-      String username,
+  Future<EventResult<RegisterResponse>> register(String username,
       String password,
       String rpassword,
       String? invitationCode,
       bool isAgent) async {
     return await ApiRequestBuilder<RegisterResponse>(
-            isAuthorization: false,
-            endPoint: "api/Player/create/",
-            params: {
-              "username": username,
-              //upper = player
-              "upper": isAgent ? "" : invitationCode,
-              "pwd": password,
-              "confirmpwd": rpassword,
-              //invitation code = agent
-              "invitationcode": isAgent ? invitationCode : "",
-              "agent": true,
-              "testplayer": true
-            },
-            converter: (json) => RegisterResponse.fromJson(json),
-            jwtRefresher: jwtAuth)
+        isAuthorization: false,
+        endPoint: "api/Player/create/",
+        params: {
+          "username": username,
+          //upper = player
+          "upper": isAgent ? "" : invitationCode,
+          "pwd": password,
+          "confirmpwd": rpassword,
+          //invitation code = agent
+          "invitationcode": isAgent ? invitationCode : "",
+          "agent": true,
+          "testplayer": true
+        },
+        converter: (json) => RegisterResponse.fromJson(json),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<UserProfile>> getBasicInfo() async {
     return await ApiRequestBuilder<UserProfile>(
-            method: HttpMethod.GET,
-            endPoint: "api/Player/info",
-            converter: (json) => UserProfile.fromJson(json),
-            consumer: (result) => setRepoValues(() {
-                  userProfile = result;
-                }),
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.GET,
+        endPoint: "api/Player/info",
+        converter: (json) => UserProfile.fromJson(json),
+        consumer: (result) =>
+            setRepoValues(() {
+              userProfile = result;
+            }),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> logout() async {
     var apiState = await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.DELETE,
-            endPoint: "api/Player/logout",
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.DELETE,
+        endPoint: "api/Player/logout",
+        jwtRefresher: jwtAuth)
         .execute();
     await clearSession();
     return apiState;
@@ -85,16 +84,15 @@ class UserRepository extends BaseRepository {
     return jwtAuth();
   }
 
-  Future<EventResult<CheckUsernameResponse>> checkUsername(
-      String username) async {
+  Future<EventResult<CheckUsernameResponse>> checkUsername(String username) async {
     return await ApiRequestBuilder<CheckUsernameResponse>(
-            method: HttpMethod.GET,
-            endPoint: "api/player/checkUsername",
-            params: {
-              "username": username,
-            },
-            converter: (json) => CheckUsernameResponse.fromJson(json),
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.GET,
+        endPoint: "api/player/checkUsername",
+        params: {
+          "username": username,
+        },
+        converter: (json) => CheckUsernameResponse.fromJson(json),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -120,183 +118,177 @@ class UserRepository extends BaseRepository {
         .execute();
   }*/
 
-  Future<EventResult<EditPasswordResponse>> editPassword(
-      String oldPassword, String newPassword) async {
+  Future<EventResult<EditPasswordResponse>> editPassword(String oldPassword, String newPassword) async {
     return await ApiRequestBuilder<EditPasswordResponse>(
-            method: HttpMethod.PUT,
-            endPoint: "api/player/password",
-            params: {
-              "oldpwd": oldPassword,
-              "newpwd": newPassword,
-            },
-            converter: (json) => EditPasswordResponse.fromJson(json),
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.PUT,
+        endPoint: "api/player/password",
+        params: {
+          "oldpwd": oldPassword,
+          "newpwd": newPassword,
+        },
+        converter: (json) => EditPasswordResponse.fromJson(json),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> setIdentity(String realname, String id) async {
     return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.PATCH,
-            endPoint: "api/player/identity",
-            params: {
-              "id": id,
-              "realname": realname,
-            },
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.PATCH,
+        endPoint: "api/player/identity",
+        params: {
+          "id": id,
+          "realname": realname,
+        },
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> checkIdVerification(String id) async {
     return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.GET,
-            endPoint: "api/player/identity/check",
-            params: {
-              "id": id,
-            },
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.GET,
+        endPoint: "api/player/identity/check",
+        params: {
+          "id": id,
+        },
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<ListResponse<AccountReport>>> getAccountReport(
-    DateTime startDate,
-    DateTime endDate,
-    int page,
-    int rows,
-    /*int orderBy,
+  Future<EventResult<ListResponse<AccountReport>>> getAccountReport(DateTime startDate,
+      DateTime endDate,
+      int page,
+      int rows,
+      /*int orderBy,
       bool isDesc,
       String sortBy,
-      bool showAll*/
-  ) async {
+      bool showAll*/) async {
     return await ApiRequestBuilder<ListResponse<AccountReport>>(
-            method: HttpMethod.GET,
-            endPoint: "api/playerreport/rounds",
-            params: {
-              "From": startDate.toString(),
-              "To": endDate.toString(),
-              "page": page.toString(),
-              "rows": rows.toString(),
-              "desc": "true",
-              "sort": "CreatedOn",
-              "all": "false",
-            },
-            converter: (json) => ListResponse.fromJson(json,
-                (res) => AccountReport.fromJson(res as Map<String, dynamic>)),
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.GET,
+        endPoint: "api/playerreport/rounds",
+        params: {
+          "From": startDate.toString(),
+          "To": endDate.toString(),
+          "page": page.toString(),
+          "rows": rows.toString(),
+          "desc": "true",
+          "sort": "CreatedOn",
+          "all": "false",
+        },
+        converter: (json) =>
+            ListResponse.fromJson(json,
+                    (res) => AccountReport.fromJson(res as Map<String, dynamic>)),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<AccountReportTotal>> getAccountReportTotal(
-    DateTime startDate,
-    DateTime endDate,
-  ) async {
+  Future<EventResult<AccountReportTotal>> getAccountReportTotal(DateTime startDate,
+      DateTime endDate,) async {
     return await ApiRequestBuilder<AccountReportTotal>(
-            method: HttpMethod.GET,
-            endPoint: "api/playerreport/rounds/total",
-            params: {
-              "From": startDate.toString(),
-              "To": endDate.toString(),
-            },
-            converter: (json) => AccountReportTotal.fromJson(json),
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.GET,
+        endPoint: "api/playerreport/rounds/total",
+        params: {
+          "From": startDate.toString(),
+          "To": endDate.toString(),
+        },
+        converter: (json) => AccountReportTotal.fromJson(json),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<MainWallet>> getWalletBalance() async {
     return await ApiRequestBuilder<MainWallet>(
-            method: HttpMethod.GET,
-            endPoint: "api/Wallet",
-            converter: (json) => MainWallet.fromJson(json),
-            consumer: (result) => setRepoValues(() {
-                  wallet = result;
-                }),
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.GET,
+        endPoint: "api/Wallet",
+        converter: (json) => MainWallet.fromJson(json),
+        consumer: (result) =>
+            setRepoValues(() {
+              wallet = result;
+            }),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<ReportResponse<Report>>> getReport(
-      DateTime startDate, DateTime endDate, int page, int rows, Status status
+  Future<EventResult<ReportResponse<Report>>> getReport(DateTime startDate, DateTime endDate, int page, int rows, Status status
       /*int orderBy,
       bool isDesc,
       String sortBy,
-      bool showAll*/
-      ) async {
+      bool showAll*/) async {
     return await ApiRequestBuilder<ReportResponse<Report>>(
-            method: HttpMethod.GET,
-            endPoint: "api/deposit/player/list",
-            params: {
-              "begincreate": startDate.toString(),
-              "endcreate": endDate.toString(),
-              "Page": page.toString(),
-              "Rows": rows.toString(),
-              "status": (status == null || status == Status.All)
-                  ? null
-                  : status.getJson().toString(),
-              "IsDesc": "true",
-              "SortBy": "CreatedOn",
-              "ShowAll": "false",
-              "OrderBy": "1"
-            },
-            converter: (json) => ReportResponse.fromJson(
+        method: HttpMethod.GET,
+        endPoint: "api/deposit/player/list",
+        params: {
+          "begincreate": startDate.toString(),
+          "endcreate": endDate.toString(),
+          "Page": page.toString(),
+          "Rows": rows.toString(),
+          "status": (status == null || status == Status.All)
+              ? null
+              : status.getJson().toString(),
+          "IsDesc": "true",
+          "SortBy": "CreatedOn",
+          "ShowAll": "false",
+          "OrderBy": "1"
+        },
+        converter: (json) =>
+            ReportResponse.fromJson(
                 json, (res) => Report.fromJson(res as Map<String, dynamic>)),
-            jwtRefresher: jwtAuth)
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<ReportResponse<Report>>> getWithdrawReport(
-      DateTime startDate, DateTime endDate, int page, int rows, Status status
+  Future<EventResult<ReportResponse<Report>>> getWithdrawReport(DateTime startDate, DateTime endDate, int page, int rows, Status status
       /*int orderBy,
       bool isDesc,
       String sortBy,
-      bool showAll*/
-      ) async {
+      bool showAll*/) async {
     return await ApiRequestBuilder<ReportResponse<Report>>(
-            method: HttpMethod.GET,
-            endPoint: "api/withdraw/player/list",
-            params: {
-              "begincreate": startDate.toString(),
-              "endcreate": endDate.toString(),
-              "Page": page.toString(),
-              "Rows": rows.toString(),
-              "status": (status == null || status == Status.All)
-                  ? null
-                  : status.getJson().toString(),
-              "IsDesc": "true",
-              "SortBy": "CreatedOn",
-              "ShowAll": "false",
-              "OrderBy": "1"
-            },
-            converter: (json) => ReportResponse.fromJson(
+        method: HttpMethod.GET,
+        endPoint: "api/withdraw/player/list",
+        params: {
+          "begincreate": startDate.toString(),
+          "endcreate": endDate.toString(),
+          "Page": page.toString(),
+          "Rows": rows.toString(),
+          "status": (status == null || status == Status.All)
+              ? null
+              : status.getJson().toString(),
+          "IsDesc": "true",
+          "SortBy": "CreatedOn",
+          "ShowAll": "false",
+          "OrderBy": "1"
+        },
+        converter: (json) =>
+            ReportResponse.fromJson(
                 json, (res) => Report.fromJson(res as Map<String, dynamic>)),
-            jwtRefresher: jwtAuth)
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<ReportResponse<TransferReport>>> getTransferReport(
-    DateTime startDate,
-    DateTime endDate,
-    int page,
-    int rows,
-    /*int orderBy,
+  Future<EventResult<ReportResponse<TransferReport>>> getTransferReport(DateTime startDate,
+      DateTime endDate,
+      int page,
+      int rows,
+      /*int orderBy,
       bool isDesc,
       String sortBy,
-      bool showAll*/
-  ) async {
+      bool showAll*/) async {
     return await ApiRequestBuilder<ReportResponse<TransferReport>>(
-            method: HttpMethod.GET,
-            endPoint: "api/game/balance/list",
-            params: {
-              "beginrecord": startDate.toString(),
-              "endrecord": endDate.toString(),
-              "Page": page.toString(),
-              "Rows": rows.toString(),
-              "OrderBy": "1",
-              "SortBy": "BalanceTime",
-              "ShowAll": "false",
-              "IsDesc": "true"
-            },
-            converter: (json) => ReportResponse.fromJson(json,
-                (res) => TransferReport.fromJson(res as Map<String, dynamic>)),
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.GET,
+        endPoint: "api/game/balance/list",
+        params: {
+          "beginrecord": startDate.toString(),
+          "endrecord": endDate.toString(),
+          "Page": page.toString(),
+          "Rows": rows.toString(),
+          "OrderBy": "1",
+          "SortBy": "BalanceTime",
+          "ShowAll": "false",
+          "IsDesc": "true"
+        },
+        converter: (json) =>
+            ReportResponse.fromJson(json,
+                    (res) => TransferReport.fromJson(res as Map<String, dynamic>)),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -304,9 +296,10 @@ class UserRepository extends BaseRepository {
     return await ApiRequestBuilder<List<BrandCommunication>>(
       method: HttpMethod.GET,
       endPoint: "api/brandcommunication",
-      converter: (json) => (json as List<dynamic>)
-          .map((e) => BrandCommunication.fromJson(e))
-          .toList(),
+      converter: (json) =>
+          (json as List<dynamic>)
+              .map((e) => BrandCommunication.fromJson(e))
+              .toList(),
       jwtRefresher: jwtAuth,
       isAuthorization: false,
     ).execute();
@@ -314,13 +307,14 @@ class UserRepository extends BaseRepository {
 
   Future<EventResult> getApiErrorLocalization() async {
     return await ApiRequestBuilder(
-            method: HttpMethod.GET,
-            endPoint: "api/localization",
-            // converter: (json) => json,
-            consumer: (result) => setRepoValues(() {
-                  apiError = result;
-                }),
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.GET,
+        endPoint: "api/localization",
+        // converter: (json) => json,
+        consumer: (result) =>
+            setRepoValues(() {
+              apiError = result;
+            }),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
@@ -336,128 +330,129 @@ class UserRepository extends BaseRepository {
 
   Future<EventResult<bool>> getAutoTransferValue() async {
     return await ApiRequestBuilder<bool>(
-            method: HttpMethod.GET,
-            endPoint: "api/player/game/auto-transfer",
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.GET,
+        endPoint: "api/player/game/auto-transfer",
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> setAutoTransferValue() async {
     return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.POST,
-            endPoint: "api/player/game/auto-transfer",
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.POST,
+        endPoint: "api/player/game/auto-transfer",
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<ReportResponse2<PromotionReport>>> getPromotionReport(
-    DateTime startDate,
-    DateTime endDate,
-    int page,
-    int rows,
-  ) async {
+  Future<EventResult<ReportResponse2<PromotionReport>>> getPromotionReport(DateTime startDate,
+      DateTime endDate,
+      int page,
+      int rows,) async {
     return await ApiRequestBuilder<ReportResponse2<PromotionReport>>(
-            method: HttpMethod.GET,
-            endPoint: "api/playerpromotion/joined",
-            params: {
-              "From": startDate.toString(),
-              "To": endDate.toString(),
-              "page": page.toString(),
-              "rows": rows.toString(),
-              "sort": "promotionName",
-              "all": "false",
-              "desc": "true"
-            },
-            converter: (json) => ReportResponse2.fromJson(json,
-                (res) => PromotionReport.fromJson(res as Map<String, dynamic>)),
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.GET,
+        endPoint: "api/playerpromotion/joined",
+        params: {
+          "From": startDate.toString(),
+          "To": endDate.toString(),
+          "page": page.toString(),
+          "rows": rows.toString(),
+          "sort": "promotionName",
+          "all": "false",
+          "desc": "true"
+        },
+        converter: (json) =>
+            ReportResponse2.fromJson(json,
+                    (res) => PromotionReport.fromJson(res as Map<String, dynamic>)),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<dynamic>> uploadIdImage(File imageFile) async {
+  Future<EventResult<dynamic>> uploadIdImage(String realname, String id, File imageFile) async {
     return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.MULTIPART,
-            endPoint: "api/player/identity/upload",
-            imageContent: imageFile,
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.MULTIPART,
+        endPoint: "api/player/identity/upload",
+        params: {
+          "id": id,
+          "realname": realname,
+        },
+        imageContent: imageFile,
+        isRealnameMultipart: true,
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<dynamic>> setMessagingAppID(
-      String messagingCode, String messagingID) async {
+  Future<EventResult<dynamic>> setMessagingAppID(String messagingCode, String messagingID) async {
     var paramName = messagingCode == "fb" ? "facebookmessenger" : messagingCode;
     return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.PATCH,
-            endPoint: "api/player/$messagingCode",
-            params: {
-              paramName: messagingID,
-            },
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.PATCH,
+        endPoint: "api/player/$messagingCode",
+        params: {
+          paramName: messagingID,
+        },
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
   Future<EventResult<dynamic>> setBirthdate(String birthdate) async {
     return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.PATCH,
-            endPoint: "api/player/birthdate",
-            params: {
-              "birthdate": birthdate,
-            },
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.PATCH,
+        endPoint: "api/player/birthdate",
+        params: {
+          "birthdate": birthdate,
+        },
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<IdrRegisterLoginResponse<RegisterResponse>>> idrRegister(
-      String username, String password) async {
+  Future<EventResult<IdrRegisterLoginResponse<RegisterResponse>>> idrRegister(String username, String password) async {
     return await ApiRequestBuilder<IdrRegisterLoginResponse<RegisterResponse>>(
-            isAuthorization: false,
-            endPoint: "api/Player/register/",
-            params: {
-              "type": "CreatePlayer",
-              "input": {
-                "username": username,
-                "pwd": password,
-              },
-            },
-            converter: (json) => IdrRegisterLoginResponse.fromJson(
+        isAuthorization: false,
+        endPoint: "api/Player/register/",
+        params: {
+          "type": "CreatePlayer",
+          "input": {
+            "username": username,
+            "pwd": password,
+          },
+        },
+        converter: (json) =>
+            IdrRegisterLoginResponse.fromJson(
                 json,
-                (res) =>
+                    (res) =>
                     RegisterResponse.fromJson(res as Map<String, dynamic>)),
-            jwtRefresher: jwtAuth)
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<dynamic>> checkDuplicatePhone(
-      String areacode, int phone) async {
+  Future<EventResult<dynamic>> checkDuplicatePhone(String areacode, int phone) async {
     return await ApiRequestBuilder<dynamic>(
-            method: HttpMethod.POST,
-            endPoint: "api/player/phone/check",
-            params: {
-              "area": areacode,
-              "phone": phone,
-            },
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.POST,
+        endPoint: "api/player/phone/check",
+        params: {
+          "area": areacode,
+          "phone": phone,
+        },
+        jwtRefresher: jwtAuth)
         .execute();
   }
 
-  Future<EventResult<ReportResponse2<BalanceChanges>>> getBalanceChangesRecord(
-    DateTime from,
-    DateTime to,
-    int page,
-    int rows,
-  ) async {
+  Future<EventResult<ReportResponse2<BalanceChanges>>> getBalanceChangesRecord(DateTime from,
+      DateTime to,
+      int page,
+      int rows,) async {
     return await ApiRequestBuilder<ReportResponse2<BalanceChanges>>(
-            method: HttpMethod.GET,
-            endPoint: "api/transaction",
-            params: {
-              "from": from.toString(),
-              "to": to.toString(),
-              "page": page.toString(),
-              "rows": rows.toString(),
-            },
-            converter: (json) => ReportResponse2.fromJson(json,
-                (res) => BalanceChanges.fromJson(res as Map<String, dynamic>)),
-            jwtRefresher: jwtAuth)
+        method: HttpMethod.GET,
+        endPoint: "api/transaction",
+        params: {
+          "from": from.toString(),
+          "to": to.toString(),
+          "page": page.toString(),
+          "rows": rows.toString(),
+        },
+        converter: (json) =>
+            ReportResponse2.fromJson(json,
+                    (res) => BalanceChanges.fromJson(res as Map<String, dynamic>)),
+        jwtRefresher: jwtAuth)
         .execute();
   }
 }

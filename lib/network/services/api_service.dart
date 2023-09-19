@@ -4,16 +4,17 @@ http.Client? client;
 //const timeoutDuration = Duration(seconds: 3);
 
 Future<http.Response> api(
-  HttpMethod method,
-  final endPoint, {
-  final content,
-  isAuthorization = true,
-  imageContent,
-  timeout = 100,
-  isAssetUrl = false,
-  isAutoHeader = true,
-  isGameMaintenance = false,
-}) async {
+    HttpMethod method,
+    final endPoint, {
+      final content,
+      isAuthorization = true,
+      imageContent,
+      timeout = 100,
+      isAssetUrl = false,
+      isAutoHeader = true,
+      isGameMaintenance = false,
+      isRealnameMultipart = false
+    }) async {
   if (client == null) {
     client = http.Client();
   }
@@ -41,10 +42,10 @@ Future<http.Response> api(
       try {
         response = await client!
             .post(
-              Uri.parse(url),
-              headers: header,
-              body: jsonEncode(content),
-            )
+          Uri.parse(url),
+          headers: header,
+          body: jsonEncode(content),
+        )
             .timeout(timeoutDuration, onTimeout: onTimeout);
         break;
       } catch (e) {
@@ -71,9 +72,9 @@ Future<http.Response> api(
         try {
           response = await client!
               .get(
-                Uri.parse(url + queryParams),
-                headers: header,
-              )
+            Uri.parse(url + queryParams),
+            headers: header,
+          )
               .timeout(timeoutDuration, onTimeout: onTimeout);
           print("Api->End ${method.getName}:$url");
           break;
@@ -90,9 +91,9 @@ Future<http.Response> api(
       try {
         response = await client!
             .delete(
-              Uri.parse(url),
-              headers: header,
-            )
+          Uri.parse(url),
+          headers: header,
+        )
             .timeout(timeoutDuration, onTimeout: onTimeout);
         break;
       } catch (e) {
@@ -109,10 +110,10 @@ Future<http.Response> api(
       try {
         response = await client!
             .patch(
-              Uri.parse(url),
-              headers: header,
-              body: jsonEncode(content),
-            )
+          Uri.parse(url),
+          headers: header,
+          body: jsonEncode(content),
+        )
             .timeout(timeoutDuration, onTimeout: onTimeout);
         break;
       } catch (e) {
@@ -128,10 +129,10 @@ Future<http.Response> api(
       try {
         response = await client!
             .put(
-              Uri.parse(url),
-              headers: header,
-              body: jsonEncode(content),
-            )
+          Uri.parse(url),
+          headers: header,
+          body: jsonEncode(content),
+        )
             .timeout(timeoutDuration, onTimeout: onTimeout);
         break;
       } catch (e) {
@@ -145,8 +146,15 @@ Future<http.Response> api(
       }
 
     case HttpMethod.MULTIPART:
-      var _content = content == null ? url : url + "/" + content;
-      var request = http.MultipartRequest("POST", Uri.parse(_content));
+      http.MultipartRequest request;
+      if(isRealnameMultipart) {
+        request = http.MultipartRequest("POST", Uri.parse(url));
+        request.fields["request"] = jsonEncode(content);
+      }else{
+        var _content = content == null ? url : url + "/" + content;
+        request = http.MultipartRequest("POST", Uri.parse(_content));
+      }
+
       header.forEach((k, v) {
         request.headers[k] = v;
       });
@@ -171,10 +179,10 @@ Future<http.Response> api(
       try {
         response = await client!
             .post(
-              Uri.parse(url),
-              headers: header,
-              body: jsonEncode(content),
-            )
+          Uri.parse(url),
+          headers: header,
+          body: jsonEncode(content),
+        )
             .timeout(timeoutDuration, onTimeout: onTimeout);
         break;
       } catch (e) {
