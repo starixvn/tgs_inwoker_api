@@ -102,7 +102,8 @@ EnvFeaturesConfig _$EnvFeaturesConfigFromJson(Map<String, dynamic> json) =>
           : DedicatedHomeBanner.fromJson(
               json['DedicatedHomeBanner'] as Map<String, dynamic>)
       ..wapPromoPageVariant = json['WapPromoPageVariant'] as int?
-      ..hideBankNameIfFilled = json['HideBankNameIfFilled'] as bool?;
+      ..hideBankNameIfFilled = json['HideBankNameIfFilled'] as bool?
+      ..domainUrl = json['domain_url'] as String?;
 
 Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
     <String, dynamic>{
@@ -185,4 +186,5 @@ Map<String, dynamic> _$EnvFeaturesConfigToJson(EnvFeaturesConfig instance) =>
       'DedicatedHomeBanner': instance.dedicatedHomeBanner,
       'WapPromoPageVariant': instance.wapPromoPageVariant,
       'HideBankNameIfFilled': instance.hideBankNameIfFilled,
+      'domain_url': instance.domainUrl,
     };

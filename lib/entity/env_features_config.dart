@@ -191,8 +191,7 @@ class EnvFeaturesConfig {
 
   @JsonKey(name: "LiveChatVendor")
   LiveChatVendor? liveChatVendor;
-
-
+  
   @JsonKey(name: "DedicatedHomeBanner")
   DedicatedHomeBanner? dedicatedHomeBanner;
 
@@ -201,6 +200,8 @@ class EnvFeaturesConfig {
   @JsonKey(name: "HideBankNameIfFilled")
   bool? hideBankNameIfFilled;
 
+  @JsonKey(name: "domain_url")
+  String? domainUrl;
 
   factory EnvFeaturesConfig.fromJson(Map<String, dynamic> json) =>
       _$EnvFeaturesConfigFromJson(json);
